@@ -76,9 +76,11 @@
   <ItemGroup>
     <ClCompile Include="logservice.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="servicelocator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logservice.h" />
+    <ClInclude Include="servicelocator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

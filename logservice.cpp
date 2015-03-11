@@ -1,14 +1,14 @@
 #include "logservice.h"
 
 
-LogService::LogService(string filename) : filename(filename) 
+LogService::LogService(string filename) : filename(filename)
 {
 	logfile.open(filename.c_str());
 	logfile << setfill('0');
 	start_time = SDL_GetTicks();
 	if (logfile.is_open())
 	{
-		write(DEBUG, "Beginning log ..." );
+		write(DEBUG, "Beginning log ...");
 	}
 }
 

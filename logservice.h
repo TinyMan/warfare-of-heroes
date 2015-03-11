@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <SDL2/SDL_timer.h>
+
 using namespace std;
 
 class LogService
