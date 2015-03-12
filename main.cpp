@@ -1,18 +1,33 @@
 #include <SDL2/SDL.h>
-#include "logservice.h"
+#include <iostream>
+#include "Callback.h"
 
+
+void myCallback(int a, int b, char c)
+{
+	cout << SDL_GetTicks() << "\ta = " << a  << c << endl;
+}
+template <typename ...Args>
+void tt(void f(Args...), Args... args)
+{
+	f(args...);
+}
 int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
+	
+	//tt(myCallback, 1, 2);
+	//Callback<int, int, char> *cb = new Callback<int, int, char>(myCallback, 1, 2, 'c');
+	Callback * cb = new Callback(myCallback, 1, 2, 'c');
+	cb->call();
+	/*
+	while (SDL_GetTicks() < 5000)
+	{
+		SDL_Delay(100);
 
-	LogService log("log.txt");
-	SDL_Window *screen = SDL_CreateWindow("My Game Window",
-		SDL_WINDOWPOS_UNDEFINED,
-		SDL_WINDOWPOS_UNDEFINED,
-		640, 480,
-		 SDL_WINDOW_OPENGL);
-	log.write(LogService::DEBUG, "Hello");
-	SDL_Delay(5000);
+		ts.update();
+	}*/
+	SDL_Delay(10000);
 	SDL_Quit();
 	return 0;
 }
