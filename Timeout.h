@@ -1,11 +1,12 @@
 #pragma once
+#include <iostream>
 #include <SDL2/SDL_timer.h>
 #include "Callback.h"
 
 class Timeout
 {
 public:
-	Timeout(Uint32 t, Callback * cb);
+	Timeout(Uint32 t, Callback & cb);
 	~Timeout();
 
 	int getId() const;
@@ -28,7 +29,7 @@ private:
 
 	bool _triggered = false;
 
-	Callback * _callback;
+	Callback  _callback;
 
 	static int _next_id;
 };

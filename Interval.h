@@ -1,11 +1,12 @@
 #pragma once
 #include <SDL2/SDL_timer.h>
+#include <iostream>
 #include "Callback.h"
 
 class Interval
 {
 public:
-	Interval(Uint32 t, Callback * cb);
+	Interval(Uint32 t, Callback& cb);
 	~Interval();
 
 	int getId() const;
@@ -28,7 +29,7 @@ private:
 	// the next time we should trigger the callback function
 	Uint32 _next_trigger_time;
 
-	Callback * _callback;
+	Callback _callback;
 
 	static int _next_id;
 };

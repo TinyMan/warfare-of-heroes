@@ -1,5 +1,5 @@
 #include "TimeService.h"
-/*
+
 TimeService::TimeService()
 {
 }
@@ -7,36 +7,54 @@ TimeService::TimeService()
 
 TimeService::~TimeService()
 {
+	for (auto e : _timeout)
+		delete e;
+	for (auto e:_interval)
+		delete e;
 }
 
 void TimeService::update()
-{/*
-	Uint32 t = SDL_GetTicks();
-	while (_timeout.front().first <= t)
+{	
+	// trigger the first timeout, stop when the first timeout is not triggered
+	// since the list is sorted if the first doesn't trigger neither will the others
+	while (!_timeout.empty() && _timeout.front()->check())
 	{
-		_timeout.front().second();
+		delete _timeout.front();
+		//cout << "Triggered timeout no. " << _timeout.front().getId() << endl;		
 		_timeout.pop_front();
 	}
+	for (auto e : _interval)
+	{
+		e->check();
+	}
 }
-/*
-void TimeService::setTimeout(Uint32 t, Callback cb)
+
+void TimeService::setTimeout(Uint32 t, Callback& cb)
 {
-	t += SDL_GetTicks();
+	// if it is the first timeout we add
 	if (_timeout.empty())
 	{
-		_timeout.emplace_back(t, cb);
+		_timeout.push_back(new Timeout(t, cb));
 	}
-	else
+	else // else we insert the timeout where it should be on the sorted list
 	{
-		list<pair<Uint32, Callback>>::iterator it = _timeout.begin();
-		bool found = t <= it->first;
+		Timeout * new_timeout = new Timeout(t, cb);
+		// search the good position
+		list<Timeout*>::iterator it = _timeout.begin();
+		bool found = *new_timeout <= **it;
 		while (!found && ++it != _timeout.end())
 		{
-			found = t <= it->first;
+			found = *new_timeout <= **it;
 		}
 
-		_timeout.insert(it, make_pair(t, cb));
+		// insert it
+		_timeout.insert(it, new_timeout);
 	}
 	display();
-
-}*/
+}
+void TimeService::setInterval(Uint32 t, Callback& cb)
+{
+	_interval.push_back(new Interval(t, cb));
+	
+	display();
+}

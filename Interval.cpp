@@ -2,24 +2,25 @@
 
 int Interval::_next_id = 0;
 
-Interval::Interval(Uint32 t, Callback * cb) : _interval(t), _callback(cb), _id(_next_id++), _start_time(SDL_GetTicks())
+Interval::Interval(Uint32 t, Callback& cb) : _interval(t), _callback(cb), _id(_next_id++), _start_time(SDL_GetTicks())
 {
 	// calculate the first trigger time
 	updateNextTriggerTime();
 }
 Interval::~Interval()
 {
-	delete _callback;
+	cout << "Interval no. " << _id << " dying" << endl;
 }
 bool Interval::check()
 {
 	if (_next_trigger_time <= SDL_GetTicks())
 	{
-		_callback->call();
+		_callback.call();
 		// take note that we triggered the cb 1 more time
 		_nb_triggered++;
 		// need to update the trigger time only if it has changed
 		updateNextTriggerTime();
+		return true;
 	}
 	return false;
 }

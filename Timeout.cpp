@@ -2,17 +2,17 @@
 
 int Timeout::_next_id = 0;
 
-Timeout::Timeout(Uint32 t, Callback * cb) : _duration(t), _callback(cb), _trigger_time(SDL_GetTicks() + t), _id(_next_id++)
+Timeout::Timeout(Uint32 t, Callback&  cb) : _duration(t), _callback(cb), _trigger_time(SDL_GetTicks() + t), _id(_next_id++)
 {
 }
 Timeout::~Timeout()
 {
-	delete _callback;
+	cout << "Timeout no. " << _id << " dying" << endl;
 }
 bool Timeout::check()
 {
 	if (!_triggered && SDL_GetTicks() >= _trigger_time){
-		_callback->call();
+		_callback.call();
 		_triggered = true;
 		return true;
 	}

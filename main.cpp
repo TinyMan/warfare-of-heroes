@@ -3,31 +3,34 @@
 #include "Callback.h"
 #include "Timeout.h"
 #include "Interval.h"
+#include "TimeService.h"
 
-void myCallback(int a, int b, char c)
+void myCallback(int a, TimeService* ts)
 {
-	cout << SDL_GetTicks() << "\ta = " << a  << c << endl;
+	cout << SDL_GetTicks() << "\ta = " << a  << endl;
+	//ts->setTimeout(1000, Callback(myCallback, 1, ts));
 }
-template <typename ...Args>
-void tt(void f(Args...), Args... args)
+void doit(TimeService* ts)
 {
-	f(args...);
+	ts->setTimeout(1000, Callback(myCallback, 1, ts));
+	ts->setInterval(1000, Callback(myCallback, 1, ts));
 }
+
 int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
 	cout << "Starting @ " << SDL_GetTicks() << endl;
-	Interval *iv = new Interval(1000, new Callback(myCallback, 1, 2, 'c'));
-	cout << "Iv started @ " << iv->getStartTime() << endl;
+	TimeService *ts = new TimeService();
+	doit(ts);
 	while (SDL_GetTicks() < 5000)
 	{
-		cout << "next time @ " << iv->getNextTriggerTime() << endl;
 		SDL_Delay(100);
-		iv->check();
+		ts->update();
 	}
 	cout << "Ending @ " << SDL_GetTicks() << endl;
-	SDL_Delay(10000);
+	delete ts;
+	system("pause");
 	SDL_Quit();
 	return 0;
 }
