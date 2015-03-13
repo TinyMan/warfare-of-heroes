@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "Callback.h"
-
+#include "Timeout.h"
 
 void myCallback(int a, int b, char c)
 {
@@ -16,17 +16,14 @@ int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
-	//tt(myCallback, 1, 2);
-	//Callback<int, int, char> *cb = new Callback<int, int, char>(myCallback, 1, 2, 'c');
-	Callback * cb = new Callback(myCallback, 1, 2, 'c');
-	cb->call();
-	/*
+	cout << "Starting timeout @ " << SDL_GetTicks() << endl;
+	Timeout* to = new Timeout(4000, new Callback(myCallback, 1, 2, 'c'));
 	while (SDL_GetTicks() < 5000)
 	{
 		SDL_Delay(100);
 
-		ts.update();
-	}*/
+		to->check();
+	}
 	SDL_Delay(10000);
 	SDL_Quit();
 	return 0;
