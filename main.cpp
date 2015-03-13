@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Callback.h"
 #include "Timeout.h"
+#include "Interval.h"
 
 void myCallback(int a, int b, char c)
 {
@@ -16,14 +17,16 @@ int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
-	cout << "Starting timeout @ " << SDL_GetTicks() << endl;
-	Timeout* to = new Timeout(4000, new Callback(myCallback, 1, 2, 'c'));
+	cout << "Starting @ " << SDL_GetTicks() << endl;
+	Interval *iv = new Interval(1000, new Callback(myCallback, 1, 2, 'c'));
+	cout << "Iv started @ " << iv->getStartTime() << endl;
 	while (SDL_GetTicks() < 5000)
 	{
+		cout << "next time @ " << iv->getNextTriggerTime() << endl;
 		SDL_Delay(100);
-
-		to->check();
+		iv->check();
 	}
+	cout << "Ending @ " << SDL_GetTicks() << endl;
 	SDL_Delay(10000);
 	SDL_Quit();
 	return 0;

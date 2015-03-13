@@ -18,24 +18,24 @@ bool Timeout::check()
 	}
 	return false;
 }
-inline int Timeout::getId() const
+int Timeout::getId() const
 {
 	return _id;
 }
-inline Uint32 Timeout::getStartTime() const
+Uint32 Timeout::getStartTime() const
 {
 	return _trigger_time - _duration;
 }
 
-inline Uint32 Timeout::getTriggerTime() const
+Uint32 Timeout::getTriggerTime() const
 {
 	return _trigger_time;
 }
-inline bool Timeout::operator<=(const Timeout& t) const
+bool Timeout::operator<=(const Timeout& t) const
 {
 	return _trigger_time <= t._trigger_time;
 }
-inline bool Timeout::outDated() const
+bool Timeout::outDated() const
 {
 	return _triggered;
 }

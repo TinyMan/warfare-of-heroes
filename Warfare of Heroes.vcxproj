@@ -75,6 +75,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Callback.cpp" />
+    <ClCompile Include="Interval.cpp" />
     <ClCompile Include="logservice.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Timeout.cpp" />
@@ -82,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Callback.h" />
+    <ClInclude Include="Interval.h" />
     <ClInclude Include="logservice.h" />
     <ClInclude Include="Timeout.h" />
     <ClInclude Include="TimeService.h" />
