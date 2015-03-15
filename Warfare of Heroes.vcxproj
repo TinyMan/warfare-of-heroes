@@ -78,6 +78,7 @@
     <ClCompile Include="Interval.cpp" />
     <ClCompile Include="logservice.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="Timeout.cpp" />
     <ClCompile Include="TimeService.cpp" />
   </ItemGroup>
@@ -85,6 +86,7 @@
     <ClInclude Include="Callback.h" />
     <ClInclude Include="Interval.h" />
     <ClInclude Include="logservice.h" />
+    <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="Timeout.h" />
     <ClInclude Include="TimeService.h" />
   </ItemGroup>

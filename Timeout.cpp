@@ -7,7 +7,7 @@ Timeout::Timeout(Uint32 t, Callback&  cb) : _duration(t), _callback(cb), _trigge
 }
 Timeout::~Timeout()
 {
-	cout << "Timeout no. " << _id << " dying" << endl;
+	//cout << "Timeout no. " << _id << " dying" << endl;
 }
 bool Timeout::check()
 {

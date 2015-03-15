@@ -9,7 +9,7 @@ Interval::Interval(Uint32 t, Callback& cb) : _interval(t), _callback(cb), _id(_n
 }
 Interval::~Interval()
 {
-	cout << "Interval no. " << _id << " dying" << endl;
+	//cout << "Interval no. " << _id << " dying" << endl;
 }
 bool Interval::check()
 {
