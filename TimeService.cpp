@@ -50,11 +50,11 @@ void TimeService::setTimeout(Uint32 t, Callback& cb)
 		// insert it
 		_timeout.insert(it, new_timeout);
 	}
-	display();
+	//display();
 }
 void TimeService::setInterval(Uint32 t, Callback& cb)
 {
 	_interval.push_back(new Interval(t, cb));
 	
-	display();
+	//display();
 }
