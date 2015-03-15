@@ -75,6 +75,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Callback.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Interval.cpp" />
     <ClCompile Include="logservice.cpp" />
     <ClCompile Include="main.cpp" />
@@ -84,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Callback.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Interval.h" />
     <ClInclude Include="logservice.h" />
     <ClInclude Include="ServiceLocator.h" />
