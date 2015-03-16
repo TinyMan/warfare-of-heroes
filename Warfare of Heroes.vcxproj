@@ -76,6 +76,8 @@
   <ItemGroup>
     <ClCompile Include="Callback.cpp" />
     <ClCompile Include="DeadObject.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventService.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Interval.cpp" />
     <ClCompile Include="logservice.cpp" />
@@ -87,6 +89,8 @@
   <ItemGroup>
     <ClInclude Include="Callback.h" />
     <ClInclude Include="DeadObject.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventService.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Interval.h" />
     <ClInclude Include="logservice.h" />

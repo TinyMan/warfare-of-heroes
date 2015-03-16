@@ -1,10 +1,14 @@
 #include <SDL2/SDL.h>
 #include <iostream>
+#include "Event.h"
 #include "ServiceLocator.h"
 
-void myCallback(int a, TimeService* ts)
+using namespace std;
+
+void myCallback( int a)
 {
 	cout << SDL_GetTicks() << "\ta = " << a  << endl;
+
 }
 
 
@@ -13,15 +17,14 @@ int main(int argc, char* argv[])
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
 	cout << "Starting @ " << SDL_GetTicks() << endl;
-	ServiceLocator::provide(new TimeService());
-	ServiceLocator::provide(new LogService("log.txt"));
-	
-	ServiceLocator::getTimeService()->setTimeout(1000, Callback(myCallback, 1, ServiceLocator::getTimeService()));
-	while (SDL_GetTicks() < 5000)
-	{
-		SDL_Delay(100);
-		ServiceLocator::getTimeService()->update();
-	}
+	ServiceLocator::provide(new EventService);
+	ServiceLocator::getEventService()->listen(Event::LAND, Callback(myCallback, 1));
+	Event e(Event::LAND);
+	SDL_Delay(1000);
+	ServiceLocator::getEventService()->dispatch(e);
+//	e.dispatch();
+
+	cout << "Type: " << e.getType() << endl;
 	cout << "Ending @ " << SDL_GetTicks() << endl;
 
 	system("pause");
