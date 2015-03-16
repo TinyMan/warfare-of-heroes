@@ -1,12 +1,23 @@
-#include "servicelocator.h"
+#include "ServiceLocator.h"
 
-LogService * ServiceLocator::_log = NULL;
+TimeService * ServiceLocator::_timeService = NULL;
+LogService * ServiceLocator::_logService = NULL;
 
-LogService* ServiceLocator::getLog()
+TimeService * ServiceLocator::getTimeService()
 {
-	return _log;
+	return _timeService;
 }
-void ServiceLocator::provide(LogService* log)
+LogService * ServiceLocator::getLogService()
 {
-	_log = log;
+	return _logService;
+}
+
+
+void ServiceLocator::provide(TimeService * ts)
+{
+	_timeService = ts;
+}
+void ServiceLocator::provide(LogService * ls)
+{
+	_logService = ls;
 }

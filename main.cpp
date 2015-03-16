@@ -1,18 +1,30 @@
 #include <SDL2/SDL.h>
-#include "servicelocator.h"
-#include "logservice.h"
+#include <iostream>
+#include "ServiceLocator.h"
+
+void myCallback(int a, TimeService* ts)
+{
+	cout << SDL_GetTicks() << "\ta = " << a  << endl;
+}
+
 
 int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
+	
+	cout << "Starting @ " << SDL_GetTicks() << endl;
+	ServiceLocator::provide(new TimeService());
 	ServiceLocator::provide(new LogService("log.txt"));
-	SDL_Window *screen = SDL_CreateWindow("My Game Window",
-		SDL_WINDOWPOS_UNDEFINED,
-		SDL_WINDOWPOS_UNDEFINED,
-		640, 480,
-		 SDL_WINDOW_OPENGL);
-	ServiceLocator::getLog()->write(LogService::DEBUG, "Hello");
-	SDL_Delay(5000);
+	
+	ServiceLocator::getTimeService()->setTimeout(1000, Callback(myCallback, 1, ServiceLocator::getTimeService()));
+	while (SDL_GetTicks() < 5000)
+	{
+		SDL_Delay(100);
+		ServiceLocator::getTimeService()->update();
+	}
+	cout << "Ending @ " << SDL_GetTicks() << endl;
+
+	system("pause");
 	SDL_Quit();
 	return 0;
 }
