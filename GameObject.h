@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <iostream>
+#include "ServiceLocator.h"
 
 using namespace std;
 class Game;
@@ -17,7 +18,7 @@ public:
 
 	/* those won't be overridden */
 	bool isActive() const  { return _active; }
-	void setActive(bool a = true) { if (_active != a){ _active = a; /*TODO: mark game object list as dirty (need to sort it) */ } }
+	void setActive(bool a = true);
 	bool isToDelete() const { return _to_delete; }
 	void setToDelete(bool td = true) { _to_delete = td; }
 	int getId() const { return _id; }
