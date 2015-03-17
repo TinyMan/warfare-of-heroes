@@ -11,7 +11,7 @@ public:
 	DeadObject(Game*);
 	virtual ~DeadObject();
 
-	virtual void update() { cout << "hello from " << getId() << endl; GameObject::update(); }
-	virtual void initialize() {}
+	virtual void update() = 0;
+	virtual void initialize() = 0;
 };
 
