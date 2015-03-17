@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <iomanip>
 #include <string>
 #include <fstream>
@@ -17,7 +18,7 @@ public:
 		WARNING
 	};
 
-	LogService(string filename);
+	LogService(string filename, bool DEBUG=false);
 	virtual ~LogService();
 
 	virtual void write(LogLevel ll, const string& str);
@@ -28,5 +29,8 @@ private:
 	ofstream logfile;
 
 	Uint32 start_time;
+
+	streambuf *oldbuf = nullptr;
 };
+
 

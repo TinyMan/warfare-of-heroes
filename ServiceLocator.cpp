@@ -29,3 +29,22 @@ void ServiceLocator::provide(EventService* es)
 {
 	_eventService = es;
 }
+
+void ServiceLocator::cleanup()
+{
+	if (_timeService != nullptr)
+	{
+		delete _timeService;
+		_timeService = nullptr;
+	}
+	if (_logService != nullptr)
+	{
+		delete _logService;
+		_logService = nullptr;
+	}
+	if (_eventService != nullptr)
+	{
+		delete _eventService;
+		_eventService = nullptr;
+	}
+}

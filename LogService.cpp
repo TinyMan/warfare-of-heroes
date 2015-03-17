@@ -1,10 +1,19 @@
 #include "logservice.h"
 
 
-LogService::LogService(string filename) : filename(filename)
+LogService::LogService(string filename, bool d) : filename(filename)
 {
-	logfile.open(filename.c_str());
-	logfile << setfill('0');
+	
+	if (!d)
+	{
+		logfile.open(filename.c_str());
+		oldbuf = cerr.rdbuf();
+		cerr.rdbuf(logfile.rdbuf());
+		logfile << setfill('0');
+	}
+	cerr << setfill('0');
+
+
 	start_time = SDL_GetTicks();
 	if (logfile.is_open())
 	{
@@ -19,28 +28,29 @@ LogService::~LogService()
 	{
 		write(DEBUG, "Ending log ...");
 		logfile.close();
+		cerr.rdbuf(oldbuf);
 	}
 }
 
 void LogService::write(LogLevel ll, const string& str)
 {
-	logfile << setw(10)<< SDL_GetTicks() - start_time << "\t[";
+	cerr << setw(10)<< SDL_GetTicks() - start_time << "\t[";
 	switch (ll)
 	{
 	case LogService::DEBUG:
-		logfile << "DEBUG";
+		cerr << "DEBUG";
 		break;
 	case LogService::INFO:
-		logfile << "INFO";
+		cerr << "INFO";
 		break;
 	case LogService::ERROR:
-		logfile << "ERROR";
+		cerr << "ERROR";
 		break;
 	case LogService::WARNING:
-		logfile << "WARNING";
+		cerr << "WARNING";
 		break;
 	default:
 		break;
 	}
-	logfile << "]\t" << str << endl;
+	cerr << "]\t" << str << endl;
 }

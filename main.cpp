@@ -1,13 +1,13 @@
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "Event.h"
+#include "Game.h"
 #include "ServiceLocator.h"
 
 using namespace std;
 
-void myCallback( int a)
+void myCallback()
 {
-	cout << SDL_GetTicks() << "\ta = " << a  << endl;
+	cout << SDL_GetTicks() << "\ta = " << 1  << endl;
 
 }
 
@@ -17,14 +17,16 @@ int main(int argc, char* argv[])
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
 	cout << "Starting @ " << SDL_GetTicks() << endl;
-	ServiceLocator::provide(new EventService);
-	ServiceLocator::getEventService()->listen(Event::LAND, Callback(myCallback, 1));
-	Event e(Event::LAND);
+	
+	Game *g = new Game();
+	
+	ServiceLocator::getTimeService()->setTimeout(900, Callback(&Game::addGameObject, g, nullptr));
+	
 	SDL_Delay(1000);
-	ServiceLocator::getEventService()->dispatch(e);
-//	e.dispatch();
+	ServiceLocator::getTimeService()->update();
+	cout << "Number of active game objects: " << g->getNbActiveGObjects() << endl;
 
-	cout << "Type: " << e.getType() << endl;
+	delete g;
 	cout << "Ending @ " << SDL_GetTicks() << endl;
 
 	system("pause");

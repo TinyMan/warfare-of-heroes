@@ -17,9 +17,9 @@ public:
 	see: http://stackoverflow.com/questions/644397/c-class-with-template-cannot-find-its-constructor
 	*/
 	template<typename ...Args>
-	Callback(void f(Args...), Args... args)
+	Callback( Args... args)
 	{
-		_cb = bind(f, args...);
+		_cb = bind(args...);
 	}
 
 	void call() const;

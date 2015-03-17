@@ -78,6 +78,7 @@
     <ClCompile Include="DeadObject.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventService.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Interval.cpp" />
     <ClCompile Include="logservice.cpp" />
@@ -91,6 +92,7 @@
     <ClInclude Include="DeadObject.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventService.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Interval.h" />
     <ClInclude Include="logservice.h" />

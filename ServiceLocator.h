@@ -15,6 +15,8 @@ public:
 	static LogService * getLogService();
 	static EventService* getEventService();
 
+	static void cleanup();
+
 private:
 	static TimeService * _timeService;
 	static LogService * _logService;
