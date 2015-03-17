@@ -3,7 +3,7 @@
 
 int main(int argc, char* argv[])
 {
-	Archer a();
+	
 
 
 	return 0;
