@@ -22,9 +22,8 @@ int main(int argc, char* argv[])
 	
 	ServiceLocator::getTimeService()->setTimeout(900, Callback(&Game::addGameObject, g, nullptr));
 	
-	SDL_Delay(1000);
-	ServiceLocator::getTimeService()->update();
-	cout << "Number of active game objects: " << g->getNbActiveGObjects() << endl;
+	g->loop();
+
 
 	delete g;
 	cout << "Ending @ " << SDL_GetTicks() << endl;

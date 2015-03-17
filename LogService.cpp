@@ -37,16 +37,16 @@ void LogService::write(LogLevel ll, const string& str)
 	cerr << setw(10)<< SDL_GetTicks() - start_time << "\t[";
 	switch (ll)
 	{
-	case LogService::DEBUG:
+	case DEBUG:
 		cerr << "DEBUG";
 		break;
-	case LogService::INFO:
+	case INFO:
 		cerr << "INFO";
 		break;
-	case LogService::ERROR:
+	case ERROR:
 		cerr << "ERROR";
 		break;
-	case LogService::WARNING:
+	case WARNING:
 		cerr << "WARNING";
 		break;
 	default:

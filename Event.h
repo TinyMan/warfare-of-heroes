@@ -9,7 +9,9 @@ public:
 	typedef enum EVENT_TYPE
 	{
 		NONE,
-		LAND
+		LAND,
+		GAMEOBJECT_ACTIVATE,
+		GAMEOBJECT_DEACTIVATE
 	} EVENT_TYPE;
 
 	Event(EVENT_TYPE t = NONE, void* data =nullptr );

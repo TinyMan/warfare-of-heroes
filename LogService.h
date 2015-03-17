@@ -6,17 +6,18 @@
 #include <SDL2/SDL_timer.h>
 
 using namespace std;
+enum LogLevel
+{
+	DEBUG,
+	INFO,
+	ERROR,
+	WARNING
+};
 
 class LogService
 {
 public:
-	enum LogLevel
-	{
-		DEBUG,
-		INFO,
-		ERROR,
-		WARNING
-	};
+
 
 	LogService(string filename, bool DEBUG=false);
 	virtual ~LogService();

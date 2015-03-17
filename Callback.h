@@ -6,6 +6,10 @@ using namespace std;
 
 /*
 To create a callback just call ctor: Callback cb(myCallbackFunction, arg1, arg2, arg3, etc...)
+In order to call an object's method do the following:
+ObjectClass * o = new ObjectClass();
+Callback cb(&ObjectClass::myMethod, o, ... argument list for method myMethod ...);
+
 then cb.call() will call myCallbackFunction with all the arguments given in the ctor
 */
 class Callback
