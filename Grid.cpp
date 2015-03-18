@@ -16,3 +16,12 @@ Grid::Grid()
 Grid::~Grid()
 {
 }
+
+void Grid::generateObstacle() {
+	for (int i = 0; i < 4; i++)
+	{
+		int x = rand() % WIDTH;
+		int y = rand() % LENGTH;
+		arrayOfCells[x][y].setType(Cell::Obstacle);
+	}
+}
