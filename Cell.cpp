@@ -42,7 +42,19 @@ int Cell::getDistance(const Cell & c) const
 	return distance;
 }
 
+int Cell::getDistance(const Character & c) const
+{
+	Cell hisCell = c.getCell();
+	return (getDistance(hisCell));
+}
+
 bool isInView(const Cell & c) const
 {
 	// TODO : vérifier la ligne de vue (obstacle ou non)
+}
+
+bool isInView(const Character & c) const
+{
+	Cell hisCell = c.getCell();
+	return (isInView(hisCell));
 }

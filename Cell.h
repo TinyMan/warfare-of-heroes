@@ -1,4 +1,5 @@
 #pragma once
+#include "Character.h"
 class Cell
 {
 public:
@@ -12,7 +13,9 @@ public:
 	int getPosX() const { return _posX; }
 	int getPosY() const { return _posY;	}
 	int getDistance(const Cell & c) const;
+	int getDistance(const Character & c) const;
 	bool isInView(const Cell & c) const;
+	bool isInView(const Character & c) const;
 
 private:
 	_STATE _cellType;

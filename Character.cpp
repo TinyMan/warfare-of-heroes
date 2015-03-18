@@ -33,19 +33,24 @@ void Character::removeCapaciyPoint(int amount)
 		_capacityPoints = 0;
 }
 
-int Character::getHP()
+int Character::getHP() const
 {
 	return(_hitPoints);
 }
 
-int Character::getMP()
+int Character::getMP() const
 {
 	return(_movementPoints);
 }
 
-int Character::getCP()
+int Character::getCP() const
 {
 	return(_capacityPoints);
+}
+
+Cell Character::getCell() const
+{
+	return(positionOnGrid);
 }
 
 bool Character::basicAttack(Character & c)

@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "Cell.h"
 
 using namespace std;
 
@@ -10,7 +11,7 @@ protected:
 	int _hitPoints;
 	int _movementPoints;
 	int _capacityPoints;
-	// Cell positionOnGrid;
+	Cell positionOnGrid;
 
 public:
 	Character(string name="NoName");
@@ -22,9 +23,10 @@ public:
 	void removeCapaciyPoint(int amount=1);
 
 	// Getters :
-	int getHP();
-	int getMP();
-	int getCP();
+	int getHP() const;
+	int getMP() const;
+	int getCP() const;
+	Cell getCell() const;
 
 	// Attacks :
 	bool basicAttack(Character & c);
