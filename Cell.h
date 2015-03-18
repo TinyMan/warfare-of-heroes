@@ -1,11 +1,6 @@
 #pragma once
 class Cell
 {
-private :
-	 _STATE _cellType;
-	 int _posX;
-	 int _posY;
-
 public:
 	typedef enum _STATE {
 		Free, PlayerOnIt, Obstacle
@@ -14,5 +9,10 @@ public:
 	~Cell();
 
 	void setType(_STATE t);
+
+private:
+	_STATE _cellType;
+	int _posX;
+	int _posY;
 };
 
