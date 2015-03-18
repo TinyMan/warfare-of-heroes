@@ -24,7 +24,7 @@ bool Knight::basicAttack(Character & c)
 
 	bool attackHits = false;
 
-	/*
+	/* TODO : utiliser getDistance pour coder les sorts
 	if (getDistance(this, c) <= range and _capacityPoints >= cost)
 	{
 		c.lowerHitPoint(amountOfDamages); // The ennemy c takes a hit.
@@ -87,7 +87,7 @@ bool Knight::swordOfDestiny(Character & c)
 
 	bool spellHits = false;
 
-	/*
+	/* TODO :
 	if (getDistance(this, c) <= range and _capacityPoints >= cost)
 	{
 		c.lowerHitPoint(amountOfDamages); // The ennemy c takes a hit.

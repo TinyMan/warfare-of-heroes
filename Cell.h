@@ -12,6 +12,7 @@ public:
 	int getPosX() const { return _posX; }
 	int getPosY() const { return _posY;	}
 	int getDistance(const Cell & c) const;
+	bool isInView(const Cell & c) const;
 
 private:
 	_STATE _cellType;

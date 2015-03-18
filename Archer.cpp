@@ -1,5 +1,6 @@
 #include "Archer.h"
 
+// TODO : Prendre en compte les dégats bonus !
 
 Archer::Archer(string name) : Character(name)
 {
@@ -24,8 +25,8 @@ bool Archer::basicAttack(Character & c)
 	
 	bool attackHits = false;
 
-	// Create a public function int getDistance(const Character & c1, const Character & c2)
-	// it returns the number of cells between two players (each is positionned on a cell)
+	
+	// TODO : Utiliser la fonction getDistance pour créer les sorts
 	/*if (getDistance(this, c) <= range and _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }

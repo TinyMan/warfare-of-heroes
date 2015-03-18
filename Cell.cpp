@@ -1,6 +1,5 @@
 #include "Cell.h"
 
-
 Cell::Cell(int x, int y)
 {
 	_posX = x;
@@ -41,4 +40,9 @@ int Cell::getDistance(const Cell & c) const
 
 	distance = (Y2 - Y1) + (X2 - X1);
 	return distance;
+}
+
+bool isInView(const Cell & c) const
+{
+	// TODO : vérifier la ligne de vue (obstacle ou non)
 }
