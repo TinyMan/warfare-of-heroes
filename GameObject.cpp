@@ -13,3 +13,12 @@ GameObject::~GameObject()
 {
 	_object_count--;
 }
+
+void GameObject::setActive(bool a)
+{
+	if (_active != a)
+	{
+		_active = a;
+		ServiceLocator::getEventService()->dispatch(Event(a ? Event::GAMEOBJECT_ACTIVATE : Event::GAMEOBJECT_DEACTIVATE, this));
+	}
+}
