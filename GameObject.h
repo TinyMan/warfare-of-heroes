@@ -25,6 +25,8 @@ public:
 
 	static int getObjectCount()  { return _object_count; }
 
+	friend ostream& operator<<(ostream& o, const GameObject& go);
+
 protected:
 	Game * getGameInstance() const { return _gameInstance; }
 

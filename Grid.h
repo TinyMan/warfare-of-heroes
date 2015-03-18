@@ -12,12 +12,12 @@ private :
 	Cell arrayOfCells[WIDTH][LENGTH];
 public:
 	Grid();
-	~Grid();
+	virtual ~Grid();
 
 	void generateObstacle();
 
-	void update() {}
-	void initialize() {}
+	virtual void update() {}
+	virtual void initialize() {}
 };
 
 

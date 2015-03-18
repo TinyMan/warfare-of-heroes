@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "ServiceLocator.h"
 #include "Grid.h"
+#include "Mage.h"
 
 using namespace std;
 
@@ -21,9 +22,15 @@ int main(int argc, char* argv[])
 	
 	Game *g = new Game();
 	Grid *grid = new Grid();
+	Mage* mage = new Mage();
 
 	ServiceLocator::getTimeService()->setTimeout(900, Callback(&Game::addGameObject, g, grid));
-	
+
+	g->addGameObject(mage);
+	mage->setActive(false);
+	ServiceLocator::getTimeService()->setTimeout(2000, Callback(&Grid::setActive, grid, false));
+
+	ServiceLocator::getTimeService()->setInterval(1000, Callback(&Game::displayState, g));
 	g->loop();
 
 

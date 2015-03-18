@@ -33,11 +33,13 @@ void Game::loop()
 	while (true)
 	{
 		SDL_Delay(100);
+		_timeService->update();
+		/*
 		if (_gameObjects_dirty)
 			_logService->write(INFO, "Game Objects list is dirty !");
 
-		_timeService->update();
 		cout << "Number of active game objects: " << getNbActiveGObjects() << endl;
+		*/
 	}
 }
 
@@ -61,4 +63,16 @@ void Game::onToggleActivatedGameObject()
 	_logService->write(INFO, "Catching ev: game object activated or deactivated" );
 	_gameObjects_dirty = true;
 	if(_nb_active_gobjects > 0) _nb_active_gobjects--;
+}
+void Game::displayState() const
+{
+	stringstream sstm;
+	sstm << "Currently " << _gameObjects.size() << " game objects in the list." << endl;
+	_logService->write(INFO, sstm.str());
+
+	for (auto e : _gameObjects)
+	{
+		sstm << *e << endl;
+		_logService->write(INFO, sstm.str());
+	}
 }

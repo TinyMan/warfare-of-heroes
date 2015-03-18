@@ -2,6 +2,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <list>
+#include <sstream>
 
 #include "GameObject.h"
 #include "ServiceLocator.h"
@@ -28,6 +29,8 @@ public:
 	/* event listeners */
 	void onToggleActivatedGameObject();
 
+	/* display the current state of the game */
+	void displayState() const;
 
 private:
 	/* the collection of all game objects, sorted with the active ones on the front and the inactive ones after them */

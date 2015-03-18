@@ -22,3 +22,12 @@ void GameObject::setActive(bool a)
 		ServiceLocator::getEventService()->dispatch(Event(a ? Event::GAMEOBJECT_ACTIVATE : Event::GAMEOBJECT_DEACTIVATE, this));
 	}
 }
+
+
+ostream& operator<<(ostream& o, const GameObject& go)
+{
+	o << "GameObject no. " << go.getId() << ": " << endl;
+	o << "Active: " << go._active << endl;
+	o << "To delete: " << go._to_delete << endl;
+	return o;
+}
