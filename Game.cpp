@@ -45,7 +45,7 @@ void Game::loop()
 
 void Game::addGameObject(GameObject* g)
 {
-	ServiceLocator::getLogService()->write(INFO, "Adding new game object to collection");
+	ServiceLocator::getLogService()->info << "Adding new game object to collection";
 
 	if (g == nullptr)
 		return;
@@ -60,7 +60,7 @@ void Game::addGameObject(GameObject* g)
 
 void Game::onToggleActivatedGameObject()
 {
-	_logService->write(INFO, "Catching ev: game object activated or deactivated" );
+	ServiceLocator::getLogService()->info << "Catching ev: game object activated or deactivated" ;
 	_gameObjects_dirty = true;
 	if(_nb_active_gobjects > 0) _nb_active_gobjects--;
 }
@@ -68,11 +68,11 @@ void Game::displayState() const
 {
 	stringstream sstm;
 	sstm << "Currently " << _gameObjects.size() << " game objects in the list." << endl;
-	_logService->write(INFO, sstm.str());
+	_logService->info<< sstm.str();
 
 	for (auto e : _gameObjects)
 	{
 		sstm << *e << endl;
-		_logService->write(INFO, sstm.str());
+		_logService->info << sstm.str();
 	}
 }
