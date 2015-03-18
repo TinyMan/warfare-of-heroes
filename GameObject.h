@@ -9,7 +9,7 @@ class Game;
 class GameObject
 {
 public:
-	GameObject(Game*);
+	GameObject();
 	virtual ~GameObject();
 
 	/* every inherited class has to implement those */

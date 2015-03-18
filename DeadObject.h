@@ -8,7 +8,7 @@ class DeadObject :
 	public GameObject
 {
 public:
-	DeadObject(Game*);
+	DeadObject();
 	virtual ~DeadObject();
 
 	virtual void update() { /*cout << "hello from " << getId() << endl; GameObject::update();*/ }

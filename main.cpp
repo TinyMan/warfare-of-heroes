@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Game.h"
 #include "ServiceLocator.h"
+#include "Grid.h"
 
 using namespace std;
 
@@ -19,8 +20,9 @@ int main(int argc, char* argv[])
 	cout << "Starting @ " << SDL_GetTicks() << endl;
 	
 	Game *g = new Game();
-	
-	ServiceLocator::getTimeService()->setTimeout(900, Callback(&Game::addGameObject, g, nullptr));
+	Grid *grid = new Grid();
+
+	ServiceLocator::getTimeService()->setTimeout(900, Callback(&Game::addGameObject, g, grid));
 	
 	g->loop();
 
