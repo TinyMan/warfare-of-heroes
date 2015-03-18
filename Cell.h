@@ -9,6 +9,9 @@ public:
 	~Cell();
 
 	void setType(_STATE t);
+	int getPosX() const;
+	int getPosY() const;
+	int getDistance(const Cell & c) const;
 
 private:
 	_STATE _cellType;
