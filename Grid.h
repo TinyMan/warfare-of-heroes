@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdlib>
 #include "Cell.h"
 
 const int WIDTH = 14;
@@ -11,6 +12,8 @@ private :
 public:
 	Grid();
 	~Grid();
+
+	void generateObstacle();
 };
 
 
