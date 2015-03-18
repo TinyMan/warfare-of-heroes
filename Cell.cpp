@@ -22,8 +22,8 @@ int Cell::getDistance(const Cell & c) const
 {
 	int X1 = c.getPosX();
 	int Y1 = c.getPosY();
-	int X2 = this.getPosX();
-	int Y2 = this.getPosY();
+	int X2 = getPosX();
+	int Y2 = getPosY();
 
 	int temp,distance;
 	if (X1 > X2)
