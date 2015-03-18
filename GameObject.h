@@ -13,8 +13,8 @@ public:
 	virtual ~GameObject();
 
 	/* every inherited class has to implement those */
-	virtual void update() = 0;
-	virtual void initialize() = 0;
+	virtual void update() { ServiceLocator::getLogService()->info << "GameObject default update()" << endl; }
+	virtual void initialize() { ServiceLocator::getLogService()->info << "GameObject default initialize()" << endl; }
 
 	/* those won't be overridden */
 	bool isActive() const  { return _active; }
@@ -44,3 +44,5 @@ private:
 	Game * _gameInstance;
 };
 
+/* used only to sort */
+bool compare(const GameObject* g, const GameObject* go);

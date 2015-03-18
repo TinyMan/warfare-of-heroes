@@ -7,40 +7,30 @@
 
 using namespace std;
 
-void myCallback()
-{
-	cout << SDL_GetTicks() << "\ta = " << 1  << endl;
-
-}
-
-
 int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
-	cout << "Starting @ " << SDL_GetTicks() << endl;
-	LogService log("log.txt");
-	log.info << "Ligne 1" << endl;
-	log.switchDestOutput();
-	log.info << "Ligne 2" << endl;
-	log.switchDestOutput();
-	cerr << "Erreur 1" << endl;
-	
-	/*Game *g = new Game();
+	Game *g = new Game();
 	Grid *grid = new Grid();
 	Mage* mage = new Mage();
 
 	ServiceLocator::getTimeService()->setTimeout(900, Callback(&Game::addGameObject, g, grid));
 
 	g->addGameObject(mage);
+	grid->setActive(false);
 	mage->setActive(false);
-	ServiceLocator::getTimeService()->setTimeout(2000, Callback(&Grid::setActive, grid, false));
+	//grid->setActive();
+	ServiceLocator::getTimeService()->setTimeout(2500, Callback(&Grid::setActive, grid, true));
 
-	ServiceLocator::getTimeService()->setInterval(1000, Callback(&Game::displayState, g));
+	ServiceLocator::getTimeService()->setInterval(2000, Callback(&Game::displayState, g));
+
+	ServiceLocator::getTimeService()->setTimeout(5000, Callback(&Game::stop, g));
 	g->loop();
 
 
-	delete g;*/
+	delete g;
+
 	cout << "Ending @ " << SDL_GetTicks() << endl;
 
 	system("pause");

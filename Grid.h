@@ -15,9 +15,9 @@ public:
 	virtual ~Grid();
 
 	void generateObstacle();
-
-	virtual void update() {}
-	virtual void initialize() {}
+	/* TODO:: */
+	/*virtual void update() {}
+	virtual void initialize() {}*/
 };
 
 

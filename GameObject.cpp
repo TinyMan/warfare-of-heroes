@@ -24,6 +24,12 @@ void GameObject::setActive(bool a)
 }
 
 
+/* used only to sort */
+bool compare(const GameObject* g, const GameObject* go)
+{
+	//ServiceLocator::getLogService()->info << "comparing " << g.getId() << " with " << go.getId() << endl;
+	return g->isActive() && !go->isActive();
+}
 ostream& operator<<(ostream& o, const GameObject& go)
 {
 	o << "GameObject no. " << go.getId() << ": " << endl;

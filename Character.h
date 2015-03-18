@@ -34,7 +34,8 @@ public:
 	bool movement(); // Français : on met en paramètre la case et on vérifie si on peut se déplacer 
 	// Il faut créer une méthode de pathfinding qui permettra de se déplacer de plus d'une case à la fois.
 
-	virtual void update(){}
-	virtual void initialize() {}
+	/* TODO:: */
+	/*virtual void update(){}
+	virtual void initialize() {}*/
 };
 

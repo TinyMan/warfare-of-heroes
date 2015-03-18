@@ -30,22 +30,29 @@ Game::~Game()
 void Game::loop()
 {
 	cout << "Main loop !" << endl;
-	while (true)
+	while (_running)
 	{
+		/* TODO: BEGIN FRAME */
+		/* TODO: PROCESS USER INPUT */
 		SDL_Delay(100);
+		/* Update */
 		_timeService->update();
+		/* TODO: UPDATE */
+		this->update();
+
 		/*
-		if (_gameObjects_dirty)
-			_logService->write(INFO, "Game Objects list is dirty !");
 
 		cout << "Number of active game objects: " << getNbActiveGObjects() << endl;
 		*/
+
+		/* TODO: RENDER */
+		/* TODO: END FRAME */
 	}
 }
 
 void Game::addGameObject(GameObject* g)
 {
-	ServiceLocator::getLogService()->info << "Adding new game object to collection";
+	ServiceLocator::getLogService()->info << "Adding new game object to collection" << endl;
 
 	if (g == nullptr)
 		return;
@@ -60,7 +67,7 @@ void Game::addGameObject(GameObject* g)
 
 void Game::onToggleActivatedGameObject()
 {
-	ServiceLocator::getLogService()->info << "Catching ev: game object activated or deactivated" ;
+	ServiceLocator::getLogService()->info << "Catching ev: game object activated or deactivated" << endl;
 	_gameObjects_dirty = true;
 	if(_nb_active_gobjects > 0) _nb_active_gobjects--;
 }
@@ -68,11 +75,20 @@ void Game::displayState() const
 {
 	stringstream sstm;
 	sstm << "Currently " << _gameObjects.size() << " game objects in the list." << endl;
-	_logService->info<< sstm.str();
 
 	for (auto e : _gameObjects)
 	{
 		sstm << *e << endl;
-		_logService->info << sstm.str();
+	}
+	_logService->info << sstm.str();
+}
+
+void Game::update()
+{
+	if (_gameObjects_dirty)
+	{
+		_logService->info << "Game Objects list is dirty !" << endl;
+		_gameObjects.sort(compare);
+		_gameObjects_dirty = false;
 	}
 }

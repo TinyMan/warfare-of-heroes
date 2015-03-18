@@ -32,6 +32,7 @@ public:
 	/* display the current state of the game */
 	void displayState() const;
 
+	void stop() { _running = false; }
 private:
 	/* the collection of all game objects, sorted with the active ones on the front and the inactive ones after them */
 	list<GameObject*> _gameObjects;
@@ -39,6 +40,9 @@ private:
 	int _nb_active_gobjects = 0;
 	/* true if we need to sort _gameObjects list */
 	bool _gameObjects_dirty = false;
+
+
+	bool _running = true;
 
 	TimeService * _timeService = nullptr;
 	LogService * _logService = nullptr;
