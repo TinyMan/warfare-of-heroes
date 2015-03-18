@@ -86,9 +86,10 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Interval.cpp" />
     <ClCompile Include="Knight.cpp" />
-    <ClCompile Include="logservice.cpp" />
+    <ClCompile Include="LogService.cpp" />
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="Timeout.cpp" />
     <ClCompile Include="TimeService.cpp" />
   </ItemGroup>
@@ -105,8 +106,9 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Interval.h" />
     <ClInclude Include="Knight.h" />
-    <ClInclude Include="logservice.h" />
+    <ClInclude Include="LogService.h" />
     <ClInclude Include="Mage.h" />
+    <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="Timeout.h" />
     <ClInclude Include="TimeService.h" />
   </ItemGroup>
