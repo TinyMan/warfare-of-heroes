@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include "GameObject.h"
+#include "Cell.h"
+#include "Grid.h"
 
 using namespace std;
 
@@ -11,7 +13,7 @@ protected:
 	int _hitPoints;
 	int _movementPoints;
 	int _capacityPoints;
-	// Cell positionOnGrid;
+	Cell* _hisCell = nullptr;
 
 public:
 	Character(string name="NoName");
@@ -26,6 +28,7 @@ public:
 	int getHP();
 	int getMP();
 	int getCP();
+	Cell* getCell() const { return _hisCell; }
 
 	// Attacks :
 	bool basicAttack(Character & c);
@@ -33,6 +36,7 @@ public:
 	// Movements :
 	bool movement(); // Français : on met en paramètre la case et on vérifie si on peut se déplacer 
 	// Il faut créer une méthode de pathfinding qui permettra de se déplacer de plus d'une case à la fois.
+	bool move(int i, int j);
 
 	/* TODO:: */
 	/*virtual void update(){}

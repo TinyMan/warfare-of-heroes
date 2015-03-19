@@ -11,13 +11,12 @@ using namespace std;
 
 /*
 Main class of the game
-CTOR():
+Singleton thx
 
 */
 class Game
 {
 public:
-	Game();
 	~Game();
 
 	void initialize();
@@ -47,6 +46,9 @@ public:
 	/* ending game */
 	void stop() { _running = false; }
 	bool isRunning() const { return _running; }
+
+	static Game* getInstance() { if (!_instance) _instance = new Game; return _instance; }
+
 private:
 	/* the collection of all game objects, sorted with the active ones on the front and the inactive ones after them */
 	list<GameObject*> _gameObjects;
@@ -68,6 +70,10 @@ private:
 	/* update its state, delete objects marked etc ... */
 	void update();
 
+	/* private constructor because of singleton. Call Game::initialize() or Game::getInstance() to get the instance */
+	Game();
+
+	static Game* _instance;
 public:
 	/* only for text mode ? */
 	void handleUserInput();

@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
 
-	Game *g = new Game();
+	Game *g = Game::getInstance();
 
 	LOGINFO << "Starting @ " << SDL_GetTicks() << endl;
 	Grid *grid = new Grid();
@@ -22,6 +22,10 @@ int main(int argc, char* argv[])
 
 	g->addGameObject(grid, player1, player2);
 	g->displayState();
+	grid->generateObstacle();
+	grid->setObject(player1, 0, 0);
+	LOGINFO << "Grid: " << endl;
+	grid->display(LOGINFO);
 
 	while (g->isRunning())
 	{

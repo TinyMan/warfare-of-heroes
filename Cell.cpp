@@ -5,6 +5,7 @@ Cell::Cell(int x, int y)
 {
 	_posX = x;
 	_posY = y;
+	_cellType = Free;
 }
 
 

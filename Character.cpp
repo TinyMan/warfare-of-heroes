@@ -49,7 +49,7 @@ int Character::getCP()
 }
 
 bool Character::basicAttack(Character & c)
-{
+{// TODO
 	return true;
 }
 
@@ -58,4 +58,16 @@ bool Character::movement()
 	// Bla bla bla I move hourray !
 	// Launches a super duper animation.
 	return true;
+}
+
+bool Character::move(int i, int j)
+{
+	int distance = Grid::getCellDistance(i, j, _hisCell->getPosX(), _hisCell->getPosY());
+	if (distance <= _movementPoints)
+	{
+		_movementPoints -= distance;
+		// TODO:: _hisCell = Game::getInstance()->getGrid()->getCellAt(i, j);
+		return true;
+	}
+	return false;
 }

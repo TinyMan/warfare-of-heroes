@@ -1,5 +1,6 @@
 #include "Game.h"
 
+Game* Game::_instance = nullptr;
 
 Game::Game()
 {
