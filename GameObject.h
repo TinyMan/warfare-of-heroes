@@ -9,12 +9,12 @@ class Game;
 class GameObject
 {
 public:
-	GameObject(Game*);
+	GameObject();
 	virtual ~GameObject();
 
 	/* every inherited class has to implement those */
-	virtual void update() = 0;
-	virtual void initialize() = 0;
+	virtual void update() { ServiceLocator::getLogService()->info << "GameObject default update()" << endl; }
+	virtual void initialize() { ServiceLocator::getLogService()->info << "GameObject default initialize()" << endl; }
 
 	/* those won't be overridden */
 	bool isActive() const  { return _active; }
@@ -24,6 +24,8 @@ public:
 	int getId() const { return _id; }
 
 	static int getObjectCount()  { return _object_count; }
+
+	friend ostream& operator<<(ostream& o, const GameObject& go);
 
 protected:
 	Game * getGameInstance() const { return _gameInstance; }
@@ -42,3 +44,5 @@ private:
 	Game * _gameInstance;
 };
 
+/* used only to sort */
+bool compare(const GameObject* g, const GameObject* go);

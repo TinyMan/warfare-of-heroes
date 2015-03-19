@@ -1,5 +1,5 @@
 #pragma once
-#include "logservice.h"
+#include "LogService.h"
 #include "TimeService.h"
 #include "EventService.h"
 

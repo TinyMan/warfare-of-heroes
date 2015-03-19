@@ -2,6 +2,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <list>
+#include <sstream>
 
 #include "GameObject.h"
 #include "ServiceLocator.h"
@@ -26,9 +27,15 @@ public:
 	int getNbActiveGObjects() const { return _nb_active_gobjects; }
 
 	/* event listeners */
-	void onToggleActivatedGameObject();
+	void onActivatedGameObject();
+	void onDeactivatedGameObject();
 
+	/* display the current state of the game */
+	void displayState() const;
 
+	/* ending game */
+	void stop() { _running = false; }
+	bool isRunning() const { return _running; }
 private:
 	/* the collection of all game objects, sorted with the active ones on the front and the inactive ones after them */
 	list<GameObject*> _gameObjects;
@@ -36,6 +43,11 @@ private:
 	int _nb_active_gobjects = 0;
 	/* true if we need to sort _gameObjects list */
 	bool _gameObjects_dirty = false;
+
+
+	bool _running = true;
+	bool _turn = 0;
+	int _player_turn = 0; // the current player ID which play 
 
 	TimeService * _timeService = nullptr;
 	LogService * _logService = nullptr;
@@ -45,6 +57,9 @@ private:
 	/* update its state, delete objects marked etc ... */
 	void update();
 
+public:
+	/* only for text mode ? */
+	void handleUserInput();
 
 };
 

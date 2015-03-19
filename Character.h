@@ -1,9 +1,10 @@
 #pragma once
 #include <iostream>
+#include "GameObject.h"
 
 using namespace std;
 
-class Character
+class Character : public GameObject
 {
 protected:
 	string _name;
@@ -32,5 +33,9 @@ public:
 	// Movements :
 	bool movement(); // Français : on met en paramètre la case et on vérifie si on peut se déplacer 
 	// Il faut créer une méthode de pathfinding qui permettra de se déplacer de plus d'une case à la fois.
+
+	/* TODO:: */
+	/*virtual void update(){}
+	virtual void initialize() {}*/
 };
 

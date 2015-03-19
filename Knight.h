@@ -8,7 +8,7 @@ protected:
 	const static int CP_MAX = 10;
 	const static int HP_MAX = 800;
 public:
-	Knight(string name);
+	Knight(string name="Aragorn");
 	~Knight();
 
 	// Spells :
