@@ -4,6 +4,7 @@
 #include "ServiceLocator.h"
 #include "Grid.h"
 #include "Mage.h"
+#include "Knight.h"
 
 using namespace std;
 
@@ -14,14 +15,18 @@ int main(int argc, char* argv[])
 	Game *g = new Game();
 	Grid *grid = new Grid();
 	Mage* mage = new Mage();
+	Knight* knight = new Knight("Bonjour");
 
-	ServiceLocator::getTimeService()->setTimeout(900, Callback(&Game::addGameObject, g, grid));
-
+	
+	g->addGameObject(grid);
 	g->addGameObject(mage);
+	g->addGameObject(knight);
 	grid->setActive(false);
 	mage->setActive(false);
-	//grid->setActive();
-	ServiceLocator::getTimeService()->setTimeout(2500, Callback(&Grid::setActive, grid, true));
+	//knight->setActive(false);
+
+	ServiceLocator::getEventService()->dispatch(Event( Event::GAMEOBJECT_ACTIVATE));
+//	ServiceLocator::getTimeService()->setTimeout(2500, Callback(&Grid::setActive, grid, true));
 
 	ServiceLocator::getTimeService()->setInterval(2000, Callback(&Game::displayState, g));
 
