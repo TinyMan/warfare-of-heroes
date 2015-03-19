@@ -37,7 +37,9 @@ void Game::loop()
 	{
 		/* TODO: BEGIN FRAME */
 		/* TODO: PROCESS USER INPUT */
+
 		SDL_Delay(100);
+
 		/* Update */
 		_timeService->update();
 		/* TODO: UPDATE */
@@ -102,5 +104,23 @@ void Game::update()
 		_logService->info << "Game Objects list is dirty !" << endl;
 		_gameObjects.sort(compare);
 		_gameObjects_dirty = false;
+	}
+}
+
+void Game::handleUserInput()
+{
+	// TODO : add textmode gameplay
+	int choice = 0;
+	cout << "Turn " << _turn << ", player " << _player_turn << ": " << endl;
+	cout << "Do you want to: " << endl;
+	cout << "1. Quit" << endl;
+	cin >> choice;
+	switch (choice)
+	{
+	case 1:
+		stop();
+		break;
+	default:
+		break;
 	}
 }

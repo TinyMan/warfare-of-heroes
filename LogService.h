@@ -6,6 +6,11 @@
 #include <sstream>
 #include <SDL2/SDL_timer.h>
 
+#define LOGINFO ServiceLocator::getLogService()->info
+#define LOGERR ServiceLocator::getLogService()->error
+#define LOGWARN ServiceLocator::getLogService()->warning
+#define LOGDEBUG ServiceLocator::getLogService()->debug
+
 using namespace std;
 
 /* Change the structure (thanks to http://stackoverflow.com/questions/27336335/c-cout-with-prefix) */

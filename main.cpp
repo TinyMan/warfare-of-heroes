@@ -12,33 +12,24 @@ int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
+
 	Game *g = new Game();
-	Grid *grid = new Grid();
-	Mage* mage = new Mage();
-	Knight* knight = new Knight("Bonjour");
 
-	
-	g->addGameObject(grid);
-	g->addGameObject(mage);
-	g->addGameObject(knight);
-	grid->setActive(false);
-	mage->setActive(false);
-	//knight->setActive(false);
+	LOGINFO << "Starting @ " << SDL_GetTicks() << endl;
 
-	ServiceLocator::getEventService()->dispatch(Event( Event::GAMEOBJECT_ACTIVATE));
-//	ServiceLocator::getTimeService()->setTimeout(2500, Callback(&Grid::setActive, grid, true));
+	while (g->isRunning())
+	{
+		g->handleUserInput();
+		// TODO : add textmode gameplay
+	}
 
-	ServiceLocator::getTimeService()->setInterval(2000, Callback(&Game::displayState, g));
-
-	ServiceLocator::getTimeService()->setTimeout(5000, Callback(&Game::stop, g));
-	g->loop();
-
+	LOGINFO << "Ending @ " << SDL_GetTicks() << endl;
 
 	delete g;
 
-	cout << "Ending @ " << SDL_GetTicks() << endl;
 
 	system("pause");
 	SDL_Quit();
+
 	return 0;
 }

@@ -52,9 +52,10 @@ LogService::LogService(string filename, bool INCONSOLE)
 
 LogService::~LogService()
 {
+	info << "Ending log ..." << endl;
 	if (logfile.is_open())
 	{
-		write(INFO, "Ending log ...");  // equivalent to: info << "Ending log ..." << endl;
+		//write(INFO, "Ending log ...");  // equivalent to: info << "Ending log ..." << endl;
 		logfile.close();
 		cerr.rdbuf(oldbuf);
 	}
