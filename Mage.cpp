@@ -1,5 +1,7 @@
 #include "Mage.h"
 
+// TODO : Prendre en compte les dégats bonus !
+
 
 Mage::Mage(string name) : Character(name)
 {
@@ -24,9 +26,7 @@ bool Mage::basicAttack(Character & c)
 
 	bool attackHits = false;
 
-	// Create a public function int getDistance(const Character & c1, const Character & c2)
-	// it returns the number of cells between two players (each is positionned on a cell)
-	/*
+	/* TODO : utiliser getDistance pour coder les sorts
 	if (getDistance(this, c) <= range or _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
@@ -73,7 +73,7 @@ bool Mage::rooting(Character & c)
 	
 	bool spellCasted = false;
 
-	/*
+	/* TODO
 	if (_capacityPoints >= cost and getDistance(this, c) <= range)
 	{
 		c.removeMovementPoint(amountOfMPRemoved);
@@ -94,7 +94,7 @@ bool Mage::fireBallOFTheDoom(Character & c)
 
 	bool spellHits = false;
 
-	/*
+	/* TODO :
 	if (_capacityPoints >= cost and getDistance(this, c) <= range)
 	{
 		c.lowerHitPoint(amountOfDamages);

@@ -1,4 +1,5 @@
 #pragma once
+#include "Character.h"
 #include "GameObject.h"
 
 class Cell
@@ -15,6 +16,9 @@ public:
 	int getPosX() const { return _posX; }
 	int getPosY() const { return _posY;	}
 	int getDistance(const Cell & c) const;
+	int getDistance(const Character & c) const;
+	bool isInView(const Cell & c) const;
+	bool isInView(const Character & c) const;
 
 	GameObject* getObject() const { return _object; }
 	void setObject(GameObject* obj) { _object = obj; /* TODO: CHANGE TYPE OF CELL */}

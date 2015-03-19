@@ -1,10 +1,10 @@
 #pragma once
 #include <iostream>
 #include "GameObject.h"
-#include "Cell.h"
-#include "Grid.h"
 
 using namespace std;
+
+class Cell;
 
 class Character : public GameObject
 {
@@ -25,9 +25,9 @@ public:
 	void removeCapaciyPoint(int amount=1);
 
 	// Getters :
-	int getHP();
-	int getMP();
-	int getCP();
+	int getHP() const;
+	int getMP() const;
+	int getCP() const;
 	Cell* getCell() const { return _hisCell; }
 
 	// Attacks :
