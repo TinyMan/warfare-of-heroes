@@ -16,6 +16,12 @@ int main(int argc, char* argv[])
 	Game *g = new Game();
 
 	LOGINFO << "Starting @ " << SDL_GetTicks() << endl;
+	Grid *grid = new Grid();
+	Mage* player1 = new Mage();
+	Knight* player2 = new Knight();
+
+	g->addGameObject(grid, player1, player2);
+	g->displayState();
 
 	while (g->isRunning())
 	{

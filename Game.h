@@ -23,7 +23,18 @@ public:
 	void initialize();
 	void loop();
 
+	/* Add a game object to the collection */
 	void addGameObject(GameObject* g);
+
+	template<typename... GO>
+	/* Add multiple game objects to the collection */
+	void addGameObject(GameObject* g, GO... a){
+		/* add the first */
+		addGameObject(g);	
+		/* recursive call if there is many, or call the fc above if there is only 1 last */
+		addGameObject(a...);
+	}
+
 	int getNbActiveGObjects() const { return _nb_active_gobjects; }
 
 	/* event listeners */
