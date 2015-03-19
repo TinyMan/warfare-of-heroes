@@ -3,15 +3,18 @@
 
 Game::Game()
 {
+	/* instanciate services */
 	_eventService = new EventService();
 	_logService = new LogService("log.txt", true);
 	_timeService = new TimeService();
+	/* and provide them */
 	ServiceLocator::provide(_eventService);
 	ServiceLocator::provide(_logService);
 	ServiceLocator::provide(_timeService);
 
-	_eventService->listen(Event::GAMEOBJECT_ACTIVATE, Callback(&Game::onToggleActivatedGameObject, this));
-	_eventService->listen(Event::GAMEOBJECT_DEACTIVATE, Callback(&Game::onToggleActivatedGameObject, this));
+	/* setup event listenenrs */
+	_eventService->listen(Event::GAMEOBJECT_ACTIVATE, Callback(&Game::onActivatedGameObject, this));
+	_eventService->listen(Event::GAMEOBJECT_DEACTIVATE, Callback(&Game::onDeactivatedGameObject, this));
 }
 
 
@@ -53,23 +56,31 @@ void Game::loop()
 void Game::addGameObject(GameObject* g)
 {
 	ServiceLocator::getLogService()->info << "Adding new game object to collection" << endl;
-
+	/* we do not want null ptr in the list */
 	if (g == nullptr)
 		return;
+	/* if it is active add it to te front */
 	if (g->isActive())
 	{
 		_nb_active_gobjects++;
 		_gameObjects.push_front(g);
 	}
-	else
+	else /* else add it to the back */
 		_gameObjects.push_back(g);
 }
 
-void Game::onToggleActivatedGameObject()
+void Game::onDeactivatedGameObject()
 {
-	ServiceLocator::getLogService()->info << "Catching ev: game object activated or deactivated" << endl;
+	ServiceLocator::getLogService()->info << "Catching ev: game object deactivated" << endl;
 	_gameObjects_dirty = true;
-	if(_nb_active_gobjects > 0) _nb_active_gobjects--;
+	if (_nb_active_gobjects > 0) /* prevent silly errors */
+		_nb_active_gobjects--;
+}
+void Game::onActivatedGameObject()
+{
+	ServiceLocator::getLogService()->info << "Catching ev: game object activated" << endl;
+	_gameObjects_dirty = true;
+	_nb_active_gobjects++;
 }
 void Game::displayState() const
 {
@@ -85,6 +96,7 @@ void Game::displayState() const
 
 void Game::update()
 {
+	/* sorting the list of game objects */
 	if (_gameObjects_dirty)
 	{
 		_logService->info << "Game Objects list is dirty !" << endl;

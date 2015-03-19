@@ -24,6 +24,7 @@ void GameObject::setActive(bool a)
 }
 
 
+/* TODO:: rename ... */
 /* used only to sort */
 bool compare(const GameObject* g, const GameObject* go)
 {
