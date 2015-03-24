@@ -60,3 +60,23 @@ bool Cell::isInView(const Character & c) const
 	Cell hisCell = *c.getCell();
 	return (isInView(hisCell));
 }
+
+
+ostream& operator<<(ostream& o, const Cell& c)
+{
+	switch (c._cellType)
+	{
+	case Cell::Free:
+		o << "Free";
+		break;
+	case Cell::Obstacle:
+		o << "Obstacle";
+		break;
+	case Cell::PlayerOnIt:
+		o << "Player";
+		break;
+	default:
+		break;
+	}
+	return o;
+}

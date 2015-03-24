@@ -21,8 +21,9 @@ public:
 	bool isInView(const Character & c) const;
 
 	GameObject* getObject() const { return _object; }
-	void setObject(GameObject* obj) { _object = obj; /* TODO: CHANGE TYPE OF CELL */}
+	void setObject(GameObject* obj) { _object = obj; _cellType = PlayerOnIt;/* TODO: CHANGE TYPE OF CELL */ }
 
+	friend ostream& operator<<(ostream&, const Cell&);
 private:
 	_STATE _cellType;
 	int _posX;

@@ -24,6 +24,7 @@ int main(int argc, char* argv[])
 	g->displayState();
 	grid->generateObstacle();
 	grid->setObject(player1, 0, 0);
+	grid->setObject(player2, Grid::WIDTH-1, Grid::HEIGHT-1);
 	LOGINFO << "Grid: " << endl;
 	grid->display(LOGINFO);
 

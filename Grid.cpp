@@ -33,7 +33,7 @@ void Grid::display(ostream& o) const
 		for (const Cell &c : a)
 		{
 			if (c.getType() != Cell::Free)
-				o << "Cell (" << c.getPosX() << "," << c.getPosY() << "): " << c.getType() << endl;
+				o << "Cell (" << c.getPosX() << "," << c.getPosY() << "): " << c << endl;
 		}
 	}
 }
