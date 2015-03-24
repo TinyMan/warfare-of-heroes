@@ -37,8 +37,8 @@ public:
 	int getNbActiveGObjects() const { return _nb_active_gobjects; }
 
 	/* event listeners */
-	void onActivatedGameObject();
-	void onDeactivatedGameObject();
+	void onActivatedGameObject(void*);
+	void onDeactivatedGameObject(void*);
 
 	/* display the current state of the game */
 	void displayState() const;

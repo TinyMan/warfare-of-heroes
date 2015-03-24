@@ -31,7 +31,7 @@ public:
 	Cell* getCell() const { return _hisCell; }
 
 	// Attacks :
-	bool basicAttack(Character & c);
+	virtual bool basicAttack(Character & c);
 
 	// Movements :
 	bool movement(); // Français : on met en paramètre la case et on vérifie si on peut se déplacer 
