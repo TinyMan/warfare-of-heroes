@@ -36,7 +36,28 @@ bool Archer::basicAttack(Character & c)
 	*/
 	return (attackHits);
 }
-
+bool Archer::cast(int spellID, void* data)
+{
+	bool ret = false;
+	switch (spellID)
+	{
+	case Archer::DMG_BUFF:
+		ret = damageBuff();
+		break;
+	case Archer::FLAMED_ARROW:
+		ret = flamedArrow(*(Character*)data);
+		break;
+	case Archer::SB_ARROW:
+		ret = stepBackArrow(*(Character*)data);
+		break;
+	case Archer::VOLLEY:
+		ret = arrowVolley(*(Character*)data);
+		break;
+	default:
+		break;
+	}
+	return ret;
+}
 bool Archer::damageBuff()
 {
 	////////STATS OF THE SPELL///////
@@ -88,7 +109,7 @@ bool Archer::arrowVolley(Character & c)
 	////////////////////////////////////////////////////
 
 	bool spellHits = false;
-
+	LOGINFO << "Casting Arrow volley on " << c.getName() << "(" << c.getId() << ")" << endl;
 	return (spellHits);
 }
 

@@ -50,12 +50,6 @@ int Character::getCP() const
 	return(_capacityPoints);
 }
 
-
-bool Character::basicAttack(Character & c)
-{// TODO
-	return true;
-}
-
 bool Character::movement()
 {
 	// Bla bla bla I move hourray !

@@ -6,6 +6,7 @@ using namespace std;
 
 class Cell;
 
+/* abstract class */
 class Character : public GameObject
 {
 protected:
@@ -25,13 +26,17 @@ public:
 	void removeCapaciyPoint(int amount=1);
 
 	// Getters :
+	string getName() const { return _name; }
 	int getHP() const;
 	int getMP() const;
 	int getCP() const;
 	Cell* getCell() const { return _hisCell; }
 
+	/* every children have to implement those methods */
 	// Attacks :
-	virtual bool basicAttack(Character & c);
+	virtual bool basicAttack(Character & c) = 0;
+	// cast a spell
+	virtual bool cast(int spellID, void* data) = 0;
 
 	// Movements :
 	bool movement(); // Français : on met en paramètre la case et on vérifie si on peut se déplacer 
