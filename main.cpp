@@ -20,6 +20,7 @@ int main(int argc, char* argv[])
 	Grid *grid = new Grid();
 	Archer* player1 = new Archer();
 	Knight* player2 = new Knight();
+	Mage* player3 = new Mage();
 
 	g->addGameObject(grid, player1, player2);
 	g->displayState();
@@ -28,6 +29,9 @@ int main(int argc, char* argv[])
 	grid->setObject(player2, Grid::WIDTH-1, Grid::HEIGHT-1);
 
 	player1->cast(Archer::VOLLEY, player2);
+	player2->cast(Knight::SWORD_DESTINY, player3);
+	player3->cast(Mage::FIREBALL, player1);
+	player3->cast(Mage::ERUPTION, grid->getCellAt(2, 3));
 	LOGINFO << "Grid: " << endl;
 	grid->display(LOGINFO);
 

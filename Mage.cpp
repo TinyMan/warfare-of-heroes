@@ -16,6 +16,29 @@ Mage::~Mage()
 {
 }
 
+bool Mage::cast(int spellID, void* data)
+{
+	bool ret = false;
+	switch (spellID)
+	{
+	case Mage::THUNDER:
+		ret = thunderStorm(*(Cell*)data);
+		break;
+	case Mage::ERUPTION:
+		ret = eruption(*(Cell*)data);
+		break;
+	case Mage::ROOT:
+		ret = rooting(*(Character*)data);
+		break;
+	case Mage::FIREBALL:
+		ret = fireBallOfTheDoom(*(Character*)data);
+		break;
+	default:
+		break;
+	}
+	return ret;
+}
+
 bool Mage::basicAttack(Character & c)
 {
 	///////////////STATS OF THE SPELL///////////////////
@@ -34,10 +57,13 @@ bool Mage::basicAttack(Character & c)
 		attackHits = true;
 	}
 	*/
+
+	LOGINFO << this->getName() << " : Casting basicAttack on " << c.getName() << "(" << c.getId() << ")" << endl;
+
 	return (attackHits);
 }
 
-bool Mage::thunderStorm(/*const Cell & c*/)
+bool Mage::thunderStorm(const Cell & c)
 {
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 5; // Only in line                    //
@@ -47,10 +73,12 @@ bool Mage::thunderStorm(/*const Cell & c*/)
 
 	bool spellHits = false;
 
+	
+
 	return (spellHits);
 }
 
-bool Mage::eruption(/*const Cell & c*/)
+bool Mage::eruption(const Cell & c)
 {
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 7;                                    //
@@ -59,6 +87,8 @@ bool Mage::eruption(/*const Cell & c*/)
 	////////////////////////////////////////////////////
 
 	bool spellHits = false;
+
+	LOGINFO << this->getName() << " : Casting eruption on (" << c.getPosX() << "," << c.getPosY() << ")." << endl;
 
 	return (spellHits);
 }
@@ -81,10 +111,12 @@ bool Mage::rooting(Character & c)
 	}
 	*/
 
+	LOGINFO << this->getName() << " : Casting rooting on " << c.getName() << "(" << c.getId() << ")" << endl;
+
 	return (spellCasted);
 }
 
-bool Mage::fireBallOFTheDoom(Character & c)
+bool Mage::fireBallOfTheDoom(Character & c)
 {
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 4;                                    //
@@ -102,6 +134,8 @@ bool Mage::fireBallOFTheDoom(Character & c)
 		spellHits = true;
 	}
 	*/
+
+	LOGINFO << this->getName() << " : Casting fireBall on " << c.getName() << "(" << c.getId() << ")" << endl;
 
 	return(spellHits);
 }
