@@ -34,7 +34,12 @@ int main(int argc, char* argv[])
 
 	UI->addAction(Action(quit, "Quit"));
 	UI->addAction(Action(cb, "Cast damage buff"));
-	
+
+	auto lambda = [] (void* d){ LOGINFO << "Salut !!!!!!!" << endl; };
+	Callback rofl(lambda);
+	rofl.call();
+
+	//g->stop();
 	while (g->isRunning())
 	{
 		g->handleUserInput();

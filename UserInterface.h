@@ -1,5 +1,5 @@
 #pragma once
-#include <map>
+#include <deque>
 #include <iostream>
 #include "Action.h"
 
@@ -16,6 +16,6 @@ public:
 
 	friend ostream& operator<<(ostream&, const UserInterface&);
 private:
-	map<int, Action> _actions;
+	deque<Action> _actions;
 };
 

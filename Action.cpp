@@ -17,6 +17,6 @@ void Action::trigger() const
 
 ostream& operator<<(ostream& o, const Action& a)
 {
-	o << a.getId() << ": " << a.getText() << " ";
+	o << a.getText() << " ";
 	return o;
 }
