@@ -1,10 +1,10 @@
 #include "Cell.h"
 
-
 Cell::Cell(int x, int y)
 {
 	_posX = x;
 	_posY = y;
+	_cellType = Free;
 }
 
 
@@ -41,4 +41,42 @@ int Cell::getDistance(const Cell & c) const
 
 	distance = (Y2 - Y1) + (X2 - X1);
 	return distance;
+}
+
+int Cell::getDistance(const Character & c) const
+{
+	Cell hisCell = *c.getCell();
+	return (getDistance(hisCell));
+}
+
+bool Cell::isInView(const Cell & c) const
+{
+	// TODO : vérifier la ligne de vue (obstacle ou non)
+	return true;
+}
+
+bool Cell::isInView(const Character & c) const
+{
+	Cell hisCell = *c.getCell();
+	return (isInView(hisCell));
+}
+
+
+ostream& operator<<(ostream& o, const Cell& c)
+{
+	switch (c._cellType)
+	{
+	case Cell::Free:
+		o << "Free";
+		break;
+	case Cell::Obstacle:
+		o << "Obstacle";
+		break;
+	case Cell::PlayerOnIt:
+		o << "Player";
+		break;
+	default:
+		break;
+	}
+	return o;
 }

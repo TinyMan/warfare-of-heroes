@@ -9,8 +9,8 @@ To create a callback just call ctor: Callback cb(myCallbackFunction, arg1, arg2,
 In order to call an object's method do the following:
 ObjectClass * o = new ObjectClass();
 Callback cb(&ObjectClass::myMethod, o, ... argument list for method myMethod ...);
-
-then cb.call() will call myCallbackFunction with all the arguments given in the ctor
+then cb.call(optional data ptr) will call myCallbackFunction with all the arguments given in the ctor
+myCallbackFunction should always have at least 1 void* parameter and it should be the last
 */
 class Callback
 {
@@ -23,12 +23,13 @@ public:
 	template<typename ...Args>
 	Callback( Args... args)
 	{
-		_cb = bind(args...);
+		_cb = bind(args..., placeholders::_1);
 	}
 
-	void call() const;
+	/* one can give a ptr to data to forward to the callback as last argument */
+	void call(void* = nullptr) const;
 
 private:
-	function<void()> _cb;
+	function<void(void*)> _cb;
 
 };

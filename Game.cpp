@@ -1,5 +1,6 @@
 #include "Game.h"
 
+Game* Game::_instance = nullptr;
 
 Game::Game()
 {
@@ -71,14 +72,14 @@ void Game::addGameObject(GameObject* g)
 		_gameObjects.push_back(g);
 }
 
-void Game::onDeactivatedGameObject()
+void Game::onDeactivatedGameObject(void*)
 {
 	ServiceLocator::getLogService()->info << "Catching ev: game object deactivated" << endl;
 	_gameObjects_dirty = true;
 	if (_nb_active_gobjects > 0) /* prevent silly errors */
 		_nb_active_gobjects--;
 }
-void Game::onActivatedGameObject()
+void Game::onActivatedGameObject(void*)
 {
 	ServiceLocator::getLogService()->info << "Catching ev: game object activated" << endl;
 	_gameObjects_dirty = true;

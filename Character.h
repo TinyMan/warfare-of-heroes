@@ -4,6 +4,9 @@
 
 using namespace std;
 
+class Cell;
+
+/* abstract class */
 class Character : public GameObject
 {
 protected:
@@ -11,7 +14,7 @@ protected:
 	int _hitPoints;
 	int _movementPoints;
 	int _capacityPoints;
-	// Cell positionOnGrid;
+	Cell* _hisCell = nullptr;
 
 public:
 	Character(string name="NoName");
@@ -23,16 +26,22 @@ public:
 	void removeCapaciyPoint(int amount=1);
 
 	// Getters :
-	int getHP();
-	int getMP();
-	int getCP();
+	string getName() const { return _name; }
+	int getHP() const;
+	int getMP() const;
+	int getCP() const;
+	Cell* getCell() const { return _hisCell; }
 
+	/* every children have to implement those methods */
 	// Attacks :
-	bool basicAttack(Character & c);
+	virtual bool basicAttack(Character & c) = 0;
+	// cast a spell
+	virtual bool cast(int spellID, void* data) = 0;
 
 	// Movements :
 	bool movement(); // Français : on met en paramètre la case et on vérifie si on peut se déplacer 
 	// Il faut créer une méthode de pathfinding qui permettra de se déplacer de plus d'une case à la fois.
+	bool move(int i, int j);
 
 	/* TODO:: */
 	/*virtual void update(){}

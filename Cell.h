@@ -1,4 +1,6 @@
 #pragma once
+#include "Character.h"
+#include "GameObject.h"
 
 class Cell
 {
@@ -10,13 +12,23 @@ public:
 	~Cell();
 
 	void setType(_STATE t);
+	_STATE getType() const { return _cellType; }
 	int getPosX() const { return _posX; }
 	int getPosY() const { return _posY;	}
 	int getDistance(const Cell & c) const;
+	int getDistance(const Character & c) const;
+	bool isInView(const Cell & c) const;
+	bool isInView(const Character & c) const;
 
+	GameObject* getObject() const { return _object; }
+	void setObject(GameObject* obj) { _object = obj; _cellType = PlayerOnIt;/* TODO: CHANGE TYPE OF CELL */ }
+
+	friend ostream& operator<<(ostream&, const Cell&);
 private:
 	_STATE _cellType;
 	int _posX;
 	int _posY;
+
+	GameObject* _object = nullptr;
 };
 

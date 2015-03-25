@@ -17,7 +17,7 @@ void EventService::dispatch(Event& e) const
 		return;
 	for (auto cb : _listeners.at(e.getType()))
 	{
-		cb.call();
+		cb.call(&e);
 	}
 }
 

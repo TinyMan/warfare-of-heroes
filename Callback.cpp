@@ -1,6 +1,6 @@
 #include "Callback.h"
 
-void Callback::call() const
+void Callback::call(void* d) const
 {
-	_cb();
+	_cb(d);
 }

@@ -1,5 +1,6 @@
 #include "Archer.h"
 
+// TODO : Prendre en compte les dégats bonus !
 
 Archer::Archer(string name) : Character(name)
 {
@@ -24,8 +25,8 @@ bool Archer::basicAttack(Character & c)
 	
 	bool attackHits = false;
 
-	// Create a public function int getDistance(const Character & c1, const Character & c2)
-	// it returns the number of cells between two players (each is positionned on a cell)
+	
+	// TODO : Utiliser la fonction getDistance pour créer les sorts
 	/*if (getDistance(this, c) <= range and _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
@@ -35,7 +36,28 @@ bool Archer::basicAttack(Character & c)
 	*/
 	return (attackHits);
 }
-
+bool Archer::cast(int spellID, void* data)
+{
+	bool ret = false;
+	switch (spellID)
+	{
+	case Archer::DMG_BUFF:
+		ret = damageBuff();
+		break;
+	case Archer::FLAMED_ARROW:
+		ret = flamedArrow(*(Character*)data);
+		break;
+	case Archer::SB_ARROW:
+		ret = stepBackArrow(*(Character*)data);
+		break;
+	case Archer::VOLLEY:
+		ret = arrowVolley(*(Character*)data);
+		break;
+	default:
+		break;
+	}
+	return ret;
+}
 bool Archer::damageBuff()
 {
 	////////STATS OF THE SPELL///////
@@ -87,7 +109,7 @@ bool Archer::arrowVolley(Character & c)
 	////////////////////////////////////////////////////
 
 	bool spellHits = false;
-
+	LOGINFO << "Casting Arrow volley on " << c.getName() << "(" << c.getId() << ")" << endl;
 	return (spellHits);
 }
 
