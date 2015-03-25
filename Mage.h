@@ -20,7 +20,7 @@ public:
 	~Mage();
 
 	virtual bool basicAttack(Character & c);
-	virtual bool cast(int spellID, void*)
+	virtual bool cast(int spellID, void*);
 
 	// begin turn
 	virtual void beginTurn(){};
