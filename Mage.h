@@ -20,7 +20,11 @@ public:
 	~Mage();
 
 	virtual bool basicAttack(Character & c);
-	virtual bool cast(int spellID, void*);
+	virtual bool cast(int spellID, void*)
+
+	// begin turn
+	virtual void beginTurn(){};
+	virtual void endTurn(){};
 
 	// Spells :
 	virtual bool thunderStorm(const Cell & c); // Spell 1 : Only in line, throws an AoE of radius 2 that deals damages

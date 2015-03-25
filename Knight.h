@@ -20,6 +20,10 @@ public:
 	virtual bool cast(int spellID, void* data);
 
 	virtual bool basicAttack(Character & c);
+	
+	// begin turn
+	virtual void beginTurn(){};
+	virtual void endTurn(){};
 
 	// Spells :
 	virtual bool dash(const Cell & c); // Spell 1 : dashes to a cell, range = 2/3 ?

@@ -22,6 +22,9 @@ public:
 
 	virtual bool basicAttack(Character & c);
 	virtual bool cast(int spellID, void* data);
+	// begin turn
+	virtual void beginTurn(){};
+	virtual void endTurn(){};
 
 	// Spells :
 	virtual bool damageBuff(); // Spell 1 : rises the damages the Archer does for a certain time.

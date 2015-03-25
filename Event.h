@@ -11,7 +11,8 @@ public:
 		NONE,
 		LAND,
 		GAMEOBJECT_ACTIVATE,
-		GAMEOBJECT_DEACTIVATE
+		GAMEOBJECT_DEACTIVATE,
+		PLAYER_ACTION
 	} EVENT_TYPE;
 
 	Event(EVENT_TYPE t = NONE, void* data =nullptr );
@@ -20,6 +21,8 @@ public:
 	//virtual void dispatch() const;
 	virtual void setData(void* data) { _data = data; }
 	virtual void* getData() const { return _data; }
+
+	virtual int getId() const { return _id; }
 
 	EVENT_TYPE getType() const { return _type; }
 
@@ -36,5 +39,9 @@ private:
 
 	void* _data;
 	//static EventService * _manager;
+
+	int _id;
+
+	static int next_id;
 };
 

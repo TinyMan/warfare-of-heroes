@@ -120,7 +120,7 @@ bool Archer::arrowVolley(Character & c)
 	////////////////////////////////////////////////////
 
 	bool spellHits = false;
-	LOGINFO << this->getName() << " : Casting Arrow volley on " << c.getName() << "(" << c.getId() << ")" << endl;
+	LOGINFO << getName() << " casts Arrow volley on " << c.getName() << "(player id: " << c.getId() << ")" << endl;
 	return (spellHits);
 }
 
