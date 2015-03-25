@@ -28,13 +28,13 @@ int main(int argc, char* argv[])
 	grid->setObject(player1, 0, 0);
 	grid->setObject(player2, Grid::WIDTH-1, Grid::HEIGHT-1);
 
-	player1->cast(Archer::VOLLEY, player2);
-	player2->cast(Knight::SWORD_DESTINY, player3);
-	player3->cast(Mage::FIREBALL, player1);
-	player3->cast(Mage::ERUPTION, grid->getCellAt(2, 3));
-	LOGINFO << "Grid: " << endl;
-	grid->display(LOGINFO);
+	
+	Callback quit(&Game::stop, g);
+	Callback cb(&Archer::cast, player1, Archer::DMG_BUFF);
 
+	UI->addAction(Action(quit, "Quit"));
+	UI->addAction(Action(cb, "Cast damage buff"));
+	
 	while (g->isRunning())
 	{
 		g->handleUserInput();

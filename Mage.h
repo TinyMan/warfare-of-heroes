@@ -19,8 +19,8 @@ public:
 	Mage(string name="Gandalf");
 	~Mage();
 
-	virtual bool basicAttack(Character & c);
-	virtual bool cast(int spellID, void*);
+	virtual void basicAttack(Character & c);
+	virtual void cast(int spellID, void*);
 
 	// begin turn
 	virtual void beginTurn(){};

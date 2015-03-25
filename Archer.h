@@ -20,8 +20,8 @@ public:
 	Archer(string name="Legolas");
 	~Archer();
 
-	virtual bool basicAttack(Character & c);
-	virtual bool cast(int spellID, void* data);
+	virtual void basicAttack(Character & c);
+	virtual void cast(int spellID, void* data);
 	// begin turn
 	virtual void beginTurn(){};
 	virtual void endTurn(){};

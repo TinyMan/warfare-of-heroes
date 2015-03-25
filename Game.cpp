@@ -8,10 +8,12 @@ Game::Game()
 	_eventService = new EventService();
 	_logService = new LogService("log.txt", true);
 	_timeService = new TimeService();
+	_userInterface = new UserInterface();
 	/* and provide them */
 	ServiceLocator::provide(_eventService);
 	ServiceLocator::provide(_logService);
 	ServiceLocator::provide(_timeService);
+	ServiceLocator::provide(_userInterface);
 
 	/* setup event listenenrs */
 	_eventService->listen(Event::GAMEOBJECT_ACTIVATE, Callback(&Game::onActivatedGameObject, this));
@@ -112,16 +114,10 @@ void Game::handleUserInput()
 {
 	// TODO : add textmode gameplay
 	int choice = 0;
-	cout << "Turn " << _turn << ", player " << _player_turn << ": " << endl;
-	cout << "Do you want to: " << endl;
-	cout << "1. Quit" << endl;
+	LOGINFO << "Turn " << _turn << ", player " << _player_turn << ": " << endl;
+	LOGINFO << *UI << endl;
+
+
 	cin >> choice;
-	switch (choice)
-	{
-	case 1:
-		stop();
-		break;
-	default:
-		break;
-	}
+	UI->handleChoice(choice);
 }

@@ -34,9 +34,9 @@ public:
 
 	/* every children have to implement those methods */
 	// Attacks :
-	virtual bool basicAttack(Character & c) = 0;
+	virtual void basicAttack(Character & c) = 0;
 	// cast a spell
-	virtual bool cast(int spellID, void* data) = 0;
+	virtual void cast(int spellID, void* data) = 0;
 	// begin turn
 	virtual void beginTurn() = 0;
 	virtual void endTurn() = 0;

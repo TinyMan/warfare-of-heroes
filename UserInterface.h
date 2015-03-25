@@ -10,9 +10,11 @@ public:
 	virtual ~UserInterface();
 	
 	virtual void addAction(const Action &);
-	virtual void display() const;
 	virtual Action getAction(int id) ;
 
+	virtual void handleChoice(int choice);
+
+	friend ostream& operator<<(ostream&, const UserInterface&);
 private:
 	map<int, Action> _actions;
 };

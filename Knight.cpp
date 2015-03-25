@@ -14,38 +14,37 @@ Knight::~Knight()
 {
 }
 
-bool Knight::cast(int spellID, void* data)
+void Knight::cast(int spellID, void* data)
 {
-	bool ret = false;
+	
 	switch (spellID)
 	{
 	case Knight::DASH:
 	{
-		ret = dash(*(Cell*)data); 
+		dash(*(Cell*)data); 
 		break;
 	}
 	case Knight::SWORD_FORWARD:
 	{
-		ret = swordForward(*(Cell*)data);
+		swordForward(*(Cell*)data);
 		break;
 	}
 	case Knight::HEAL:
 	{
-		ret = heal(); 
+		heal(); 
 		break;
 	}
 	case Knight::SWORD_DESTINY:
 	{
-		ret = swordOfDestiny(*(Character*)data);
+		swordOfDestiny(*(Character*)data);
 		break;
 	}
 	default:
 		break;
 	}
-	return ret;
 }
 
-bool Knight::basicAttack(Character & c)
+void Knight::basicAttack(Character & c)
 {
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 1;                                    //
@@ -65,7 +64,6 @@ bool Knight::basicAttack(Character & c)
 
 	LOGINFO << this->getName() << " : Casting basicAttack on " << c.getName() << "(" << c.getId() << ")" << endl;
 
-	return (attackHits);
 }
 
 bool Knight::dash(const Cell & c)

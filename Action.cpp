@@ -1,7 +1,7 @@
 #include "Action.h"
 
 
-Action::Action(Callback& cb, string t) : _text(t), _cb(cb)
+Action::Action(Callback& cb, string t, void* data) : _text(t), _cb(cb), Event(PLAYER_ACTION, data)
 {
 }
 
@@ -17,6 +17,6 @@ void Action::trigger() const
 
 ostream& operator<<(ostream& o, const Action& a)
 {
-	o << a.getId() << ": " << a.getText() << endl;
+	o << a.getId() << ": " << a.getText() << " ";
 	return o;
 }

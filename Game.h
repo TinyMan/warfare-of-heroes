@@ -9,6 +9,8 @@
 
 using namespace std;
 
+#define UI ServiceLocator::getUI()
+
 /*
 Main class of the game
 Singleton thx
@@ -44,7 +46,7 @@ public:
 	void displayState() const;
 
 	/* ending game */
-	void stop() { _running = false; }
+	void stop(void*d=nullptr) { _running = false; }
 	bool isRunning() const { return _running; }
 
 	static Game* getInstance() { if (!_instance) _instance = new Game; return _instance; }
@@ -65,6 +67,7 @@ private:
 	TimeService * _timeService = nullptr;
 	LogService * _logService = nullptr;
 	EventService* _eventService = nullptr;
+	UserInterface* _userInterface = nullptr;
 
 
 	/* update its state, delete objects marked etc ... */

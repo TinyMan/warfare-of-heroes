@@ -15,30 +15,28 @@ Archer::~Archer()
 {
 }
 
-bool Archer::cast(int spellID, void* data)
+void Archer::cast(int spellID, void* data)
 {
-	bool ret = false;
 	switch (spellID)
 	{
 	case Archer::DMG_BUFF:
-		ret = damageBuff();
+		damageBuff();
 		break;
 	case Archer::FLAMED_ARROW:
-		ret = flamedArrow(*(Character*)data);
+		flamedArrow(*(Character*)data);
 		break;
 	case Archer::SB_ARROW:
-		ret = stepBackArrow(*(Character*)data);
+		stepBackArrow(*(Character*)data);
 		break;
 	case Archer::VOLLEY:
-		ret = arrowVolley(*(Character*)data);
+		arrowVolley(*(Character*)data);
 		break;
 	default:
 		break;
 	}
-	return ret;
 }
 
-bool Archer::basicAttack(Character & c)
+void Archer::basicAttack(Character & c)
 {
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 6; // Random value, to be changed ?   //
@@ -60,7 +58,6 @@ bool Archer::basicAttack(Character & c)
 
 	LOGINFO << this->getName() << " : Casting basicAttack on " << c.getName() << "(" << c.getId() << ")" << endl;
 
-	return (attackHits);
 }
 
 bool Archer::damageBuff()

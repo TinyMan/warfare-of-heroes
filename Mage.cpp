@@ -16,30 +16,28 @@ Mage::~Mage()
 {
 }
 
-bool Mage::cast(int spellID, void* data)
+void Mage::cast(int spellID, void* data)
 {
-	bool ret = false;
 	switch (spellID)
 	{
 	case Mage::THUNDER:
-		ret = thunderStorm(*(Cell*)data);
+		thunderStorm(*(Cell*)data);
 		break;
 	case Mage::ERUPTION:
-		ret = eruption(*(Cell*)data);
+		eruption(*(Cell*)data);
 		break;
 	case Mage::ROOT:
-		ret = rooting(*(Character*)data);
+		rooting(*(Character*)data);
 		break;
 	case Mage::FIREBALL:
-		ret = fireBallOfTheDoom(*(Character*)data);
+		fireBallOfTheDoom(*(Character*)data);
 		break;
 	default:
 		break;
 	}
-	return ret;
 }
 
-bool Mage::basicAttack(Character & c)
+void Mage::basicAttack(Character & c)
 {
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 4;                                    //
@@ -60,7 +58,6 @@ bool Mage::basicAttack(Character & c)
 
 	LOGINFO << this->getName() << " : Casting basicAttack on " << c.getName() << "(" << c.getId() << ")" << endl;
 
-	return (attackHits);
 }
 
 bool Mage::thunderStorm(const Cell & c)

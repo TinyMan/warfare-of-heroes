@@ -18,7 +18,7 @@ public:
 		MOVE,
 		FINISH
 	};
-	Action(Callback& cb, string text = "");
+	Action(Callback& cb, string text = "", void* data=nullptr);
 	virtual ~Action();
 
 	virtual void trigger() const;

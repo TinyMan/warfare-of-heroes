@@ -17,9 +17,9 @@ public:
 	Knight(string name="Aragorn");
 	~Knight();
 
-	virtual bool cast(int spellID, void* data);
+	virtual void cast(int spellID, void* data);
 
-	virtual bool basicAttack(Character & c);
+	virtual void basicAttack(Character & c);
 	
 	// begin turn
 	virtual void beginTurn(){};
