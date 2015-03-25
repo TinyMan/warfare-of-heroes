@@ -14,6 +14,37 @@ Knight::~Knight()
 {
 }
 
+bool Knight::cast(int spellID, void* data)
+{
+	bool ret = false;
+	switch (spellID)
+	{
+	case Knight::DASH:
+	{
+		ret = dash(*(Cell*)data); 
+		break;
+	}
+	case Knight::SWORD_FORWARD:
+	{
+		ret = swordForward(*(Cell*)data);
+		break;
+	}
+	case Knight::HEAL:
+	{
+		ret = heal(); 
+		break;
+	}
+	case Knight::SWORD_DESTINY:
+	{
+		ret = swordOfDestiny(*(Character*)data);
+		break;
+	}
+	default:
+		break;
+	}
+	return ret;
+}
+
 bool Knight::basicAttack(Character & c)
 {
 	///////////////STATS OF THE SPELL///////////////////
@@ -31,10 +62,13 @@ bool Knight::basicAttack(Character & c)
 		attackHits = true;
 	}
 	*/
+
+	LOGINFO << this->getName() << " : Casting basicAttack on " << c.getName() << "(" << c.getId() << ")" << endl;
+
 	return (attackHits);
 }
 
-bool Knight::dash(/*const Cell & c*/)
+bool Knight::dash(const Cell & c)
 {
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 2;                                    //
@@ -46,12 +80,13 @@ bool Knight::dash(/*const Cell & c*/)
 	if (_capacityPoints >= cost)
 	{
 		// TELEPORT ME TO THE POINT YAY !
+		LOGINFO << this->getName() << " : Casting dash !" << endl;
 		spellCasted = true;
 	}
 
 	return (spellCasted);
 }
-bool Knight::swordForward(/*const Cell & c*/)
+bool Knight::swordForward(const Cell & c)
 {
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 6; // Only in line                    //
@@ -60,6 +95,8 @@ bool Knight::swordForward(/*const Cell & c*/)
 	////////////////////////////////////////////////////
 
 	bool spellHits = false;
+
+	LOGINFO << this->getName() << " : Casting swordForward on (" << c.getPosX() << "," << c.getPosY() << ")." << endl;
 
 	return (spellHits);
 }
@@ -73,6 +110,8 @@ bool Knight::heal()
 	////////////////////////////////////////////////////
 
 	bool spellHits = false;
+
+	LOGINFO << this->getName() << " : Casting heal on himself (" << this->getId() << ")" << endl;
 
 	return (spellHits);
 }
@@ -94,6 +133,8 @@ bool Knight::swordOfDestiny(Character & c)
 		spellHits = true;
 	}
 	*/
+
+	LOGINFO << this->getName() << " : Casting swordOfDestiny on " << c.getName() << "(" << c.getId() << ")" << endl;
 
 	return (spellHits);
 }

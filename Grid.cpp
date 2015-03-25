@@ -45,3 +45,12 @@ void Grid::setObject(GameObject* go, int i, int j)
 		arrayOfCells[i][j].setObject(go);
 	}
 }
+
+Cell* Grid::getCellAt(int i, int j)
+{
+	if (i>WIDTH || j>HEIGHT || i < 0 || j < 0)
+	{
+		LOGINFO << "Index de getCellAt() hors de la grille !" << endl;
+	}
+	return &arrayOfCells[i][j];
+}

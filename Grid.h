@@ -21,7 +21,7 @@ public:
 	void display(ostream& o=cout) const;
 	void setObject(GameObject* go, int i, int j);
 
-	Cell* getCellAt(int i, int j) const { /* TODO:: RETURN THE CELL AND CHECK INDEX */ }
+	Cell* getCellAt(int i, int j);
 
 	// TODO: return the cell distance between cells at index i,j and x,y
 	static int getCellDistance(int i, int j, int x, int y){ return 0; };

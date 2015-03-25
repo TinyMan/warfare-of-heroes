@@ -15,27 +15,6 @@ Archer::~Archer()
 {
 }
 
-bool Archer::basicAttack(Character & c)
-{
-	///////////////STATS OF THE SPELL///////////////////
-	int range = 6; // Random value, to be changed ?   //
-	int amountOfDamages = 50;                         //
-	int cost = 2;                                     //
-	////////////////////////////////////////////////////
-	
-	bool attackHits = false;
-
-	
-	// TODO : Utiliser la fonction getDistance pour créer les sorts
-	/*if (getDistance(this, c) <= range and _capacityPoints >= cost)
-	{
-		// Launch projectile (animation) { TO BE ADD ! }
-		c.lowerHitPoint(amountOfDamages); // The ennemy c takes a hit.
-		attackHits = true;
-	}
-	*/
-	return (attackHits);
-}
 bool Archer::cast(int spellID, void* data)
 {
 	bool ret = false;
@@ -58,6 +37,32 @@ bool Archer::cast(int spellID, void* data)
 	}
 	return ret;
 }
+
+bool Archer::basicAttack(Character & c)
+{
+	///////////////STATS OF THE SPELL///////////////////
+	int range = 6; // Random value, to be changed ?   //
+	int amountOfDamages = 50;                         //
+	int cost = 2;                                     //
+	////////////////////////////////////////////////////
+	
+	bool attackHits = false;
+
+	
+	// TODO : Utiliser la fonction getDistance pour créer les sorts
+	/*if (getDistance(this, c) <= range and _capacityPoints >= cost)
+	{
+		// Launch projectile (animation) { TO BE ADD ! }
+		c.lowerHitPoint(amountOfDamages); // The ennemy c takes a hit.
+		attackHits = true;
+	}
+	*/
+
+	LOGINFO << this->getName() << " : Casting basicAttack on " << c.getName() << "(" << c.getId() << ")" << endl;
+
+	return (attackHits);
+}
+
 bool Archer::damageBuff()
 {
 	////////STATS OF THE SPELL///////
@@ -69,6 +74,8 @@ bool Archer::damageBuff()
 	{
 		_bonusDamage += 20;
 		spellCasted = true;
+		/* Lancement du sort : affichage */
+		LOGINFO << this->getName() << " : Casting damageBuff on himself (" << this->getId() << ") : +20 damages." << endl;
 	}
 	
 	return (spellCasted);
@@ -84,6 +91,8 @@ bool Archer::flamedArrow(Character & c)
 
 	bool spellHits = false;
 
+	LOGINFO << this->getName() << " : Casting flamedArrow on " << c.getName() << "(" << c.getId() << ")" << endl;
+
 	return (spellHits);
 }
 
@@ -96,6 +105,8 @@ bool Archer::stepBackArrow(Character & c)
 	////////////////////////////////////////////////////
 
 	bool spellHits = false;
+
+	LOGINFO << this->getName() << " : Casting stepBackArrow on " << c.getName() << "(" << c.getId() << ")" << endl;
 
 	return (spellHits);
 }
