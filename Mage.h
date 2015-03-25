@@ -17,6 +17,9 @@ public:
 	virtual bool cast(int spellID, void*){
 		return true;
 	};
+	// begin turn
+	virtual void beginTurn(){};
+	virtual void endTurn(){};
 
 	// Spells :
 	virtual bool thunderStorm(/*const Cell & c*/); // Spell 1 : Only in line, throws an AoE of radius 2 that deals damages

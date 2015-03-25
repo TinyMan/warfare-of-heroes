@@ -37,6 +37,9 @@ public:
 	virtual bool basicAttack(Character & c) = 0;
 	// cast a spell
 	virtual bool cast(int spellID, void* data) = 0;
+	// begin turn
+	virtual void beginTurn() = 0;
+	virtual void endTurn() = 0;
 
 	// Movements :
 	bool movement(); // Français : on met en paramètre la case et on vérifie si on peut se déplacer 

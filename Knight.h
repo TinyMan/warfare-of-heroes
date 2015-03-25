@@ -15,6 +15,9 @@ public:
 	virtual bool cast(int spellID, void*){
 		return true;
 	};
+	// begin turn
+	virtual void beginTurn(){};
+	virtual void endTurn(){};
 
 	// Spells :
 	virtual bool dash(/*const Cell & c*/); // Spell 1 : dashes to a cell, range = 2/3 ?
