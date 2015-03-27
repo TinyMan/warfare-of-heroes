@@ -22,7 +22,7 @@ public:
 	virtual void basicAttack(Character & c);
 	
 	// begin turn
-	virtual void beginTurn(){};
+	virtual void beginTurn();
 	virtual void endTurn(){};
 
 	// Spells :

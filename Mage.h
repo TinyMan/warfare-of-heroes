@@ -23,7 +23,7 @@ public:
 	virtual void cast(int spellID, void*);
 
 	// begin turn
-	virtual void beginTurn(){};
+	virtual void beginTurn();
 	virtual void endTurn(){};
 
 	// Spells :

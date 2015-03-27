@@ -62,22 +62,26 @@ bool Character::movement()
 
 bool Character::move(int i, int j)
 {
+	LOGINFO << _name << " is moving from " << *_hisCell << " to " << i << ", " << j << endl;
 	int distance = Grid::getCellDistance(i, j, _hisCell->getPosX(), _hisCell->getPosY());
 	if (distance <= _movementPoints)
 	{
 		_movementPoints -= distance;
-		// TODO:: _hisCell = Game::getInstance()->getGrid()->getCellAt(i, j);
+		_hisCell = GAMEINST->getGrid()->getCellAt(i, j);
 		return true;
 	}
+	else
+		LOGERR << "Cannot move: not enough movement points" << endl;
 	return false;
 }
 
 void Character::beginTurn()
 {
 	/* add actions to the 'menu' */
-	UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_MOVE), "Move"));
-	UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_CAST), "Cast a spell"));
 	UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_ENDTURN), "I'm done"));
+	UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_MOVE), "Move"));
+	/* casting a spell isn't handled by character but by each class (archer, knight, ..) */
+	//UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_CAST), "Cast a spell"));
 }
 
 void Character::actionCallback(int actionID, void* d)
@@ -90,6 +94,7 @@ void Character::actionCallback(int actionID, void* d)
 	case ACTION_CAST:
 		break;
 	case ACTION_ENDTURN:
+		GAMEINST->endTurn();
 		break;
 	default:
 		break;

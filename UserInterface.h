@@ -13,6 +13,7 @@ public:
 	virtual Action getAction(int id) ;
 
 	virtual void handleChoice(int choice);
+	void clear() { _actions.clear(); }
 
 	friend ostream& operator<<(ostream&, const UserInterface&);
 private:

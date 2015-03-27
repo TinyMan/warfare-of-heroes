@@ -10,6 +10,8 @@
 #include "Grid.h"
 #include "ServiceLocator.h"
 
+#define GAMEINST Game::getInstance()
+
 using namespace std;
 
 
@@ -53,6 +55,8 @@ public:
 	/* starting game */
 	void initialize();
 	void start();
+	void beginTurn();
+	void endTurn();
 
 	/* ending game */
 	void stop(void*d=nullptr) { _running = false; }

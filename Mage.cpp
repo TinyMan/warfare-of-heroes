@@ -136,3 +136,7 @@ bool Mage::fireBallOfTheDoom(Character & c)
 
 	return(spellHits);
 }
+void Mage::beginTurn()
+{
+	Character::beginTurn();
+}

@@ -136,3 +136,7 @@ bool Knight::swordOfDestiny(Character & c)
 
 	return (spellHits);
 }
+void Knight::beginTurn()
+{
+	Character::beginTurn();
+}
