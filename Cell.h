@@ -1,6 +1,8 @@
 #pragma once
-#include "Character.h"
+//#include "Character.h"
 #include "GameObject.h"
+
+class Character;
 
 class Cell
 {

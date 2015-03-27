@@ -18,6 +18,10 @@ Game::Game()
 	/* setup event listenenrs */
 	_eventService->listen(Event::GAMEOBJECT_ACTIVATE, Callback(&Game::onActivatedGameObject, this));
 	_eventService->listen(Event::GAMEOBJECT_DEACTIVATE, Callback(&Game::onDeactivatedGameObject, this));
+
+	/* generate basic game objects */
+	_grid = new Grid();
+	
 }
 
 
@@ -74,6 +78,10 @@ void Game::addGameObject(GameObject* g)
 		_gameObjects.push_back(g);
 }
 
+void Game::addPlayer(Character* c)
+{
+	_players.push_back(c);
+}
 void Game::onDeactivatedGameObject(void*)
 {
 	ServiceLocator::getLogService()->info << "Catching ev: game object deactivated" << endl;
@@ -92,7 +100,13 @@ void Game::displayState() const
 	stringstream sstm;
 	sstm << "Currently " << _gameObjects.size() << " game objects in the list." << endl;
 
-	for (auto e : _gameObjects)
+	for (auto& e : _gameObjects)
+	{
+		sstm << *e << endl;
+	}
+	sstm << "Players: " << endl;
+
+	for (auto& e : _players)
 	{
 		sstm << *e << endl;
 	}
@@ -120,4 +134,9 @@ void Game::handleUserInput()
 
 	cin >> choice;
 	UI->handleChoice(choice);
+}
+void Game::start()
+{
+	UI->addAction(Action(Callback(&Game::stop, this), "Quit"));
+	_players.at(_player_turn)->beginTurn();
 }

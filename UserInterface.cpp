@@ -11,7 +11,7 @@ UserInterface::~UserInterface()
 
 void UserInterface::addAction( const Action & a)
 {
-	_actions.emplace_back(a);
+	_actions.emplace_front(a);
 }
 ostream& operator<<(ostream& o, const UserInterface& ui) 
 {
@@ -30,5 +30,6 @@ Action UserInterface::getAction(int id)
 }
 void UserInterface::handleChoice(int choice)
 {
-	_actions.at(choice).trigger();
+	if (choice < (int)_actions.size() && choice >= 0)
+		_actions.at(choice).trigger();
 }

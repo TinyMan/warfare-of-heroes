@@ -3,7 +3,7 @@
 // TODO : Prendre en compte les dégats bonus !
 
 
-Mage::Mage(string name) : Character(name)
+Mage::Mage(int x, int y, string name) : Character(x, y, name)
 {
 	// Initializing the Archer's HP, MP and CP with it's constants.
 	_movementPoints = MP_MAX;

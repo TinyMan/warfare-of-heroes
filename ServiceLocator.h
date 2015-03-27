@@ -4,6 +4,8 @@
 #include "EventService.h"
 #include "UserInterface.h"
 
+#define UI ServiceLocator::getUI()
+
 class ServiceLocator
 {
 public:

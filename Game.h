@@ -2,14 +2,16 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <list>
+#include <deque>
 #include <sstream>
 
 #include "GameObject.h"
+#include "Character.h"
+#include "Grid.h"
 #include "ServiceLocator.h"
 
 using namespace std;
 
-#define UI ServiceLocator::getUI()
 
 /*
 Main class of the game
@@ -21,11 +23,14 @@ class Game
 public:
 	~Game();
 
-	void initialize();
 	void loop();
 
 	/* Add a game object to the collection */
 	void addGameObject(GameObject* g);
+	void addPlayer(Character*);
+
+	/* getters */
+	Grid* getGrid() { return _grid; }
 
 	template<typename... GO>
 	/* Add multiple game objects to the collection */
@@ -45,6 +50,10 @@ public:
 	/* display the current state of the game */
 	void displayState() const;
 
+	/* starting game */
+	void initialize();
+	void start();
+
 	/* ending game */
 	void stop(void*d=nullptr) { _running = false; }
 	bool isRunning() const { return _running; }
@@ -59,11 +68,14 @@ private:
 	/* true if we need to sort _gameObjects list */
 	bool _gameObjects_dirty = false;
 
+	deque<Character*> _players;
+	Grid* _grid;
 
 	bool _running = true;
 	bool _turn = 0;
 	int _player_turn = 0; // the current player ID which play 
 
+	/* ptr to different services */
 	TimeService * _timeService = nullptr;
 	LogService * _logService = nullptr;
 	EventService* _eventService = nullptr;

@@ -1,7 +1,7 @@
 #include "Knight.h"
 
 
-Knight::Knight(string name) : Character(name)
+Knight::Knight(int x , int y , string name) : Character(x, y, name)
 {
 	// Initializing the Knight's HP, MP and CP with it's constants.
 	_movementPoints = MP_MAX;

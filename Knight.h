@@ -14,7 +14,7 @@ public:
 	static const int HEAL = 2;
 	static const int SWORD_DESTINY = 3;
 
-	Knight(string name="Aragorn");
+	Knight(int x = 0, int y = 0, string name = "Aragorn");
 	~Knight();
 
 	virtual void cast(int spellID, void* data);

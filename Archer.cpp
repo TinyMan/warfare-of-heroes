@@ -2,7 +2,7 @@
 
 // TODO : Prendre en compte les dégats bonus !
 
-Archer::Archer(string name) : Character(name)
+Archer::Archer(int x, int y, string name) : Character(x, y, name)
 {
 	// Initializing the Archer's HP, MP and CP with it's constants.
 	_movementPoints = MP_MAX;
@@ -121,3 +121,8 @@ bool Archer::arrowVolley(Character & c)
 	return (spellHits);
 }
 
+void Archer::beginTurn()
+{
+	LOGINFO << "Beginning turn of " << _name << endl;
+	Character::beginTurn();
+}

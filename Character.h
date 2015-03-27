@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "GameObject.h"
+#include "Game.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ protected:
 	Cell* _hisCell = nullptr;
 
 public:
-	Character(string name="NoName");
+	Character(int x = 0, int y = 0, string name = "NoName");
 	virtual ~Character();
 
 	// Setters :
@@ -38,16 +39,26 @@ public:
 	// cast a spell
 	virtual void cast(int spellID, void* data) = 0;
 	// begin turn
-	virtual void beginTurn() = 0;
-	virtual void endTurn() = 0;
+	virtual void beginTurn();
+	virtual void endTurn(){};
 
 	// Movements :
 	bool movement(); // Français : on met en paramètre la case et on vérifie si on peut se déplacer 
 	// Il faut créer une méthode de pathfinding qui permettra de se déplacer de plus d'une case à la fois.
 	bool move(int i, int j);
 
+	void actionCallback(int actionID, void*);
+
+
+	static const int ACTION_MOVE = 0;
+	static const int ACTION_CAST = 1;
+	static const int ACTION_ENDTURN = 2;
+
+	void askWhereToMove(void*);
 	/* TODO:: */
 	/*virtual void update(){}
 	virtual void initialize() {}*/
+
+	friend ostream& operator<<(ostream& , const Character& );
 };
 

@@ -16,7 +16,7 @@ public:
 	static const int ROOT = 2;
 	static const int FIREBALL = 3;
 
-	Mage(string name="Gandalf");
+	Mage(int x = 0, int y = 0, string name = "Gandalf");
 	~Mage();
 
 	virtual void basicAttack(Character & c);

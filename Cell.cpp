@@ -1,4 +1,5 @@
 #include "Cell.h"
+#include "Character.h"
 
 Cell::Cell(int x, int y)
 {

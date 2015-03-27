@@ -17,18 +17,18 @@ int main(int argc, char* argv[])
 	Game *g = Game::getInstance();
 
 	LOGINFO << "Starting @ " << SDL_GetTicks() << endl;
-	Grid *grid = new Grid();
+	Grid* grid = g->getGrid();
 	Archer* player1 = new Archer();
 	Knight* player2 = new Knight();
 	Mage* player3 = new Mage();
 
 	g->addGameObject(grid, player1, player2);
+	g->addPlayer(player1);
+	g->addPlayer(player2);
 	g->displayState();
 	grid->generateObstacle();
-	grid->setObject(player1, 0, 0);
-	grid->setObject(player2, Grid::WIDTH-1, Grid::HEIGHT-1);
 
-	
+	/*
 	Callback quit(&Game::stop, g);
 	Callback cb(&Archer::cast, player1, Archer::DMG_BUFF);
 
@@ -38,8 +38,9 @@ int main(int argc, char* argv[])
 	auto lambda = [] (void* d){ LOGINFO << "Salut !!!!!!!" << endl; };
 	Callback rofl(lambda);
 	rofl.call();
-
+	*/
 	//g->stop();
+	g->start();
 	while (g->isRunning())
 	{
 		g->handleUserInput();

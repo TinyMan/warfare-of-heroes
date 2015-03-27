@@ -17,13 +17,13 @@ public:
 	static const int VOLLEY = 3;
 	
 
-	Archer(string name="Legolas");
+	Archer(int x = 0, int y = 0, string name="Legolas");
 	~Archer();
 
 	virtual void basicAttack(Character & c);
 	virtual void cast(int spellID, void* data);
 	// begin turn
-	virtual void beginTurn(){};
+	virtual void beginTurn();
 	virtual void endTurn(){};
 
 	// Spells :

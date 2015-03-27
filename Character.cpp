@@ -3,9 +3,12 @@
 #include "Grid.h"
 
 
-Character::Character(string name)
+Character::Character(int x, int y, string name)
 {
 	_name = name;
+	Grid* grid = Game::getInstance()->getGrid();
+	grid->setObject(this, x, y);
+	_hisCell = grid->getCellAt(x, y);
 }
 
 
@@ -67,4 +70,42 @@ bool Character::move(int i, int j)
 		return true;
 	}
 	return false;
+}
+
+void Character::beginTurn()
+{
+	/* add actions to the 'menu' */
+	UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_MOVE), "Move"));
+	UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_CAST), "Cast a spell"));
+	UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_ENDTURN), "I'm done"));
+}
+
+void Character::actionCallback(int actionID, void* d)
+{
+	switch (actionID)
+	{
+	case ACTION_MOVE:
+		askWhereToMove(d);
+		break;
+	case ACTION_CAST:
+		break;
+	case ACTION_ENDTURN:
+		break;
+	default:
+		break;
+	}
+}
+
+void Character::askWhereToMove(void*)
+{
+	int x, y;
+	LOGINFO << "Where do you want to go ? Enter cell position (e.g. 13 29): " << endl;
+	cin >> x >> y;
+	move(x, y);
+}
+
+ostream& operator<<(ostream& o, const Character& c)
+{
+	o << "Displaying: " << c._name << endl;
+	return o;
 }
