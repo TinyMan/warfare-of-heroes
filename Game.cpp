@@ -95,24 +95,36 @@ void Game::onActivatedGameObject(void*)
 	_gameObjects_dirty = true;
 	_nb_active_gobjects++;
 }
-void Game::displayState() const
+void Game::displayState(ostream& o) const
 {
 	stringstream sstm;
-	sstm << "Currently " << _gameObjects.size() << " game objects in the list." << endl;
+	o << "Currently " << _gameObjects.size() << " game objects in the list." << endl;
 
 	for (auto& e : _gameObjects)
 	{
-		sstm << *e << endl;
+		o << *e << endl;
 	}
-	sstm << "Players: " << endl;
-
+	displayPlayersList(o);
+	o << "Grid: " << endl;
+	_grid->display(o);
+}
+void Game::displayPlayers(ostream& o) const
+{
+	o << "Players: " << endl;
 	for (auto& e : _players)
 	{
-		sstm << *e << endl;
+		o << *e << endl;
 	}
-	sstm << "Grid: " << endl;
-	_grid->display(sstm);
-	_logService->info << sstm.str();
+	
+}
+void Game::displayPlayersList(ostream& o) const
+{
+	int i = 0;
+	o << "Players list: " << endl;
+	for (auto& e : _players)
+	{
+		o << i++ << ": " << e->getName() << endl;
+	}
 }
 
 void Game::update()

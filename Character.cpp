@@ -83,6 +83,23 @@ void Character::beginTurn()
 	/* add actions to the 'menu' */
 	UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_ENDTURN), "I'm done"));
 	UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_MOVE), "Move"));
+	/* lambda for target selection for basic attack */
+	auto targetSelector = [this](void*)
+	{
+		LOGINFO << "Who do you want to attack ?" << endl;
+		GAMEINST->displayPlayersList(LOGINFO);
+		int c;
+		cin >> c;
+		try{
+			Character *target = GAMEINST->getPlayer(c);
+			basicAttack(*target);
+		}
+		catch (const std::out_of_range& oor) {
+			LOGERR << "Out of Range error: " << oor.what() << " (player does not exists)\n";
+		}
+	};
+
+	UI->addAction(Action(Callback(targetSelector), "Basic attack"));
 	/* casting a spell isn't handled by character but by each class (archer, knight, ..) */
 	//UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_CAST), "Cast a spell"));
 }

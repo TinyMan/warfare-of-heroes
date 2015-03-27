@@ -128,4 +128,7 @@ void Archer::beginTurn()
 	UI->addAction(Action(Callback(&Archer::cast, this, Archer::SB_ARROW), "Cast step back arrow"));
 	UI->addAction(Action(Callback(&Archer::cast, this, Archer::VOLLEY), "Cast arrow volley"));*/
 	Character::beginTurn();
+
+
+
 }

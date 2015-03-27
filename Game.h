@@ -33,6 +33,7 @@ public:
 
 	/* getters */
 	Grid* getGrid() { return _grid; }
+	Character* getPlayer(int id) { return _players.at(id); }
 
 	template<typename... GO>
 	/* Add multiple game objects to the collection */
@@ -50,7 +51,9 @@ public:
 	void onDeactivatedGameObject(void*);
 
 	/* display the current state of the game */
-	void displayState() const;
+	void displayState(ostream& o = LOGINFO) const; // display the full state of the game (game objects, grid, players ...)
+	void displayPlayers(ostream& o = LOGINFO) const; // display players with operator<<
+	void displayPlayersList(ostream& o = LOGINFO) const; // just a list with number (used to chose target f.e.)
 
 	/* starting game */
 	void initialize();
