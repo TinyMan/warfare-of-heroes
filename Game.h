@@ -59,7 +59,7 @@ public:
 	void initialize();
 	void start();
 	void beginTurn();
-	void endTurn();
+	void endTurn(void* data=nullptr);
 
 	/* ending game */
 	void stop(void*d=nullptr) { _running = false; }

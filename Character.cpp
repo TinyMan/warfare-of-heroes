@@ -62,6 +62,7 @@ bool Character::movement()
 
 bool Character::move(int i, int j)
 {
+	// TO DO: over load to take Cell in parameter
 	LOGINFO << _name << " is moving from " << *_hisCell << " to " << i << ", " << j << endl;
 	int distance = Grid::getCellDistance(i, j, _hisCell->getPosX(), _hisCell->getPosY());
 	if (distance <= _movementPoints)
@@ -81,25 +82,9 @@ bool Character::move(int i, int j)
 void Character::beginTurn()
 {
 	/* add actions to the 'menu' */
-	UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_ENDTURN), "I'm done"));
 	UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_MOVE), "Move"));
-	/* lambda for target selection for basic attack */
-	auto targetSelector = [this](void*)
-	{
-		LOGINFO << "Who do you want to attack ?" << endl;
-		GAMEINST->displayPlayersList(LOGINFO);
-		int c;
-		cin >> c;
-		try{
-			Character *target = GAMEINST->getPlayer(c);
-			basicAttack(*target);
-		}
-		catch (const std::out_of_range& oor) {
-			LOGERR << "Out of Range error: " << oor.what() << " (player does not exists)\n";
-		}
-	};
-
-	UI->addAction(Action(Callback(targetSelector), "Basic attack"));
+		
+	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Character::BASIC_ATTACK), "Basic attack"));
 	/* casting a spell isn't handled by character but by each class (archer, knight, ..) */
 	//UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_CAST), "Cast a spell"));
 }
@@ -109,6 +94,7 @@ void Character::actionCallback(int actionID, void* d)
 	switch (actionID)
 	{
 	case ACTION_MOVE:
+		// TO DO: get a cell from the askWhereToMove and then move to the cell using move()
 		askWhereToMove(d);
 		break;
 	case ACTION_CAST:
@@ -123,10 +109,25 @@ void Character::actionCallback(int actionID, void* d)
 
 void Character::askWhereToMove(void*)
 {
+	// TO DO: changes to return a cell
 	int x, y;
 	LOGINFO << "Where do you want to go ? Enter cell position (e.g. 13 29): " << endl;
 	cin >> x >> y;
 	move(x, y);
+}
+void Character::targetSelectorForCharacter(int spellIID, void* d)
+{
+	LOGINFO << "Select your target: " << endl;
+	GAMEINST->displayPlayersList(LOGINFO);
+	int c;
+	cin >> c;
+	try{
+		Character *target = GAMEINST->getPlayer(c);
+		cast(spellIID, target);
+	}
+	catch (const std::out_of_range& oor) {
+		LOGERR << "Out of Range error: " << oor.what() << " (player does not exists)\n";
+	}
 }
 
 ostream& operator<<(ostream& o, const Character& c)
@@ -135,3 +136,4 @@ ostream& operator<<(ostream& o, const Character& c)
 	o << "Position: " << c._hisCell->getPosX() << "," << c._hisCell->getPosY() << endl;
 	return o;
 }
+

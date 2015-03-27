@@ -19,6 +19,9 @@ void Knight::cast(int spellID, void* data)
 	
 	switch (spellID)
 	{
+	case Character::BASIC_ATTACK:
+		basicAttack(*(Character*)data);
+		break;
 	case Knight::DASH:
 	{
 		dash(*(Cell*)data); 

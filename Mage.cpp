@@ -20,6 +20,9 @@ void Mage::cast(int spellID, void* data)
 {
 	switch (spellID)
 	{
+	case Character::BASIC_ATTACK:
+		basicAttack(*(Character*)data);
+		break;
 	case Mage::THUNDER:
 		thunderStorm(*(Cell*)data);
 		break;

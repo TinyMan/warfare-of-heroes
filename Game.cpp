@@ -156,12 +156,14 @@ void Game::start()
 }
 void Game::beginTurn()
 {
+	LOGINFO << "Begining turn of " << _players.at(_player_turn)->getName() << endl;
 	UI->addAction(Action(Callback(&Game::stop, this), "Quit"));
+	UI->addAction(Action(Callback(&Game::endTurn, this), "I'm done"));
 	_players.at(_player_turn)->beginTurn();
 }
-void Game::endTurn()
+void Game::endTurn(void* )
 {
-	_player_turn = _player_turn == 1 ? 0 : 1;
+	_player_turn = _player_turn == 0 ? 1 : 0;
 	UI->clear();
 	beginTurn();
 }

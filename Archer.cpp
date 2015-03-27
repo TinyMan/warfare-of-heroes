@@ -19,6 +19,9 @@ void Archer::cast(int spellID, void* data)
 {
 	switch (spellID)
 	{
+	case Character::BASIC_ATTACK:
+		basicAttack(*(Character*)data);
+		break;
 	case Archer::DMG_BUFF:
 		damageBuff();
 		break;
@@ -123,12 +126,10 @@ bool Archer::arrowVolley(Character & c)
 
 void Archer::beginTurn()
 {
-	/*UI->addAction(Action(Callback(&Archer::cast, this, Archer::DMG_BUFF), "Cast Damage buff"));
-	UI->addAction(Action(Callback(&Archer::cast, this, Archer::FLAMED_ARROW), "Cast flamed arrow"));
-	UI->addAction(Action(Callback(&Archer::cast, this, Archer::SB_ARROW), "Cast step back arrow"));
-	UI->addAction(Action(Callback(&Archer::cast, this, Archer::VOLLEY), "Cast arrow volley"));*/
+	
+	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Archer::VOLLEY), "Cast arrow volley"));
+	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Archer::SB_ARROW), "Cast step back arrow"));
+	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Archer::FLAMED_ARROW), "Cast flamed arrow"));
+	UI->addAction(Action(Callback(&Archer::cast, this, Archer::DMG_BUFF), "Cast Damage buff"));
 	Character::beginTurn();
-
-
-
 }
