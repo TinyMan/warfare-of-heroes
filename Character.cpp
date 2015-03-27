@@ -66,9 +66,12 @@ bool Character::move(int i, int j)
 	int distance = Grid::getCellDistance(i, j, _hisCell->getPosX(), _hisCell->getPosY());
 	if (distance <= _movementPoints)
 	{
-		_movementPoints -= distance;
 		_hisCell = GAMEINST->getGrid()->getCellAt(i, j);
-		return true;
+		if (_hisCell != nullptr)
+		{
+			_movementPoints -= distance;
+			return true;
+		}
 	}
 	else
 		LOGERR << "Cannot move: not enough movement points" << endl;
@@ -112,5 +115,6 @@ void Character::askWhereToMove(void*)
 ostream& operator<<(ostream& o, const Character& c)
 {
 	o << "Displaying: " << c._name << endl;
+	o << "Position: " << c._hisCell->getPosX() << "," << c._hisCell->getPosY() << endl;
 	return o;
 }

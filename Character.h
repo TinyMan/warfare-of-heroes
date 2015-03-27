@@ -36,7 +36,7 @@ public:
 	/* every children have to implement those methods */
 	// Attacks :
 	virtual void basicAttack(Character & c) = 0;
-	// cast a spell
+	// cast a spell: Callback fonction
 	virtual void cast(int spellID, void* data) = 0;
 	// begin turn
 	virtual void beginTurn();

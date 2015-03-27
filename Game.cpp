@@ -110,6 +110,8 @@ void Game::displayState() const
 	{
 		sstm << *e << endl;
 	}
+	sstm << "Grid: " << endl;
+	_grid->display(sstm);
 	_logService->info << sstm.str();
 }
 
@@ -128,7 +130,8 @@ void Game::handleUserInput()
 {
 	// TODO : add textmode gameplay
 	int choice = 0;
-	LOGINFO << "Turn " << _turn << ", player " << _player_turn << ": " << endl;
+	LOGINFO << "------------------------" << endl;
+	LOGINFO << "Turn " << _turn << ", player " << _player_turn << " (" << _players.at(_player_turn)->getName() << "): " << endl;
 	LOGINFO << *UI << endl;
 
 

@@ -33,7 +33,7 @@ void Grid::display(ostream& o) const
 		for (const Cell &c : a)
 		{
 			if (c.getType() != Cell::Free)
-				o << "Cell (" << c.getPosX() << "," << c.getPosY() << "): " << c << endl;
+				o << c << endl;
 		}
 	}
 }
@@ -50,7 +50,8 @@ Cell* Grid::getCellAt(int i, int j)
 {
 	if (i>WIDTH || j>HEIGHT || i < 0 || j < 0)
 	{
-		LOGINFO << "Index de getCellAt() hors de la grille !" << endl;
+		LOGERR << "Index de getCellAt() hors de la grille !" << endl;
+		return nullptr;
 	}
 	return &arrayOfCells[i][j];
 }

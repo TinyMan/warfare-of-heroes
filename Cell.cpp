@@ -65,7 +65,7 @@ bool Cell::isInView(const Character & c) const
 
 ostream& operator<<(ostream& o, const Cell& c)
 {
-	o << "Cell " << c._posX << "," << c._posY << " ";
+	o << "Cell " << c._posX << "," << c._posY << ": ";
 	switch (c._cellType)
 	{
 	case Cell::Free:

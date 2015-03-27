@@ -123,7 +123,6 @@ bool Archer::arrowVolley(Character & c)
 
 void Archer::beginTurn()
 {
-	LOGINFO << "Beginning turn of " << _name << endl;
 	/*UI->addAction(Action(Callback(&Archer::cast, this, Archer::DMG_BUFF), "Cast Damage buff"));
 	UI->addAction(Action(Callback(&Archer::cast, this, Archer::FLAMED_ARROW), "Cast flamed arrow"));
 	UI->addAction(Action(Callback(&Archer::cast, this, Archer::SB_ARROW), "Cast step back arrow"));
