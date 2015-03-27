@@ -79,7 +79,7 @@ private:
 	Grid* _grid;
 
 	bool _running = true;
-	bool _turn = 0;
+	int _turn = 0;
 	int _player_turn = 0; // the current player ID which play 
 
 	/* ptr to different services */

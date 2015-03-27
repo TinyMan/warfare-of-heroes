@@ -163,6 +163,7 @@ void Game::beginTurn()
 }
 void Game::endTurn(void* )
 {
+	_turn += _player_turn;
 	_player_turn = _player_turn == 0 ? 1 : 0;
 	UI->clear();
 	beginTurn();
