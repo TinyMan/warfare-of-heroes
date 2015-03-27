@@ -22,7 +22,7 @@ public:
 	bool isInView(const Character & c) const;
 
 	GameObject* getObject() const { return _object; }
-	void setObject(GameObject* obj) throw( const char*)
+	void setObject(GameObject* obj)
 	{ 
 		_object = obj; 
 		if (_cellType != Free) 

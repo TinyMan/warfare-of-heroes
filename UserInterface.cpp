@@ -11,7 +11,7 @@ UserInterface::~UserInterface()
 
 void UserInterface::addAction( const Action & a)
 {
-	_actions.emplace_front(a);
+	_actions.push_front(a);
 }
 ostream& operator<<(ostream& o, const UserInterface& ui) 
 {

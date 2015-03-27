@@ -109,7 +109,6 @@ void Character::actionCallback(int actionID, void* d)
 	case ACTION_ENDTURN:
 		GAMEINST->endTurn();
 		break;
-	case ACTION_CAST:
 	default:
 		cast(actionID, d);
 		break;

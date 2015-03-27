@@ -73,7 +73,7 @@ bool Mage::thunderStorm(const Cell & c)
 
 	bool spellHits = false;
 
-	
+	LOGINFO << this->getName() << " : Casting thunder storm on (" << c.getPosX() << "," << c.getPosY() << ")." << endl;
 
 	return (spellHits);
 }
@@ -141,5 +141,9 @@ bool Mage::fireBallOfTheDoom(Character & c)
 }
 void Mage::beginTurn()
 {
+	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Mage::FIREBALL), "Cast fireball of the doom"));
+	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Mage::ROOT), "Cast root"));
+	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, Mage::ERUPTION), "Cast eruption"));
+	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, Mage::THUNDER), "Cast thunder storm"));
 	Character::beginTurn();
 }

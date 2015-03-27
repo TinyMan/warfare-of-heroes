@@ -141,5 +141,9 @@ bool Knight::swordOfDestiny(Character & c)
 }
 void Knight::beginTurn()
 {
+	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, Knight::DASH), "Cast dash"));
+	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, Knight::SWORD_FORWARD), "Cast step back arrow"));
+	UI->addAction(Action(Callback(&Knight::cast, this, Knight::HEAL), "Cast heal"));
+	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Knight::SWORD_DESTINY), "Cast sword of destiny"));
 	Character::beginTurn();
 }

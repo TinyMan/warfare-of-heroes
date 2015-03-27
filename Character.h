@@ -53,9 +53,8 @@ public:
 	void targetSelectorForCell(int , void* d = nullptr);
 
 	static const int BASIC_ATTACK = -1;
-	static const int ACTION_MOVE = 0;
-	static const int ACTION_CAST = 1;
-	static const int ACTION_ENDTURN = 2;
+	static const int ACTION_MOVE = -2;
+	static const int ACTION_ENDTURN = -3;
 
 	/* TODO:: */
 	/*virtual void update(){}
