@@ -60,29 +60,38 @@ bool Character::movement()
 	return true;
 }
 
+bool Character::move(Cell& c)
+{
+	LOGINFO << _name << " is moving from " << *_hisCell << " to " << c << endl;
+	try
+	{
+		int distance = Grid::getCellDistance(c, *_hisCell);
+		if (distance > _movementPoints) throw "not enough movement points";
+		c.setObject(this);			
+		_hisCell = &c;
+		_movementPoints -= distance;	
+	}
+	catch (const char * msg)
+	{
+		LOGERR << "Cannot move : " << msg << endl;
+		return false;
+	}
+	return true;
+}
 bool Character::move(int i, int j)
 {
 	// TO DO: over load to take Cell in parameter
-	LOGINFO << _name << " is moving from " << *_hisCell << " to " << i << ", " << j << endl;
-	int distance = Grid::getCellDistance(i, j, _hisCell->getPosX(), _hisCell->getPosY());
-	if (distance <= _movementPoints)
-	{
-		_hisCell = GAMEINST->getGrid()->getCellAt(i, j);
-		if (_hisCell != nullptr)
-		{
-			_movementPoints -= distance;
-			return true;
-		}
-	}
-	else
-		LOGERR << "Cannot move: not enough movement points" << endl;
+	Cell* cell = GAMEINST->getGrid()->getCellAt(i, j);
+	if (cell != nullptr)		
+			return move(*cell);
+	
 	return false;
 }
 
 void Character::beginTurn()
 {
 	/* add actions to the 'menu' */
-	UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_MOVE), "Move"));
+	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, ACTION_MOVE), "Move"));
 		
 	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Character::BASIC_ATTACK), "Basic attack"));
 	/* casting a spell isn't handled by character but by each class (archer, knight, ..) */
@@ -95,25 +104,32 @@ void Character::actionCallback(int actionID, void* d)
 	{
 	case ACTION_MOVE:
 		// TO DO: get a cell from the askWhereToMove and then move to the cell using move()
-		askWhereToMove(d);
-		break;
-	case ACTION_CAST:
+		move(*(Cell*)d);
 		break;
 	case ACTION_ENDTURN:
 		GAMEINST->endTurn();
 		break;
+	case ACTION_CAST:
 	default:
+		cast(actionID, d);
 		break;
 	}
 }
 
-void Character::askWhereToMove(void*)
+void Character::targetSelectorForCell(int spellID, void* d)
 {
 	// TO DO: changes to return a cell
 	int x, y;
-	LOGINFO << "Where do you want to go ? Enter cell position (e.g. 13 29): " << endl;
+	LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
 	cin >> x >> y;
-	move(x, y);
+	try{
+		Cell* c = GAMEINST->getGrid()->getCellAt(x, y);
+		if (c == nullptr) throw std::out_of_range("cell does not exists");
+		actionCallback(spellID, c);
+	}
+	catch (const std::out_of_range& oor) {
+		LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";
+	}
 }
 void Character::targetSelectorForCharacter(int spellIID, void* d)
 {

@@ -46,16 +46,17 @@ public:
 	bool movement(); // Français : on met en paramètre la case et on vérifie si on peut se déplacer 
 	// Il faut créer une méthode de pathfinding qui permettra de se déplacer de plus d'une case à la fois.
 	bool move(int i, int j);
+	bool move(Cell& c);
 
 	void actionCallback(int actionID, void*);
 	void targetSelectorForCharacter(int spellIID, void* d = nullptr);
+	void targetSelectorForCell(int , void* d = nullptr);
 
 	static const int BASIC_ATTACK = -1;
 	static const int ACTION_MOVE = 0;
 	static const int ACTION_CAST = 1;
 	static const int ACTION_ENDTURN = 2;
 
-	void askWhereToMove(void*);
 	/* TODO:: */
 	/*virtual void update(){}
 	virtual void initialize() {}*/

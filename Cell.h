@@ -22,7 +22,14 @@ public:
 	bool isInView(const Character & c) const;
 
 	GameObject* getObject() const { return _object; }
-	void setObject(GameObject* obj) { _object = obj; _cellType = PlayerOnIt;/* TODO: CHANGE TYPE OF CELL */ }
+	void setObject(GameObject* obj) throw( const char*)
+	{ 
+		_object = obj; 
+		if (_cellType != Free) 
+			throw "Cannot set object: Cell is not free";
+		_cellType = PlayerOnIt;
+		/* TODO: CHANGE TYPE OF CELL */ 
+	}
 
 	friend ostream& operator<<(ostream&, const Cell&);
 private:
