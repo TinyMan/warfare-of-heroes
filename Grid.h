@@ -24,9 +24,9 @@ public:
 	Cell* getCellAt(int i, int j);
 
 	// TODO: return the cell distance between cells at index i,j and x,y
-	static int getCellDistance(int i, int j, int x, int y){ return 0; };
+	int getCellDistance(int i, int j, int x, int y);
 	// TODO: return the cell distance between cells
-	static int getCellDistance(const Cell&, const Cell&){ return 0; };
+	int getCellDistance(const Cell&, const Cell&);
 
 	static const int WIDTH = 14;
 	static const int HEIGHT = 30;

@@ -55,3 +55,15 @@ Cell* Grid::getCellAt(int i, int j)
 	}
 	return &arrayOfCells[i][j];
 }
+
+int Grid::getCellDistance(int i, int j, int x, int y)
+{
+	int ret = getCellDistance(arrayOfCells[i][j], arrayOfCells[x][y]);
+	return ret;
+}
+
+int Grid::getCellDistance(const Cell& c1, const Cell& c2)
+{
+	int ret = c1.getDistance(c2);
+	return ret;
+}

@@ -38,6 +38,12 @@ void Character::removeCapaciyPoint(int amount)
 		_capacityPoints = 0;
 }
 
+void Character::setDoT(int amount)
+{
+	this->_damageOverTime = amount;
+	LOGINFO << this->getName() << " : take DoT = " << amount << endl;
+}
+
 int Character::getHP() const
 {
 	return(_hitPoints);
@@ -53,23 +59,18 @@ int Character::getCP() const
 	return(_capacityPoints);
 }
 
-bool Character::movement()
-{
-	// Bla bla bla I move hourray !
-	// Launches a super duper animation.
-	return true;
-}
-
-bool Character::move(Cell& c)
+bool Character::move(Cell& c, bool moveWanted)
 {
 	LOGINFO << _name << " is moving from " << *_hisCell << " to " << c << endl;
 	try
 	{
-		int distance = Grid::getCellDistance(c, *_hisCell);
-		if (distance > _movementPoints) throw "not enough movement points";
-		c.setObject(this);			
+		int distance = GAMEINST->getGrid()->getCellDistance(c, *_hisCell);
+		if (distance > _movementPoints && moveWanted) throw "not enough movement points";
+		c.setObject(this);
+		_hisCell->setType(Cell::Free);
 		_hisCell = &c;
-		_movementPoints -= distance;	
+		if (moveWanted)
+			_movementPoints -= distance;	
 	}
 	catch (const char * msg)
 	{
@@ -78,13 +79,13 @@ bool Character::move(Cell& c)
 	}
 	return true;
 }
-bool Character::move(int i, int j)
+bool Character::move(int i, int j, bool moveWanted)
 {
 	// TO DO: over load to take Cell in parameter
 	Cell* cell = GAMEINST->getGrid()->getCellAt(i, j);
 	if (cell != nullptr)		
-			return move(*cell);
-	
+			return move(*cell,moveWanted);
+
 	return false;
 }
 
@@ -96,6 +97,17 @@ void Character::beginTurn()
 	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Character::BASIC_ATTACK), "Basic attack"));
 	/* casting a spell isn't handled by character but by each class (archer, knight, ..) */
 	//UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_CAST), "Cast a spell"));
+
+
+
+
+	if (_damageOverTime > 0)
+	{
+		LOGINFO << this->getName() << " : taking damages (DoT) : " << _damageOverTime << endl;
+		this->lowerHitPoint(_damageOverTime);
+	}
+	_capacityPoints = cpMax;
+	_movementPoints = mpMax;
 }
 
 void Character::actionCallback(int actionID, void* d)
