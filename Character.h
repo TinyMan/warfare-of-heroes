@@ -15,6 +15,9 @@ protected:
 	int _hitPoints;
 	int _movementPoints;
 	int _capacityPoints;
+	int _damageOverTime = 0;
+	int mpMax;
+	int cpMax;
 	Cell* _hisCell = nullptr;
 
 public:
@@ -22,9 +25,10 @@ public:
 	virtual ~Character();
 
 	// Setters :
-	void lowerHitPoint(int amount);
+	void lowerHitPoint(int amount=0);
 	void removeMovementPoint(int amount=1);
 	void removeCapaciyPoint(int amount=1);
+	void setDoT(int amount=0);
 
 	// Getters :
 	string getName() const { return _name; }
@@ -42,11 +46,10 @@ public:
 	virtual void beginTurn();
 	virtual void endTurn(){};
 
-	// Movements :
-	bool movement(); // Français : on met en paramètre la case et on vérifie si on peut se déplacer 
+	// Movements : 
 	// Il faut créer une méthode de pathfinding qui permettra de se déplacer de plus d'une case à la fois.
-	bool move(int i, int j);
-	bool move(Cell& c);
+	bool move(int i, int j, bool moveWanted=true);
+	bool move(Cell& c, bool moveWanted=true);
 
 	void actionCallback(int actionID, void*);
 	void targetSelectorForCharacter(int spellIID, void* d = nullptr);

@@ -22,10 +22,11 @@ int main(int argc, char* argv[])
 	grid->generateObstacle();
 
 	Archer* player1 = new Archer(0,0);
-	Mage* player2 = new Mage(Grid::WIDTH - 1, Grid::HEIGHT - 1);
-	g->addGameObject(grid, player1, player2);
+	Knight* player3 = new Knight(1, 0);
+	g->addGameObject(grid, player1, player3);
 	g->addPlayer(player1);
-	g->addPlayer(player2);
+	g->addPlayer(player3);
+	
 
 	g->displayState();
 	g->start();
