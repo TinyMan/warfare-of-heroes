@@ -18,6 +18,7 @@ protected:
 	int _damageOverTime = 0;
 	int mpMax;
 	int cpMax;
+	int hpMax;
 	Cell* _hisCell = nullptr;
 
 public:

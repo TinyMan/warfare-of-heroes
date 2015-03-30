@@ -33,6 +33,7 @@ int main(int argc, char* argv[])
 	while (g->isRunning())
 	{
 		g->handleUserInput();
+		g->displayState(LOGINFO);
 		// TODO : add textmode gameplay
 	}
 

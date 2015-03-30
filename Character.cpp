@@ -159,8 +159,14 @@ void Character::targetSelectorForCharacter(int spellIID, void* d)
 
 ostream& operator<<(ostream& o, const Character& c)
 {
-	o << "Displaying: " << c._name << endl;
-	o << "Position: " << c._hisCell->getPosX() << "," << c._hisCell->getPosY() << endl;
+	o << "\tDisplaying: " << c._name << endl;
+	o << "\tPosition: " << c._hisCell->getPosX() << "," << c._hisCell->getPosY() << endl;
+	//o << "Stats: " << endl;
+	o << "\tHP: " << c._hitPoints << "/" << c.hpMax << endl;
+	o << "\tMP: " << c._movementPoints << endl;
+	o << "\tCP: " << c._capacityPoints << endl;
+	o << "\tDoT: " << c._damageOverTime << endl;
+
 	return o;
 }
 

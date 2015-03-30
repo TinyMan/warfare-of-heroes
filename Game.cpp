@@ -100,11 +100,11 @@ void Game::displayState(ostream& o) const
 	stringstream sstm;
 	o << "Currently " << _gameObjects.size() << " game objects in the list." << endl;
 
-	for (auto& e : _gameObjects)
+	/*for (auto& e : _gameObjects)
 	{
 		o << *e << endl;
-	}
-	displayPlayersList(o);
+	}*/
+	displayPlayers(o);
 	o << "Grid: " << endl;
 	_grid->display(o);
 }
@@ -113,7 +113,8 @@ void Game::displayPlayers(ostream& o) const
 	o << "Players: " << endl;
 	for (auto& e : _players)
 	{
-		o << *e << endl;
+		o << *e;
+		o << "<--------------------------------->" << endl;
 	}
 	
 }
