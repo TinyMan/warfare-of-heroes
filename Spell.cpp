@@ -2,14 +2,15 @@
 
 /* definition */
 
-Spell::Spell(string name, Character* caster, int cd, int dmg, int heal, int cost, int min_scope, int max_scope, bool is_inline, DamageOverTime* dot)
-	: _name(name), _caster(caster), _max_cooldown(cd), _damage(dmg), _heal(heal), _cost(cost), _min_scope(min_scope), _max_scope(max_scope), _is_inline(is_inline), _dot(dot)
+Spell::Spell(string name, Character* caster, int cd, int dmg, int heal, int cost, int min_scope, int max_scope, bool is_inline, DamageOverTime* dot, BonusDamage* db)
+	: _name(name), _caster(caster), _max_cooldown(cd), _damage(dmg), _heal(heal), _cost(cost), _min_scope(min_scope), _max_scope(max_scope), _is_inline(is_inline), _dot(dot), _damage_buff(db)
 {
 }
 
 
 Spell::~Spell()
 {
+	delete _dot;
 }
 
 void Spell::beginTurn()

@@ -8,10 +8,10 @@ Archer::Archer(int x, int y, string name) : Character(x, y, name)
 	cpMax = CP_MAX;
 	hpMax = _hitPoints = HP_MAX;
 
-	_spells[VOLLEY] = new Spell("Arrow Volley", this, 4, 120, 0, 10, 0, 8);
+	_spells[VOLLEY] = new Spell("Arrow Volley", this, 4, 120, 0, 10, 0, 8, false, nullptr, 0);
 	//_spells[SB_ARROW] = new Spell("Arrow Volley", this, 4, 120, 0, 10, 0, 8);
-	//_spells[FLAMED_ARROW] = new Spell("Arrow Volley", this, 4, 120, 0, 10, 0, 8);
-	//_spells[DMG_BUFF] = new Spell("Arrow Volley", this, 4, 120, 0, 10, 0, 8);
+	_spells[FLAMED_ARROW] = new Spell("Flamed Arrow", this, 4, 80, 0, 5, 0, 6, false, new DamageOverTime(20, 3, "Flamed Arrow DoT"));
+	_spells[DMG_BUFF] = new Spell("Damage Buff", this, 4, 0, 0, 4, 0, 0, false, nullptr, new BonusDamage(20, 3, "Archer Damage buff", this));
 }
 
 
@@ -27,17 +27,18 @@ void Archer::cast(int spellID, void* data)
 		basicAttack(*(Character*)data);
 		break;
 	case Archer::DMG_BUFF:
-		damageBuff();
+		_spells[DMG_BUFF]->cast(this);
 		break;
 	case Archer::FLAMED_ARROW:
-		flamedArrow(*(Character*)data);
+		_spells[FLAMED_ARROW]->cast((Character*)data);
+		//flamedArrow(*(Character*)data);
 		break;
 	case Archer::SB_ARROW:
 		stepBackArrow(*(Character*)data);
 		break;
 	case Archer::VOLLEY:
 		//arrowVolley(*(Character*)data);
-		_spells[0]->cast((Character*)data);
+		_spells[VOLLEY]->cast((Character*)data);
 		break;
 	default:
 		break;
@@ -91,6 +92,7 @@ void Archer::flamedArrow(Character & c)
 
 	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
 	{
+
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.lowerHitPoint(amountOfDamages); // The ennemy c takes a hit.
 		LOGINFO << this->getName() << " : Casting flamedArrow on " << c.getName() << "(" << c.getId() << ")" << endl;

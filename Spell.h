@@ -4,6 +4,7 @@
 #include "Cell.h"
 #include "SpellTarget.h"
 #include "DamageOverTime.h"
+#include "BonusDamage.h"
 
 using namespace std;
 
@@ -11,7 +12,7 @@ using namespace std;
 class Spell
 {
 public:
-	Spell(string name = "Unknown Spell", Character* caster = nullptr, int cd = 0, int dmg = 0, int heal = 0, int cost = 0, int min_scope = 0, int max_scope = 0, bool is_inline = false, DamageOverTime* dot=nullptr);
+	Spell(string name = "Unknown Spell", Character* caster = nullptr, int cd = 0, int dmg = 0, int heal = 0, int cost = 0, int min_scope = 0, int max_scope = 0, bool is_inline = false, DamageOverTime* dot = nullptr, BonusDamage* damage_buff = nullptr);
 	virtual ~Spell();
 
 
@@ -42,6 +43,7 @@ protected:
 	bool _is_inline;
 	string _name;
 	DamageOverTime *_dot;
+	BonusDamage* _damage_buff;
 
 	Character* _caster;
 private:
@@ -54,12 +56,21 @@ template<class Target>
 bool Spell::cast(Target* target)
 {
 	if (canCastOn(target))
-	{
+	{		
+		_damage += _caster->getBonusDamage();
 		_cooldown = _max_cooldown;
 		_caster->removeCapaciyPoint(_cost);
 		target->lowerHitPoint(_damage);
 		target->lowerHitPoint(-_heal);
-		target->setDot(_dot);
+		if (_damage_buff)
+		{
+			target->setBonusDamage(*_damage_buff);
+		}
+		if (_dot)
+		{
+			_dot->setTarget(target);
+			target->setDot(*_dot);
+		}
 
 		LOGINFO << _caster->getName() << " : Casting " << _name << " on ";
 		target->displayBasic(LOGINFO);

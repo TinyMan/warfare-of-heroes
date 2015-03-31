@@ -38,10 +38,25 @@ void Character::removeCapaciyPoint(int amount)
 		_capacityPoints = 0;
 }
 
-void Character::setDot(DamageOverTime* dot)
+void Character::setDot(const DamageOverTime& dot)
 {
-	_damageOverTime.push_back(dot);
+	_damageOverTime.emplace_back(dot);
 	LOGINFO << this->getName() << " : take DoT = " << dot << endl;
+}
+void Character::setBonusDamage(const BonusDamage& bonus)
+{
+	_bonusDamage.emplace_back(bonus);
+	LOGINFO << this->getName() << " : add Bonus Damage = " << bonus << endl;
+}
+
+int Character::getBonusDamage() const
+{
+	int s = 0;
+	for (auto & b : _bonusDamage)
+	{
+		s += b.getBonus();
+	}
+	return s;
 }
 
 int Character::getHP() const
@@ -101,11 +116,14 @@ void Character::beginTurn()
 
 
 
-	/*if (_damageOverTime > 0)
+	for (auto & dot : _damageOverTime)
 	{
-		LOGINFO << this->getName() << " : taking damages (DoT) : " << _damageOverTime << endl;
-		this->lowerHitPoint(_damageOverTime);
-	}*/
+		dot.beginTurn();
+	}
+	for (auto & bonus : _bonusDamage)
+	{
+		bonus.beginTurn();
+	}
 	_capacityPoints = cpMax;
 	_movementPoints = mpMax;
 }
