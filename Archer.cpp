@@ -1,4 +1,5 @@
 #include "Archer.h"
+#include "Spell.h"
 
 Archer::Archer(int x, int y, string name) : Character(x, y, name)
 {
@@ -7,7 +8,10 @@ Archer::Archer(int x, int y, string name) : Character(x, y, name)
 	cpMax = CP_MAX;
 	hpMax = _hitPoints = HP_MAX;
 
-	_spells[0] =  new Spell("Arrow Volley", this, 4, 120, 0, 10, 0, 8);
+	_spells[VOLLEY] = new Spell("Arrow Volley", this, 4, 120, 0, 10, 0, 8);
+	//_spells[SB_ARROW] = new Spell("Arrow Volley", this, 4, 120, 0, 10, 0, 8);
+	//_spells[FLAMED_ARROW] = new Spell("Arrow Volley", this, 4, 120, 0, 10, 0, 8);
+	//_spells[DMG_BUFF] = new Spell("Arrow Volley", this, 4, 120, 0, 10, 0, 8);
 }
 
 
@@ -90,7 +94,7 @@ void Archer::flamedArrow(Character & c)
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.lowerHitPoint(amountOfDamages); // The ennemy c takes a hit.
 		LOGINFO << this->getName() << " : Casting flamedArrow on " << c.getName() << "(" << c.getId() << ")" << endl;
-		c.setDoT(dot);
+//		c.setDoT(dot);
 		_capacityPoints -= cost;
 	}
 	else

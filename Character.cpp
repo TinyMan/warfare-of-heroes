@@ -1,6 +1,7 @@
 #include "Character.h"
 #include "Cell.h"
 #include "Grid.h"
+#include "Spell.h"
 
 
 Character::Character(int x, int y, string name) : _name(name), _spells(NB_SPELLS)
@@ -37,10 +38,10 @@ void Character::removeCapaciyPoint(int amount)
 		_capacityPoints = 0;
 }
 
-void Character::setDoT(int amount)
+void Character::setDot(DamageOverTime* dot)
 {
-	this->_damageOverTime = amount;
-	LOGINFO << this->getName() << " : take DoT = " << amount << endl;
+	_damageOverTime.push_back(dot);
+	LOGINFO << this->getName() << " : take DoT = " << dot << endl;
 }
 
 int Character::getHP() const
@@ -100,11 +101,11 @@ void Character::beginTurn()
 
 
 
-	if (_damageOverTime > 0)
+	/*if (_damageOverTime > 0)
 	{
 		LOGINFO << this->getName() << " : taking damages (DoT) : " << _damageOverTime << endl;
 		this->lowerHitPoint(_damageOverTime);
-	}
+	}*/
 	_capacityPoints = cpMax;
 	_movementPoints = mpMax;
 }
@@ -188,7 +189,7 @@ ostream& operator<<(ostream& o, const Character& c)
 	o << "|-- HP: " << c._hitPoints << "/" << c.hpMax << endl;
 	o << "|-- MP: " << c._movementPoints << endl;
 	o << "|-- CP: " << c._capacityPoints << endl;
-	o << "|-- DoT: " << c._damageOverTime << endl;
+	//o << "|-- DoT: " << c._damageOverTime << endl;
 
 	return o;
 }

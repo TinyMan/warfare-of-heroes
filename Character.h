@@ -4,11 +4,13 @@
 #include "SpellTarget.h"
 #include "GameObject.h"
 #include "Game.h"
-#include "Spell.h"
+#include "DamageOverTime.h"
 
 using namespace std;
 
 class Cell;
+class Spell;
+
 
 /* abstract class */
 class Character : public GameObject, public SpellTarget
@@ -21,7 +23,7 @@ protected:
 	int _hitPoints;
 	int _movementPoints;
 	int _capacityPoints;
-	int _damageOverTime = 0;
+	list<DamageOverTime*> _damageOverTime;
 	int mpMax;
 	int cpMax;
 	int hpMax;
@@ -35,8 +37,8 @@ public:
 	// Setters :
 	void lowerHitPoint(int amount=0);
 	void removeMovementPoint(int amount=1);
-	void removeCapaciyPoint(int amount=1);
-	void setDoT(int amount=0);
+	void removeCapaciyPoint(int amount = 1);
+	void setDot(DamageOverTime* dot);
 
 	// Getters :
 	string getName() const { return _name; }
@@ -78,6 +80,6 @@ public:
 
 
 	/* should return the selected target (by the user) (only in text mode) */
-	static SpellTarget* targetSelector() ;
+	static SpellTarget* targetSelector();
 };
 

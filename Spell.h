@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "Cell.h"
 #include "SpellTarget.h"
+#include "DamageOverTime.h"
 
 using namespace std;
 
@@ -10,7 +11,7 @@ using namespace std;
 class Spell
 {
 public:
-	Spell(string name = "Unknown Spell", Character* caster = nullptr, int cd = 0, int dmg = 0, int heal = 0, int cost = 0, int min_scope = 0, int max_scope = 0, bool is_inline = false);
+	Spell(string name = "Unknown Spell", Character* caster = nullptr, int cd = 0, int dmg = 0, int heal = 0, int cost = 0, int min_scope = 0, int max_scope = 0, bool is_inline = false, DamageOverTime* dot=nullptr);
 	virtual ~Spell();
 
 
@@ -28,6 +29,7 @@ public:
 	void setMinScope(int min_scope) { _min_scope = min_scope; }
 	void setMaxScope(int max_scope) { _max_scope = max_scope; }
 	void setInline(bool il) { _is_inline = il; }
+	void setDot(DamageOverTime* dot) { _dot = dot; }
 
 	friend ostream& operator<<(ostream& o, const Spell& s);
 protected:
@@ -39,6 +41,7 @@ protected:
 	int _cost;
 	bool _is_inline;
 	string _name;
+	DamageOverTime *_dot;
 
 	Character* _caster;
 private:
@@ -56,6 +59,7 @@ bool Spell::cast(Target* target)
 		_caster->removeCapaciyPoint(_cost);
 		target->lowerHitPoint(_damage);
 		target->lowerHitPoint(-_heal);
+		target->setDot(_dot);
 
 		LOGINFO << _caster->getName() << " : Casting " << _name << " on ";
 		target->displayBasic(LOGINFO);
