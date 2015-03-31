@@ -57,10 +57,9 @@ bool Spell::cast(Target* target)
 {
 	if (canCastOn(target))
 	{		
-		_damage += _caster->getBonusDamage();
 		_cooldown = _max_cooldown;
 		_caster->removeCapaciyPoint(_cost);
-		target->lowerHitPoint(_damage);
+		target->lowerHitPoint(_damage + _caster->getBonusDamage());
 		target->lowerHitPoint(-_heal);
 		if (_damage_buff)
 		{

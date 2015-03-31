@@ -8,6 +8,8 @@ public:
 
 	virtual ~BonusDamage();
 
-	virtual int getBonus() const { return _damage; }
+	virtual int getBonus() const { if (_duration > 0) return _damage; return 0; }
+	virtual void beginTurn();
+
 };
 
