@@ -26,7 +26,7 @@ public:
 	// TODO: return the cell distance between cells at index i,j and x,y
 	int getCellDistance(int i, int j, int x, int y);
 	// TODO: return the cell distance between cells
-	int getCellDistance(const Cell&, const Cell&);
+	static int getCellDistance(const Cell&, const Cell&);
 
 	static const int WIDTH = 14;
 	static const int HEIGHT = 30;

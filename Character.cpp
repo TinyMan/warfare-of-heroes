@@ -157,15 +157,39 @@ void Character::targetSelectorForCharacter(int spellIID, void* d)
 	}
 }
 
+int Character::getDistance(const SpellTarget& st) const
+{
+	return Grid::getCellDistance(*_hisCell, *st.getCell());
+}
+void Character::displayBasic(ostream& o) const
+{
+	o << _name;
+}
+
+SpellTarget* Character::targetSelector()
+{
+	LOGINFO << "Select your target: " << endl;
+	GAMEINST->displayPlayersList(LOGINFO);
+	int c;
+	cin >> c;
+	try{
+		Character *target = GAMEINST->getPlayer(c);
+		return target;
+	}
+	catch (const std::out_of_range& oor) {
+		LOGERR << "Out of Range error: " << oor.what() << " (player does not exists)\n";
+	}
+	return nullptr;
+}
 ostream& operator<<(ostream& o, const Character& c)
 {
-	o << "\tDisplaying: " << c._name << endl;
-	o << "\tPosition: " << c._hisCell->getPosX() << "," << c._hisCell->getPosY() << endl;
+	o << "Displaying: " << c._name << endl;
+	o << "|-- Position: " << c._hisCell->getPosX() << "," << c._hisCell->getPosY() << endl;
 	//o << "Stats: " << endl;
-	o << "\tHP: " << c._hitPoints << "/" << c.hpMax << endl;
-	o << "\tMP: " << c._movementPoints << endl;
-	o << "\tCP: " << c._capacityPoints << endl;
-	o << "\tDoT: " << c._damageOverTime << endl;
+	o << "|-- HP: " << c._hitPoints << "/" << c.hpMax << endl;
+	o << "|-- MP: " << c._movementPoints << endl;
+	o << "|-- CP: " << c._capacityPoints << endl;
+	o << "|-- DoT: " << c._damageOverTime << endl;
 
 	return o;
 }

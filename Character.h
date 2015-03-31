@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <vector>
+#include "SpellTarget.h"
 #include "GameObject.h"
 #include "Game.h"
 
@@ -8,7 +10,7 @@ using namespace std;
 class Cell;
 
 /* abstract class */
-class Character : public GameObject
+class Character : public GameObject, public SpellTarget
 {
 protected:
 	string _name;
@@ -65,5 +67,12 @@ public:
 	virtual void initialize() {}*/
 
 	friend ostream& operator<<(ostream& , const Character& );
+
+	virtual int getDistance(const SpellTarget& st) const;
+	virtual void displayBasic(ostream& o) const;
+
+
+	/* should return the selected target (by the user) (only in text mode) */
+	static SpellTarget* targetSelector() ;
 };
 

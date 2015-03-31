@@ -91,6 +91,8 @@
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
+    <ClCompile Include="Spell.cpp" />
+    <ClCompile Include="SpellTarget.cpp" />
     <ClCompile Include="Timeout.cpp" />
     <ClCompile Include="TimeService.cpp" />
     <ClCompile Include="UserInterface.cpp" />
@@ -112,6 +114,8 @@
     <ClInclude Include="LogService.h" />
     <ClInclude Include="Mage.h" />
     <ClInclude Include="ServiceLocator.h" />
+    <ClInclude Include="Spell.h" />
+    <ClInclude Include="SpellTarget.h" />
     <ClInclude Include="Timeout.h" />
     <ClInclude Include="TimeService.h" />
     <ClInclude Include="UserInterface.h" />
