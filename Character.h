@@ -4,6 +4,7 @@
 #include "SpellTarget.h"
 #include "GameObject.h"
 #include "Game.h"
+#include "Spell.h"
 
 using namespace std;
 
@@ -12,6 +13,9 @@ class Cell;
 /* abstract class */
 class Character : public GameObject, public SpellTarget
 {
+private:
+	static const int NB_SPELLS = 6; /* four spells + move + basic attack */
+
 protected:
 	string _name;
 	int _hitPoints;
@@ -23,6 +27,7 @@ protected:
 	int hpMax;
 	Cell* _hisCell = nullptr;
 
+	vector<Spell*> _spells;
 public:
 	Character(int x = 0, int y = 0, string name = "NoName");
 	virtual ~Character();

@@ -6,6 +6,8 @@ Archer::Archer(int x, int y, string name) : Character(x, y, name)
 	mpMax = MP_MAX;
 	cpMax = CP_MAX;
 	hpMax = _hitPoints = HP_MAX;
+
+	_spells[0] =  new Spell("Arrow Volley", this, 4, 120, 0, 10, 0, 8);
 }
 
 
@@ -30,7 +32,8 @@ void Archer::cast(int spellID, void* data)
 		stepBackArrow(*(Character*)data);
 		break;
 	case Archer::VOLLEY:
-		arrowVolley(*(Character*)data);
+		//arrowVolley(*(Character*)data);
+		_spells[0]->cast((Character*)data);
 		break;
 	default:
 		break;

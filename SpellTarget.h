@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
-#include "Cell.h"
 
 using namespace std;
+class Cell;
 
 /*  *interface* that (for example) Character and Cell should implement as they are targetable with spell*/
 class SpellTarget

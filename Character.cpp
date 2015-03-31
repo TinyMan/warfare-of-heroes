@@ -3,9 +3,8 @@
 #include "Grid.h"
 
 
-Character::Character(int x, int y, string name)
+Character::Character(int x, int y, string name) : _name(name), _spells(NB_SPELLS)
 {
-	_name = name;
 	Grid* grid = Game::getInstance()->getGrid();
 	grid->setObject(this, x, y);
 	_hisCell = grid->getCellAt(x, y);
