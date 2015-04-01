@@ -13,7 +13,7 @@ MoveEffect::~MoveEffect()
 
 bool MoveEffect::apply(SpellTarget* st)
 {
-	if (st)
+	if (st && _cell)
 	{		
 		return st->move(*_cell, false);
 	}
