@@ -96,6 +96,7 @@
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OverTimeEffect.cpp" />
+    <ClCompile Include="RootEffect.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="SpellTarget.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="LogService.h" />
     <ClInclude Include="Mage.h" />
     <ClInclude Include="OverTimeEffect.h" />
+    <ClInclude Include="RootEffect.h" />
     <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="SpellTarget.h" />

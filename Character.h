@@ -42,6 +42,7 @@ public:
 	void removeCapaciyPoint(int amount = 1);
 	void addBonusDamage(int amount = 0);
 	void addEffect(OverTimeEffect* e);
+	void root();
 
 	// Getters :
 	string getName() const { return _name; }

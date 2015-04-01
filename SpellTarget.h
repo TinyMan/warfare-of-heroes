@@ -19,10 +19,14 @@ public:
 	virtual Cell* getCell() const = 0;
 	virtual int getDistance(const SpellTarget& st) const = 0;
 
+	/* setters */
 	virtual void lowerHitPoint(int amount) = 0;
-	
+	virtual void removeMovementPoint(int amount) = 0;
+	virtual void removeCapaciyPoint(int amount) = 0;
 	virtual void addEffect(OverTimeEffect*) = 0;
 	virtual void addBonusDamage(int amount) = 0;
+	virtual void root() = 0;
+
 	
 };
 

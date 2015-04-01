@@ -46,7 +46,10 @@ void Character::addEffect(OverTimeEffect* e)
 	_effects.push_back(e);
 	LOGINFO << "Adding over time effect " << *e << " to a spell target" << endl;
 }
-
+void Character::root()
+{
+	_movementPoints = 0;
+}
 int Character::getHP() const
 {
 	return(_hitPoints);
