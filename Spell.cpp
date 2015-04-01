@@ -38,8 +38,6 @@ bool Spell::canCastOn(SpellTarget* target)
 {
 	if (_caster)
 	{
-		LOGWARN << "Target " << *(Character*)target << endl;
-		//target->displayBasic(LOGWARN);
 		int distance = _caster->getDistance(*target);
 		if (distance <= _max_scope && distance >= _min_scope)
 		{

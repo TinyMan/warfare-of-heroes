@@ -1,6 +1,7 @@
 #include "Knight.h"
 #include "Spell.h"
 #include "HealEffect.h"
+#include "DashEffect.h"
 
 
 Knight::Knight(int x , int y , string name) : Character(x, y, name)
@@ -9,6 +10,9 @@ Knight::Knight(int x , int y , string name) : Character(x, y, name)
 	mpMax = MP_MAX;
 	cpMax = CP_MAX;
 	hpMax = _hitPoints = HP_MAX;
+
+	_spells[DASH] = new Spell("Dash", this, 4, 3, 0, 2, false);
+	_spells[DASH]->addEffect(new DashEffect(this));
 
 	_spells[HEAL] = new Spell("Heal", this, 4, 2, 0, 0, false);
 	_spells[HEAL]->addEffect(new HealEffect(50, this));
@@ -147,7 +151,23 @@ void Knight::swordOfDestiny(Character & c)
 }
 void Knight::beginTurn()
 {
-	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, Knight::DASH), "Cast Dash"));
+	auto lambda = [this](int spellID, void*)
+	{
+		int x, y;
+		LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
+		cin >> x >> y;
+		try{
+			Cell* c = GAMEINST->getGrid()->getCellAt(x, y);
+			if (c == nullptr) throw std::out_of_range("cell does not exists");
+
+			getSpell(spellID)->cast(c);
+		}
+		catch (const std::out_of_range& oor) {
+			LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";
+		}
+	};
+		
+	UI->addAction(Action(Callback(lambda, Knight::DASH), "Cast Dash"));
 	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Knight::SWORD_FORWARD), "Cast Sword Forward"));
 	UI->addAction(Action(Callback(&Knight::newCast, this, Knight::HEAL), "Cast Heal"));
 	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Knight::SWORD_DESTINY), "Cast Sword Of Destiny"));

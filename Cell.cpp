@@ -44,10 +44,9 @@ int Cell::getDistance(const Cell & c) const
 	return distance;
 }
 
-int Cell::getDistance(const Character & c) const
+int Cell::getDistance(const SpellTarget & c) const
 {
-	Cell hisCell = *c.getCell();
-	return (getDistance(hisCell));
+	return (getDistance(*c.getCell()));
 }
 
 bool Cell::isInView(const Cell & c) const
@@ -56,7 +55,7 @@ bool Cell::isInView(const Cell & c) const
 	return true;
 }
 
-bool Cell::isInView(const Character & c) const
+bool Cell::isInView(const SpellTarget & c) const
 {
 	Cell hisCell = *c.getCell();
 	return (isInView(hisCell));

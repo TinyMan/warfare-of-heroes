@@ -172,7 +172,7 @@ void Character::targetSelectorForCharacter(int spellIID, void* d)
 
 int Character::getDistance(const SpellTarget& st) const
 {
-	Cell *c = st.getCell();
+	const Cell *c = st.getCell();
 	return Grid::getCellDistance(*_hisCell, *c);
 }
 void Character::displayBasic(ostream& o) const

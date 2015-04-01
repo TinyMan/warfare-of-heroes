@@ -82,6 +82,7 @@
     <ClCompile Include="DamageBuffEffect.cpp" />
     <ClCompile Include="DamageEffect.cpp" />
     <ClCompile Include="DamageOverTime.cpp" />
+    <ClCompile Include="DashEffect.cpp" />
     <ClCompile Include="DeadObject.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Event.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="DamageBuffEffect.h" />
     <ClInclude Include="DamageEffect.h" />
     <ClInclude Include="DamageOverTime.h" />
+    <ClInclude Include="DashEffect.h" />
     <ClInclude Include="DeadObject.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Event.h" />

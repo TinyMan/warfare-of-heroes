@@ -49,8 +49,9 @@ public:
 	int getHP() const;
 	int getMP() const;
 	int getCP() const;
-	Cell* getCell() const { return _hisCell; }
+	const Cell* getCell() const{ return _hisCell; }
 	int getBonusDamage() const { return _bonusDamage; }
+	Spell* getSpell(int spellID) const { return _spells.at(spellID); }
 
 	/* every children have to implement those methods */
 	// Attacks :
