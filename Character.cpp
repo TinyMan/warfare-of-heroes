@@ -37,28 +37,19 @@ void Character::removeCapaciyPoint(int amount)
 	if (_capacityPoints < 0)
 		_capacityPoints = 0;
 }
-
-void Character::setDot(const DamageOverTime& dot)
+void Character::addBonusDamage(int amount)
 {
-	_damageOverTime.emplace_back(dot);
-	LOGINFO << this->getName() << " : take DoT = " << dot << endl;
+	_bonusDamage += amount;
 }
-void Character::setBonusDamage(const BonusDamage& bonus)
+void Character::addEffect(OverTimeEffect* e)
 {
-	_bonusDamage.emplace_back(bonus);
-	LOGINFO << this->getName() << " : add Bonus Damage = " << bonus << endl;
+	_effects.push_back(e);
+	LOGINFO << "Adding over time effect " << *e << " to a spell target" << endl;
 }
-
-int Character::getBonusDamage() const
+void Character::root()
 {
-	int s = 0;
-	for (auto & b : _bonusDamage)
-	{
-		s += b.getBonus();
-	}
-	return s;
+	_movementPoints = 0;
 }
-
 int Character::getHP() const
 {
 	return(_hitPoints);
@@ -113,19 +104,17 @@ void Character::beginTurn()
 	/* casting a spell isn't handled by character but by each class (archer, knight, ..) */
 	//UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_CAST), "Cast a spell"));
 
-
-
-
-	for (auto & dot : _damageOverTime)
-	{
-		dot.beginTurn();
-	}
-	for (auto & bonus : _bonusDamage)
-	{
-		bonus.beginTurn();
-	}
+	
+	/* reset the stats to normal */
 	_capacityPoints = cpMax;
 	_movementPoints = mpMax;
+	_bonusDamage = 0;
+
+	/* apply all the effects */
+	for (OverTimeEffect* e : _effects)
+	{
+		e->beginTurn();
+	}
 }
 
 void Character::actionCallback(int actionID, void* d)
@@ -143,6 +132,12 @@ void Character::actionCallback(int actionID, void* d)
 		cast(actionID, d);
 		break;
 	}
+}
+void Character::newCast(int spellID, void* target)
+{
+	if (target == nullptr)
+		target = this;
+	_spells[spellID]->cast((Character*)target);
 }
 
 void Character::targetSelectorForCell(int spellID, void* d)
@@ -177,14 +172,15 @@ void Character::targetSelectorForCharacter(int spellIID, void* d)
 
 int Character::getDistance(const SpellTarget& st) const
 {
-	return Grid::getCellDistance(*_hisCell, *st.getCell());
+	Cell *c = st.getCell();
+	return Grid::getCellDistance(*_hisCell, *c);
 }
 void Character::displayBasic(ostream& o) const
 {
 	o << _name;
 }
 
-SpellTarget* Character::targetSelector()
+void Character::targetSelector(int spellID, void* target)
 {
 	LOGINFO << "Select your target: " << endl;
 	GAMEINST->displayPlayersList(LOGINFO);
@@ -192,12 +188,11 @@ SpellTarget* Character::targetSelector()
 	cin >> c;
 	try{
 		Character *target = GAMEINST->getPlayer(c);
-		return target;
+		newCast(spellID, target);
 	}
 	catch (const std::out_of_range& oor) {
 		LOGERR << "Out of Range error: " << oor.what() << " (player does not exists)\n";
 	}
-	return nullptr;
 }
 ostream& operator<<(ostream& o, const Character& c)
 {

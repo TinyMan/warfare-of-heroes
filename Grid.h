@@ -10,6 +10,14 @@ using namespace std;
 class Grid : public DeadObject
 {
 public:
+	enum DIRECTION
+	{
+		TOP,
+		BOTTOM,
+		RIGHT,
+		LEFT,
+		UNKNOWN
+	};
 	Grid();
 	virtual ~Grid();
 
@@ -27,6 +35,8 @@ public:
 	int getCellDistance(int i, int j, int x, int y);
 	// TODO: return the cell distance between cells
 	static int getCellDistance(const Cell&, const Cell&);
+	Cell* getCellFromCellAndDir(const Cell&, DIRECTION d, int pathLength);
+	DIRECTION getDir(const Cell& c1, const Cell& c2);
 
 	static const int WIDTH = 14;
 	static const int HEIGHT = 30;

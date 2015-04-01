@@ -62,6 +62,10 @@ bool Cell::isInView(const Character & c) const
 	return (isInView(hisCell));
 }
 
+bool Cell::isInLine(const Cell& c) const
+{
+	return c._posX == _posX || c._posY == _posY;
+}
 
 ostream& operator<<(ostream& o, const Cell& c)
 {

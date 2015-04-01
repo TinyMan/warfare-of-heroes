@@ -5,7 +5,7 @@
 #include "GameObject.h"
 #include "Game.h"
 #include "DamageOverTime.h"
-#include "BonusDamage.h"
+//#include "BonusDamage.h"
 
 using namespace std;
 
@@ -24,8 +24,8 @@ protected:
 	int _hitPoints;
 	int _movementPoints;
 	int _capacityPoints;
-	list<BonusDamage> _bonusDamage;
-	list<DamageOverTime> _damageOverTime;
+	int _bonusDamage;
+	list<OverTimeEffect*> _effects;
 	int mpMax;
 	int cpMax;
 	int hpMax;
@@ -40,8 +40,9 @@ public:
 	void lowerHitPoint(int amount=0);
 	void removeMovementPoint(int amount=1);
 	void removeCapaciyPoint(int amount = 1);
-	void setDot(const DamageOverTime& dot);
-	void setBonusDamage(const BonusDamage& bonus);
+	void addBonusDamage(int amount = 0);
+	void addEffect(OverTimeEffect* e);
+	void root();
 
 	// Getters :
 	string getName() const { return _name; }
@@ -49,7 +50,7 @@ public:
 	int getMP() const;
 	int getCP() const;
 	Cell* getCell() const { return _hisCell; }
-	int getBonusDamage() const;
+	int getBonusDamage() const { return _bonusDamage; }
 
 	/* every children have to implement those methods */
 	// Attacks :
@@ -68,6 +69,7 @@ public:
 	void actionCallback(int actionID, void*);
 	void targetSelectorForCharacter(int spellIID, void* d = nullptr);
 	void targetSelectorForCell(int , void* d = nullptr);
+	void newCast(int spellID, void* target=nullptr);
 
 	static const int BASIC_ATTACK = -1;
 	static const int ACTION_MOVE = -2;
@@ -84,6 +86,6 @@ public:
 
 
 	/* should return the selected target (by the user) (only in text mode) */
-	static SpellTarget* targetSelector();
+	void targetSelector(int spellID = 0, void* target = nullptr);
 };
 

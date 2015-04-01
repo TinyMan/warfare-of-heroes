@@ -20,6 +20,7 @@ public:
 	int getDistance(const Character & c) const;
 	bool isInView(const Cell & c) const;
 	bool isInView(const Character & c) const;
+	bool isInLine(const Cell& c) const;
 
 	GameObject* getObject() const { return _object; }
 	void setObject(GameObject* obj)

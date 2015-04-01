@@ -7,7 +7,6 @@ protected:
 	const static int MP_MAX = 3;
 	const static int CP_MAX = 10;
 	const static int HP_MAX = 680;
-	int _bonusDamage = 0;
 
 	
 public:

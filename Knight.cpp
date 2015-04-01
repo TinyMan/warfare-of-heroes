@@ -1,4 +1,6 @@
 #include "Knight.h"
+#include "Spell.h"
+#include "HealEffect.h"
 
 
 Knight::Knight(int x , int y , string name) : Character(x, y, name)
@@ -7,6 +9,9 @@ Knight::Knight(int x , int y , string name) : Character(x, y, name)
 	mpMax = MP_MAX;
 	cpMax = CP_MAX;
 	hpMax = _hitPoints = HP_MAX;
+
+	_spells[HEAL] = new Spell("Heal", this, 4, 2, 0, 0, false);
+	_spells[HEAL]->addEffect(new HealEffect(50, this));
 }
 
 
@@ -144,7 +149,7 @@ void Knight::beginTurn()
 {
 	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, Knight::DASH), "Cast Dash"));
 	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Knight::SWORD_FORWARD), "Cast Sword Forward"));
-	UI->addAction(Action(Callback(&Knight::cast, this, Knight::HEAL), "Cast Heal"));
+	UI->addAction(Action(Callback(&Knight::newCast, this, Knight::HEAL), "Cast Heal"));
 	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Knight::SWORD_DESTINY), "Cast Sword Of Destiny"));
 	Character::beginTurn();
 }

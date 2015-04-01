@@ -1,4 +1,6 @@
 #include "Mage.h"
+#include "Spell.h"
+#include "RootEffect.h"
 
 Mage::Mage(int x, int y, string name) : Character(x, y, name)
 {
@@ -6,6 +8,9 @@ Mage::Mage(int x, int y, string name) : Character(x, y, name)
 	mpMax = MP_MAX;
 	cpMax = CP_MAX;
 	hpMax = _hitPoints = HP_MAX;
+
+	_spells[ROOT] = new Spell("Damage Buff", this, 4, 4, 0, 7, false);
+	_spells[ROOT]->addEffect(new RootEffect(3, this));
 }
 
 
@@ -123,7 +128,7 @@ void Mage::fireBallOfTheDoom(Character & c)
 void Mage::beginTurn()
 {
 	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Mage::FIREBALL), "Cast Fireball Of The Doom"));
-	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Mage::ROOT), "Cast Root"));
+	UI->addAction(Action(Callback(&Character::targetSelector, this, Mage::ROOT), "Cast Root"));
 	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, Mage::ERUPTION), "Cast Eruption"));
 	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, Mage::THUNDER), "Cast Thunder Storm"));
 	Character::beginTurn();
