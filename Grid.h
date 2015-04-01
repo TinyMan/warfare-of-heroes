@@ -10,6 +10,13 @@ using namespace std;
 class Grid : public DeadObject
 {
 public:
+	enum DIRECTION
+	{
+		TOP,
+		BOTTOM,
+		RIGHT,
+		LEFT
+	};
 	Grid();
 	virtual ~Grid();
 

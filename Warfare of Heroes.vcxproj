@@ -95,6 +95,7 @@
     <ClCompile Include="LogService.cpp" />
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MoveEffect.cpp" />
     <ClCompile Include="OverTimeEffect.cpp" />
     <ClCompile Include="RootEffect.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="Knight.h" />
     <ClInclude Include="LogService.h" />
     <ClInclude Include="Mage.h" />
+    <ClInclude Include="MoveEffect.h" />
     <ClInclude Include="OverTimeEffect.h" />
     <ClInclude Include="RootEffect.h" />
     <ClInclude Include="ServiceLocator.h" />

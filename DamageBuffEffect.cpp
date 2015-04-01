@@ -14,10 +14,14 @@ DamageBuffEffect::~DamageBuffEffect()
 
 bool DamageBuffEffect::beginTurn()
 {
-	if (OverTimeEffect::_target)
+	if (OverTimeEffect::newTurn())
 	{
-		OverTimeEffect::_target->addBonusDamage(_amount);
-		return true;
+		if (_target)
+		{
+			_target->addBonusDamage(_amount);
+			return true;
+		}
+			
 	}
 	return false;
 }

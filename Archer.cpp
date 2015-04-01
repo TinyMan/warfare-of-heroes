@@ -3,6 +3,7 @@
 #include "DamageEffect.h"
 #include "DamageOverTime.h"
 #include "DamageBuffEffect.h"
+#include "MoveEffect.h"
 
 Archer::Archer(int x, int y, string name) : Character(x, y, name)
 {
@@ -14,7 +15,8 @@ Archer::Archer(int x, int y, string name) : Character(x, y, name)
 	_spells[VOLLEY] = new Spell("Arrow Volley", this, 4, 10, 0, 8, false);
 	_spells[VOLLEY]->addEffect(new DamageEffect(120, this));
 
-	//_spells[SB_ARROW] = new Spell("Arrow Volley", this, 4, 120, 0, 10, 0, 8);
+	_spells[SB_ARROW] = new Spell("Step-Back Arrow", this, 4, 6, 0, 3, false);
+	_spells[SB_ARROW]->addEffect(new MoveEffect(GAMEINST->getGrid()->getCellAt(5, 5), this));
 
 	_spells[FLAMED_ARROW] = new Spell("Flamed Arrow", this, 4, 5, 0, 6, false);
 	_spells[FLAMED_ARROW]->addEffect(new DamageEffect(80, this));
@@ -166,7 +168,7 @@ void Archer::beginTurn()
 {
 	
 	UI->addAction(Action(Callback(&Character::targetSelector, this, Archer::VOLLEY), "Cast Arrow Volley"));
-	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Archer::SB_ARROW), "Cast Step Back Arrow"));
+	UI->addAction(Action(Callback(&Character::targetSelector, this, Archer::SB_ARROW), "Cast Step Back Arrow"));
 	UI->addAction(Action(Callback(&Character::targetSelector, this, Archer::FLAMED_ARROW), "Cast Flamed Arrow"));
 	UI->addAction(Action(Callback(&Character::newCast, this, Archer::DMG_BUFF), "Cast Damage Buff"));
 	Character::beginTurn();
