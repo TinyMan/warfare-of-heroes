@@ -15,7 +15,7 @@ Archer::Archer(int x, int y, string name) : Character(x, y, name)
 	_spells[VOLLEY] = new Spell("Arrow Volley", this, 4, 10, 0, 8, false);
 	_spells[VOLLEY]->addEffect(new DamageEffect(120, this));
 
-	_spells[SB_ARROW] = new Spell("Step-Back Arrow", this, 4, 6, 0, 3, false);
+	_spells[SB_ARROW] = new Spell("Step-Back Arrow", this, 4, 6, 0, 3, true);
 	_spells[SB_ARROW]->addEffect(new KnockBackEffect(2, this));
 	_spells[SB_ARROW]->addEffect(new DamageEffect(70, this));
 

@@ -2,6 +2,7 @@
 #include "Spell.h"
 #include "HealEffect.h"
 #include "DashEffect.h"
+#include "DamageEffect.h"
 
 
 Knight::Knight(int x , int y , string name) : Character(x, y, name)
@@ -16,6 +17,9 @@ Knight::Knight(int x , int y , string name) : Character(x, y, name)
 
 	_spells[HEAL] = new Spell("Heal", this, 4, 2, 0, 0, false);
 	_spells[HEAL]->addEffect(new HealEffect(50, this));
+
+	_spells[SWORD_DESTINY] = new Spell("Sword of Destiny", this, 4, 10, 0, 1, false);
+	_spells[SWORD_DESTINY]->addEffect(new DamageEffect(250, this));
 }
 
 
@@ -170,6 +174,6 @@ void Knight::beginTurn()
 	UI->addAction(Action(Callback(lambda, Knight::DASH), "Cast Dash"));
 	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Knight::SWORD_FORWARD), "Cast Sword Forward"));
 	UI->addAction(Action(Callback(&Knight::newCast, this, Knight::HEAL), "Cast Heal"));
-	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Knight::SWORD_DESTINY), "Cast Sword Of Destiny"));
+	UI->addAction(Action(Callback(&Character::targetSelector, this, Knight::SWORD_DESTINY), "Cast Sword Of Destiny"));
 	Character::beginTurn();
 }

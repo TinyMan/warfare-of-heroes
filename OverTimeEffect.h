@@ -13,6 +13,9 @@ public:
 	virtual bool beginTurn() = 0;
 
 	virtual bool apply(SpellTarget *target = nullptr);
+
+	virtual void setTarget(SpellTarget* t) { _target = t; }
+
 protected:
 	SpellTarget* _target;
 	int _duration;

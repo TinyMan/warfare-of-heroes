@@ -202,6 +202,7 @@ ostream& operator<<(ostream& o, const Character& c)
 	o << "|-- HP: " << c._hitPoints << "/" << c.hpMax << endl;
 	o << "|-- MP: " << c._movementPoints << endl;
 	o << "|-- CP: " << c._capacityPoints << endl;
+	o << "|-- DB: " << c._bonusDamage << endl;
 	//o << "|-- DoT: " << c._damageOverTime << endl;
 
 	return o;

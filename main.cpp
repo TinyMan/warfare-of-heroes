@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
 	grid->generateObstacle();
 
 	Archer* player1 = new Archer(5,5);
-	Knight* player3 = new Knight(4, 5);
+	Mage* player3 = new Mage(4, 5);
 	g->addGameObject(grid, player1, player3);
 	g->addPlayer(player1);
 	g->addPlayer(player3);

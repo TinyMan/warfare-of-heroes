@@ -19,7 +19,10 @@ bool OverTimeEffect::newTurn()
 
 bool OverTimeEffect::apply(SpellTarget *target)
 {
-	target->addEffect(this);
-	_target = target;
+	if (!_target)
+	{		
+		_target = target;
+	}
+	_target->addEffect(this);
 	return true;
 }
