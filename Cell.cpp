@@ -17,6 +17,14 @@ void Cell::setType(_STATE t)
 {
 	_cellType = t;
 }
+void Cell::setObject(SpellTarget* obj)
+{
+	if (_cellType != Free)
+		throw "Cannot set object: Cell is not free";
+	_cellType = PlayerOnIt;
+	_object = obj;
+	/* TODO: CHANGE TYPE OF CELL */
+}
 
 int Cell::getDistance(const Cell & c) const
 // Returns the distance between the object and the cell given as parameter
@@ -66,6 +74,10 @@ bool Cell::isInLine(const Cell& c) const
 	return c._posX == _posX || c._posY == _posY;
 }
 
+void Cell::displayBasic(ostream& o) const
+{
+	o << *this;
+}
 ostream& operator<<(ostream& o, const Cell& c)
 {
 	o << "Cell " << c._posX << "," << c._posY << ": ";

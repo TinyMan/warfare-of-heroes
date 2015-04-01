@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Cell.h"
 #include "GameObject.h"
+#include "SpellTarget.h"
 
 using namespace std;
 
@@ -27,7 +28,7 @@ public:
 	virtual void initialize() {}*/
 
 	void display(ostream& o=cout) const;
-	void setObject(GameObject* go, int i, int j);
+	void setObject(SpellTarget* go, int i, int j);
 
 	Cell* getCellAt(int i, int j);
 

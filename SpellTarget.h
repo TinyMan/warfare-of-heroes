@@ -15,20 +15,20 @@ public:
 	SpellTarget();
 	virtual ~SpellTarget();
 
-	virtual void displayBasic(ostream& o) const {};
+	/* getters */
+	virtual void displayBasic(ostream& o) const =0;
 	virtual const Cell* getCell() const = 0;
 	virtual int getDistance(const SpellTarget& st) const = 0;
 
 	/* setters */
-	// TO DO soon it will be pure virtual (need to implement these in cell)
-	virtual void lowerHitPoint(int amount) {};
-	virtual void removeMovementPoint(int amount) {};
-	virtual void removeCapaciyPoint(int amount) {};
-	virtual void addEffect(OverTimeEffect*) {};
-	virtual void addBonusDamage(int amount) {};
-	virtual void root() {};
-	virtual bool move(int i, int j, bool moveWanted) { return false; };
-	virtual bool move(Cell & newCell, bool moveWanted) { return false; };
+	virtual void lowerHitPoint(int amount) = 0;
+	virtual void removeMovementPoint(int amount) =0;
+	virtual void removeCapaciyPoint(int amount) =0;
+	virtual void addEffect(OverTimeEffect*) =0;
+	virtual void addBonusDamage(int amount) =0;
+	virtual void root() =0;
+	virtual bool move(int i, int j, bool moveWanted) =0;
+	virtual bool move(Cell & newCell, bool moveWanted) = 0;
 
 	
 };

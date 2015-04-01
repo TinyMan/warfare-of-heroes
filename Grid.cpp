@@ -38,7 +38,7 @@ void Grid::display(ostream& o) const
 	}
 }
 
-void Grid::setObject(GameObject* go, int i, int j)
+void Grid::setObject(SpellTarget* go, int i, int j)
 {
 	if (i < Grid::WIDTH && j < Grid::HEIGHT)
 	{

@@ -14,27 +14,32 @@ public:
 	Cell(int x=0, int y=0);
 	~Cell();
 
-	void setType(_STATE t);
+	/* getters */
 	_STATE getType() const { return _cellType; }
 	int getPosX() const { return _posX; }
 	int getPosY() const { return _posY;	}
 	int getDistance(const Cell & c) const;
 	int getDistance(const SpellTarget& st) const;
 	const Cell* getCell() const { return this; }
+	SpellTarget* getObject() const { return _object; }
+	void displayBasic(ostream& o) const;
 
 	bool isInView(const Cell & c) const;
 	bool isInView(const SpellTarget & c) const;
 	bool isInLine(const Cell& c) const;
 
-	GameObject* getObject() const { return _object; }
-	void setObject(GameObject* obj)
-	{ 
-		_object = obj; 
-		if (_cellType != Free) 
-			throw "Cannot set object: Cell is not free";
-		_cellType = PlayerOnIt;
-		/* TODO: CHANGE TYPE OF CELL */ 
-	}
+	/* setters */
+	void setObject(SpellTarget* obj);
+	void setType(_STATE t);
+	void lowerHitPoint(int amount) { _object->lowerHitPoint(amount); }
+	void removeMovementPoint(int amount) { _object->removeMovementPoint(amount); }
+	void removeCapaciyPoint(int amount) { _object->removeCapaciyPoint(amount); }
+	void addEffect(OverTimeEffect* d) { _object->addEffect(d); }
+	void addBonusDamage(int amount) { _object->addBonusDamage(amount); }
+	void root() { _object->root(); }
+	bool move(int i, int j, bool moveWanted) { return _object->move(i, j, moveWanted); }
+	bool move(Cell & newCell, bool moveWanted) { return _object->move(newCell, moveWanted); }
+
 
 	friend ostream& operator<<(ostream&, const Cell&);
 private:
@@ -42,6 +47,6 @@ private:
 	int _posX;
 	int _posY;
 
-	GameObject* _object = nullptr;
+	SpellTarget* _object = nullptr;
 };
 
