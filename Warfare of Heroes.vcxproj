@@ -76,10 +76,10 @@
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="Archer.cpp" />
-    <ClCompile Include="BonusDamage.cpp" />
     <ClCompile Include="Callback.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="DamageBuffEffect.cpp" />
     <ClCompile Include="DamageEffect.cpp" />
     <ClCompile Include="DamageOverTime.cpp" />
     <ClCompile Include="DeadObject.cpp" />
@@ -105,10 +105,10 @@
   <ItemGroup>
     <ClInclude Include="Action.h" />
     <ClInclude Include="Archer.h" />
-    <ClInclude Include="BonusDamage.h" />
     <ClInclude Include="Callback.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="DamageBuffEffect.h" />
     <ClInclude Include="DamageEffect.h" />
     <ClInclude Include="DamageOverTime.h" />
     <ClInclude Include="DeadObject.h" />

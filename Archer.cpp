@@ -2,6 +2,7 @@
 #include "Spell.h"
 #include "DamageEffect.h"
 #include "DamageOverTime.h"
+#include "DamageBuffEffect.h"
 
 Archer::Archer(int x, int y, string name) : Character(x, y, name)
 {
@@ -11,12 +12,16 @@ Archer::Archer(int x, int y, string name) : Character(x, y, name)
 	hpMax = _hitPoints = HP_MAX;
 
 	_spells[VOLLEY] = new Spell("Arrow Volley", this, 4, 10, 0, 8, false);
-	_spells[VOLLEY]->addEffect(new DamageEffect(120));
+	_spells[VOLLEY]->addEffect(new DamageEffect(120, this));
+
 	//_spells[SB_ARROW] = new Spell("Arrow Volley", this, 4, 120, 0, 10, 0, 8);
+
 	_spells[FLAMED_ARROW] = new Spell("Flamed Arrow", this, 4, 5, 0, 6, false);
-	_spells[FLAMED_ARROW]->addEffect(new DamageEffect(80));
-	_spells[FLAMED_ARROW]->addEffect(new DamageOverTime(20,3, "Flamed Arrow DoT"));
-//	_spells[DMG_BUFF] = new Spell("Damage Buff", this, 4, 0, 0, 4, 0, 0, false, nullptr, new BonusDamage(20, 3, "Archer Damage buff", this));
+	_spells[FLAMED_ARROW]->addEffect(new DamageEffect(80, this));
+	_spells[FLAMED_ARROW]->addEffect(new DamageOverTime(20, 3, "Flamed Arrow DoT", this));
+
+	_spells[DMG_BUFF] = new Spell("Damage Buff", this, 4, 4, 0, 0, false);
+	_spells[DMG_BUFF]->addEffect(new DamageBuffEffect(20, 3, this));
 }
 
 

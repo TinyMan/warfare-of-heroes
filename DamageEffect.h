@@ -4,7 +4,7 @@ class DamageEffect :
 	public Effect
 {
 public:
-	DamageEffect(int dmg, SpellTarget* target=nullptr);
+	DamageEffect(int dmg, Character* caster=nullptr);
 	virtual ~DamageEffect();
 
 	virtual bool apply(SpellTarget* target);

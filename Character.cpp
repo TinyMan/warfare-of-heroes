@@ -37,7 +37,10 @@ void Character::removeCapaciyPoint(int amount)
 	if (_capacityPoints < 0)
 		_capacityPoints = 0;
 }
-
+void Character::addBonusDamage(int amount)
+{
+	_bonusDamage += amount;
+}
 void Character::addEffect(OverTimeEffect* e)
 {
 	_effects.push_back(e);
@@ -98,12 +101,17 @@ void Character::beginTurn()
 	/* casting a spell isn't handled by character but by each class (archer, knight, ..) */
 	//UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_CAST), "Cast a spell"));
 
+	
+	/* reset the stats to normal */
+	_capacityPoints = cpMax;
+	_movementPoints = mpMax;
+	_bonusDamage = 0;
+
+	/* apply all the effects */
 	for (OverTimeEffect* e : _effects)
 	{
 		e->beginTurn();
 	}
-	_capacityPoints = cpMax;
-	_movementPoints = mpMax;
 }
 
 void Character::actionCallback(int actionID, void* d)

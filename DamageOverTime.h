@@ -9,7 +9,7 @@ class DamageOverTime
 	: public OverTimeEffect
 {
 public:
-	DamageOverTime(int dmg = 0, int duration = 0, string name = "Unknown DoT", SpellTarget * t = nullptr);
+	DamageOverTime(int dmg = 0, int duration = 0, string name = "Unknown DoT", Character * caster = nullptr);
 	virtual ~DamageOverTime();
 
 	virtual bool beginTurn();

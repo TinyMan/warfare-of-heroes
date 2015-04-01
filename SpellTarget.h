@@ -22,6 +22,7 @@ public:
 	virtual void lowerHitPoint(int amount) = 0;
 	
 	virtual void addEffect(OverTimeEffect*) = 0;
+	virtual void addBonusDamage(int amount) = 0;
 	
 };
 

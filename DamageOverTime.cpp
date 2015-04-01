@@ -2,7 +2,7 @@
 #include "SpellTarget.h"
 
 
-DamageOverTime::DamageOverTime(int dmg, int duration, string name, SpellTarget *t)
+DamageOverTime::DamageOverTime(int dmg, int duration, string name, Character *t)
 	: _damage(dmg), OverTimeEffect(duration, name, t)
 {
 }
@@ -14,7 +14,7 @@ DamageOverTime::~DamageOverTime()
 
 bool DamageOverTime::beginTurn()
 {
-	if (OverTimeEffect::beginTurn())
+	if (OverTimeEffect::newTurn())
 	{	
 		if (_target)
 		{

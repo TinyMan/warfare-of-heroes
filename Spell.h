@@ -5,7 +5,6 @@
 #include "Cell.h"
 #include "SpellTarget.h"
 #include "DamageOverTime.h"
-#include "BonusDamage.h"
 
 using namespace std;
 
