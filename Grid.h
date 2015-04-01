@@ -2,12 +2,12 @@
 #include <cstdlib>
 #include <iostream>
 #include "Cell.h"
-#include "DeadObject.h"
+#include "GameObject.h"
 
 using namespace std;
 
 
-class Grid : public DeadObject
+class Grid : public GameObject
 {
 public:
 	enum DIRECTION
