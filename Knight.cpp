@@ -177,3 +177,7 @@ void Knight::beginTurn()
 	UI->addAction(Action(Callback(&Character::targetSelector, this, Knight::SWORD_DESTINY), "Cast Sword Of Destiny"));
 	Character::beginTurn();
 }
+void Knight::endTurn()
+{
+	Character::endTurn();
+}

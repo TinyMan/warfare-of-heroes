@@ -161,9 +161,11 @@ void Game::beginTurn()
 	UI->addAction(Action(Callback(&Game::stop, this), "Quit"));
 	UI->addAction(Action(Callback(&Game::endTurn, this), "I'm done"));
 	_players.at(_player_turn)->beginTurn();
+	_grid->beginTurn();
 }
 void Game::endTurn(void* )
 {
+	_players.at(_player_turn)->endTurn();
 	_turn += _player_turn;
 	_player_turn = _player_turn == 0 ? 1 : 0;
 	UI->clear();

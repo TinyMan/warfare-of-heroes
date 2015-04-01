@@ -42,6 +42,8 @@ public:
 	static const int WIDTH = 14;
 	static const int HEIGHT = 30;
 
+	virtual void beginTurn();
+
 private:
 	Cell arrayOfCells[WIDTH][HEIGHT];
 };

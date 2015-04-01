@@ -19,6 +19,7 @@ public:
 	virtual void displayBasic(ostream& o) const =0;
 	virtual const Cell* getCell() const = 0;
 	virtual int getDistance(const SpellTarget& st) const = 0;
+	virtual bool hisTurn() const = 0;
 
 	/* setters */
 	virtual void lowerHitPoint(int amount) = 0;

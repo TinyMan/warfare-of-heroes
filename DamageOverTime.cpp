@@ -18,8 +18,11 @@ bool DamageOverTime::beginTurn()
 	{	
 		if (_target)
 		{
-			_target->lowerHitPoint(_damage);
-			return true;
+			if (_target->hisTurn())
+			{
+				_target->lowerHitPoint(_damage);
+				return true;
+			}
 		}
 	}
 	return false;

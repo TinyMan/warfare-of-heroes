@@ -25,7 +25,11 @@ void Cell::setObject(SpellTarget* obj)
 	_object = obj;
 	/* TODO: CHANGE TYPE OF CELL */
 }
-
+void Cell::addEffect(OverTimeEffect* e)
+{
+	_effects.push_back(e);
+	LOGINFO << "Adding over time effect " << *e << " to a spell target" << endl;
+}
 int Cell::getDistance(const Cell & c) const
 // Returns the distance between the object and the cell given as parameter
 {
@@ -74,6 +78,13 @@ bool Cell::isInLine(const Cell& c) const
 	return c._posX == _posX || c._posY == _posY;
 }
 
+void Cell::beginTurn()
+{
+	for (auto e : _effects)
+	{
+		e->beginTurn();
+	}
+}
 void Cell::displayBasic(ostream& o) const
 {
 	o << *this;

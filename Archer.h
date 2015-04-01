@@ -23,7 +23,7 @@ public:
 	virtual void cast(int spellID, void* data);
 	// begin turn
 	virtual void beginTurn();
-	virtual void endTurn(){};
+	virtual void endTurn();
 
 	// Spells :
 	virtual void damageBuff(); // Spell 1 : rises the damages the Archer does for a certain time.

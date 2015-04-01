@@ -115,3 +115,14 @@ Grid::DIRECTION Grid::getDir(const Cell& c1, const Cell& c2)
 		
 	return d;
 }
+
+void Grid::beginTurn()
+{
+	for (auto& l : arrayOfCells)
+	{
+		for (Cell& c : l)
+		{
+			c.beginTurn();
+		}
+	}
+}

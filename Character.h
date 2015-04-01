@@ -30,6 +30,7 @@ protected:
 	int cpMax;
 	int hpMax;
 	Cell* _hisCell = nullptr;
+	bool _myTurn = false;
 
 	vector<Spell*> _spells;
 public:
@@ -52,6 +53,7 @@ public:
 	const Cell* getCell() const{ return _hisCell; }
 	int getBonusDamage() const { return _bonusDamage; }
 	Spell* getSpell(int spellID) const { return _spells.at(spellID); }
+	bool hisTurn() const { return _myTurn; }
 
 	/* every children have to implement those methods */
 	// Attacks :
@@ -60,7 +62,7 @@ public:
 	virtual void cast(int spellID, void* data) = 0;
 	// begin turn
 	virtual void beginTurn();
-	virtual void endTurn(){};
+	virtual void endTurn();
 
 	// Movements : 
 	// Il faut créer une méthode de pathfinding qui permettra de se déplacer de plus d'une case à la fois.

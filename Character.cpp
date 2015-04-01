@@ -97,6 +97,7 @@ bool Character::move(int i, int j, bool moveWanted)
 
 void Character::beginTurn()
 {
+	_myTurn = true;
 	/* add actions to the 'menu' */
 	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, ACTION_MOVE), "Move"));
 		
@@ -115,6 +116,11 @@ void Character::beginTurn()
 	{
 		e->beginTurn();
 	}
+}
+void Character::endTurn()
+{
+	LOGINFO << "Ending turn " << endl;
+	_myTurn = false;
 }
 
 void Character::actionCallback(int actionID, void* d)
@@ -203,6 +209,7 @@ ostream& operator<<(ostream& o, const Character& c)
 	o << "|-- MP: " << c._movementPoints << endl;
 	o << "|-- CP: " << c._capacityPoints << endl;
 	o << "|-- DB: " << c._bonusDamage << endl;
+	o << "|-- HT: " << c._myTurn << endl;
 	//o << "|-- DoT: " << c._damageOverTime << endl;
 
 	return o;

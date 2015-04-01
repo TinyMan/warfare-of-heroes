@@ -141,3 +141,7 @@ void Mage::beginTurn()
 	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, Mage::THUNDER), "Cast Thunder Storm"));
 	Character::beginTurn();
 }
+void Mage::endTurn()
+{
+	Character::endTurn();
+}

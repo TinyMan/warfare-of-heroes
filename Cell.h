@@ -1,6 +1,8 @@
 #pragma once
+#include <list>
 #include "GameObject.h"
 #include "SpellTarget.h"
+#include "OverTimeEffect.h"
 
 class Character;
 
@@ -23,6 +25,8 @@ public:
 	const Cell* getCell() const { return this; }
 	SpellTarget* getObject() const { return _object; }
 	void displayBasic(ostream& o) const;
+	bool hisTurn() const { if (_object) return _object->hisTurn(); else return false; }
+
 
 	bool isInView(const Cell & c) const;
 	bool isInView(const SpellTarget & c) const;
@@ -31,15 +35,16 @@ public:
 	/* setters */
 	void setObject(SpellTarget* obj);
 	void setType(_STATE t);
-	void lowerHitPoint(int amount) { _object->lowerHitPoint(amount); }
-	void removeMovementPoint(int amount) { _object->removeMovementPoint(amount); }
-	void removeCapaciyPoint(int amount) { _object->removeCapaciyPoint(amount); }
-	void addEffect(OverTimeEffect* d) { _object->addEffect(d); }
-	void addBonusDamage(int amount) { _object->addBonusDamage(amount); }
-	void root() { _object->root(); }
-	bool move(int i, int j, bool moveWanted) { return _object->move(i, j, moveWanted); }
-	bool move(Cell & newCell, bool moveWanted) { return _object->move(newCell, moveWanted); }
-
+	void lowerHitPoint(int amount) { if(_object) _object->lowerHitPoint(amount); }
+	void removeMovementPoint(int amount) { if (_object)_object->removeMovementPoint(amount); }
+	void removeCapaciyPoint(int amount) { if (_object)_object->removeCapaciyPoint(amount); }
+	void addEffect(OverTimeEffect* d);
+	void addBonusDamage(int amount) { if (_object)_object->addBonusDamage(amount); }
+	void root() { if (_object) _object->root(); }
+	bool move(int i, int j, bool moveWanted) { if (_object)return _object->move(i, j, moveWanted); else return false; }
+	bool move(Cell & newCell, bool moveWanted) { if (_object) return _object->move(newCell, moveWanted); else return false; }
+	
+	virtual void beginTurn();
 
 	friend ostream& operator<<(ostream&, const Cell&);
 private:
@@ -48,5 +53,6 @@ private:
 	int _posY;
 
 	SpellTarget* _object = nullptr;
+	list<OverTimeEffect*> _effects;
 };
 

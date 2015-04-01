@@ -167,10 +167,29 @@ void Archer::arrowVolley(Character & c)
 
 void Archer::beginTurn()
 {
-	
+	auto lambda = [this](int spellID, void*)
+	{
+		int x, y;
+		LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
+		cin >> x >> y;
+		try{
+			Cell* c = GAMEINST->getGrid()->getCellAt(x, y);
+			if (c == nullptr) throw std::out_of_range("cell does not exists");
+
+			getSpell(spellID)->cast(c);
+		}
+		catch (const std::out_of_range& oor) {
+			LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";
+		}
+	};
+
 	UI->addAction(Action(Callback(&Character::targetSelector, this, Archer::VOLLEY), "Cast Arrow Volley"));
 	UI->addAction(Action(Callback(&Character::targetSelector, this, Archer::SB_ARROW), "Cast Step Back Arrow"));
 	UI->addAction(Action(Callback(&Character::targetSelector, this, Archer::FLAMED_ARROW), "Cast Flamed Arrow"));
 	UI->addAction(Action(Callback(&Character::newCast, this, Archer::DMG_BUFF), "Cast Damage Buff"));
 	Character::beginTurn();
+}
+void Archer::endTurn()
+{
+	Character::endTurn();
 }
