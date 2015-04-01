@@ -14,6 +14,7 @@ Spell::~Spell()
 
 bool Spell::cast(SpellTarget* target)
 {
+
 	if (canCastOn(target))
 	{
 		_cooldown = _max_cooldown;
@@ -37,12 +38,18 @@ bool Spell::canCastOn(SpellTarget* target)
 {
 	if (_caster)
 	{
+		LOGWARN << "Target " << *(Character*)target << endl;
+		//target->displayBasic(LOGWARN);
 		int distance = _caster->getDistance(*target);
 		if (distance <= _max_scope && distance >= _min_scope)
 		{
 			if (_caster->getCP() >= _cost)
 				return true;
+			else
+				LOGWARN << "Not enough CP" << endl;
 		}
+		else
+			LOGWARN << "Not in scope" << endl;
 	}
 	return false;
 }

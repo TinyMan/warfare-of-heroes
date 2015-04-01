@@ -68,6 +68,7 @@ public:
 	void actionCallback(int actionID, void*);
 	void targetSelectorForCharacter(int spellIID, void* d = nullptr);
 	void targetSelectorForCell(int , void* d = nullptr);
+	void newCast(int spellID, void* target=nullptr);
 
 	static const int BASIC_ATTACK = -1;
 	static const int ACTION_MOVE = -2;
@@ -84,6 +85,6 @@ public:
 
 
 	/* should return the selected target (by the user) (only in text mode) */
-	static SpellTarget* targetSelector();
+	void targetSelector(int spellID = 0, void* target = nullptr);
 };
 

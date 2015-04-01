@@ -130,6 +130,12 @@ void Character::actionCallback(int actionID, void* d)
 		break;
 	}
 }
+void Character::newCast(int spellID, void* target)
+{
+	if (target == nullptr)
+		target = this;
+	_spells[spellID]->cast((Character*)target);
+}
 
 void Character::targetSelectorForCell(int spellID, void* d)
 {
@@ -163,14 +169,15 @@ void Character::targetSelectorForCharacter(int spellIID, void* d)
 
 int Character::getDistance(const SpellTarget& st) const
 {
-	return Grid::getCellDistance(*_hisCell, *st.getCell());
+	Cell *c = st.getCell();
+	return Grid::getCellDistance(*_hisCell, *c);
 }
 void Character::displayBasic(ostream& o) const
 {
 	o << _name;
 }
 
-SpellTarget* Character::targetSelector()
+void Character::targetSelector(int spellID, void* target)
 {
 	LOGINFO << "Select your target: " << endl;
 	GAMEINST->displayPlayersList(LOGINFO);
@@ -178,12 +185,11 @@ SpellTarget* Character::targetSelector()
 	cin >> c;
 	try{
 		Character *target = GAMEINST->getPlayer(c);
-		return target;
+		newCast(spellID, target);
 	}
 	catch (const std::out_of_range& oor) {
 		LOGERR << "Out of Range error: " << oor.what() << " (player does not exists)\n";
 	}
-	return nullptr;
 }
 ostream& operator<<(ostream& o, const Character& c)
 {
