@@ -1,5 +1,6 @@
 #pragma once
 #include "DamageOverTime.h"
+/*
 class BonusDamage :
 	public DamageOverTime
 {
@@ -9,7 +10,7 @@ public:
 	virtual ~BonusDamage();
 
 	virtual int getBonus() const { if (_duration > 0) return _damage; return 0; }
-	virtual void beginTurn();
+	virtual bool beginTurn();
 
-};
+};*/
 

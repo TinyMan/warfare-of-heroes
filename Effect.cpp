@@ -10,3 +10,9 @@ Effect::Effect(string name, SpellTarget* st)
 Effect::~Effect()
 {
 }
+
+ostream& operator<<(ostream& o, const Effect& effect)
+{
+	o << effect._name;
+	return o;
+}

@@ -5,7 +5,7 @@
 #include "GameObject.h"
 #include "Game.h"
 #include "DamageOverTime.h"
-#include "BonusDamage.h"
+//#include "BonusDamage.h"
 
 using namespace std;
 
@@ -24,8 +24,8 @@ protected:
 	int _hitPoints;
 	int _movementPoints;
 	int _capacityPoints;
-	list<BonusDamage> _bonusDamage;
-	list<DamageOverTime> _damageOverTime;
+	int _bonusDamage;
+	list<OverTimeEffect*> _effects;
 	int mpMax;
 	int cpMax;
 	int hpMax;
@@ -40,8 +40,8 @@ public:
 	void lowerHitPoint(int amount=0);
 	void removeMovementPoint(int amount=1);
 	void removeCapaciyPoint(int amount = 1);
-	void setDot(const DamageOverTime& dot);
-	void setBonusDamage(const BonusDamage& bonus);
+	void addBonusDamage(int amount = 0);
+	void addEffect(OverTimeEffect* e);
 
 	// Getters :
 	string getName() const { return _name; }
@@ -49,7 +49,7 @@ public:
 	int getMP() const;
 	int getCP() const;
 	Cell* getCell() const { return _hisCell; }
-	int getBonusDamage() const;
+	int getBonusDamage() const { return _bonusDamage; }
 
 	/* every children have to implement those methods */
 	// Attacks :

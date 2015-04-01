@@ -38,25 +38,10 @@ void Character::removeCapaciyPoint(int amount)
 		_capacityPoints = 0;
 }
 
-void Character::setDot(const DamageOverTime& dot)
+void Character::addEffect(OverTimeEffect* e)
 {
-	_damageOverTime.emplace_back(dot);
-	LOGINFO << this->getName() << " : take DoT = " << dot << endl;
-}
-void Character::setBonusDamage(const BonusDamage& bonus)
-{
-	_bonusDamage.emplace_back(bonus);
-	LOGINFO << this->getName() << " : add Bonus Damage = " << bonus << endl;
-}
-
-int Character::getBonusDamage() const
-{
-	int s = 0;
-	for (auto & b : _bonusDamage)
-	{
-		s += b.getBonus();
-	}
-	return s;
+	_effects.push_back(e);
+	LOGINFO << "Adding over time effect " << *e << " to a spell target" << endl;
 }
 
 int Character::getHP() const
@@ -113,16 +98,9 @@ void Character::beginTurn()
 	/* casting a spell isn't handled by character but by each class (archer, knight, ..) */
 	//UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_CAST), "Cast a spell"));
 
-
-
-
-	for (auto & dot : _damageOverTime)
+	for (OverTimeEffect* e : _effects)
 	{
-		dot.beginTurn();
-	}
-	for (auto & bonus : _bonusDamage)
-	{
-		bonus.beginTurn();
+		e->beginTurn();
 	}
 	_capacityPoints = cpMax;
 	_movementPoints = mpMax;

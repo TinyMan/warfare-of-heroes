@@ -9,7 +9,7 @@ public:
 
 	virtual bool apply(SpellTarget* target);
 
-private:
+protected:
 	int _damage;
 };
 

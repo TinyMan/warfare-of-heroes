@@ -1,4 +1,5 @@
 #include "DamageEffect.h"
+#include "SpellTarget.h"
 
 
 DamageEffect::DamageEffect(int dmg, SpellTarget* st)

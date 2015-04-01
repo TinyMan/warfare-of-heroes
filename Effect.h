@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
-#include "SpellTarget.h"
+
 using namespace std;
+class SpellTarget;
 
 class Effect
 {
@@ -11,6 +12,7 @@ public:
 
 	virtual bool apply(SpellTarget* target) = 0;
 
+	friend ostream& operator<<(ostream& o, const Effect& e);
 protected:
 	SpellTarget* _target;
 	string _name;
