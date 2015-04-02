@@ -1,4 +1,9 @@
 #include "Archer.h"
+#include "Spell.h"
+#include "DamageEffect.h"
+#include "DamageOverTime.h"
+#include "DamageBuffEffect.h"
+#include "KnockBackEffect.h"
 
 Archer::Archer(int x, int y, string name) : Character(x, y, name)
 {
@@ -6,6 +11,20 @@ Archer::Archer(int x, int y, string name) : Character(x, y, name)
 	mpMax = MP_MAX;
 	cpMax = CP_MAX;
 	hpMax = _hitPoints = HP_MAX;
+
+	_spells[VOLLEY] = new Spell("Arrow Volley", this, 4, 10, 0, 8, false);
+	_spells[VOLLEY]->addEffect(new DamageEffect(120, this));
+
+	_spells[SB_ARROW] = new Spell("Step-Back Arrow", this, 4, 6, 0, 3, true);
+	_spells[SB_ARROW]->addEffect(new KnockBackEffect(2, this));
+	_spells[SB_ARROW]->addEffect(new DamageEffect(70, this));
+
+	_spells[FLAMED_ARROW] = new Spell("Flamed Arrow", this, 4, 5, 0, 6, false);
+	_spells[FLAMED_ARROW]->addEffect(new DamageEffect(80, this));
+	_spells[FLAMED_ARROW]->addEffect(new DamageOverTime(20, 3, this, "Flamed Arrow DoT"));
+
+	_spells[DMG_BUFF] = new Spell("Damage Buff", this, 4, 4, 0, 0, false);
+	_spells[DMG_BUFF]->addEffect(new DamageBuffEffect(20, 3, this));
 }
 
 
@@ -21,16 +40,18 @@ void Archer::cast(int spellID, void* data)
 		basicAttack(*(Character*)data);
 		break;
 	case Archer::DMG_BUFF:
-		damageBuff();
+		_spells[DMG_BUFF]->cast(this);
 		break;
 	case Archer::FLAMED_ARROW:
-		flamedArrow(*(Character*)data);
+		_spells[FLAMED_ARROW]->cast((Character*)data);
+		//flamedArrow(*(Character*)data);
 		break;
 	case Archer::SB_ARROW:
 		stepBackArrow(*(Character*)data);
 		break;
 	case Archer::VOLLEY:
-		arrowVolley(*(Character*)data);
+		//arrowVolley(*(Character*)data);
+		_spells[VOLLEY]->cast((Character*)data);
 		break;
 	default:
 		break;
@@ -45,7 +66,7 @@ void Archer::basicAttack(Character & c)
 	int cost = 2;                                     //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.lowerHitPoint(amountOfDamages+_bonusDamage); // The ennemy c takes a hit.
@@ -82,12 +103,13 @@ void Archer::flamedArrow(Character & c)
 	int cost = 5;                                     //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
+
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.lowerHitPoint(amountOfDamages); // The ennemy c takes a hit.
 		LOGINFO << this->getName() << " : Casting flamedArrow on " << c.getName() << "(" << c.getId() << ")" << endl;
-		c.setDoT(dot);
+//		c.setDoT(dot);
 		_capacityPoints -= cost;
 	}
 	else
@@ -102,7 +124,7 @@ void Archer::stepBackArrow(Character & c)
 	int cost = 6;                                     //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
 		if (this->getCell()->getPosX() == c.getCell()->getPosX())
@@ -132,7 +154,7 @@ void Archer::arrowVolley(Character & c)
 	int amountOfDamages = 120;                        //
 	int cost = 10;                                    //
 	////////////////////////////////////////////////////
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.lowerHitPoint(amountOfDamages); // The ennemy c takes a hit.
@@ -145,10 +167,29 @@ void Archer::arrowVolley(Character & c)
 
 void Archer::beginTurn()
 {
-	
-	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Archer::VOLLEY), "Cast Arrow Volley"));
-	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Archer::SB_ARROW), "Cast Step Back Arrow"));
-	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Archer::FLAMED_ARROW), "Cast Flamed Arrow"));
-	UI->addAction(Action(Callback(&Archer::cast, this, Archer::DMG_BUFF), "Cast Damage Buff"));
+	auto lambda = [this](int spellID, void*)
+	{
+		int x, y;
+		LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
+		cin >> x >> y;
+		try{
+			Cell* c = GAMEINST->getGrid()->getCellAt(x, y);
+			if (c == nullptr) throw std::out_of_range("cell does not exists");
+
+			getSpell(spellID)->cast(c);
+		}
+		catch (const std::out_of_range& oor) {
+			LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";
+		}
+	};
+
+	UI->addAction(Action(Callback(&Character::targetSelector, this, Archer::VOLLEY), "Cast Arrow Volley"));
+	UI->addAction(Action(Callback(&Character::targetSelector, this, Archer::SB_ARROW), "Cast Step Back Arrow"));
+	UI->addAction(Action(Callback(&Character::targetSelector, this, Archer::FLAMED_ARROW), "Cast Flamed Arrow"));
+	UI->addAction(Action(Callback(&Character::newCast, this, Archer::DMG_BUFF), "Cast Damage Buff"));
 	Character::beginTurn();
+}
+void Archer::endTurn()
+{
+	Character::endTurn();
 }

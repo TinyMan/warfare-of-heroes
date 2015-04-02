@@ -1,4 +1,9 @@
 #include "Knight.h"
+#include "Spell.h"
+#include "HealEffect.h"
+#include "DashEffect.h"
+#include "DamageEffect.h"
+#include "LineAoE.h"
 
 
 Knight::Knight(int x , int y , string name) : Character(x, y, name)
@@ -7,6 +12,19 @@ Knight::Knight(int x , int y , string name) : Character(x, y, name)
 	mpMax = MP_MAX;
 	cpMax = CP_MAX;
 	hpMax = _hitPoints = HP_MAX;
+
+	_spells[DASH] = new Spell("Dash", this, 4, 3, 0, 2, false);
+	_spells[DASH]->addEffect(new DashEffect(this));
+
+	_spells[HEAL] = new Spell("Heal", this, 4, 2, 0, 0, false);
+	_spells[HEAL]->addEffect(new HealEffect(50, this));
+
+	_spells[SWORD_DESTINY] = new Spell("Sword of Destiny", this, 4, 10, 0, 1, false);
+	_spells[SWORD_DESTINY]->addEffect(new DamageEffect(250, this));
+
+	_spells[SWORD_FORWARD] = new Spell("Sword Forward", this, 0, 0, 0, 2, true);
+	_spells[SWORD_FORWARD]->addEffect(new DamageEffect(100, this));
+	
 }
 
 
@@ -55,7 +73,7 @@ void Knight::basicAttack(Character & c)
 	int cost = 2;                                     //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.lowerHitPoint(amountOfDamages); // The ennemy c takes a hit.
@@ -91,7 +109,7 @@ void Knight::swordForward(Character & c)
 	int cost = 5;                                     //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost &&
+	if (this->getDistance(c) <= range && _capacityPoints >= cost &&
 		(this->getCell()->getPosX() == c.getCell()->getPosX() || this->getCell()->getPosY() == c.getCell()->getPosY()))
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
@@ -131,7 +149,7 @@ void Knight::swordOfDestiny(Character & c)
 	int cost = 10;                                    //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		c.lowerHitPoint(amountOfDamages); // The ennemy c takes a hit.
 		_capacityPoints -= cost;
@@ -142,9 +160,50 @@ void Knight::swordOfDestiny(Character & c)
 }
 void Knight::beginTurn()
 {
-	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, Knight::DASH), "Cast Dash"));
-	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Knight::SWORD_FORWARD), "Cast Sword Forward"));
-	UI->addAction(Action(Callback(&Knight::cast, this, Knight::HEAL), "Cast Heal"));
-	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Knight::SWORD_DESTINY), "Cast Sword Of Destiny"));
+	auto lambda = [this](int spellID, void*)
+	{
+		int x, y;
+		LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
+		cin >> x >> y;
+		try{
+			Cell* c = GAMEINST->getGrid()->getCellAt(x, y);
+			if (c == nullptr) throw std::out_of_range("cell does not exists");
+
+			getSpell(spellID)->cast(c);
+		}
+		catch (const std::out_of_range& oor) {
+			LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";
+		}
+	};
+	auto lineAoESelector = [this](int range, int spellID, void*)
+	{
+		int x, y;
+		LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
+		cin >> x >> y;
+		try{
+			Cell* c = GAMEINST->getGrid()->getCellAt(x, y);
+			if (c == nullptr) throw std::out_of_range("cell does not exists");
+			Grid * g = GAMEINST->getGrid();
+			LineAoE* aoe = new LineAoE(g->getCellFromCellAndDir(*this->_hisCell, g->getDir(*this->_hisCell, *c), 1), c, range);
+			LOGINFO << *aoe << endl;
+			getSpell(spellID)->cast(aoe);
+		}
+		catch (const std::out_of_range& oor) {
+			LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";
+		}
+		catch (const char* msg)
+		{
+			LOGERR << msg << endl;
+		}
+	};
+		
+	UI->addAction(Action(Callback(lambda, Knight::DASH), "Cast Dash"));
+	UI->addAction(Action(Callback(lineAoESelector, _spells[SWORD_FORWARD]->getMaxScope(), Knight::SWORD_FORWARD), "Cast Sword Forward"));
+	UI->addAction(Action(Callback(&Knight::newCast, this, Knight::HEAL), "Cast Heal"));
+	UI->addAction(Action(Callback(&Character::targetSelector, this, Knight::SWORD_DESTINY), "Cast Sword Of Destiny"));
 	Character::beginTurn();
+}
+void Knight::endTurn()
+{
+	Character::endTurn();
 }

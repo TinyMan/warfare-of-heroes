@@ -1,6 +1,7 @@
 #pragma once
 #include "Character.h"
 #include "Cell.h"
+#include "DiamondAoE.h"
 
 class Mage : public Character
 {
@@ -24,7 +25,7 @@ public:
 
 	// begin turn
 	virtual void beginTurn();
-	virtual void endTurn(){};
+	virtual void endTurn();
 
 	// Spells :
 	virtual void thunderStorm(const Cell & c); // Spell 1 : Only in line, throws an AoE of radius 2 that deals damages

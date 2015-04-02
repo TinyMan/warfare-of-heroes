@@ -2,14 +2,23 @@
 #include <cstdlib>
 #include <iostream>
 #include "Cell.h"
-#include "DeadObject.h"
+#include "GameObject.h"
+#include "SpellTarget.h"
 
 using namespace std;
 
 
-class Grid : public DeadObject
+class Grid : public GameObject
 {
 public:
+	enum DIRECTION
+	{
+		TOP,
+		BOTTOM,
+		RIGHT,
+		LEFT,
+		UNKNOWN
+	};
 	Grid();
 	virtual ~Grid();
 
@@ -19,17 +28,21 @@ public:
 	virtual void initialize() {}*/
 
 	void display(ostream& o=cout) const;
-	void setObject(GameObject* go, int i, int j);
+	void setObject(SpellTarget* go, int i, int j);
 
 	Cell* getCellAt(int i, int j);
 
 	// TODO: return the cell distance between cells at index i,j and x,y
 	int getCellDistance(int i, int j, int x, int y);
 	// TODO: return the cell distance between cells
-	int getCellDistance(const Cell&, const Cell&);
+	static int getCellDistance(const Cell&, const Cell&);
+	Cell* getCellFromCellAndDir(const Cell&, DIRECTION d, int pathLength);
+	DIRECTION getDir(const Cell& c1, const Cell& c2);
 
-	static const int WIDTH = 14;
-	static const int HEIGHT = 30;
+	static const int WIDTH = 30;
+	static const int HEIGHT = 14;
+
+	virtual void beginTurn();
 
 private:
 	Cell arrayOfCells[WIDTH][HEIGHT];

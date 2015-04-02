@@ -7,7 +7,6 @@ protected:
 	const static int MP_MAX = 3;
 	const static int CP_MAX = 10;
 	const static int HP_MAX = 680;
-	int _bonusDamage = 0;
 
 	
 public:
@@ -24,7 +23,7 @@ public:
 	virtual void cast(int spellID, void* data);
 	// begin turn
 	virtual void beginTurn();
-	virtual void endTurn(){};
+	virtual void endTurn();
 
 	// Spells :
 	virtual void damageBuff(); // Spell 1 : rises the damages the Archer does for a certain time.

@@ -1,4 +1,8 @@
 #include "Mage.h"
+#include "Spell.h"
+#include "RootEffect.h"
+#include "DamageEffect.h"
+#include "DamageBuffEffect.h"
 
 Mage::Mage(int x, int y, string name) : Character(x, y, name)
 {
@@ -6,6 +10,23 @@ Mage::Mage(int x, int y, string name) : Character(x, y, name)
 	mpMax = MP_MAX;
 	cpMax = CP_MAX;
 	hpMax = _hitPoints = HP_MAX;
+
+	_spells[ROOT] = new Spell("Damage Buff", this, 4, 4, 0, 7, false);
+	_spells[ROOT]->addEffect(new RootEffect(3, this));
+
+	_spells[FIREBALL] = new Spell("Fireball of the Doom", this, 4, 5, 0, 4, false);
+	_spells[FIREBALL]->addEffect(new DamageEffect(150, this));
+	DamageBuffEffect* e = new DamageBuffEffect(200, 3, this);
+	e->setTarget(this);
+	_spells[FIREBALL]->addEffect(e);
+
+	_spells[THUNDER] = new Spell("Thunder Storm", this, 2, 6, 0, 5, true);
+	_spells[THUNDER]->addEffect(new DamageEffect(80, this));
+
+	_spells[ERUPTION] = new Spell("Eruption", this, 2, 4, 0, 7, false);
+	_spells[ERUPTION]->addEffect(new DamageOverTime(100, 6, this, "Eruption DoT"));
+	
+	
 }
 
 
@@ -45,7 +66,7 @@ void Mage::basicAttack(Character & c)
 	int cost = 1;                                     //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.lowerHitPoint(amountOfDamages + _bonusDamage); // The ennemy c takes a hit.
@@ -90,7 +111,7 @@ void Mage::rooting(Character & c)
 	int cost = 4;                                     //
 	////////////////////////////////////////////////////
 	
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.removeMovementPoint(amountOfMPRemoved);
@@ -109,7 +130,7 @@ void Mage::fireBallOfTheDoom(Character & c)
 	int cost = 5;                                     //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.lowerHitPoint(amountOfDamages+_bonusDamage); // The ennemy c takes a hit.
@@ -122,9 +143,42 @@ void Mage::fireBallOfTheDoom(Character & c)
 }
 void Mage::beginTurn()
 {
-	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Mage::FIREBALL), "Cast Fireball Of The Doom"));
-	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Mage::ROOT), "Cast Root"));
-	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, Mage::ERUPTION), "Cast Eruption"));
-	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, Mage::THUNDER), "Cast Thunder Storm"));
+	auto aoeSelector = [this](int radius, int spellID, void*)
+	{
+		int x, y;
+		LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
+		cin >> x >> y;
+		try{
+			Cell* c = GAMEINST->getGrid()->getCellAt(x, y);
+			if (c == nullptr) throw std::out_of_range("cell does not exists");			
+			getSpell(spellID)->cast(new DiamondAoE(c, radius));
+		}
+		catch (const std::out_of_range& oor) {
+			LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";
+		}
+	};
+	auto lambda = [this](int spellID, void*)
+	{
+		int x, y;
+		LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
+		cin >> x >> y;
+		try{
+			Cell* c = GAMEINST->getGrid()->getCellAt(x, y);
+			if (c == nullptr) throw std::out_of_range("cell does not exists");
+
+			getSpell(spellID)->cast(c);
+		}
+		catch (const std::out_of_range& oor) {
+			LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";
+		}
+	};
+	UI->addAction(Action(Callback(&Character::targetSelector, this, Mage::FIREBALL), "Cast Fireball Of The Doom"));
+	UI->addAction(Action(Callback(&Character::targetSelector, this, Mage::ROOT), "Cast Root"));
+	UI->addAction(Action(Callback(aoeSelector, 2, Mage::ERUPTION), "Cast Eruption"));
+	UI->addAction(Action(Callback(aoeSelector, 2, Mage::THUNDER), "Cast Thunder Storm"));
 	Character::beginTurn();
+}
+void Mage::endTurn()
+{
+	Character::endTurn();
 }

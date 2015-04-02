@@ -6,6 +6,11 @@
 #include "Mage.h"
 #include "Knight.h"
 #include "Archer.h"
+#include "Spell.h"
+#include "SquareAoE.h"
+#include "DiamondAoE.h"
+#include "DamageEffect.h"
+#include "LineAoE.h"
 
 using namespace std;
 
@@ -21,14 +26,21 @@ int main(int argc, char* argv[])
 	Grid* grid = g->getGrid();
 	grid->generateObstacle();
 
-	Archer* player1 = new Archer(0,0);
-	Knight* player3 = new Knight(1, 0);
+	Knight* player1 = new Knight(0,2);
+	Mage* player3 = new Mage(6,2);
 	g->addGameObject(grid, player1, player3);
 	g->addPlayer(player1);
 	g->addPlayer(player3);
 	
 
 	g->displayState();
+
+	/*player1->beginTurn();
+	Spell* av = new Spell("Arrow Volley", player1, 4, 120, 0, 10, 0, 8);
+	av->cast(Character::targetSelector());
+	g->displayState();*/
+	//LOGINFO << *av << endl;
+
 	g->start();
 	while (g->isRunning())
 	{

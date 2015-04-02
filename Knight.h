@@ -23,7 +23,7 @@ public:
 	
 	// begin turn
 	virtual void beginTurn();
-	virtual void endTurn(){};
+	virtual void endTurn();
 
 	// Spells :
 	virtual void dash(Cell & c); // Spell 1 : dashes to a cell, range = 2/3 ?

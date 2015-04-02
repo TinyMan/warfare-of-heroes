@@ -17,7 +17,20 @@ void Cell::setType(_STATE t)
 {
 	_cellType = t;
 }
-
+void Cell::setObject(SpellTarget* obj)
+{
+	if (_cellType != Free)
+		throw "Cannot set object: Cell is not free";
+	_cellType = PlayerOnIt;
+	_object = obj;
+	/* TODO: CHANGE TYPE OF CELL */
+}
+void Cell::addEffect(OverTimeEffect* e)
+{
+	e->setTarget(this);
+	_effects.push_back(e);
+	LOGINFO << "Adding over time effect " << *e << " to " << *this << endl;
+}
 int Cell::getDistance(const Cell & c) const
 // Returns the distance between the object and the cell given as parameter
 {
@@ -44,25 +57,34 @@ int Cell::getDistance(const Cell & c) const
 	return distance;
 }
 
-int Cell::getDistance(const Character & c) const
-{
-	Cell hisCell = *c.getCell();
-	return (getDistance(hisCell));
-}
-
 bool Cell::isInView(const Cell & c) const
 {
 	// TODO : vérifier la ligne de vue (obstacle ou non)
 	return true;
 }
 
-bool Cell::isInView(const Character & c) const
+bool Cell::isInView(const SpellTarget & c) const
 {
 	Cell hisCell = *c.getCell();
 	return (isInView(hisCell));
 }
 
+bool Cell::isInLine(const Cell& c) const
+{
+	return c._posX == _posX || c._posY == _posY;
+}
 
+void Cell::beginTurn()
+{
+	for (auto e : _effects)
+	{
+		e->beginTurn();
+	}
+}
+void Cell::displayBasic(ostream& o) const
+{
+	o << *this;
+}
 ostream& operator<<(ostream& o, const Cell& c)
 {
 	o << "Cell " << c._posX << "," << c._posY << ": ";

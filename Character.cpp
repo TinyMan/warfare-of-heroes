@@ -1,11 +1,11 @@
 #include "Character.h"
 #include "Cell.h"
 #include "Grid.h"
+#include "Spell.h"
 
 
-Character::Character(int x, int y, string name)
+Character::Character(int x, int y, string name) : _name(name), _spells(NB_SPELLS)
 {
-	_name = name;
 	Grid* grid = Game::getInstance()->getGrid();
 	grid->setObject(this, x, y);
 	_hisCell = grid->getCellAt(x, y);
@@ -37,13 +37,21 @@ void Character::removeCapaciyPoint(int amount)
 	if (_capacityPoints < 0)
 		_capacityPoints = 0;
 }
-
-void Character::setDoT(int amount)
+void Character::addBonusDamage(int amount)
 {
-	this->_damageOverTime = amount;
-	LOGINFO << this->getName() << " : take DoT = " << amount << endl;
+	_bonusDamage += amount;
 }
-
+void Character::addEffect(OverTimeEffect* e)
+{
+	_effects.push_back(e);
+	LOGINFO << "Adding over time effect " << *e << " to ";
+	displayBasic(LOGINFO);
+	LOGINFO << endl;
+}
+void Character::root()
+{
+	_movementPoints = 0;
+}
 int Character::getHP() const
 {
 	return(_hitPoints);
@@ -91,6 +99,7 @@ bool Character::move(int i, int j, bool moveWanted)
 
 void Character::beginTurn()
 {
+	_myTurn = true;
 	/* add actions to the 'menu' */
 	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, ACTION_MOVE), "Move"));
 		
@@ -98,16 +107,28 @@ void Character::beginTurn()
 	/* casting a spell isn't handled by character but by each class (archer, knight, ..) */
 	//UI->addAction(Action(Callback(&Character::actionCallback, this, ACTION_CAST), "Cast a spell"));
 
-
-
-
-	if (_damageOverTime > 0)
-	{
-		LOGINFO << this->getName() << " : taking damages (DoT) : " << _damageOverTime << endl;
-		this->lowerHitPoint(_damageOverTime);
-	}
+	
+	/* reset the stats to normal */
 	_capacityPoints = cpMax;
 	_movementPoints = mpMax;
+	_bonusDamage = 0;
+
+	/* apply all the effects */
+	for (OverTimeEffect* e : _effects)
+	{
+		e->beginTurn();
+	}
+	/* update cooldown */
+	for (Spell* s : _spells)
+	{
+		if(s)
+			s->beginTurn();
+	}
+}
+void Character::endTurn()
+{
+	LOGINFO << "Ending turn " << endl;
+	_myTurn = false;
 }
 
 void Character::actionCallback(int actionID, void* d)
@@ -125,6 +146,12 @@ void Character::actionCallback(int actionID, void* d)
 		cast(actionID, d);
 		break;
 	}
+}
+void Character::newCast(int spellID, void* target)
+{
+	if (target == nullptr)
+		target = this;
+	_spells[spellID]->cast((Character*)target);
 }
 
 void Character::targetSelectorForCell(int spellID, void* d)
@@ -157,15 +184,36 @@ void Character::targetSelectorForCharacter(int spellIID, void* d)
 	}
 }
 
+void Character::displayBasic(ostream& o) const
+{
+	o << _name;
+}
+
+void Character::targetSelector(int spellID, void* target)
+{
+	LOGINFO << "Select your target: " << endl;
+	GAMEINST->displayPlayersList(LOGINFO);
+	int c;
+	cin >> c;
+	try{
+		Character *target = GAMEINST->getPlayer(c);
+		newCast(spellID, target);
+	}
+	catch (const std::out_of_range& oor) {
+		LOGERR << "Out of Range error: " << oor.what() << " (player does not exists)\n";
+	}
+}
 ostream& operator<<(ostream& o, const Character& c)
 {
-	o << "\tDisplaying: " << c._name << endl;
-	o << "\tPosition: " << c._hisCell->getPosX() << "," << c._hisCell->getPosY() << endl;
+	o << "Displaying: " << c._name << endl;
+	o << "|-- Position: " << c._hisCell->getPosX() << "," << c._hisCell->getPosY() << endl;
 	//o << "Stats: " << endl;
-	o << "\tHP: " << c._hitPoints << "/" << c.hpMax << endl;
-	o << "\tMP: " << c._movementPoints << endl;
-	o << "\tCP: " << c._capacityPoints << endl;
-	o << "\tDoT: " << c._damageOverTime << endl;
+	o << "|-- HP: " << c._hitPoints << "/" << c.hpMax << endl;
+	o << "|-- MP: " << c._movementPoints << endl;
+	o << "|-- CP: " << c._capacityPoints << endl;
+	o << "|-- DB: " << c._bonusDamage << endl;
+	o << "|-- HT: " << c._myTurn << endl;
+	//o << "|-- DoT: " << c._damageOverTime << endl;
 
 	return o;
 }
