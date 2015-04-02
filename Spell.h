@@ -12,7 +12,7 @@ using namespace std;
 class Spell
 {
 public:
-	Spell(string name = "Unknown Spell", Character* caster = nullptr, int cd = 0, int dmg = 0, int min_scope = 0, int max_scope = 0, bool is_inline = false);
+	Spell(string name = "Unknown Spell", Character* caster = nullptr, int cd = 0, int cost = 0, int min_scope = 0, int max_scope = 0, bool is_inline = false);
 	virtual ~Spell();
 
 	virtual bool cast(SpellTarget* target = nullptr);

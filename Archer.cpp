@@ -21,7 +21,7 @@ Archer::Archer(int x, int y, string name) : Character(x, y, name)
 
 	_spells[FLAMED_ARROW] = new Spell("Flamed Arrow", this, 4, 5, 0, 6, false);
 	_spells[FLAMED_ARROW]->addEffect(new DamageEffect(80, this));
-	_spells[FLAMED_ARROW]->addEffect(new DamageOverTime(20, 3, "Flamed Arrow DoT", this));
+	_spells[FLAMED_ARROW]->addEffect(new DamageOverTime(20, 3, this, "Flamed Arrow DoT"));
 
 	_spells[DMG_BUFF] = new Spell("Damage Buff", this, 4, 4, 0, 0, false);
 	_spells[DMG_BUFF]->addEffect(new DamageBuffEffect(20, 3, this));

@@ -2,7 +2,7 @@
 #include "SpellTarget.h"
 
 
-DamageOverTime::DamageOverTime(int dmg, int duration, string name, Character *t)
+DamageOverTime::DamageOverTime(int dmg, int duration, Character *t, string name)
 	: _damage(dmg), OverTimeEffect(duration, name, t)
 {
 }

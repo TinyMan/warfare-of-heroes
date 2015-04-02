@@ -1,6 +1,7 @@
 #pragma once
 #include "Character.h"
 #include "Cell.h"
+#include "DiamondAoE.h"
 
 class Mage : public Character
 {

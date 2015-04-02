@@ -116,6 +116,12 @@ void Character::beginTurn()
 	{
 		e->beginTurn();
 	}
+	/* update cooldown */
+	for (Spell* s : _spells)
+	{
+		if(s)
+			s->beginTurn();
+	}
 }
 void Character::endTurn()
 {

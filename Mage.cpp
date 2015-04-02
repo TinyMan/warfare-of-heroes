@@ -19,6 +19,14 @@ Mage::Mage(int x, int y, string name) : Character(x, y, name)
 	DamageBuffEffect* e = new DamageBuffEffect(200, 3, this);
 	e->setTarget(this);
 	_spells[FIREBALL]->addEffect(e);
+
+	_spells[THUNDER] = new Spell("Thunder Storm", this, 2, 6, 0, 5, true);
+	_spells[THUNDER]->addEffect(new DamageEffect(80, this));
+
+	_spells[ERUPTION] = new Spell("Eruption", this, 2, 4, 0, 7, false);
+	_spells[ERUPTION]->addEffect(new DamageOverTime(70, 3, this, "Eruption DoT"));
+	
+	
 }
 
 
@@ -135,10 +143,24 @@ void Mage::fireBallOfTheDoom(Character & c)
 }
 void Mage::beginTurn()
 {
+	auto aoeSelector = [this](int radius, int spellID, void*)
+	{
+		int x, y;
+		LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
+		cin >> x >> y;
+		try{
+			Cell* c = GAMEINST->getGrid()->getCellAt(x, y);
+			if (c == nullptr) throw std::out_of_range("cell does not exists");			
+			getSpell(spellID)->cast(new DiamondAoE(c, radius));
+		}
+		catch (const std::out_of_range& oor) {
+			LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";
+		}
+	};
 	UI->addAction(Action(Callback(&Character::targetSelector, this, Mage::FIREBALL), "Cast Fireball Of The Doom"));
 	UI->addAction(Action(Callback(&Character::targetSelector, this, Mage::ROOT), "Cast Root"));
-	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, Mage::ERUPTION), "Cast Eruption"));
-	UI->addAction(Action(Callback(&Character::targetSelectorForCell, this, Mage::THUNDER), "Cast Thunder Storm"));
+	UI->addAction(Action(Callback(aoeSelector, 2, Mage::ERUPTION), "Cast Eruption"));
+	UI->addAction(Action(Callback(aoeSelector, 2, Mage::THUNDER), "Cast Thunder Storm"));
 	Character::beginTurn();
 }
 void Mage::endTurn()

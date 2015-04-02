@@ -33,12 +33,6 @@ int main(int argc, char* argv[])
 	g->addPlayer(player3);
 	
 
-	Cell *c1 = grid->getCellAt(3, 3);
-	Cell *c2 = grid->getCellAt(7, 3);
-	LineAoE* aoe = new LineAoE(c1, c2);
-	Spell p("Test", player1, 0, 0, 0, 10000000, false);
-	p.addEffect(new DamageEffect(200, player1));
-	p.cast(aoe);
 	g->displayState();
 
 	/*player1->beginTurn();
