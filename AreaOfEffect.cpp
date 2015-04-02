@@ -47,7 +47,8 @@ void AreaOfEffect::addEffect(OverTimeEffect* e)
 {
 	for (Cell* c : _cells)
 	{
-		c->addEffect(e);
+		OverTimeEffect *effect = e->clone();
+		c->addEffect(effect);
 	}
 }
 void AreaOfEffect::addBonusDamage(int e)

@@ -11,6 +11,7 @@ public:
 	bool isToDelete() const { return _to_delete; }
 
 	virtual bool beginTurn() = 0;
+	virtual OverTimeEffect* clone() const = 0;
 
 	virtual bool apply(SpellTarget *target = nullptr);
 

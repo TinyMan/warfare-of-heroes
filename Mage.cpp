@@ -24,7 +24,7 @@ Mage::Mage(int x, int y, string name) : Character(x, y, name)
 	_spells[THUNDER]->addEffect(new DamageEffect(80, this));
 
 	_spells[ERUPTION] = new Spell("Eruption", this, 2, 4, 0, 7, false);
-	_spells[ERUPTION]->addEffect(new DamageOverTime(70, 3, this, "Eruption DoT"));
+	_spells[ERUPTION]->addEffect(new DamageOverTime(100, 6, this, "Eruption DoT"));
 	
 	
 }
@@ -152,6 +152,21 @@ void Mage::beginTurn()
 			Cell* c = GAMEINST->getGrid()->getCellAt(x, y);
 			if (c == nullptr) throw std::out_of_range("cell does not exists");			
 			getSpell(spellID)->cast(new DiamondAoE(c, radius));
+		}
+		catch (const std::out_of_range& oor) {
+			LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";
+		}
+	};
+	auto lambda = [this](int spellID, void*)
+	{
+		int x, y;
+		LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
+		cin >> x >> y;
+		try{
+			Cell* c = GAMEINST->getGrid()->getCellAt(x, y);
+			if (c == nullptr) throw std::out_of_range("cell does not exists");
+
+			getSpell(spellID)->cast(c);
 		}
 		catch (const std::out_of_range& oor) {
 			LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";

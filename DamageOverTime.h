@@ -13,6 +13,9 @@ public:
 	virtual ~DamageOverTime();
 
 	virtual bool beginTurn();
+	virtual DamageOverTime* clone() const {
+		return new DamageOverTime(*this);
+	}
 
 	bool isToDelete() const { return _to_delete; }
 	void setTarget(SpellTarget * t) { _target = t; }

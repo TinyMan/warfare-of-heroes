@@ -23,6 +23,7 @@ bool OverTimeEffect::apply(SpellTarget *target)
 	{		
 		_target = target;
 	}
-	_target->addEffect(this);
+	_target->addEffect(this->clone());
+	_target = nullptr;
 	return true;
 }

@@ -44,7 +44,9 @@ void Character::addBonusDamage(int amount)
 void Character::addEffect(OverTimeEffect* e)
 {
 	_effects.push_back(e);
-	LOGINFO << "Adding over time effect " << *e << " to a spell target" << endl;
+	LOGINFO << "Adding over time effect " << *e << " to ";
+	displayBasic(LOGINFO);
+	LOGINFO << endl;
 }
 void Character::root()
 {

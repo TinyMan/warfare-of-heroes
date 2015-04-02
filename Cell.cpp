@@ -27,8 +27,9 @@ void Cell::setObject(SpellTarget* obj)
 }
 void Cell::addEffect(OverTimeEffect* e)
 {
+	e->setTarget(this);
 	_effects.push_back(e);
-	LOGINFO << "Adding over time effect " << *e << " to a spell target" << endl;
+	LOGINFO << "Adding over time effect " << *e << " to " << *this << endl;
 }
 int Cell::getDistance(const Cell & c) const
 // Returns the distance between the object and the cell given as parameter

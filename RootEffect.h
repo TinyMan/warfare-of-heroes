@@ -8,5 +8,8 @@ public:
 	virtual ~RootEffect();
 
 	virtual bool beginTurn();
+	virtual RootEffect* clone() const {
+		return new RootEffect(*this);
+	}
 };
 
