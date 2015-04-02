@@ -56,11 +56,6 @@ int Cell::getDistance(const Cell & c) const
 	return distance;
 }
 
-int Cell::getDistance(const SpellTarget & c) const
-{
-	return (getDistance(*c.getCell()));
-}
-
 bool Cell::isInView(const Cell & c) const
 {
 	// TODO : vérifier la ligne de vue (obstacle ou non)

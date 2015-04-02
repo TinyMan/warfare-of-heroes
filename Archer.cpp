@@ -66,7 +66,7 @@ void Archer::basicAttack(Character & c)
 	int cost = 2;                                     //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.lowerHitPoint(amountOfDamages+_bonusDamage); // The ennemy c takes a hit.
@@ -103,7 +103,7 @@ void Archer::flamedArrow(Character & c)
 	int cost = 5;                                     //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 
 		// Launch projectile (animation) { TO BE ADD ! }
@@ -124,7 +124,7 @@ void Archer::stepBackArrow(Character & c)
 	int cost = 6;                                     //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
 		if (this->getCell()->getPosX() == c.getCell()->getPosX())
@@ -154,7 +154,7 @@ void Archer::arrowVolley(Character & c)
 	int amountOfDamages = 120;                        //
 	int cost = 10;                                    //
 	////////////////////////////////////////////////////
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.lowerHitPoint(amountOfDamages); // The ennemy c takes a hit.

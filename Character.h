@@ -54,6 +54,7 @@ public:
 	int getBonusDamage() const { return _bonusDamage; }
 	Spell* getSpell(int spellID) const { return _spells.at(spellID); }
 	bool hisTurn() const { return _myTurn; }
+	virtual void displayBasic(ostream& o) const;
 
 	/* every children have to implement those methods */
 	// Attacks :
@@ -84,8 +85,6 @@ public:
 
 	friend ostream& operator<<(ostream& , const Character& );
 
-	virtual int getDistance(const SpellTarget& st) const;
-	virtual void displayBasic(ostream& o) const;
 
 
 	/* should return the selected target (by the user) (only in text mode) */

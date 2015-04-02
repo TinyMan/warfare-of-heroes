@@ -58,7 +58,7 @@ void Mage::basicAttack(Character & c)
 	int cost = 1;                                     //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.lowerHitPoint(amountOfDamages + _bonusDamage); // The ennemy c takes a hit.
@@ -103,7 +103,7 @@ void Mage::rooting(Character & c)
 	int cost = 4;                                     //
 	////////////////////////////////////////////////////
 	
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.removeMovementPoint(amountOfMPRemoved);
@@ -122,7 +122,7 @@ void Mage::fireBallOfTheDoom(Character & c)
 	int cost = 5;                                     //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.lowerHitPoint(amountOfDamages+_bonusDamage); // The ennemy c takes a hit.

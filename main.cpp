@@ -7,6 +7,7 @@
 #include "Knight.h"
 #include "Archer.h"
 #include "Spell.h"
+#include "SquareAoE.h"
 
 using namespace std;
 
@@ -31,6 +32,7 @@ int main(int argc, char* argv[])
 
 	g->displayState();
 
+	//SquareAoE* aoe = new SquareAoE();
 	/*player1->beginTurn();
 	Spell* av = new Spell("Arrow Volley", player1, 4, 120, 0, 10, 0, 8);
 	av->cast(Character::targetSelector());

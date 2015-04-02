@@ -68,7 +68,7 @@ void Knight::basicAttack(Character & c)
 	int cost = 2;                                     //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
 		c.lowerHitPoint(amountOfDamages); // The ennemy c takes a hit.
@@ -104,7 +104,7 @@ void Knight::swordForward(Character & c)
 	int cost = 5;                                     //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost &&
+	if (this->getDistance(c) <= range && _capacityPoints >= cost &&
 		(this->getCell()->getPosX() == c.getCell()->getPosX() || this->getCell()->getPosY() == c.getCell()->getPosY()))
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
@@ -144,7 +144,7 @@ void Knight::swordOfDestiny(Character & c)
 	int cost = 10;                                    //
 	////////////////////////////////////////////////////
 
-	if (this->getCell()->getDistance(c) <= range && _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		c.lowerHitPoint(amountOfDamages); // The ennemy c takes a hit.
 		_capacityPoints -= cost;

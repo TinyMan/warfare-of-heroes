@@ -76,6 +76,7 @@
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="Archer.cpp" />
+    <ClCompile Include="AreaOfEffect.cpp" />
     <ClCompile Include="Callback.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -102,6 +103,7 @@
     <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="SpellTarget.cpp" />
+    <ClCompile Include="SquareAoE.cpp" />
     <ClCompile Include="Timeout.cpp" />
     <ClCompile Include="TimeService.cpp" />
     <ClCompile Include="UserInterface.cpp" />
@@ -109,6 +111,7 @@
   <ItemGroup>
     <ClInclude Include="Action.h" />
     <ClInclude Include="Archer.h" />
+    <ClInclude Include="AreaOfEffect.h" />
     <ClInclude Include="Callback.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Character.h" />
@@ -134,6 +137,7 @@
     <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="SpellTarget.h" />
+    <ClInclude Include="SquareAoE.h" />
     <ClInclude Include="Timeout.h" />
     <ClInclude Include="TimeService.h" />
     <ClInclude Include="UserInterface.h" />

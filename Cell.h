@@ -21,7 +21,6 @@ public:
 	int getPosX() const { return _posX; }
 	int getPosY() const { return _posY;	}
 	int getDistance(const Cell & c) const;
-	int getDistance(const SpellTarget& st) const;
 	const Cell* getCell() const { return this; }
 	SpellTarget* getObject() const { return _object; }
 	void displayBasic(ostream& o) const;
