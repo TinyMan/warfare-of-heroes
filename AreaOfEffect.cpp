@@ -43,3 +43,40 @@ void AreaOfEffect::removeCapaciyPoint(int amount)
 		c->removeCapaciyPoint(amount);
 	}
 }
+void AreaOfEffect::addEffect(OverTimeEffect* e)
+{
+	for (Cell* c : _cells)
+	{
+		c->addEffect(e);
+	}
+}
+void AreaOfEffect::addBonusDamage(int e)
+{
+	for (Cell* c : _cells)
+	{
+		c->addBonusDamage(e);
+	}
+}
+void AreaOfEffect::root()
+{
+	for (Cell* c : _cells)
+	{
+		c->root();
+	}
+}
+bool AreaOfEffect::move(int i, int j, bool moveWanted)
+{
+	for (Cell* c : _cells)
+	{
+		c->move(i, j, moveWanted);
+	}
+	return true;
+}
+bool AreaOfEffect::move(Cell & newCell, bool moveWanted)
+{
+	for (Cell* c : _cells)
+	{
+		c->move(newCell, moveWanted);
+	}
+	return true;
+}

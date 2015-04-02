@@ -3,8 +3,8 @@
 #include "Game.h"
 
 
-SquareAoE::SquareAoE(Cell* center, int len)
-	: _center(center), _len(len)
+SquareAoE::SquareAoE(const Cell* center, int len)
+	: _len(len), _center(center)
 {
 	extrapole();
 }

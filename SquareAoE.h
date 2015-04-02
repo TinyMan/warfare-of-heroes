@@ -4,7 +4,7 @@ class SquareAoE :
 	public AreaOfEffect
 {
 public:
-	SquareAoE(Cell* center = nullptr, int len = 0);
+	SquareAoE(const Cell* center = nullptr, int len = 0);
 
 	virtual ~SquareAoE();
 
@@ -18,7 +18,7 @@ public:
 	virtual const Cell* getCell() const { return _center; }
 
 protected:
-	Cell* _center;
+	const Cell* _center;
 	int _len;
 };
 
