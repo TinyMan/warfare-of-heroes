@@ -20,12 +20,16 @@ public:
 
 	virtual bool canCastOn(SpellTarget* target);
 
+	/* setters */
 	void setCDMax(int cd) { _max_cooldown = cd; }
 	void setCost(int cost) { _cost = cost; }
 	void setMinScope(int min_scope) { _min_scope = min_scope; }
 	void setMaxScope(int max_scope) { _max_scope = max_scope; }
 	void setInline(bool il) { _is_inline = il; }
 	void addEffect(Effect* effect);
+
+	/* getters */
+	int getMaxScope() const { return _max_scope; }
 
 	friend ostream& operator<<(ostream& o, const Spell& s);
 protected:	

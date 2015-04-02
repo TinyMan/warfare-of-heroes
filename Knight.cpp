@@ -3,6 +3,7 @@
 #include "HealEffect.h"
 #include "DashEffect.h"
 #include "DamageEffect.h"
+#include "LineAoE.h"
 
 
 Knight::Knight(int x , int y , string name) : Character(x, y, name)
@@ -20,6 +21,10 @@ Knight::Knight(int x , int y , string name) : Character(x, y, name)
 
 	_spells[SWORD_DESTINY] = new Spell("Sword of Destiny", this, 4, 10, 0, 1, false);
 	_spells[SWORD_DESTINY]->addEffect(new DamageEffect(250, this));
+
+	_spells[SWORD_FORWARD] = new Spell("Sword Forward", this, 0, 0, 0, 2, true);
+	_spells[SWORD_FORWARD]->addEffect(new DamageEffect(100, this));
+	
 }
 
 
@@ -170,9 +175,30 @@ void Knight::beginTurn()
 			LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";
 		}
 	};
+	auto lineAoESelector = [this](int range, int spellID, void*)
+	{
+		int x, y;
+		LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
+		cin >> x >> y;
+		try{
+			Cell* c = GAMEINST->getGrid()->getCellAt(x, y);
+			if (c == nullptr) throw std::out_of_range("cell does not exists");
+			Grid * g = GAMEINST->getGrid();
+			LineAoE* aoe = new LineAoE(g->getCellFromCellAndDir(*this->_hisCell, g->getDir(*this->_hisCell, *c), 1), c, range);
+			LOGINFO << *aoe << endl;
+			getSpell(spellID)->cast(aoe);
+		}
+		catch (const std::out_of_range& oor) {
+			LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";
+		}
+		catch (const char* msg)
+		{
+			LOGERR << msg << endl;
+		}
+	};
 		
 	UI->addAction(Action(Callback(lambda, Knight::DASH), "Cast Dash"));
-	UI->addAction(Action(Callback(&Character::targetSelectorForCharacter, this, Knight::SWORD_FORWARD), "Cast Sword Forward"));
+	UI->addAction(Action(Callback(lineAoESelector, _spells[SWORD_FORWARD]->getMaxScope(), Knight::SWORD_FORWARD), "Cast Sword Forward"));
 	UI->addAction(Action(Callback(&Knight::newCast, this, Knight::HEAL), "Cast Heal"));
 	UI->addAction(Action(Callback(&Character::targetSelector, this, Knight::SWORD_DESTINY), "Cast Sword Of Destiny"));
 	Character::beginTurn();

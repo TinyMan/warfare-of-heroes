@@ -26,6 +26,7 @@ void AreaOfEffect::lowerHitPoint(int amount)
 	/* there should be no null value in the list */
 	for (Cell* c : _cells)
 	{
+		LOGINFO << "Lowering HP on " << *c << endl;
 		c->lowerHitPoint(amount);
 	}
 }

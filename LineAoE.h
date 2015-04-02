@@ -12,8 +12,9 @@ public:
 	virtual ~LineAoE();
 
 	virtual void extrapole();
-	virtual const Cell* getCell() const { return _first; }
+	virtual const Cell* getCell() const { return _last; }
 
+	friend ostream& operator<<(ostream& o, const LineAoE& l);
 protected:
 	const Cell* _first;
 	const Cell* _last;
