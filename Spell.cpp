@@ -42,7 +42,19 @@ bool Spell::canCastOn(SpellTarget* target)
 		if (distance <= _max_scope && distance >= _min_scope)
 		{
 			if (_caster->getCP() >= _cost)
-				return true;
+			{
+				if (!_is_inline || _caster->getCell()->isInLine(*target->getCell()))
+				{
+					if (_cooldown <= 0)
+					{
+						return true;
+					}
+					else
+						LOGWARN << "Spell in cooldown" << endl;
+				}
+				else
+					LOGWARN << "Target not inline" << endl;
+			}
 			else
 				LOGWARN << "Not enough CP" << endl;
 		}
