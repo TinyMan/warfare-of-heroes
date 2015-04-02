@@ -114,6 +114,12 @@
     <ClCompile Include="SquareAoE.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DiamondAoE.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LineAoE.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeService.h">
@@ -210,6 +216,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SquareAoE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DiamondAoE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LineAoE.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

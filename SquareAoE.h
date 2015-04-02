@@ -11,7 +11,7 @@ public:
 	void setCenter(Cell* c);
 	void setLen(int len);
 
-	void extrapole();
+	virtual void extrapole();
 
 	/* getters */
 	virtual void displayBasic(ostream& o) const;

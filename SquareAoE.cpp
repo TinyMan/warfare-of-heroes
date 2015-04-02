@@ -17,12 +17,12 @@ SquareAoE::~SquareAoE()
 void SquareAoE::setCenter(Cell* center)
 {
 	_center = center;
-	extrapole();
+	this->extrapole();
 }
 void SquareAoE::setLen(int len)
 {
 	_len = len;
-	extrapole();
+	this->extrapole();
 }
 void SquareAoE::extrapole()
 {
