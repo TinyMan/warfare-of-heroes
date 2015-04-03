@@ -11,19 +11,19 @@ Mage::Mage(int x, int y, string name) : Character(x, y, name)
 	cpMax = CP_MAX;
 	hpMax = _hitPoints = HP_MAX;
 
-	_spells[ROOT] = new Spell("Damage Buff", this, 4, 4, 0, 7, false);
+	_spells[ROOT] = new Spell("Damage Buff", this, 4, 4, 0, 0, 0, 7, false);
 	_spells[ROOT]->addEffect(new RootEffect(3, this));
 
-	_spells[FIREBALL] = new Spell("Fireball of the Doom", this, 4, 5, 0, 4, false);
+	_spells[FIREBALL] = new Spell("Fireball of the Doom", this, 4, 5, 0, 0, 0, 4, false);
 	_spells[FIREBALL]->addEffect(new DamageEffect(150, this));
 	DamageBuffEffect* e = new DamageBuffEffect(200, 3, this);
 	e->setTarget(this);
 	_spells[FIREBALL]->addEffect(e);
 
-	_spells[THUNDER] = new Spell("Thunder Storm", this, 2, 6, 0, 5, true);
+	_spells[THUNDER] = new Spell("Thunder Storm", this, 2, 6, 0, 0, 0, 5, true);
 	_spells[THUNDER]->addEffect(new DamageEffect(80, this));
 
-	_spells[ERUPTION] = new Spell("Eruption", this, 2, 4, 0, 7, false);
+	_spells[ERUPTION] = new Spell("Eruption", this, 2, 4, 0, 0, 0, 7, false);
 	_spells[ERUPTION]->addEffect(new DamageOverTime(100, 6, this, "Eruption DoT"));
 	
 	

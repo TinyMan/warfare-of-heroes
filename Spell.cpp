@@ -2,8 +2,8 @@
 
 /* definition */
 
-Spell::Spell(string name, Character* caster, int cd,int cost, int min_scope, int max_scope, bool is_inline)
-	: _name(name), _caster(caster), _max_cooldown(cd), _cost(cost), _min_scope(min_scope), _max_scope(max_scope), _is_inline(is_inline)
+Spell::Spell(string name, Character* caster, int cd,int cp_cost, int mp_cost, int hp_cost, int min_scope, int max_scope, bool is_inline)
+	: _name(name), _caster(caster), _max_cooldown(cd), _cp_cost(cp_cost), _mp_cost(mp_cost), _hp_cost(hp_cost), _min_scope(min_scope), _max_scope(max_scope), _is_inline(is_inline)
 {
 }
 
@@ -18,7 +18,9 @@ bool Spell::cast(SpellTarget* target)
 	if (canCastOn(target))
 	{
 		_cooldown = _max_cooldown;
-		_caster->removeCapaciyPoint(_cost);
+		_caster->removeCapaciyPoint(_cp_cost);
+		_caster->removeMovementPoint(_mp_cost);
+		_caster->lowerHitPoint(_hp_cost);
 
 		for (Effect* e : _effects)
 		{
