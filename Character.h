@@ -31,6 +31,7 @@ protected:
 	int hpMax;
 	Cell* _hisCell = nullptr;
 	bool _myTurn = false;
+	bool _dead = false;
 
 	vector<Spell*> _spells;
 public:
@@ -39,6 +40,7 @@ public:
 
 	// Setters :
 	void lowerHitPoint(int amount=0);
+	void heal(int amount = 0);
 	void removeMovementPoint(int amount=1);
 	void removeCapaciyPoint(int amount = 1);
 	void addBonusDamage(int amount = 0);
@@ -55,6 +57,7 @@ public:
 	Spell* getSpell(int spellID) const { return _spells.at(spellID); }
 	bool hisTurn() const { return _myTurn; }
 	virtual void displayBasic(ostream& o) const;
+	bool isDead() const { return _dead; }
 
 	/* every children have to implement those methods */
 	// Attacks :

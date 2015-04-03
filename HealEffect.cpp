@@ -16,7 +16,7 @@ bool HealEffect::apply(SpellTarget* st)
 {
 	if (st)
 	{		
-		st->lowerHitPoint(-_heal);
+		st->heal(_heal);
 		return true;
 	}
 	return false;

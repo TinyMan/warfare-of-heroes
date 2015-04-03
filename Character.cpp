@@ -18,14 +18,34 @@ Character::~Character()
 
 void Character::lowerHitPoint(int amount)
 {
-	_hitPoints -= amount;
-	if (_hitPoints < 0)
-		_hitPoints = 0;
+	if (!_dead)
+	{
+		/* trigger taking damage event */
+		if (_hitPoints < amount)
+		{
+			_dead = true;
+			_hitPoints = 0;
+			/* trigger dead event */
+		}
+		else
+		{
+			_hitPoints -= amount;
+		}
+	}
+}
 
+void Character::heal(int amount)
+{
+	if (!_dead)
+	{
+		/* trigger heal event */
+		_hitPoints += amount;
+	}
 }
 
 void Character::removeMovementPoint(int amount)
 {
+	/* trigger event remove mp */
 	_movementPoints -= amount;
 	if (_movementPoints < 0)
 		_movementPoints = 0;
@@ -33,6 +53,7 @@ void Character::removeMovementPoint(int amount)
 
 void Character::removeCapaciyPoint(int amount)
 {
+	/* trigger event remove cp */
 	_capacityPoints -= amount;
 	if (_capacityPoints < 0)
 		_capacityPoints = 0;
@@ -43,6 +64,7 @@ void Character::addBonusDamage(int amount)
 }
 void Character::addEffect(OverTimeEffect* e)
 {
+	/* trigger event adding an effect */
 	_effects.push_back(e);
 	LOGINFO << "Adding over time effect " << *e << " to ";
 	displayBasic(LOGINFO);
@@ -212,7 +234,7 @@ ostream& operator<<(ostream& o, const Character& c)
 	o << "|-- MP: " << c._movementPoints << endl;
 	o << "|-- CP: " << c._capacityPoints << endl;
 	o << "|-- DB: " << c._bonusDamage << endl;
-	o << "|-- HT: " << c._myTurn << endl;
+	//o << "|-- HT: " << c._myTurn << endl;
 	//o << "|-- DoT: " << c._damageOverTime << endl;
 
 	return o;
