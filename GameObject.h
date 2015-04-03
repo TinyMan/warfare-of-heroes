@@ -2,10 +2,10 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "ServiceLocator.h"
-#include "Event.h"
+#include "GameObjectEvents.h"
 
 using namespace std;
-
+using namespace Events::GameObjectEvents;
 class Game;
 
 class GameObject
@@ -22,7 +22,7 @@ public:
 	bool isActive() const  { return _active; }
 	void setActive(bool a = true);
 	bool isToDelete() const { return _to_delete; }
-	void setToDelete(bool td = true) { _to_delete = td; }
+	void setToDelete(bool td = true);
 	int getId() const { return _id; }
 
 	static int getObjectCount()  { return _object_count; }
@@ -49,9 +49,3 @@ private:
 /* used only to sort */
 bool compare(const GameObject* g, const GameObject* go);
 
-/* declaring events */
-namespace Events
-{
-	const EVENT_TYPE GAMEOBJECT_ACTIVATE = "GAMEOBJECT_ACTIVATE";
-	const EVENT_TYPE GAMEOBJECT_DEACTIVATE = "GAMEOBJECT_DEACTIVATE";
-}

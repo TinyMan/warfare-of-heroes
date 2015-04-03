@@ -6,8 +6,6 @@
 using namespace std;
 
 namespace Events{
-	const EVENT_TYPE PLAYER_ACTION = "PLAYER_ACTION";
-
 	class Action :
 		public Event
 	{
@@ -15,14 +13,8 @@ namespace Events{
 		string _text;
 		Callback _cb;
 
-	public:
-		enum ACTION_TYPE
-		{
-			CAST,
-			MOVE,
-			FINISH
-		};
-		Action(Callback& cb, string text = "", void* data = nullptr);
+	public:		
+		Action(Callback& cb, string text = "");
 		virtual ~Action();
 
 		virtual void trigger() const;

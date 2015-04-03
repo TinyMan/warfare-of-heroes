@@ -1,4 +1,5 @@
 #include "EventService.h"
+#include "ServiceLocator.h"
 
 namespace Events
 {
@@ -12,18 +13,17 @@ namespace Events
 	}
 
 
-	void EventService::dispatch(Event& e) const
+	void EventService::dispatch(Event* e) const
 	{
-		if (!_listeners.count(e.getType()))
-			return;
-		for (auto cb : _listeners.at(e.getType()))
+		//LOGINFO << "Dispatching " << typeid(*e).name() << endl;
+		for (const Callback& cb : _listeners.at(typeid(*e).hash_code()))
 		{
-			cb.call(&e);
+			cb.call(e);
 		}
 	}
 
-	void EventService::listen(EVENT_TYPE et, Callback& cb)
+	void EventService::listen(const type_info& ti, const Callback& cb)
 	{
-		_listeners[et].push_back(cb);
+		_listeners[ti.hash_code()].push_back(cb);
 	}
 }

@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <typeinfo>
 #include <iostream>
 #include "Game.h"
 #include "ServiceLocator.h"
@@ -32,15 +33,8 @@ int main(int argc, char* argv[])
 	g->addPlayer(player1);
 	g->addPlayer(player3);
 	
-
-	g->displayState();
-
-	/*player1->beginTurn();
-	Spell* av = new Spell("Arrow Volley", player1, 4, 120, 0, 10, 0, 8);
-	av->cast(Character::targetSelector());
-	g->displayState();*/
-	//LOGINFO << *av << endl;
-
+	//g->stop();
+	g->displayState();	
 	g->start();
 	while (g->isRunning())
 	{

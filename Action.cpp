@@ -2,7 +2,7 @@
 
 
 namespace Events{
-	Action::Action(Callback& cb, string t, void* data) : _text(t), _cb(cb), Event(PLAYER_ACTION, data)
+	Action::Action(Callback& cb, string t) : _text(t), _cb(cb)
 	{
 	}
 
@@ -13,7 +13,7 @@ namespace Events{
 
 	void Action::trigger() const
 	{
-		_cb.call(this->getData());
+		_cb.call();
 	}
 
 	ostream& operator<<(ostream& o, const Action& a)

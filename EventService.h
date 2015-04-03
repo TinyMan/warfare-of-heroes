@@ -1,4 +1,5 @@
 #pragma once
+#include <typeinfo>
 #include <list>
 #include <map>
 #include <iostream>
@@ -6,6 +7,7 @@
 #include "Callback.h"
 
 using namespace std;
+#define EVENTSERVICE ServiceLocator::getEventService()
 
 namespace Events
 {
@@ -15,12 +17,12 @@ namespace Events
 		EventService();
 		virtual ~EventService();
 
-		virtual void dispatch(Event&) const;
+		virtual void dispatch(Event*) const;
 
-		void listen(EVENT_TYPE e, Callback& cb);
+		void listen(const type_info& e, const Callback& cb);
 
 	private:
-		map<EVENT_TYPE, list<Callback>> _listeners;
+		map<size_t, list<Callback>> _listeners;
 
 	};
 }

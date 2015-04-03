@@ -19,7 +19,24 @@ void GameObject::setActive(bool a)
 	if (_active != a)
 	{
 		_active = a;
-		ServiceLocator::getEventService()->dispatch(Event(a ? Events::GAMEOBJECT_ACTIVATE : Events::GAMEOBJECT_DEACTIVATE, this));
+		Events::Event* e;
+		if (a)
+			e = new ActivateEvent(this);
+		else
+			e = new DeactivateEvent(this);
+		ServiceLocator::getEventService()->dispatch(e);
+	}
+}
+void GameObject::setToDelete(bool a)
+{
+	if (_to_delete != a)
+	{
+		_to_delete = a;
+		Events::Event* e;
+		if (a){
+			e = new ToDeleteEvent(this);
+			ServiceLocator::getEventService()->dispatch(e);
+		}
 	}
 }
 

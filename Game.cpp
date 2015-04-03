@@ -16,9 +16,9 @@ Game::Game()
 	ServiceLocator::provide(_userInterface);
 
 	/* setup event listenenrs */
-	_eventService->listen(Events::GAMEOBJECT_ACTIVATE, Callback(&Game::onActivatedGameObject, this));
-	_eventService->listen(Events::GAMEOBJECT_DEACTIVATE, Callback(&Game::onDeactivatedGameObject, this));
-
+	_eventService->listen(typeid(Events::GameObjectEvents::ActivateEvent), Callback(&Game::onActivatedGameObject, this));
+	_eventService->listen(typeid(Events::GameObjectEvents::DeactivateEvent), Callback(&Game::onDeactivatedGameObject, this));
+	
 	/* generate basic game objects */
 	_grid = new Grid();
 	
