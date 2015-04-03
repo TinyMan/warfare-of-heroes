@@ -2,13 +2,15 @@
 #include "Cell.h"
 #include "Grid.h"
 #include "Spell.h"
+#include "MoveEffect.h"
 
 
-Character::Character(int x, int y, string name) : _name(name), _spells(NB_SPELLS)
+Character::Character(int x, int y, string name) : _name(name)
 {
 	Grid* grid = Game::getInstance()->getGrid();
 	grid->setObject(this, x, y);
 	_hisCell = grid->getCellAt(x, y);
+		
 }
 
 
@@ -96,6 +98,7 @@ bool Character::move(Cell& c, bool moveWanted)
 	{
 		int distance = GAMEINST->getGrid()->getCellDistance(c, *_hisCell);
 		if (distance > _movementPoints && moveWanted) throw "not enough movement points";
+		_hisCell->free();
 		c.setObject(this);
 		_hisCell->setType(Cell::Free);
 		_hisCell = &c;
@@ -141,10 +144,10 @@ void Character::beginTurn()
 		e->beginTurn();
 	}
 	/* update cooldown */
-	for (Spell* s : _spells)
+	for (auto s : _spells)
 	{
-		if(s)
-			s->beginTurn();
+		if(s.second)
+			s.second->beginTurn();
 	}
 }
 void Character::endTurn()
@@ -178,6 +181,8 @@ void Character::newCast(int spellID, void* target)
 
 void Character::targetSelectorForCell(int spellID, void* d)
 {
+	LOGWARN << "targetSelectorForCell: depreciated, you should not call this func" << endl;
+	
 	// TO DO: changes to return a cell
 	int x, y;
 	LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
@@ -193,6 +198,8 @@ void Character::targetSelectorForCell(int spellID, void* d)
 }
 void Character::targetSelectorForCharacter(int spellIID, void* d)
 {
+	LOGWARN << "targetSelectorForCharacter: depreciated, you should not call this func" << endl;
+	
 	LOGINFO << "Select your target: " << endl;
 	GAMEINST->displayPlayersList(LOGINFO);
 	int c;

@@ -79,6 +79,8 @@ void Mage::basicAttack(Character & c)
 
 void Mage::thunderStorm(const Cell & c)
 {
+	LOGWARN << "thunderStorm: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 5; // Only in line                    //
 	int amountOfDamages = 80;                         //
@@ -88,10 +90,13 @@ void Mage::thunderStorm(const Cell & c)
 	// TODO : En ligne, AoE
 
 	LOGINFO << this->getName() << " : Casting thunder storm on (" << c.getPosX() << "," << c.getPosY() << ")." << endl;
+	*/
 }
 
 void Mage::eruption(const Cell & c)
 {
+	LOGWARN << "eruption: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 7;                                    //
 	int amountOfDamages = 70;                         //
@@ -101,10 +106,13 @@ void Mage::eruption(const Cell & c)
 	// TODO : AoE dégats
 
 	LOGINFO << this->getName() << " : Casting eruption on (" << c.getPosX() << "," << c.getPosY() << ")." << endl;
+	*/
 }
 
 void Mage::rooting(Character & c)
 {
+	LOGWARN << "rooting: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 7;                                    //
 	int amountOfMPRemoved = 1;                        //
@@ -120,10 +128,13 @@ void Mage::rooting(Character & c)
 	}
 	else
 		LOGWARN << this->getName() << " : Fail cast rooting" << endl;
+		*/
 }
 
 void Mage::fireBallOfTheDoom(Character & c)
 {
+	LOGWARN << "fireBallOfTheDoom: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 4;                                    //
 	int amountOfDamages = 150;                        //
@@ -140,6 +151,7 @@ void Mage::fireBallOfTheDoom(Character & c)
 	}
 	else
 		LOGWARN << this->getName() << " : Fail Cast fireBall" << endl;
+		*/
 }
 void Mage::beginTurn()
 {

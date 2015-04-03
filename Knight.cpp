@@ -86,6 +86,8 @@ void Knight::basicAttack(Character & c)
 
 void Knight::dash(Cell & c)
 {
+	LOGWARN << "dash: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 2;                                    //
 	int cost = 3;                                     //
@@ -100,9 +102,12 @@ void Knight::dash(Cell & c)
 	}
 	else
 		LOGWARN << this->getName() << " : Fail cast dash" << endl;
+		*/
 }
 void Knight::swordForward(Character & c)
 {
+	LOGWARN << "swordForward: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 6; // Only in line                    //
 	int amountOfDamages = 90;                         //
@@ -119,10 +124,13 @@ void Knight::swordForward(Character & c)
 	}
 	else
 		LOGWARN << this->getName() << " : Fail cast swordForward" << endl;
+		*/
 }
 
 void Knight::heal()
 {
+	LOGWARN << "heal: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 0;                                    //
 	int amountOfDamages = -50;                        //
@@ -138,11 +146,13 @@ void Knight::heal()
 	else
 		LOGWARN << this->getName() << " : Fail cast heal" << endl;
 
-	
+	*/
 }
 
 void Knight::swordOfDestiny(Character & c)
 {
+	LOGWARN << "swordOfDestiny: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 1;                                    //
 	int amountOfDamages = 250;                        //
@@ -157,6 +167,7 @@ void Knight::swordOfDestiny(Character & c)
 	}
 	else
 		LOGWARN << this->getName() << " : Fail cast swordOfDestiny" << endl;
+		*/
 }
 void Knight::beginTurn()
 {

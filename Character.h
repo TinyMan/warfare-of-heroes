@@ -33,7 +33,7 @@ protected:
 	bool _myTurn = false;
 	bool _dead = false;
 
-	vector<Spell*> _spells;
+	map<int, Spell*> _spells;
 public:
 	Character(int x = 0, int y = 0, string name = "NoName");
 	virtual ~Character();

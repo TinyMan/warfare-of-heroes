@@ -34,6 +34,8 @@ Archer::~Archer()
 
 void Archer::cast(int spellID, void* data)
 {
+	LOGWARN << "cast: depreciated, you should not call this func" << endl;
+	/*
 	switch (spellID)
 	{
 	case Character::BASIC_ATTACK:
@@ -55,7 +57,7 @@ void Archer::cast(int spellID, void* data)
 		break;
 	default:
 		break;
-	}
+	}*/
 }
 
 void Archer::basicAttack(Character & c)
@@ -75,10 +77,13 @@ void Archer::basicAttack(Character & c)
 	}
 	else
 		LOGWARN << this->getName() << " : Fail cast basicAttack" << endl;
+		
 }
 
 void Archer::damageBuff()
 {
+	LOGWARN << "damageBuff: depreciated, you should not call this func" << endl;
+	/*
 	////////STATS OF THE SPELL///////
 	int cost = 4;                  //
 	/////////////////////////////////
@@ -86,16 +91,18 @@ void Archer::damageBuff()
 	if (_capacityPoints >= cost)
 	{
 		_bonusDamage += 20;
-		/* Lancement du sort : affichage */
 		LOGINFO << this->getName() << " : Casting damageBuff on himself (" << this->getId() << ") : +20 damages." << endl;
 		_capacityPoints -= cost;
 	}
 	else
 		LOGWARN << this->getName() << " : Fail cast damageBuff (not enough CP)" << endl;
+		*/
 }
 
 void Archer::flamedArrow(Character & c)
 {
+	LOGWARN << "flamedArrow: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 6; //                                 //
 	int amountOfDamages = 80;                         //
@@ -114,10 +121,13 @@ void Archer::flamedArrow(Character & c)
 	}
 	else
 		LOGWARN << this->getName() << " : Fail cast flamedArrow" << endl;
+		*/
 }
 
 void Archer::stepBackArrow(Character & c)
 {
+	LOGWARN << "stepBackArrow: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 3;                                    //
 	int amountOfDamages = 70;                         //
@@ -144,11 +154,13 @@ void Archer::stepBackArrow(Character & c)
 	}
 	else
 		LOGWARN << this->getName() << " : Fail cast stepBackArrow" << endl;
-	
+		*/	
 }
 
 void Archer::arrowVolley(Character & c)
 {
+	LOGWARN << "arrowVolley: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 8;                                    //
 	int amountOfDamages = 120;                        //
@@ -163,6 +175,7 @@ void Archer::arrowVolley(Character & c)
 	}
 	else
 		LOGWARN << this->getName() << " : Fail cast arrowVolley" << endl;
+		*/
 }
 
 void Archer::beginTurn()

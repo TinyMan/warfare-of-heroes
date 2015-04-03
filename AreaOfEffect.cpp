@@ -30,6 +30,14 @@ void AreaOfEffect::lowerHitPoint(int amount)
 		c->lowerHitPoint(amount);
 	}
 }
+void AreaOfEffect::heal(int amount)
+{
+	for (Cell* c : _cells)
+	{
+		LOGINFO << "Healing on " << *c << endl;
+		c->lowerHitPoint(amount);
+	}
+}
 void AreaOfEffect::removeMovementPoint(int amount)
 {
 	for (Cell* c : _cells)
