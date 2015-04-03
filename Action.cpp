@@ -1,22 +1,24 @@
 #include "Action.h"
 
 
-Action::Action(Callback& cb, string t, void* data) : _text(t), _cb(cb), Event(PLAYER_ACTION, data)
-{
-}
+namespace Events{
+	Action::Action(Callback& cb, string t, void* data) : _text(t), _cb(cb), Event(PLAYER_ACTION, data)
+	{
+	}
 
 
-Action::~Action()
-{
-}
+	Action::~Action()
+	{
+	}
 
-void Action::trigger() const
-{
-	_cb.call(this->getData());
-}
+	void Action::trigger() const
+	{
+		_cb.call(this->getData());
+	}
 
-ostream& operator<<(ostream& o, const Action& a)
-{
-	o << a.getText() << " ";
-	return o;
+	ostream& operator<<(ostream& o, const Action& a)
+	{
+		o << a.getText() << " ";
+		return o;
+	}
 }

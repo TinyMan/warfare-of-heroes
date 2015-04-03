@@ -7,18 +7,21 @@
 
 using namespace std;
 
-class EventService
+namespace Events
 {
-public:
-	EventService();
-	virtual ~EventService();
+	class EventService
+	{
+	public:
+		EventService();
+		virtual ~EventService();
 
-	virtual void dispatch(Event&) const;
-	
-	void listen(Event::EVENT_TYPE e, Callback& cb);
+		virtual void dispatch(Event&) const;
 
-private:
-	map<Event::EVENT_TYPE, list<Callback>> _listeners;
+		void listen(EVENT_TYPE e, Callback& cb);
 
-};
+	private:
+		map<EVENT_TYPE, list<Callback>> _listeners;
+
+	};
+}
 

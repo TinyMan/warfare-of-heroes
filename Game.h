@@ -13,6 +13,7 @@
 #define GAMEINST Game::getInstance()
 
 using namespace std;
+using namespace Events;
 
 
 /*

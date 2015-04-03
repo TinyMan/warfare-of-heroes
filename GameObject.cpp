@@ -19,7 +19,7 @@ void GameObject::setActive(bool a)
 	if (_active != a)
 	{
 		_active = a;
-		ServiceLocator::getEventService()->dispatch(Event(a ? Event::GAMEOBJECT_ACTIVATE : Event::GAMEOBJECT_DEACTIVATE, this));
+		ServiceLocator::getEventService()->dispatch(Event(a ? Events::GAMEOBJECT_ACTIVATE : Events::GAMEOBJECT_DEACTIVATE, this));
 	}
 }
 

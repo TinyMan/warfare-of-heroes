@@ -2,8 +2,10 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "ServiceLocator.h"
+#include "Event.h"
 
 using namespace std;
+
 class Game;
 
 class GameObject
@@ -46,3 +48,10 @@ private:
 
 /* used only to sort */
 bool compare(const GameObject* g, const GameObject* go);
+
+/* declaring events */
+namespace Events
+{
+	const EVENT_TYPE GAMEOBJECT_ACTIVATE = "GAMEOBJECT_ACTIVATE";
+	const EVENT_TYPE GAMEOBJECT_DEACTIVATE = "GAMEOBJECT_DEACTIVATE";
+}

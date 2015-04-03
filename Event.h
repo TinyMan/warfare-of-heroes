@@ -1,47 +1,44 @@
 #pragma once
-
+#include <string>
 using namespace std;
 
-class Event
+namespace Events
 {
-public:
+	typedef string EVENT_TYPE;
 
-	typedef enum EVENT_TYPE
+	const string NONE = "NONE";
+
+	class Event
 	{
-		NONE,
-		LAND,
-		GAMEOBJECT_ACTIVATE,
-		GAMEOBJECT_DEACTIVATE,
-		PLAYER_ACTION
-	} EVENT_TYPE;
+	public:
+		Event(EVENT_TYPE t = NONE, void* data =nullptr );
+		virtual ~Event();
 
-	Event(EVENT_TYPE t = NONE, void* data =nullptr );
-	virtual ~Event();
+		//virtual void dispatch() const;
+		virtual void setData(void* data) { _data = data; }
+		virtual void* getData() const { return _data; }
 
-	//virtual void dispatch() const;
-	virtual void setData(void* data) { _data = data; }
-	virtual void* getData() const { return _data; }
+		virtual int getId() const { return _id; }
 
-	virtual int getId() const { return _id; }
+		EVENT_TYPE getType() const { return _type; }
 
-	EVENT_TYPE getType() const { return _type; }
+	protected:
+		/*static EventService* getEventService()
+		{
+			if (_manager == nullptr)
+				_manager = ServiceLocator::getEventService();
+			return _manager; 
+		}
+		*/
+	private:
+		EVENT_TYPE _type;
 
-protected:
-	/*static EventService* getEventService()
-	{
-		if (_manager == nullptr)
-			_manager = ServiceLocator::getEventService();
-		return _manager; 
-	}
-	*/
-private:
-	EVENT_TYPE _type;
+		void* _data;
+		//static EventService * _manager;
 
-	void* _data;
-	//static EventService * _manager;
+		int _id;
 
-	int _id;
+		static int next_id;
+	};
 
-	static int next_id;
-};
-
+}
