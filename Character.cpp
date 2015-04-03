@@ -10,7 +10,7 @@ Character::Character(int x, int y, string name) : _name(name)
 	Grid* grid = Game::getInstance()->getGrid();
 	grid->setObject(this, x, y);
 	_hisCell = grid->getCellAt(x, y);
-		
+	
 }
 
 
@@ -176,7 +176,8 @@ void Character::newCast(int spellID, void* target)
 {
 	if (target == nullptr)
 		target = this;
-	_spells[spellID]->cast((Character*)target);
+	if (_spells.count(spellID))
+		_spells[spellID]->cast((Character*)target);
 }
 
 void Character::targetSelectorForCell(int spellID, void* d)

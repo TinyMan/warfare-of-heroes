@@ -33,6 +33,7 @@ int main(int argc, char* argv[])
 	g->addPlayer(player1);
 	g->addPlayer(player3);
 	
+	player1->setToDelete();
 	//g->stop();
 	g->displayState();	
 	g->start();

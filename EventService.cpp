@@ -16,6 +16,8 @@ namespace Events
 	void EventService::dispatch(Event* e) const
 	{
 		//LOGINFO << "Dispatching " << typeid(*e).name() << endl;
+		if (!_listeners.count(typeid(*e).hash_code()))
+			return;
 		for (const Callback& cb : _listeners.at(typeid(*e).hash_code()))
 		{
 			cb.call(e);
