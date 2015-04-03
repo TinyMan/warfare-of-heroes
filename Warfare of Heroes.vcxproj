@@ -117,6 +117,7 @@
     <ClInclude Include="Callback.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="CharacterEvents.h" />
     <ClInclude Include="DamageBuffEffect.h" />
     <ClInclude Include="DamageEffect.h" />
     <ClInclude Include="DamageOverTime.h" />

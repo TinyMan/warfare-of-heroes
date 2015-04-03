@@ -27,7 +27,7 @@ void Character::lowerHitPoint(int amount)
 		{
 			_dead = true;
 			_hitPoints = 0;
-			/* trigger dead event */
+			(new DieEvent(this))->dispatch();
 		}
 		else
 		{

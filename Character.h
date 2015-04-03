@@ -5,9 +5,10 @@
 #include "GameObject.h"
 #include "Game.h"
 #include "DamageOverTime.h"
-//#include "BonusDamage.h"
+#include "CharacterEvents.h"
 
 using namespace std;
+using namespace Events::CharacterEvents;
 
 class Cell;
 class Spell;
