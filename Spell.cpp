@@ -2,8 +2,8 @@
 
 /* definition */
 
-Spell::Spell(string name, Character* caster, int cd,int cost, int min_scope, int max_scope, bool is_inline)
-	: _name(name), _caster(caster), _max_cooldown(cd), _cost(cost), _min_scope(min_scope), _max_scope(max_scope), _is_inline(is_inline)
+Spell::Spell(string name, Character* caster, int cd,int cp_cost, int mp_cost, int hp_cost, int min_scope, int max_scope, bool is_inline)
+	: _name(name), _caster(caster), _max_cooldown(cd), _cp_cost(cp_cost), _mp_cost(mp_cost), _hp_cost(hp_cost), _min_scope(min_scope), _max_scope(max_scope), _is_inline(is_inline)
 {
 }
 
@@ -18,7 +18,9 @@ bool Spell::cast(SpellTarget* target)
 	if (canCastOn(target))
 	{
 		_cooldown = _max_cooldown;
-		_caster->removeCapaciyPoint(_cost);
+		_caster->removeCapaciyPoint(_cp_cost);
+		_caster->removeMovementPoint(_mp_cost);
+		_caster->lowerHitPoint(_hp_cost);
 
 		for (Effect* e : _effects)
 		{
@@ -41,19 +43,29 @@ bool Spell::canCastOn(SpellTarget* target)
 		int distance = _caster->getDistance(*target);
 		if (distance <= _max_scope && distance >= _min_scope)
 		{
-			if (_caster->getCP() >= _cost)
+			if (_caster->getCP() >= _cp_cost)
 			{
-				if (!_is_inline || _caster->getCell()->isInLine(*target->getCell()))
+				if (_caster->getMP() >= _mp_cost)
 				{
-					if (_cooldown <= 0)
+					if (_caster->getHP() >= _hp_cost)
 					{
-						return true;
+						if (!_is_inline || _caster->getCell()->isInLine(*target->getCell()))
+						{
+							if (_cooldown <= 0)
+							{
+								return true;
+							}
+							else
+								LOGWARN << "Spell in cooldown" << endl;
+						}
+						else
+							LOGWARN << "Target not inline" << endl;
 					}
 					else
-						LOGWARN << "Spell in cooldown" << endl;
+						LOGWARN << "Not enough HP" << endl;
 				}
 				else
-					LOGWARN << "Target not inline" << endl;
+					LOGWARN << "Not enough MP" << endl;				
 			}
 			else
 				LOGWARN << "Not enough CP" << endl;

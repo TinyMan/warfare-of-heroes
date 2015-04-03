@@ -23,6 +23,7 @@ public:
 
 	/* setters */
 	virtual void lowerHitPoint(int amount) = 0;
+	virtual void heal(int amount) = 0;
 	virtual void removeMovementPoint(int amount) =0;
 	virtual void removeCapaciyPoint(int amount) =0;
 	virtual void addEffect(OverTimeEffect*) =0;

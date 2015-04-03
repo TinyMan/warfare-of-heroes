@@ -1,17 +1,12 @@
 #include "Event.h"
-
-int Event::next_id = 0;
-
-Event::Event(EVENT_TYPE type, void* data) : _type(type), _data(data), _id(next_id++)
+#include "ServiceLocator.h"
+namespace Events
 {
+	Event::~Event()
+	{
+	}
+	void Event::dispatch()
+	{
+		EVENTSERVICE->dispatch(this);
+	}
 }
-
-
-Event::~Event()
-{
-}
-
-/*void Event::dispatch() const
-{
-	getEventService()->dispatch(*this);
-}*/

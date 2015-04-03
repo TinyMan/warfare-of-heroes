@@ -2,13 +2,15 @@
 #include "Cell.h"
 #include "Grid.h"
 #include "Spell.h"
+#include "MoveEffect.h"
 
 
-Character::Character(int x, int y, string name) : _name(name), _spells(NB_SPELLS)
+Character::Character(int x, int y, string name) : _name(name)
 {
 	Grid* grid = Game::getInstance()->getGrid();
 	grid->setObject(this, x, y);
 	_hisCell = grid->getCellAt(x, y);
+	
 }
 
 
@@ -18,14 +20,34 @@ Character::~Character()
 
 void Character::lowerHitPoint(int amount)
 {
-	_hitPoints -= amount;
-	if (_hitPoints < 0)
-		_hitPoints = 0;
+	if (!_dead)
+	{
+		/* trigger taking damage event */
+		if (_hitPoints < amount)
+		{
+			_dead = true;
+			_hitPoints = 0;
+			(new DieEvent(this))->dispatch();
+		}
+		else
+		{
+			_hitPoints -= amount;
+		}
+	}
+}
 
+void Character::heal(int amount)
+{
+	if (!_dead)
+	{
+		/* trigger heal event */
+		_hitPoints += amount;
+	}
 }
 
 void Character::removeMovementPoint(int amount)
 {
+	/* trigger event remove mp */
 	_movementPoints -= amount;
 	if (_movementPoints < 0)
 		_movementPoints = 0;
@@ -33,6 +55,7 @@ void Character::removeMovementPoint(int amount)
 
 void Character::removeCapaciyPoint(int amount)
 {
+	/* trigger event remove cp */
 	_capacityPoints -= amount;
 	if (_capacityPoints < 0)
 		_capacityPoints = 0;
@@ -43,6 +66,7 @@ void Character::addBonusDamage(int amount)
 }
 void Character::addEffect(OverTimeEffect* e)
 {
+	/* trigger event adding an effect */
 	_effects.push_back(e);
 	LOGINFO << "Adding over time effect " << *e << " to ";
 	displayBasic(LOGINFO);
@@ -74,6 +98,7 @@ bool Character::move(Cell& c, bool moveWanted)
 	{
 		int distance = GAMEINST->getGrid()->getCellDistance(c, *_hisCell);
 		if (distance > _movementPoints && moveWanted) throw "not enough movement points";
+		_hisCell->free();
 		c.setObject(this);
 		_hisCell->setType(Cell::Free);
 		_hisCell = &c;
@@ -119,10 +144,10 @@ void Character::beginTurn()
 		e->beginTurn();
 	}
 	/* update cooldown */
-	for (Spell* s : _spells)
+	for (auto s : _spells)
 	{
-		if(s)
-			s->beginTurn();
+		if(s.second)
+			s.second->beginTurn();
 	}
 }
 void Character::endTurn()
@@ -151,11 +176,14 @@ void Character::newCast(int spellID, void* target)
 {
 	if (target == nullptr)
 		target = this;
-	_spells[spellID]->cast((Character*)target);
+	if (_spells.count(spellID))
+		_spells[spellID]->cast((Character*)target);
 }
 
 void Character::targetSelectorForCell(int spellID, void* d)
 {
+	LOGWARN << "targetSelectorForCell: depreciated, you should not call this func" << endl;
+	
 	// TO DO: changes to return a cell
 	int x, y;
 	LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
@@ -171,6 +199,8 @@ void Character::targetSelectorForCell(int spellID, void* d)
 }
 void Character::targetSelectorForCharacter(int spellIID, void* d)
 {
+	LOGWARN << "targetSelectorForCharacter: depreciated, you should not call this func" << endl;
+	
 	LOGINFO << "Select your target: " << endl;
 	GAMEINST->displayPlayersList(LOGINFO);
 	int c;
@@ -212,7 +242,7 @@ ostream& operator<<(ostream& o, const Character& c)
 	o << "|-- MP: " << c._movementPoints << endl;
 	o << "|-- CP: " << c._capacityPoints << endl;
 	o << "|-- DB: " << c._bonusDamage << endl;
-	o << "|-- HT: " << c._myTurn << endl;
+	//o << "|-- HT: " << c._myTurn << endl;
 	//o << "|-- DoT: " << c._damageOverTime << endl;
 
 	return o;

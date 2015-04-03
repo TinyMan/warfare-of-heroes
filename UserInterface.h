@@ -2,6 +2,7 @@
 #include <deque>
 #include <iostream>
 #include "Action.h"
+using namespace Events;
 
 class UserInterface
 {

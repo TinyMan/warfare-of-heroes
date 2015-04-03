@@ -4,6 +4,8 @@
 #include "EventService.h"
 #include "UserInterface.h"
 
+using namespace Events;
+
 #define UI ServiceLocator::getUI()
 
 class ServiceLocator

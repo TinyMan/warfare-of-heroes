@@ -13,17 +13,17 @@ Knight::Knight(int x , int y , string name) : Character(x, y, name)
 	cpMax = CP_MAX;
 	hpMax = _hitPoints = HP_MAX;
 
-	_spells[DASH] = new Spell("Dash", this, 4, 3, 0, 2, false);
+	_spells[DASH] = new Spell("Dash", this, 2, 3, 0, 0, 0, 2, false);
 	_spells[DASH]->addEffect(new DashEffect(this));
 
-	_spells[HEAL] = new Spell("Heal", this, 4, 2, 0, 0, false);
+	_spells[HEAL] = new Spell("Heal", this, 2, 2, 0, 0, 0, 0, false);
 	_spells[HEAL]->addEffect(new HealEffect(50, this));
 
-	_spells[SWORD_DESTINY] = new Spell("Sword of Destiny", this, 4, 10, 0, 1, false);
+	_spells[SWORD_DESTINY] = new Spell("Sword of Destiny", this, 2, 10, 0, 0, 0, 1, false);
 	_spells[SWORD_DESTINY]->addEffect(new DamageEffect(250, this));
 
-	_spells[SWORD_FORWARD] = new Spell("Sword Forward", this, 0, 0, 0, 2, true);
-	_spells[SWORD_FORWARD]->addEffect(new DamageEffect(100, this));
+	_spells[SWORD_FORWARD] = new Spell("Sword Forward", this, 2, 5, 0, 0, 0, 6, true);
+	_spells[SWORD_FORWARD]->addEffect(new DamageEffect(90, this));
 	
 }
 
@@ -86,6 +86,8 @@ void Knight::basicAttack(Character & c)
 
 void Knight::dash(Cell & c)
 {
+	LOGWARN << "dash: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 2;                                    //
 	int cost = 3;                                     //
@@ -100,9 +102,12 @@ void Knight::dash(Cell & c)
 	}
 	else
 		LOGWARN << this->getName() << " : Fail cast dash" << endl;
+		*/
 }
 void Knight::swordForward(Character & c)
 {
+	LOGWARN << "swordForward: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 6; // Only in line                    //
 	int amountOfDamages = 90;                         //
@@ -119,10 +124,13 @@ void Knight::swordForward(Character & c)
 	}
 	else
 		LOGWARN << this->getName() << " : Fail cast swordForward" << endl;
+		*/
 }
 
 void Knight::heal()
 {
+	LOGWARN << "heal: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 0;                                    //
 	int amountOfDamages = -50;                        //
@@ -138,11 +146,13 @@ void Knight::heal()
 	else
 		LOGWARN << this->getName() << " : Fail cast heal" << endl;
 
-	
+	*/
 }
 
 void Knight::swordOfDestiny(Character & c)
 {
+	LOGWARN << "swordOfDestiny: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 1;                                    //
 	int amountOfDamages = 250;                        //
@@ -157,6 +167,7 @@ void Knight::swordOfDestiny(Character & c)
 	}
 	else
 		LOGWARN << this->getName() << " : Fail cast swordOfDestiny" << endl;
+		*/
 }
 void Knight::beginTurn()
 {

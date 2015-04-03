@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <typeinfo>
 #include <iostream>
 #include "Game.h"
 #include "ServiceLocator.h"
@@ -26,21 +27,15 @@ int main(int argc, char* argv[])
 	Grid* grid = g->getGrid();
 	grid->generateObstacle();
 
-	Knight* player1 = new Knight(0,2);
+	Archer* player1 = new Archer(0, 2);
 	Mage* player3 = new Mage(6,2);
 	g->addGameObject(grid, player1, player3);
 	g->addPlayer(player1);
 	g->addPlayer(player3);
 	
-
-	g->displayState();
-
-	/*player1->beginTurn();
-	Spell* av = new Spell("Arrow Volley", player1, 4, 120, 0, 10, 0, 8);
-	av->cast(Character::targetSelector());
-	g->displayState();*/
-	//LOGINFO << *av << endl;
-
+	player1->setToDelete();
+	//g->stop();
+	g->displayState();	
 	g->start();
 	while (g->isRunning())
 	{

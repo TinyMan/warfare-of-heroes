@@ -25,6 +25,11 @@ void Cell::setObject(SpellTarget* obj)
 	_object = obj;
 	/* TODO: CHANGE TYPE OF CELL */
 }
+void Cell::free()
+{
+	_object = nullptr;
+	_cellType = Free;
+}
 void Cell::addEffect(OverTimeEffect* e)
 {
 	e->setTarget(this);

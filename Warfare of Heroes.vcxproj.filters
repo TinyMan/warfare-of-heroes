@@ -224,5 +224,11 @@
     <ClInclude Include="LineAoE.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameObjectEvents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterEvents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

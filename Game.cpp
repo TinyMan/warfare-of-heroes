@@ -16,9 +16,10 @@ Game::Game()
 	ServiceLocator::provide(_userInterface);
 
 	/* setup event listenenrs */
-	_eventService->listen(Event::GAMEOBJECT_ACTIVATE, Callback(&Game::onActivatedGameObject, this));
-	_eventService->listen(Event::GAMEOBJECT_DEACTIVATE, Callback(&Game::onDeactivatedGameObject, this));
-
+	_eventService->listen(typeid(Events::GameObjectEvents::ActivateEvent), Callback(&Game::onActivatedGameObject, this));
+	_eventService->listen(typeid(Events::GameObjectEvents::DeactivateEvent), Callback(&Game::onDeactivatedGameObject, this));
+	_eventService->listen(typeid(Events::CharacterEvents::DieEvent), Callback(&Game::onDie, this));
+	
 	/* generate basic game objects */
 	_grid = new Grid();
 	
@@ -94,6 +95,25 @@ void Game::onActivatedGameObject(void*)
 	ServiceLocator::getLogService()->info << "Catching ev: game object activated" << endl;
 	_gameObjects_dirty = true;
 	_nb_active_gobjects++;
+}
+void Game::onDie(void* data)
+{
+	if (data == nullptr)
+		return;
+	char a;
+	Character* c = (Character*)((DieEvent*)data)->getCharacter();
+	LOGINFO << c->getName() << " died !" << endl;	
+	LOGINFO << "Do you want to replay (y/n) ?" << endl;
+	cin >> a;
+	switch (a)
+	{
+	case 'y':
+		// TODO: reset game 
+		break;
+	default:
+		stop();
+		break;
+	}
 }
 void Game::displayState(ostream& o) const
 {

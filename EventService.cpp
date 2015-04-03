@@ -1,27 +1,31 @@
 #include "EventService.h"
+#include "ServiceLocator.h"
 
-
-EventService::EventService()
+namespace Events
 {
-}
-
-
-EventService::~EventService()
-{
-}
-
-
-void EventService::dispatch(Event& e) const
-{
-	if (!_listeners.count(e.getType()))
-		return;
-	for (auto cb : _listeners.at(e.getType()))
+	EventService::EventService()
 	{
-		cb.call(&e);
 	}
-}
 
-void EventService::listen(Event::EVENT_TYPE et, Callback& cb)
-{
-	_listeners[et].push_back(cb);
+
+	EventService::~EventService()
+	{
+	}
+
+
+	void EventService::dispatch(Event* e) const
+	{
+		LOGINFO << "Dispatching " << typeid(*e).name() << endl;
+		if (!_listeners.count(typeid(*e).hash_code()))
+			return;
+		for (const Callback& cb : _listeners.at(typeid(*e).hash_code()))
+		{
+			cb.call(e);
+		}
+	}
+
+	void EventService::listen(const type_info& ti, const Callback& cb)
+	{
+		_listeners[ti.hash_code()].push_back(cb);
+	}
 }

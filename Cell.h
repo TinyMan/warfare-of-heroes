@@ -33,8 +33,10 @@ public:
 
 	/* setters */
 	void setObject(SpellTarget* obj);
+	void free();
 	void setType(_STATE t);
 	void lowerHitPoint(int amount) { if(_object) _object->lowerHitPoint(amount); }
+	void heal(int amount) { if (_object) _object->heal(amount); }
 	void removeMovementPoint(int amount) { if (_object)_object->removeMovementPoint(amount); }
 	void removeCapaciyPoint(int amount) { if (_object)_object->removeCapaciyPoint(amount); }
 	void addEffect(OverTimeEffect* d);

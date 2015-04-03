@@ -9,10 +9,13 @@
 #include "Character.h"
 #include "Grid.h"
 #include "ServiceLocator.h"
+#include "CharacterEvents.h"
 
 #define GAMEINST Game::getInstance()
 
 using namespace std;
+using namespace Events;
+using namespace Events::CharacterEvents;
 
 
 /*
@@ -49,6 +52,7 @@ public:
 	/* event listeners */
 	void onActivatedGameObject(void*);
 	void onDeactivatedGameObject(void*);
+	void onDie(void*);
 
 	/* display the current state of the game */
 	void displayState(ostream& o = LOGINFO) const; // display the full state of the game (game objects, grid, players ...)
