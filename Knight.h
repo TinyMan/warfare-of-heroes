@@ -14,22 +14,22 @@ public:
 	static const int HEAL = 2;
 	static const int SWORD_DESTINY = 3;
 
-	Knight(string name="Aragorn");
+	Knight(int x = 0, int y = 0, string name = "Aragorn");
 	~Knight();
 
-	virtual bool cast(int spellID, void* data);
+	virtual void cast(int spellID, void* data);
 
-	virtual bool basicAttack(Character & c);
+	virtual void basicAttack(Character & c);
 	
 	// begin turn
-	virtual void beginTurn(){};
-	virtual void endTurn(){};
+	virtual void beginTurn();
+	virtual void endTurn();
 
 	// Spells :
-	virtual bool dash(const Cell & c); // Spell 1 : dashes to a cell, range = 2/3 ?
-	virtual bool swordForward(const Cell & c); // Spell 2 : only in line, extends the sword and deals damages
-	virtual bool heal(); // Spell 3 : heal the Knight for a certain amount of HP
-	virtual bool swordOfDestiny(Character & c); // Spell 4 : Bring down from the sky the ultimate sword, destroy anything
+	virtual void dash(Cell & c); // Spell 1 : dashes to a cell, range = 2/3 ?
+	virtual void swordForward(Character & c); // Spell 2 : only in line, extends the sword and deals damages
+	virtual void heal(); // Spell 3 : heal the Knight for a certain amount of HP
+	virtual void swordOfDestiny(Character & c); // Spell 4 : Bring down from the sky the ultimate sword, destroy anything
 
 };
 

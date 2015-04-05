@@ -3,6 +3,7 @@
 TimeService * ServiceLocator::_timeService = nullptr;
 LogService * ServiceLocator::_logService = nullptr;
 EventService* ServiceLocator::_eventService = nullptr;
+UserInterface* ServiceLocator::_userInterface = nullptr;
 
 TimeService * ServiceLocator::getTimeService()
 {
@@ -16,6 +17,10 @@ EventService* ServiceLocator::getEventService()
 {
 	return _eventService;
 }
+UserInterface* ServiceLocator::getUI()
+{
+	return _userInterface;
+}
 
 void ServiceLocator::provide(TimeService * ts)
 {
@@ -28,6 +33,10 @@ void ServiceLocator::provide(LogService * ls)
 void ServiceLocator::provide(EventService* es)
 {
 	_eventService = es;
+}
+void ServiceLocator::provide(UserInterface* ui)
+{
+	_userInterface = ui;
 }
 
 void ServiceLocator::cleanup()
@@ -46,5 +55,10 @@ void ServiceLocator::cleanup()
 	{
 		delete _eventService;
 		_eventService = nullptr;
+	}
+	if (_userInterface!= nullptr)
+	{
+		delete _userInterface;
+		_userInterface = nullptr;
 	}
 }

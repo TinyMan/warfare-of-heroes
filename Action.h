@@ -4,27 +4,24 @@
 #include "Callback.h"
 #include "Event.h"
 using namespace std;
-class Action :
-	public Event
-{
-private:
-	string _text;
-	Callback _cb;
 
-public:
-	enum ACTION_TYPE
+namespace Events{
+	class Action :
+		public Event
 	{
-		CAST,
-		MOVE,
-		FINISH
+	private:
+		string _text;
+		Callback _cb;
+
+	public:		
+		Action(Callback& cb, string text = "");
+		virtual ~Action();
+
+		virtual void trigger() const;
+
+		string getText() const{ return _text; }
+
 	};
-	Action(Callback& cb, string text = "");
-	virtual ~Action();
 
-	virtual void trigger() const;
-
-	string getText() const{ return _text; }
-
-};
-
-ostream& operator<<(ostream& o, const Action&);
+	ostream& operator<<(ostream& o, const Action&);
+}

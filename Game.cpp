@@ -8,14 +8,21 @@ Game::Game()
 	_eventService = new EventService();
 	_logService = new LogService("log.txt", true);
 	_timeService = new TimeService();
+	_userInterface = new UserInterface();
 	/* and provide them */
 	ServiceLocator::provide(_eventService);
 	ServiceLocator::provide(_logService);
 	ServiceLocator::provide(_timeService);
+	ServiceLocator::provide(_userInterface);
 
 	/* setup event listenenrs */
-	_eventService->listen(Event::GAMEOBJECT_ACTIVATE, Callback(&Game::onActivatedGameObject, this));
-	_eventService->listen(Event::GAMEOBJECT_DEACTIVATE, Callback(&Game::onDeactivatedGameObject, this));
+	_eventService->listen(typeid(Events::GameObjectEvents::ActivateEvent), Callback(&Game::onActivatedGameObject, this));
+	_eventService->listen(typeid(Events::GameObjectEvents::DeactivateEvent), Callback(&Game::onDeactivatedGameObject, this));
+	_eventService->listen(typeid(Events::CharacterEvents::DieEvent), Callback(&Game::onDie, this));
+	
+	/* generate basic game objects */
+	_grid = new Grid();
+	
 }
 
 
@@ -72,6 +79,10 @@ void Game::addGameObject(GameObject* g)
 		_gameObjects.push_back(g);
 }
 
+void Game::addPlayer(Character* c)
+{
+	_players.push_back(c);
+}
 void Game::onDeactivatedGameObject(void*)
 {
 	ServiceLocator::getLogService()->info << "Catching ev: game object deactivated" << endl;
@@ -85,16 +96,56 @@ void Game::onActivatedGameObject(void*)
 	_gameObjects_dirty = true;
 	_nb_active_gobjects++;
 }
-void Game::displayState() const
+void Game::onDie(void* data)
+{
+	if (data == nullptr)
+		return;
+	char a;
+	Character* c = (Character*)((DieEvent*)data)->getCharacter();
+	LOGINFO << c->getName() << " died !" << endl;	
+	LOGINFO << "Do you want to replay (y/n) ?" << endl;
+	cin >> a;
+	switch (a)
+	{
+	case 'y':
+		// TODO: reset game 
+		break;
+	default:
+		stop();
+		break;
+	}
+}
+void Game::displayState(ostream& o) const
 {
 	stringstream sstm;
-	sstm << "Currently " << _gameObjects.size() << " game objects in the list." << endl;
+	o << "Currently " << _gameObjects.size() << " game objects in the list." << endl;
 
-	for (auto e : _gameObjects)
+	/*for (auto& e : _gameObjects)
 	{
-		sstm << *e << endl;
+		o << *e << endl;
+	}*/
+	displayPlayers(o);
+	o << "Grid: " << endl;
+	_grid->display(o);
+}
+void Game::displayPlayers(ostream& o) const
+{
+	o << "Players: " << endl;
+	for (auto& e : _players)
+	{
+		o << *e;
+		o << "<--------------------------------->" << endl;
 	}
-	_logService->info << sstm.str();
+	
+}
+void Game::displayPlayersList(ostream& o) const
+{
+	int i = 0;
+	o << "Players list: " << endl;
+	for (auto& e : _players)
+	{
+		o << i++ << ": " << e->getName() << endl;
+	}
 }
 
 void Game::update()
@@ -112,16 +163,31 @@ void Game::handleUserInput()
 {
 	// TODO : add textmode gameplay
 	int choice = 0;
-	cout << "Turn " << _turn << ", player " << _player_turn << ": " << endl;
-	cout << "Do you want to: " << endl;
-	cout << "1. Quit" << endl;
+	LOGINFO << "------------------------" << endl;
+	LOGINFO << "Turn " << _turn << ", player " << _player_turn << " (" << _players.at(_player_turn)->getName() << "): " << endl;
+	LOGINFO << *UI << endl;
+
+
 	cin >> choice;
-	switch (choice)
-	{
-	case 1:
-		stop();
-		break;
-	default:
-		break;
-	}
+	UI->handleChoice(choice);
+}
+void Game::start()
+{
+	beginTurn();
+}
+void Game::beginTurn()
+{
+	LOGINFO << "Begining turn of " << _players.at(_player_turn)->getName() << endl;
+	UI->addAction(Action(Callback(&Game::stop, this), "Quit"));
+	UI->addAction(Action(Callback(&Game::endTurn, this), "I'm done"));
+	_players.at(_player_turn)->beginTurn();
+	_grid->beginTurn();
+}
+void Game::endTurn(void* )
+{
+	_players.at(_player_turn)->endTurn();
+	_turn += _player_turn;
+	_player_turn = _player_turn == 0 ? 1 : 0;
+	UI->clear();
+	beginTurn();
 }

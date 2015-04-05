@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <typeinfo>
 #include <iostream>
 #include "Game.h"
 #include "ServiceLocator.h"
@@ -6,6 +7,11 @@
 #include "Mage.h"
 #include "Knight.h"
 #include "Archer.h"
+#include "Spell.h"
+#include "SquareAoE.h"
+#include "DiamondAoE.h"
+#include "DamageEffect.h"
+#include "LineAoE.h"
 
 using namespace std;
 
@@ -17,27 +23,24 @@ int main(int argc, char* argv[])
 	Game *g = Game::getInstance();
 
 	LOGINFO << "Starting @ " << SDL_GetTicks() << endl;
-	Grid *grid = new Grid();
-	Archer* player1 = new Archer();
-	Knight* player2 = new Knight();
-	Mage* player3 = new Mage();
 
-	g->addGameObject(grid, player1, player2);
-	g->displayState();
+	Grid* grid = g->getGrid();
 	grid->generateObstacle();
-	grid->setObject(player1, 0, 0);
-	grid->setObject(player2, Grid::WIDTH-1, Grid::HEIGHT-1);
 
-	player1->cast(Archer::VOLLEY, player2);
-	player2->cast(Knight::SWORD_DESTINY, player3);
-	player3->cast(Mage::FIREBALL, player1);
-	player3->cast(Mage::ERUPTION, grid->getCellAt(2, 3));
-	LOGINFO << "Grid: " << endl;
-	grid->display(LOGINFO);
-
+	Archer* player1 = new Archer(0, 2);
+	Mage* player3 = new Mage(6,2);
+	g->addGameObject(grid, player1, player3);
+	g->addPlayer(player1);
+	g->addPlayer(player3);
+	
+	player1->setToDelete();
+	//g->stop();
+	g->displayState();	
+	g->start();
 	while (g->isRunning())
 	{
 		g->handleUserInput();
+		g->displayState(LOGINFO);
 		// TODO : add textmode gameplay
 	}
 

@@ -1,14 +1,32 @@
 #include "Mage.h"
+#include "Spell.h"
+#include "RootEffect.h"
+#include "DamageEffect.h"
+#include "DamageBuffEffect.h"
 
-// TODO : Prendre en compte les dégats bonus !
-
-
-Mage::Mage(string name) : Character(name)
+Mage::Mage(int x, int y, string name) : Character(x, y, name)
 {
 	// Initializing the Archer's HP, MP and CP with it's constants.
-	_movementPoints = MP_MAX;
-	_capacityPoints = CP_MAX;
-	_hitPoints = HP_MAX;
+	mpMax = MP_MAX;
+	cpMax = CP_MAX;
+	hpMax = _hitPoints = HP_MAX;
+
+	_spells[ROOT] = new Spell("Damage Buff", this, 4, 4, 0, 0, 0, 7, false);
+	_spells[ROOT]->addEffect(new RootEffect(3, this));
+
+	_spells[FIREBALL] = new Spell("Fireball of the Doom", this, 4, 5, 0, 0, 0, 4, false);
+	_spells[FIREBALL]->addEffect(new DamageEffect(150, this));
+	DamageBuffEffect* e = new DamageBuffEffect(200, 3, this);
+	e->setTarget(this);
+	_spells[FIREBALL]->addEffect(e);
+
+	_spells[THUNDER] = new Spell("Thunder Storm", this, 2, 6, 0, 0, 0, 5, true);
+	_spells[THUNDER]->addEffect(new DamageEffect(80, this));
+
+	_spells[ERUPTION] = new Spell("Eruption", this, 2, 4, 0, 0, 0, 7, false);
+	_spells[ERUPTION]->addEffect(new DamageOverTime(100, 6, this, "Eruption DoT"));
+	
+	
 }
 
 
@@ -16,30 +34,31 @@ Mage::~Mage()
 {
 }
 
-bool Mage::cast(int spellID, void* data)
+void Mage::cast(int spellID, void* data)
 {
-	bool ret = false;
 	switch (spellID)
 	{
+	case Character::BASIC_ATTACK:
+		basicAttack(*(Character*)data);
+		break;
 	case Mage::THUNDER:
-		ret = thunderStorm(*(Cell*)data);
+		thunderStorm(*(Cell*)data);
 		break;
 	case Mage::ERUPTION:
-		ret = eruption(*(Cell*)data);
+		eruption(*(Cell*)data);
 		break;
 	case Mage::ROOT:
-		ret = rooting(*(Character*)data);
+		rooting(*(Character*)data);
 		break;
 	case Mage::FIREBALL:
-		ret = fireBallOfTheDoom(*(Character*)data);
+		fireBallOfTheDoom(*(Character*)data);
 		break;
 	default:
 		break;
 	}
-	return ret;
 }
 
-bool Mage::basicAttack(Character & c)
+void Mage::basicAttack(Character & c)
 {
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 4;                                    //
@@ -47,95 +66,131 @@ bool Mage::basicAttack(Character & c)
 	int cost = 1;                                     //
 	////////////////////////////////////////////////////
 
-	bool attackHits = false;
-
-	/* TODO : utiliser getDistance pour coder les sorts
-	if (getDistance(this, c) <= range or _capacityPoints >= cost)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
 		// Launch projectile (animation) { TO BE ADD ! }
-		c.lowerHitPoint(amountOfDamages); // The ennemy c takes a hit.
-		attackHits = true;
+		c.lowerHitPoint(amountOfDamages + _bonusDamage); // The ennemy c takes a hit.
+		LOGINFO << this->getName() << " : Casting basicAttack on " << c.getName() << "(" << c.getId() << ")" << endl;
+		_capacityPoints -= cost;
 	}
-	*/
-
-	LOGINFO << this->getName() << " : Casting basicAttack on " << c.getName() << "(" << c.getId() << ")" << endl;
-
-	return (attackHits);
+	else
+		LOGWARN << this->getName() << " : Fail cast basicAttack" << endl;
 }
 
-bool Mage::thunderStorm(const Cell & c)
+void Mage::thunderStorm(const Cell & c)
 {
+	LOGWARN << "thunderStorm: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 5; // Only in line                    //
 	int amountOfDamages = 80;                         //
 	int cost = 6;                                     //
 	////////////////////////////////////////////////////
 
-	bool spellHits = false;
+	// TODO : En ligne, AoE
 
-	
-
-	return (spellHits);
+	LOGINFO << this->getName() << " : Casting thunder storm on (" << c.getPosX() << "," << c.getPosY() << ")." << endl;
+	*/
 }
 
-bool Mage::eruption(const Cell & c)
+void Mage::eruption(const Cell & c)
 {
+	LOGWARN << "eruption: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 7;                                    //
 	int amountOfDamages = 70;                         //
 	int cost = 4;                                     //
 	////////////////////////////////////////////////////
 
-	bool spellHits = false;
+	// TODO : AoE dégats
 
 	LOGINFO << this->getName() << " : Casting eruption on (" << c.getPosX() << "," << c.getPosY() << ")." << endl;
-
-	return (spellHits);
+	*/
 }
 
-bool Mage::rooting(Character & c)
+void Mage::rooting(Character & c)
 {
+	LOGWARN << "rooting: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 7;                                    //
 	int amountOfMPRemoved = 1;                        //
 	int cost = 4;                                     //
 	////////////////////////////////////////////////////
 	
-	bool spellCasted = false;
-
-	/* TODO
-	if (_capacityPoints >= cost and getDistance(this, c) <= range)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
+		// Launch projectile (animation) { TO BE ADD ! }
 		c.removeMovementPoint(amountOfMPRemoved);
-		spellCasted = true;
+		LOGINFO << this->getName() << " : Casting rooting on " << c.getName() << "(" << c.getId() << ")" << endl;
+		_capacityPoints -= cost;
 	}
-	*/
-
-	LOGINFO << this->getName() << " : Casting rooting on " << c.getName() << "(" << c.getId() << ")" << endl;
-
-	return (spellCasted);
+	else
+		LOGWARN << this->getName() << " : Fail cast rooting" << endl;
+		*/
 }
 
-bool Mage::fireBallOfTheDoom(Character & c)
+void Mage::fireBallOfTheDoom(Character & c)
 {
+	LOGWARN << "fireBallOfTheDoom: depreciated, you should not call this func" << endl;
+	/*
 	///////////////STATS OF THE SPELL///////////////////
 	int range = 4;                                    //
 	int amountOfDamages = 150;                        //
-	int cost = 4;                                     //
+	int cost = 5;                                     //
 	////////////////////////////////////////////////////
 
-	bool spellHits = false;
-
-	/* TODO :
-	if (_capacityPoints >= cost and getDistance(this, c) <= range)
+	if (this->getDistance(c) <= range && _capacityPoints >= cost)
 	{
-		c.lowerHitPoint(amountOfDamages);
+		// Launch projectile (animation) { TO BE ADD ! }
+		c.lowerHitPoint(amountOfDamages+_bonusDamage); // The ennemy c takes a hit.
 		_bonusDamage += 20;
-		spellHits = true;
+		LOGINFO << this->getName() << " : Casting fireBall on " << c.getName() << "(" << c.getId() << ")" << endl;
+		_capacityPoints -= cost;
 	}
-	*/
+	else
+		LOGWARN << this->getName() << " : Fail Cast fireBall" << endl;
+		*/
+}
+void Mage::beginTurn()
+{
+	auto aoeSelector = [this](int radius, int spellID, void*)
+	{
+		int x, y;
+		LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
+		cin >> x >> y;
+		try{
+			Cell* c = GAMEINST->getGrid()->getCellAt(x, y);
+			if (c == nullptr) throw std::out_of_range("cell does not exists");			
+			getSpell(spellID)->cast(new DiamondAoE(c, radius));
+		}
+		catch (const std::out_of_range& oor) {
+			LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";
+		}
+	};
+	auto lambda = [this](int spellID, void*)
+	{
+		int x, y;
+		LOGINFO << "Enter cell position (e.g. 13 29): " << endl;
+		cin >> x >> y;
+		try{
+			Cell* c = GAMEINST->getGrid()->getCellAt(x, y);
+			if (c == nullptr) throw std::out_of_range("cell does not exists");
 
-	LOGINFO << this->getName() << " : Casting fireBall on " << c.getName() << "(" << c.getId() << ")" << endl;
-
-	return(spellHits);
+			getSpell(spellID)->cast(c);
+		}
+		catch (const std::out_of_range& oor) {
+			LOGERR << "Out of Range error: " << oor.what() << " (cell does not exists)\n";
+		}
+	};
+	UI->addAction(Action(Callback(&Character::targetSelector, this, Mage::FIREBALL), "Cast Fireball Of The Doom"));
+	UI->addAction(Action(Callback(&Character::targetSelector, this, Mage::ROOT), "Cast Root"));
+	UI->addAction(Action(Callback(aoeSelector, 2, Mage::ERUPTION), "Cast Eruption"));
+	UI->addAction(Action(Callback(aoeSelector, 2, Mage::THUNDER), "Cast Thunder Storm"));
+	Character::beginTurn();
+}
+void Mage::endTurn()
+{
+	Character::endTurn();
 }

@@ -2,12 +2,21 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <list>
+#include <deque>
 #include <sstream>
 
 #include "GameObject.h"
+#include "Character.h"
+#include "Grid.h"
 #include "ServiceLocator.h"
+#include "CharacterEvents.h"
+
+#define GAMEINST Game::getInstance()
 
 using namespace std;
+using namespace Events;
+using namespace Events::CharacterEvents;
+
 
 /*
 Main class of the game
@@ -19,11 +28,15 @@ class Game
 public:
 	~Game();
 
-	void initialize();
 	void loop();
 
 	/* Add a game object to the collection */
 	void addGameObject(GameObject* g);
+	void addPlayer(Character*);
+
+	/* getters */
+	Grid* getGrid() { return _grid; }
+	Character* getPlayer(int id) { return _players.at(id); }
 
 	template<typename... GO>
 	/* Add multiple game objects to the collection */
@@ -39,12 +52,21 @@ public:
 	/* event listeners */
 	void onActivatedGameObject(void*);
 	void onDeactivatedGameObject(void*);
+	void onDie(void*);
 
 	/* display the current state of the game */
-	void displayState() const;
+	void displayState(ostream& o = LOGINFO) const; // display the full state of the game (game objects, grid, players ...)
+	void displayPlayers(ostream& o = LOGINFO) const; // display players with operator<<
+	void displayPlayersList(ostream& o = LOGINFO) const; // just a list with number (used to chose target f.e.)
+
+	/* starting game */
+	void initialize();
+	void start();
+	void beginTurn();
+	void endTurn(void* data=nullptr);
 
 	/* ending game */
-	void stop() { _running = false; }
+	void stop(void*d=nullptr) { _running = false; }
 	bool isRunning() const { return _running; }
 
 	static Game* getInstance() { if (!_instance) _instance = new Game; return _instance; }
@@ -57,14 +79,18 @@ private:
 	/* true if we need to sort _gameObjects list */
 	bool _gameObjects_dirty = false;
 
+	deque<Character*> _players;
+	Grid* _grid;
 
 	bool _running = true;
-	bool _turn = 0;
+	int _turn = 0;
 	int _player_turn = 0; // the current player ID which play 
 
+	/* ptr to different services */
 	TimeService * _timeService = nullptr;
 	LogService * _logService = nullptr;
 	EventService* _eventService = nullptr;
+	UserInterface* _userInterface = nullptr;
 
 
 	/* update its state, delete objects marked etc ... */
