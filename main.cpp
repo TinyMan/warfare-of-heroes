@@ -35,14 +35,15 @@ int main(int argc, char* argv[])
 	
 	player1->setToDelete();
 	//g->stop();
-	g->displayState();	
+	/*g->displayState();	
 	g->start();
 	while (g->isRunning())
 	{
 		g->handleUserInput();
 		g->displayState(LOGINFO);
 		// TODO : add textmode gameplay
-	}
+	}*/
+	g->loop();
 
 	LOGINFO << "Ending @ " << SDL_GetTicks() << endl;
 

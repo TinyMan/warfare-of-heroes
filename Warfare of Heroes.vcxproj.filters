@@ -123,6 +123,12 @@
     <ClCompile Include="Clickable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Octopus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OctopusBaby.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeService.h">
@@ -240,6 +246,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EventCallback.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Octopus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OctopusBaby.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

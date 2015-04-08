@@ -22,10 +22,15 @@ Game::Game()
 	
 	/* generate basic game objects */
 	_grid = new Grid();
-	
+	_octopus = new Octopus();
+
+	initialize();
 }
 
-
+void Game::initialize()
+{
+	_octopus->initialize();
+}
 Game::~Game()
 {
 	/* destroy all last game objects */
@@ -59,6 +64,7 @@ void Game::loop()
 		*/
 
 		/* TODO: RENDER */
+		_octopus->render();
 		/* TODO: END FRAME */
 	}
 }

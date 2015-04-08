@@ -10,6 +10,7 @@
 #include "Grid.h"
 #include "ServiceLocator.h"
 #include "CharacterEvents.h"
+#include "Octopus.h"
 
 #define GAMEINST Game::getInstance()
 
@@ -81,6 +82,8 @@ private:
 
 	deque<Character*> _players;
 	Grid* _grid;
+
+	Octopus * _octopus;
 
 	bool _running = true;
 	int _turn = 0;
