@@ -32,8 +32,20 @@ public:
 		}
 		cout << "-----------" << endl;
 	}
+	virtual void beginFrame(){ _frameStart = SDL_GetTicks(); }
+	virtual void endFrame() { _nbFrames++; }
+	Uint32 getFps() const{ return _fps; }
+	Uint32 getFrameTime() const { return _frameStart; }
+	void updateFps();
+	static Uint32 time() { return SDL_GetTicks(); }
 private:
 	list<Timeout*> _timeout;
 	list<Interval*> _interval;
+
+	Uint32 _frameStart = 0;
+	Uint32 _nbFrames = 0;
+	Uint32 _fps = 0;
+	Uint32 _lastFpsUpdate = 0;
+	Uint32 _fpsUpdateInterval = 1000; /* 1000 ms */
 };
 

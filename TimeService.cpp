@@ -58,3 +58,12 @@ void TimeService::setInterval(Uint32 t, Callback& cb)
 	
 	//display();
 }
+void TimeService::updateFps()
+{
+	Uint32 t = time();
+	if (t - _lastFpsUpdate > _fpsUpdateInterval)
+	{
+
+		_lastFpsUpdate = t;
+	}
+}
