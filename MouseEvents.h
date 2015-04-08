@@ -9,10 +9,13 @@ namespace Events
 		class ClickEvent : public Events::Event
 		{
 		public:
-			ClickEvent(SDL_Point p) : _pos(p){}
+			ClickEvent(SDL_Point p, bool left = true) : _pos(p), _left(left){}
 			virtual ~ClickEvent(){ }
+			bool isLeft() const { return _left; }
+			bool isRight() const { return !_left; }
 		private:
 			SDL_Point _pos;
+			bool _left;
 		};
 		class LeftClick : public ClickEvent
 		{
