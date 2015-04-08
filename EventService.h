@@ -4,7 +4,7 @@
 #include <map>
 #include <iostream>
 #include "Event.h"
-#include "Callback.h"
+#include "EventCallback.h"
 
 using namespace std;
 #define EVENTSERVICE ServiceLocator::getEventService()
@@ -19,10 +19,10 @@ namespace Events
 
 		virtual void dispatch(Event*) const;
 
-		void listen(const type_info& e, const Callback& cb);
+		void listen(const type_info& e, const EventCallback& cb);
 
 	private:
-		map<size_t, list<Callback>> _listeners;
+		map<size_t, list<EventCallback>> _listeners;
 
 	};
 }

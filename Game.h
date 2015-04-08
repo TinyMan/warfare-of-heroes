@@ -50,9 +50,9 @@ public:
 	int getNbActiveGObjects() const { return _nb_active_gobjects; }
 
 	/* event listeners */
-	void onActivatedGameObject(void*);
-	void onDeactivatedGameObject(void*);
-	void onDie(void*);
+	void onActivatedGameObject(Event*);
+	void onDeactivatedGameObject(Event*);
+	void onDie(Event*);
 
 	/* display the current state of the game */
 	void displayState(ostream& o = LOGINFO) const; // display the full state of the game (game objects, grid, players ...)

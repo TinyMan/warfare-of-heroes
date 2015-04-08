@@ -120,6 +120,9 @@
     <ClCompile Include="LineAoE.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Clickable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeService.h">
@@ -228,6 +231,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CharacterEvents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Clickable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseEvents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventCallback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,33 +7,33 @@ namespace Events
 {
 	namespace GameObjectEvents
 	{
-		class Event : public Events::Event
+		class GameObjectEvent : public Events::Event
 		{
 		public:
-			Event(GameObject* go) : _object(go) {}
-			virtual ~Event(){}
+			GameObjectEvent(GameObject* go) : _object(go) {}
+			virtual ~GameObjectEvent(){}
 		protected:
 			GameObject* _object;
 		};
 		class ActivateEvent
-			: public Event
+			: public GameObjectEvent
 		{
 		public:
-			ActivateEvent(GameObject* go) : Event(go) {}
+			ActivateEvent(GameObject* go) : GameObjectEvent(go) {}
 			virtual ~ActivateEvent(){}
 		};
 		class DeactivateEvent
-			: public Event
+			: public GameObjectEvent
 		{
 		public:
-			DeactivateEvent(GameObject* go) : Event(go) {}
+			DeactivateEvent(GameObject* go) : GameObjectEvent(go) {}
 			virtual ~DeactivateEvent(){}
 		};
 		class ToDeleteEvent
-			: public Event
+			: public GameObjectEvent
 		{
 		public:
-			ToDeleteEvent(GameObject* go) : Event(go) {}
+			ToDeleteEvent(GameObject* go) : GameObjectEvent(go) {}
 			virtual ~ToDeleteEvent(){}
 		};
 	}

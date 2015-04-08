@@ -16,9 +16,9 @@ Game::Game()
 	ServiceLocator::provide(_userInterface);
 
 	/* setup event listenenrs */
-	_eventService->listen(typeid(Events::GameObjectEvents::ActivateEvent), Callback(&Game::onActivatedGameObject, this));
-	_eventService->listen(typeid(Events::GameObjectEvents::DeactivateEvent), Callback(&Game::onDeactivatedGameObject, this));
-	_eventService->listen(typeid(Events::CharacterEvents::DieEvent), Callback(&Game::onDie, this));
+	_eventService->listen(typeid(Events::GameObjectEvents::ActivateEvent), EventCallback(&Game::onActivatedGameObject, this));
+	_eventService->listen(typeid(Events::GameObjectEvents::DeactivateEvent), EventCallback(&Game::onDeactivatedGameObject, this));
+	_eventService->listen(typeid(Events::CharacterEvents::DieEvent), EventCallback(&Game::onDie, this));
 	
 	/* generate basic game objects */
 	_grid = new Grid();
@@ -83,20 +83,20 @@ void Game::addPlayer(Character* c)
 {
 	_players.push_back(c);
 }
-void Game::onDeactivatedGameObject(void*)
+void Game::onDeactivatedGameObject(Event*)
 {
 	ServiceLocator::getLogService()->info << "Catching ev: game object deactivated" << endl;
 	_gameObjects_dirty = true;
 	if (_nb_active_gobjects > 0) /* prevent silly errors */
 		_nb_active_gobjects--;
 }
-void Game::onActivatedGameObject(void*)
+void Game::onActivatedGameObject(Event*)
 {
 	ServiceLocator::getLogService()->info << "Catching ev: game object activated" << endl;
 	_gameObjects_dirty = true;
 	_nb_active_gobjects++;
 }
-void Game::onDie(void* data)
+void Game::onDie(Event* data)
 {
 	if (data == nullptr)
 		return;
