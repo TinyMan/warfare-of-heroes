@@ -10,6 +10,7 @@ namespace Events
 		{
 		public:
 			ClickEvent(SDL_Point p, bool left = true) : _pos(p), _left(left){}
+			ClickEvent(int x, int y, bool left = true) : _pos({ x, y }), _left(left){}
 			virtual ~ClickEvent(){ }
 			bool isLeft() const { return _left; }
 			bool isRight() const { return !_left; }

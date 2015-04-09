@@ -129,6 +129,9 @@
     <ClCompile Include="OctopusBaby.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SDLEvents.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeService.h">
@@ -252,6 +255,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OctopusBaby.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLEvents.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

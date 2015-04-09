@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "SDLEvents.h"
 
 Game* Game::_instance = nullptr;
 
@@ -45,13 +46,22 @@ Game::~Game()
 
 void Game::loop()
 {
+	SDL_Event e;
+	Event* ev;
 	cout << "Main loop !" << endl;
 	while (_running)
 	{
 		/* TODO: BEGIN FRAME */
 		_timeService->beginFrame();
 		/* TODO: PROCESS USER INPUT */
-
+		while (SDL_PollEvent(&e)) {
+			if (e.type == SDL_QUIT)
+			{
+				//Quit the program
+				stop();
+			}
+			ev = SDLEvents::createEventFromSDLEvent(&e);
+		}
 		//SDL_Delay(1);
 
 		/* Update */

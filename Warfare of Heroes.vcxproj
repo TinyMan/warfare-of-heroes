@@ -105,6 +105,7 @@
     <ClCompile Include="OctopusBaby.cpp" />
     <ClCompile Include="OverTimeEffect.cpp" />
     <ClCompile Include="RootEffect.cpp" />
+    <ClCompile Include="SDLEvents.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="SpellTarget.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="OctopusBaby.h" />
     <ClInclude Include="OverTimeEffect.h" />
     <ClInclude Include="RootEffect.h" />
+    <ClInclude Include="SDLEvents.h" />
     <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="SpellTarget.h" />
