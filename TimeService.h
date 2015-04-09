@@ -34,7 +34,7 @@ public:
 	}
 	virtual void beginFrame(){ _frameStart = SDL_GetTicks(); }
 	virtual void endFrame() { _nbFrames++; }
-	Uint32 getFps() const{ return _fps; }
+	float getFps() const{ return _fps; }
 	Uint32 getFrameTime() const { return _frameStart; }
 	void updateFps();
 	static Uint32 time() { return SDL_GetTicks(); }
@@ -44,7 +44,7 @@ private:
 
 	Uint32 _frameStart = 0;
 	Uint32 _nbFrames = 0;
-	Uint32 _fps = 0;
+	float _fps = 0;
 	Uint32 _lastFpsUpdate = 0;
 	Uint32 _fpsUpdateInterval = 1000; /* 1000 ms */
 };

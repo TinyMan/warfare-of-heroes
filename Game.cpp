@@ -49,9 +49,10 @@ void Game::loop()
 	while (_running)
 	{
 		/* TODO: BEGIN FRAME */
+		_timeService->beginFrame();
 		/* TODO: PROCESS USER INPUT */
 
-		SDL_Delay(100);
+		//SDL_Delay(1);
 
 		/* Update */
 		_timeService->update();
@@ -66,6 +67,7 @@ void Game::loop()
 		/* TODO: RENDER */
 		_octopus->render();
 		/* TODO: END FRAME */
+		_timeService->endFrame();
 	}
 }
 
