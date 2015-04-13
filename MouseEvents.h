@@ -6,17 +6,24 @@ namespace Events
 {
 	namespace MouseEvents
 	{
-		class ClickEvent : public Events::Event
+		class MouseEvent : public Events::Event
 		{
 		public:
-			ClickEvent(SDL_Point p, bool left = true) : _pos(p), _left(left){}
-			ClickEvent(int x, int y, bool left = true) : _pos({ x, y }), _left(left){}
-			virtual ~ClickEvent(){ }
-			bool isLeft() const { return _left; }
-			bool isRight() const { return !_left; }
+			MouseEvent(SDL_Point p) : _pos(p) {}
+			MouseEvent(int x, int y) : _pos({ x, y }) {}
+			~MouseEvent() {}
 		private:
 			SDL_Point _pos;
-			bool _left;
+		};
+		class ClickEvent : public MouseEvent
+		{
+		public:
+			ClickEvent(SDL_Point p, Uint8 button = SDL_BUTTON_LEFT) : MouseEvent(p), _button(button){}
+			ClickEvent(int x, int y, Uint8 button = SDL_BUTTON_LEFT) : MouseEvent(x, y), _button(button){}
+			virtual ~ClickEvent(){ }
+			Uint8 button() const { return _button; }
+		private:
+			Uint8 _button;
 		};
 		class LeftClick : public ClickEvent
 		{
