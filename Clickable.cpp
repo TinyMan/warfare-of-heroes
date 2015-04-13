@@ -3,8 +3,7 @@
 
 Clickable::Clickable()
 {
-	ServiceLocator::getEventService()->listen(typeid(Events::MouseEvents::LeftClick), EventCallback(&Clickable::onClick, this));
-	ServiceLocator::getEventService()->listen(typeid(Events::MouseEvents::RightClick), EventCallback(&Clickable::onClick, this));
+	ServiceLocator::getEventService()->listen(typeid(Events::MouseEvents::ClickEvent), EventCallback(&Clickable::onClick, this));
 
 }
 
