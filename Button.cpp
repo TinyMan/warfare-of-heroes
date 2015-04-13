@@ -18,10 +18,14 @@ Button::~Button()
 
 void Button::render(SDL_Renderer* r)
 {
-	SDL_SetRenderDrawColor(r, 255, 0, 0, 0);
+	if (hover())
+		SDL_SetRenderDrawColor(r, 0, 0, 255,0);
+	else
+		SDL_SetRenderDrawColor(r, 255, 0, 0, 0);
+
 	SDL_RenderDrawRect(r, &_rect);
 }
 bool Button::isInArea(SDL_Point p) const
 {
-	return p.x >= _rect.x && p.x <= _rect.x + _rect.h && p.y >= _rect.y && p.y <= _rect.y + _rect.h;
+	return p.x >= _rect.x && p.x <= _rect.x + _rect.w && p.y >= _rect.y && p.y <= _rect.y + _rect.h;
 }

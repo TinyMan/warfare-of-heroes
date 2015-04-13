@@ -36,8 +36,9 @@ int main(int argc, char* argv[])
 	
 	player1->setToDelete();
 	auto lambda = [](Event*) { GAMEINST->stop(); };
+	auto lambda1 = [](Event*) { LOGINFO << "Hover on my button ! " << endl; };
 	Button* b = new Button(250,250,100,50);
-	b->setCallback(new EventCallback(lambda));
+	b->Clickable::setCallback(new EventCallback(lambda));
 	g->getOctopus()->addBaby(b);
 	//g->stop();
 	/*g->displayState();	

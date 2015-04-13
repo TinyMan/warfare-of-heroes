@@ -1,8 +1,9 @@
 #pragma once
 #include "OctopusBaby.h"
 #include "Clickable.h"
+#include "Hoverable.h"
 class Button :
-	public OctopusBaby, public Clickable
+	public OctopusBaby, public Clickable, public Hoverable
 {
 public:
 	Button(SDL_Rect);

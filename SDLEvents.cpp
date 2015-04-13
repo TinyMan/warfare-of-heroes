@@ -1,6 +1,6 @@
 #include "SDLEvents.h"
 #include "MouseEvents.h"
-
+#include "ServiceLocator.h"
 namespace Events
 {
 	namespace SDLEvents
@@ -17,8 +17,8 @@ namespace Events
 					event = new MouseEvents::ClickEvent(e->button.x, e->button.y, e->button.button);
 				break;
 			case SDL_MOUSEMOTION:
-					event = new MouseEvents::HoverEvent(e->button.x, e->button.y);
-					break;				
+				event = new MouseEvents::MotionEvent(e->motion.x, e->motion.y);
+				break;
 			default:
 				break;
 			}
