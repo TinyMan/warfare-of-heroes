@@ -12,6 +12,7 @@ namespace Events
 			MouseEvent(SDL_Point p) : _pos(p) {}
 			MouseEvent(int x, int y) : _pos({ x, y }) {}
 			~MouseEvent() {}
+			SDL_Point getPos() const { return _pos; }
 		private:
 			SDL_Point _pos;
 		};

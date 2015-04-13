@@ -77,6 +77,7 @@
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="Archer.cpp" />
     <ClCompile Include="AreaOfEffect.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Callback.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="Action.h" />
     <ClInclude Include="Archer.h" />
     <ClInclude Include="AreaOfEffect.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Callback.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Character.h" />

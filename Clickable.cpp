@@ -11,3 +11,11 @@ Clickable::Clickable()
 Clickable::~Clickable()
 {
 }
+
+void Clickable::onClick(Event * e)
+{ 
+	if (isInArea(((MouseEvents::ClickEvent*)e)->getPos()) && _cb)
+	{
+		_cb->call(e); 
+	}
+}

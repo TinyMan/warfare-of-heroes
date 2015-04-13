@@ -36,8 +36,9 @@ public:
 	void addPlayer(Character*);
 
 	/* getters */
-	Grid* getGrid() { return _grid; }
-	Character* getPlayer(int id) { return _players.at(id); }
+	Grid* getGrid() const { return _grid; }
+	Character* getPlayer(int id) const { return _players.at(id); }
+	Octopus* getOctopus() const { return _octopus; }
 
 	template<typename... GO>
 	/* Add multiple game objects to the collection */

@@ -13,12 +13,14 @@ Octopus::~Octopus()
 
 void Octopus::render()
 {
+	//LOGINFO << "Rendering mother of octopus ! " << endl;
+	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);
 	SDL_RenderClear(_renderer);
+	//SDL_FillRect(NULL, NULL, 0);
 	for (auto ob : _babies)
 	{
-		ob->render();
+		ob->render(_renderer);
 	}
-	SDL_FillRect(NULL, NULL, 0);
 	SDL_RenderPresent(_renderer);
 	updateWindowTitle();
 	
@@ -42,5 +44,13 @@ void Octopus::updateWindowTitle()
 		s << TIMESERVICE->getFps() << " fps";
 		SDL_SetWindowTitle(_window, s.str().c_str());
 		_lastFpsUpdate = now;
+	}
+}
+void Octopus::addBaby(OctopusBaby* b)
+{
+	if (b)
+	{
+		LOGINFO << "Adding octopus baby" << endl;
+		_babies.push_back(b);
 	}
 }

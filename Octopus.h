@@ -17,6 +17,7 @@ public:
 
 	virtual void initialize();
 	virtual void updateWindowTitle();
+	void addBaby(OctopusBaby*);
 private:
 	/* collection of octopus babies */
 	deque<OctopusBaby*> _babies;

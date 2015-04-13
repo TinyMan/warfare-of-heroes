@@ -61,6 +61,8 @@ void Game::loop()
 				stop();
 			}
 			ev = SDLEvents::createEventFromSDLEvent(&e);
+			if(ev)
+				_eventService->dispatch(ev);
 		}
 		//SDL_Delay(1);
 
