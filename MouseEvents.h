@@ -25,19 +25,7 @@ namespace Events
 			Uint8 button() const { return _button; }
 		private:
 			Uint8 _button;
-		};
-		class LeftClick : public ClickEvent
-		{
-		public:
-			LeftClick(SDL_Point p) : ClickEvent(p) {}
-			virtual ~LeftClick(){}
-		};
-		class RightClick : public ClickEvent
-		{
-		public:
-			RightClick(SDL_Point p) : ClickEvent(p) {}
-			virtual ~RightClick(){}
-		};
+		};		
 		class MotionEvent : public MouseEvent
 		{
 		public:
