@@ -1,12 +1,13 @@
 #pragma once
-#include <deque>
 #include <sstream>
 #include <SDL2/SDL.h>
 #include "OctopusBaby.h"
 #include "ServiceLocator.h"
+#include "MyContainer.h"
 using namespace std;
 
 class Octopus
+	: public MyContainer<OctopusBaby*>
 {
 public:
 	Octopus();
@@ -19,9 +20,6 @@ public:
 	virtual void updateWindowTitle();
 	void addBaby(OctopusBaby*);
 private:
-	/* collection of octopus babies */
-	deque<OctopusBaby*> _babies;
-
 	SDL_Window* _window;
 	SDL_Renderer* _renderer;
 
