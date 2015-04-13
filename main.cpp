@@ -35,8 +35,9 @@ int main(int argc, char* argv[])
 	g->addPlayer(player3);
 	
 	player1->setToDelete();
+	auto lambda = [](Event*) { GAMEINST->stop(); };
 	Button* b = new Button(250,250,100,50);
-
+	b->setCallback(new EventCallback(lambda));
 	g->getOctopus()->addBaby(b);
 	//g->stop();
 	/*g->displayState();	

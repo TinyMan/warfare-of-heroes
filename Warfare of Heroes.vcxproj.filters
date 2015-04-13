@@ -135,6 +135,15 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Hoverable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventReceiver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseEventReceiver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeService.h">
@@ -264,6 +273,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hoverable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventReceiver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseEventReceiver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
