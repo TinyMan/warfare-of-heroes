@@ -14,8 +14,11 @@ namespace Events
 				break;
 			case SDL_MOUSEBUTTONUP:
 				if (e->button.button == SDL_BUTTON_LEFT || e->button.button == SDL_BUTTON_RIGHT)
-				event = new MouseEvents::ClickEvent(e->button.x, e->button.y, e->button.button);
+					event = new MouseEvents::ClickEvent(e->button.x, e->button.y, e->button.button);
 				break;
+			case SDL_MOUSEMOTION):
+					event = new MouseEvents::HoverEvent(e->button.x, e->button.y);
+					break;				
 			default:
 				break;
 			}

@@ -37,5 +37,12 @@ namespace Events
 			RightClick(SDL_Point p) : ClickEvent(p) {}
 			virtual ~RightClick(){}
 		};
+		class HoverEvent : public MouseEvent
+		{
+		public:
+			HoverEvent(SDL_Point p) : MouseEvent(p) {}
+			HoverEvent(int x, int y) : MouseEvent(x, y) {}
+			virtual ~HoverEvent(){ }
+		};
 	}
 }
