@@ -12,6 +12,12 @@ public:
 	virtual void update() {};
 	virtual void render(SDL_Renderer*);
 	virtual bool isInArea(SDL_Point) const;
+
+	virtual Button* getThis() { return this; }
+
+protected:
+	virtual void triggerModifyEvent();
+
 private:
 	SDL_Rect _rect;
 };

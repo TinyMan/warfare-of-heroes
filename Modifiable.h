@@ -6,6 +6,10 @@ class Modifiable
 public:
 	Modifiable();
 	virtual ~Modifiable();
+	
+protected:
+	virtual void triggerModifyEvent() = 0;
+
 };
 
 

@@ -35,21 +35,19 @@ int main(int argc, char* argv[])
 	g->addPlayer(player3);
 	
 	player1->setToDelete();
-	auto lambda = [](Event*) { GAMEINST->stop(); };
-	auto lambda1 = [](Event*) { LOGINFO << "Hover on my button ! " << endl; };
+
 	Panel * p = new Panel(g->getOctopus()->getRenderer(), 0, 0, 1200, 900);
 	
 	Button* b = new Button(250,250,100,50);
 	p->add(b);
-	Hoverable * h = static_cast<Hoverable*>(b);
-	Button* aaa = (Button*)((void*)h);
-	if (p->contains(aaa))
+
+	if (p->contains(b))
 	{
-		LOGINFO << p << "(" << TYPENAME(p) << ") contains " << aaa << "(" << TYPENAME(aaa) << ")" << endl;
+		LOGINFO << p << "(" << TYPENAME(p) << ") contains " << b << "(" << TYPENAME(b) << ")" << endl;
 	}
 	
-	b->Clickable::setCallback(new EventCallback(lambda));
-	g->getOctopus()->addBaby(p);
+	b->Clickable::setCallback(new EventCallback([](Event*) { GAMEINST->stop(); }));
+	g->getOctopus()->add(p);
 	
 
 	g->loop();

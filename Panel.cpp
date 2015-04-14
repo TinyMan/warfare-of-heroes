@@ -27,8 +27,7 @@ Panel::~Panel()
 void Panel::render(SDL_Renderer* r)
 {
 	internalRender(r);
-	SDL_RenderCopy(r, _texture, NULL, &_rect);
-	
+	SDL_RenderCopy(r, _texture, NULL, &_rect);	
 }
 
 void Panel::internalRender(SDL_Renderer* r)
@@ -48,4 +47,9 @@ void Panel::internalRender(SDL_Renderer* r)
 		/* the texture is now up to date */
 		setDirty(false);
 	}
+}
+void Panel::triggerModifyEvent()
+{
+	//LOGINFO << "Triggerin modify event " << this << endl;
+	(new ModifyEvent(reinterpret_cast<Modifiable*>(this)))->dispatch();
 }

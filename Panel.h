@@ -3,7 +3,7 @@
 #include "OctopusBaby.h"
 #include "MyContainer.h"
 class Panel :
-	public MyContainer<OctopusBaby*>, public OctopusBaby
+	public OctopusBaby, public MyContainer<OctopusBaby*>
 {
 public:
 	Panel(SDL_Renderer* r, SDL_Rect rect);
@@ -13,9 +13,11 @@ public:
 	virtual void render(SDL_Renderer*);
 	virtual void update(){}
 
+	virtual Panel* getThis() { return this; }
 
 protected:
 	virtual void internalRender(SDL_Renderer* r);
+	virtual void triggerModifyEvent();
 
 private:
 	SDL_Rect _rect;
