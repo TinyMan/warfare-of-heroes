@@ -17,7 +17,7 @@ void Octopus::render()
 	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);
 	SDL_RenderClear(_renderer);
 	//SDL_FillRect(NULL, NULL, 0);
-	for (auto ob : _list)
+	for (auto ob : _babies)
 	{
 		ob->render(_renderer);
 	}
@@ -51,6 +51,6 @@ void Octopus::addBaby(OctopusBaby* b)
 	if (b)
 	{
 		LOGINFO << "Adding octopus baby" << endl;
-		add(b);
+		_babies.push_back(b);
 	}
 }

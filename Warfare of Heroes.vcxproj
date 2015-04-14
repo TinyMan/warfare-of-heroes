@@ -120,7 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
-    <ClInclude Include="ActivableObject.h" />
     <ClInclude Include="Archer.h" />
     <ClInclude Include="AreaOfEffect.h" />
     <ClInclude Include="Button.h" />
@@ -154,7 +153,6 @@
     <ClInclude Include="MouseEventReceiver.h" />
     <ClInclude Include="MouseEvents.h" />
     <ClInclude Include="MoveEffect.h" />
-    <ClInclude Include="MyContainer.h" />
     <ClInclude Include="Octopus.h" />
     <ClInclude Include="OctopusBaby.h" />
     <ClInclude Include="OverTimeEffect.h" />

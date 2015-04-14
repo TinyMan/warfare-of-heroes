@@ -284,11 +284,5 @@
     <ClInclude Include="MouseEventReceiver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyContainer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ActivableObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
