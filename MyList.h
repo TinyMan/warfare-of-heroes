@@ -2,6 +2,8 @@
 #include <list>
 #include "Modifiable.h"
 #include "Activable.h"
+#include "ServiceLocator.h"
+
 using namespace std;
 template<class T>
 class MyList :
@@ -49,8 +51,17 @@ public:
 	}
 	list<T> * getList() { return &_list; }
 	virtual void setDirty(bool b = true) { _dirty = b; }
-private:
+
+	
+	
+protected:
 	list<T> _list;
+	virtual void setSorted(bool b = true)
+	{
+		_sorted = b;
+	}
+private:
 	bool _dirty;
+	bool _sorted = true;
 };
 

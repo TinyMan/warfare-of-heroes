@@ -68,6 +68,7 @@ void Game::loop()
 
 		/* Update */
 		_timeService->update();
+		_octopus->update();
 		/* TODO: UPDATE */
 		this->update();
 

@@ -19,6 +19,10 @@ public:
 	virtual void initialize();
 	virtual void updateWindowTitle();
 	void addBaby(OctopusBaby*);
+
+	SDL_Window* getWindow() const { return _window; }
+	SDL_Renderer* getRenderer() const { return _renderer; }
+
 private:
 	/* collection of octopus babies */
 	deque<OctopusBaby*> _babies;

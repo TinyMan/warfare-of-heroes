@@ -13,6 +13,7 @@
 #include "DamageEffect.h"
 #include "LineAoE.h"
 #include "Button.h"
+#include "Panel.h"
 
 using namespace std;
 
@@ -34,11 +35,29 @@ int main(int argc, char* argv[])
 	g->addPlayer(player1);
 	g->addPlayer(player3);
 	
-	auto lambda = [](Event*) { GAMEINST->stop(); };
-	Button* b = new Button(250,250,100,50);
-	b->Clickable::setCallback(new EventCallback(lambda));
+	Panel* p = new Panel(0, 0, 1200, 900);
+	Button* b = new Button(250, 250, 100, 100);
+	Button* b1 = new Button(300, 300, 100, 100);
+	b1->setColor({ 0, 255, 0, 0 });
+	b1->setZIndex(5);
 
+	auto lambda = [](Event*) { GAMEINST->stop(); };
+	auto switcher = [=](Event*) 
+	{
+		int t = b1->getZIndex();
+		b1->setZIndex(b->getZIndex());
+		b->setZIndex(t);
+	};
+
+
+	b->Clickable::setCallback(new EventCallback(lambda));
+	b1->Clickable::setCallback(new EventCallback(switcher));
+
+	
+	//p->add(b);
+	//p->add(b1);
 	g->getOctopus()->addBaby(b);
+	g->getOctopus()->addBaby(b1);
 
 	g->loop();
 

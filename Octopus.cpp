@@ -21,7 +21,7 @@ void Octopus::render()
 
 		for (auto ob : *_list.getList())
 		{
-			ob->render(_renderer);
+			ob->render(_renderer, true);
 		}
 		_list.setDirty(false);
 	}
@@ -30,7 +30,14 @@ void Octopus::render()
 }
 void Octopus::update()
 {
-
+	for (auto o : *_list.getList())
+	{
+		o->update();
+	}
+	if (_list.isDirty())
+	{
+		_list.getList()->sort(compareZindex);
+	}
 }
 void Octopus::initialize()
 {

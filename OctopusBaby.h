@@ -13,13 +13,16 @@ public:
 	virtual ~OctopusBaby();
 
 	virtual void update() = 0;
-	virtual void render(SDL_Renderer* ) = 0;
+	virtual void render(SDL_Renderer* , bool dirty = false) = 0;
 
-	bool isAbove(const OctopusBaby& ob) { return _z_index < ob._z_index; }
-protected:
-	virtual void internalRender(SDL_Renderer* r) = 0;
+	bool isAbove(const OctopusBaby& ob) const { return _z_index < ob._z_index; }
+	void setZIndex(int z);
+	int getZIndex() const { return _z_index; }
+
+	bool operator<(const OctopusBaby& o) const;
 
 private:
 	int _z_index = 0;
 };
 
+bool compareZindex(const OctopusBaby* o, const OctopusBaby *b);
