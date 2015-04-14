@@ -4,6 +4,7 @@
 #include "EventService.h"
 #include "UserInterface.h"
 
+#define TYPENAME(x) typeid(x).name()
 using namespace Events;
 
 #define UI ServiceLocator::getUI()

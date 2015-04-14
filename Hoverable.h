@@ -1,8 +1,10 @@
 #pragma once
 #include "MouseEventReceiver.h"
+#include "Modifiable.h"
 using namespace Events;
 
-class Hoverable : public MouseEventReceiver
+class Hoverable 
+	: public MouseEventReceiver
 {
 public:
 	Hoverable();
@@ -13,7 +15,8 @@ public:
 
 	virtual bool concernMe(Event* e) const
 	{
-		return (MouseEventReceiver::concernMe(e) && !_hover) || _hover;
+		bool b = MouseEventReceiver::concernMe(e);
+		return (b && !_hover) || (!b && _hover);
 	}
 private:
 	bool _hover = false;
