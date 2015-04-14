@@ -29,8 +29,3 @@ bool Button::isInArea(SDL_Point p) const
 {
 	return p.x >= _rect.x && p.x <= _rect.x + _rect.w && p.y >= _rect.y && p.y <= _rect.y + _rect.h;
 }
-void Button::triggerModifyEvent()
-{
-	//LOGINFO << "Modify event " << TYPENAME(this) << ": " << this << endl;
-	(new ModifyEvent(reinterpret_cast<Modifiable*>(this)))->dispatch();
-}

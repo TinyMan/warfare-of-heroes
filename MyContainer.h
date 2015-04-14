@@ -8,16 +8,13 @@ using namespace Events;
 
 template <class C>
 class MyContainer
-	: public Modifiable
 {
 public:
 
 	MyContainer()
 	{
-		//LOGINFO << "Instanciate " << this << " of type " << typeid(this).name() << endl;
+		LOGINFO << "Instanciate " << this << " of type " << typeid(this).name() << endl;
 		ServiceLocator::getEventService()->listen(typeid(Events::ModifyEvent), EventCallback(&MyContainer::onModify, this));
-		ServiceLocator::getEventService()->listen(typeid(Events::ActivableObjectEvents::ActivateEvent), EventCallback(&MyContainer::onActivate, this));
-		ServiceLocator::getEventService()->listen(typeid(Events::ActivableObjectEvents::DeactivateEvent), EventCallback(&MyContainer::onDeactivate, this));
 	}
 
 	virtual ~MyContainer()
@@ -26,7 +23,6 @@ public:
 
 	void add(C g)
 	{
-		//LOGINFO << "Adding item " << g << endl;
 		/* if it is active add it to te front */
 		if (g->isActive())
 		{
@@ -36,32 +32,25 @@ public:
 		else /* else add it to the back */
 			_list.push_back(g);
 	}
-	virtual void onActivate(Event* e)
+	/*virtual void onActivate(Event*)
 	{
-		if (concernMe(e))
-		{
-			_unsorted = true;
-			_dirty = true;
-			_nb_active++;
-		}
+		_unsorted = true;
+		_dirty = true;
+		_nb_active++;
 	}
-	virtual void onDeactivate(Event* e)
+	virtual void onDeactivate(Event*)
 	{
-		if (concernMe(e))
-		{
-			_unsorted = true;
-			_dirty = true;
-			if (_nb_active > 0) // prevent silly errors 
-				_nb_active--;
-		}
-	}
+		_unsorted = true;
+		_dirty = true;
+		if (_nb_active > 0) // prevent silly errors 
+			_nb_active--;
+	}*/
 	virtual void onModify(Event* e)
 	{
 		if (concernMe(e))
 		{
 			_dirty = true;
-			//LOGINFO << this << " is now DIRTY" << endl;
-			triggerModifyEvent();
+			LOGINFO << this << " is now DIRTY" << endl;
 		}
 		
 	}
@@ -77,10 +66,9 @@ public:
 
 	virtual bool concernMe(Event *e) const
 	{
-		Modifiable* o = ((ModifyEvent*)e)->getObject();
-		C p = reinterpret_cast<C>(o);
-		//LOGINFO << "testing if " << this << "(" << typeid(this).name() << ") contains " << p << "(" << TYPENAME(p) << ")" << endl;
-		return contains(p);
+		//Modifiable* o = ((ModifyEvent*)e)->getObject();
+		//LOGINFO << "testing if " << this << "(" << typeid(this).name() << ") contains " << o << "(" << TYPENAME(o) << ")" << endl;
+		return contains((C)((ModifyEvent*)e)->getObject());
 	}
 	bool contains(C o) const
 	{
@@ -93,8 +81,8 @@ public:
 			if (found)
 				break;
 		}
-		//if(found)
-		//	LOGINFO << "FOUNNND!" << endl;
+		if(found)
+			LOGINFO << "FOUNNND!" << endl;
 		return found;
 	}
 	bool isDirty() const { return _dirty; }

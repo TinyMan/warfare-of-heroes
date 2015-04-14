@@ -24,8 +24,6 @@ public:
 	SDL_Renderer* getRenderer() const { return _renderer; }
 	SDL_Window* getWindow() const { return _window; }
 
-protected:
-	virtual void triggerModifyEvent(){}
 private:
 	SDL_Window* _window;
 	SDL_Renderer* _renderer;

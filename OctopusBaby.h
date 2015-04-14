@@ -1,12 +1,11 @@
 #pragma once
 #include <SDL2/SDL.h>
-#include "Modifiable.h"
 #include "ActivableObject.h"
 /* 
 everything that is displayed shoudl be an octopus baby (button, player, ...)
 */
 class OctopusBaby
-	: public ActivableObject, public Modifiable
+	: public ActivableObject
 {
 public:
 	OctopusBaby();
