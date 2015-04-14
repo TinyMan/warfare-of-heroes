@@ -144,6 +144,12 @@
     <ClCompile Include="MouseEventReceiver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Modifiable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Activable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeService.h">
@@ -282,6 +288,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MouseEventReceiver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Modifiable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Activable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

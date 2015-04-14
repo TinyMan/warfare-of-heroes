@@ -11,6 +11,7 @@ Hoverable::Hoverable() : MouseEventReceiver(typeid(Events::MouseEvents::MotionEv
 			_hover = true;
 		else
 			_hover = false;
+		setDirty();
 	}));
 }
 

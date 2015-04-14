@@ -75,6 +75,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="Activable.cpp" />
     <ClCompile Include="Archer.cpp" />
     <ClCompile Include="AreaOfEffect.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -103,6 +104,7 @@
     <ClCompile Include="LogService.cpp" />
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Modifiable.cpp" />
     <ClCompile Include="MouseEventReceiver.cpp" />
     <ClCompile Include="MoveEffect.cpp" />
     <ClCompile Include="Octopus.cpp" />
@@ -120,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="Activable.h" />
     <ClInclude Include="Archer.h" />
     <ClInclude Include="AreaOfEffect.h" />
     <ClInclude Include="Button.h" />
@@ -150,9 +153,11 @@
     <ClInclude Include="LineAoE.h" />
     <ClInclude Include="LogService.h" />
     <ClInclude Include="Mage.h" />
+    <ClInclude Include="Modifiable.h" />
     <ClInclude Include="MouseEventReceiver.h" />
     <ClInclude Include="MouseEvents.h" />
     <ClInclude Include="MoveEffect.h" />
+    <ClInclude Include="MyList.h" />
     <ClInclude Include="Octopus.h" />
     <ClInclude Include="OctopusBaby.h" />
     <ClInclude Include="OverTimeEffect.h" />

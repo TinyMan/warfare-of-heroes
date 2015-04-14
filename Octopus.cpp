@@ -13,17 +13,20 @@ Octopus::~Octopus()
 
 void Octopus::render()
 {
-	//LOGINFO << "Rendering mother of octopus ! " << endl;
-	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);
-	SDL_RenderClear(_renderer);
-	//SDL_FillRect(NULL, NULL, 0);
-	for (auto ob : _babies)
+	if (_list.isDirty())
 	{
-		ob->render(_renderer);
+		//LOGINFO << "Rendering mother of octopus ! " << endl;
+		SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);
+		SDL_RenderClear(_renderer);
+
+		for (auto ob : *_list.getList())
+		{
+			ob->render(_renderer);
+		}
+		_list.setDirty(false);
 	}
 	SDL_RenderPresent(_renderer);
-	updateWindowTitle();
-	
+	updateWindowTitle();	
 }
 void Octopus::update()
 {
@@ -51,6 +54,7 @@ void Octopus::addBaby(OctopusBaby* b)
 	if (b)
 	{
 		LOGINFO << "Adding octopus baby" << endl;
-		_babies.push_back(b);
+		//_babies.push_back(b);
+		_list.add(b);
 	}
 }

@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include "OctopusBaby.h"
 #include "ServiceLocator.h"
+#include "MyList.h"
 using namespace std;
 
 class Octopus
@@ -21,6 +22,7 @@ public:
 private:
 	/* collection of octopus babies */
 	deque<OctopusBaby*> _babies;
+	MyList<OctopusBaby*> _list;
 
 	SDL_Window* _window;
 	SDL_Renderer* _renderer;
