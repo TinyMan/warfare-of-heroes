@@ -13,7 +13,7 @@
 #include "DamageEffect.h"
 #include "LineAoE.h"
 #include "Button.h"
-#include "Panel.h"
+
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -37,21 +37,18 @@ int main(int argc, char* argv[])
 	player1->setToDelete();
 	auto lambda = [](Event*) { GAMEINST->stop(); };
 	auto lambda1 = [](Event*) { LOGINFO << "Hover on my button ! " << endl; };
-	Panel * p = new Panel(g->getOctopus()->getRenderer(), 0, 0, 1200, 900);
-	
 	Button* b = new Button(250,250,100,50);
-	p->add(b);
-	Hoverable * h = static_cast<Hoverable*>(b);
-	Button* aaa = (Button*)((void*)h);
-	if (p->contains(aaa))
-	{
-		LOGINFO << p << "(" << TYPENAME(p) << ") contains " << aaa << "(" << TYPENAME(aaa) << ")" << endl;
-	}
-	
 	b->Clickable::setCallback(new EventCallback(lambda));
-	g->getOctopus()->addBaby(p);
-	
-
+	g->getOctopus()->addBaby(b);
+	//g->stop();
+	/*g->displayState();	
+	g->start();
+	while (g->isRunning())
+	{
+		g->handleUserInput();
+		g->displayState(LOGINFO);
+		// TODO : add textmode gameplay
+	}*/
 	g->loop();
 
 	LOGINFO << "Ending @ " << SDL_GetTicks() << endl;

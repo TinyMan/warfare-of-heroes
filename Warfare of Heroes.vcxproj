@@ -103,13 +103,11 @@
     <ClCompile Include="LogService.cpp" />
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Modifiable.cpp" />
     <ClCompile Include="MouseEventReceiver.cpp" />
     <ClCompile Include="MoveEffect.cpp" />
     <ClCompile Include="Octopus.cpp" />
     <ClCompile Include="OctopusBaby.cpp" />
     <ClCompile Include="OverTimeEffect.cpp" />
-    <ClCompile Include="Panel.cpp" />
     <ClCompile Include="RootEffect.cpp" />
     <ClCompile Include="SDLEvents.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
@@ -153,7 +151,6 @@
     <ClInclude Include="LineAoE.h" />
     <ClInclude Include="LogService.h" />
     <ClInclude Include="Mage.h" />
-    <ClInclude Include="Modifiable.h" />
     <ClInclude Include="MouseEventReceiver.h" />
     <ClInclude Include="MouseEvents.h" />
     <ClInclude Include="MoveEffect.h" />
@@ -161,7 +158,6 @@
     <ClInclude Include="Octopus.h" />
     <ClInclude Include="OctopusBaby.h" />
     <ClInclude Include="OverTimeEffect.h" />
-    <ClInclude Include="Panel.h" />
     <ClInclude Include="RootEffect.h" />
     <ClInclude Include="SDLEvents.h" />
     <ClInclude Include="ServiceLocator.h" />

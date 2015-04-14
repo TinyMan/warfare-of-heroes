@@ -1,11 +1,11 @@
 #include "EventReceiver.h"
 #include "ServiceLocator.h"
-#include "MyContainer.h"
 
 EventReceiver::EventReceiver(const type_info& ti)
 {
-	addEventToListen(ti);
+	ServiceLocator::getEventService()->listen(ti, EventCallback(&EventReceiver::onEvent, this));
 }
+
 
 EventReceiver::~EventReceiver()
 {
@@ -17,8 +17,4 @@ void EventReceiver::onEvent(Event* e)
 	{
 		_cb->call(e);
 	}
-}
-void EventReceiver::addEventToListen(const type_info& ti)
-{
-	ServiceLocator::getEventService()->listen(ti, EventCallback(&EventReceiver::onEvent, this));
 }

@@ -13,7 +13,7 @@ public:
 	virtual bool isInArea(SDL_Point) const = 0;
 	virtual bool concernMe(Event* e) const
 	{
-		return isInArea(((MouseEvents::MouseEvent*)e)->getPos());
+		return isInArea(((MouseEvents::ClickEvent*)e)->getPos());
 	}
 };
 

@@ -144,12 +144,6 @@
     <ClCompile Include="MouseEventReceiver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Panel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Modifiable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeService.h">
@@ -294,12 +288,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ActivableObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Panel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Modifiable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

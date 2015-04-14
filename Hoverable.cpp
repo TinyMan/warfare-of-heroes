@@ -11,8 +11,6 @@ Hoverable::Hoverable() : MouseEventReceiver(typeid(Events::MouseEvents::MotionEv
 			_hover = true;
 		else
 			_hover = false;
-		LOGINFO << "Hover " << TYPENAME(this) << endl;
-		(new ModifyEvent(this))->dispatch();
 	}));
 }
 
