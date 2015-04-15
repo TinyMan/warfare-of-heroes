@@ -69,294 +69,294 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Action.cpp">
+    <ClCompile Include="Action.cpp">
       <Filter>Source Files\Util\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Callback.cpp">
+    <ClCompile Include="Callback.cpp">
       <Filter>Source Files\Util\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Event.cpp">
+    <ClCompile Include="Event.cpp">
       <Filter>Source Files\Util\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EventReceiver.cpp">
+    <ClCompile Include="EventReceiver.cpp">
       <Filter>Source Files\Util\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EventService.cpp">
+    <ClCompile Include="EventService.cpp">
       <Filter>Source Files\Util\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MouseEventReceiver.cpp">
+    <ClCompile Include="MouseEventReceiver.cpp">
       <Filter>Source Files\Util\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SDLEvents.cpp">
+    <ClCompile Include="SDLEvents.cpp">
       <Filter>Source Files\Util\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Interval.cpp">
+    <ClCompile Include="Interval.cpp">
       <Filter>Source Files\Util\Time</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Timeout.cpp">
+    <ClCompile Include="Timeout.cpp">
       <Filter>Source Files\Util\Time</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TimeService.cpp">
+    <ClCompile Include="TimeService.cpp">
       <Filter>Source Files\Util\Time</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Activable.cpp">
+    <ClCompile Include="Activable.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Clickable.cpp">
+    <ClCompile Include="Clickable.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Hoverable.cpp">
+    <ClCompile Include="Hoverable.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Modifiable.cpp">
+    <ClCompile Include="Modifiable.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LogService.cpp">
+    <ClCompile Include="LogService.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ServiceLocator.cpp">
+    <ClCompile Include="ServiceLocator.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Archer.cpp">
+    <ClCompile Include="Archer.cpp">
       <Filter>Source Files\Game\Character</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Knight.cpp">
+    <ClCompile Include="Knight.cpp">
       <Filter>Source Files\Game\Character</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Character.cpp">
+    <ClCompile Include="Character.cpp">
       <Filter>Source Files\Game\Character</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Mage.cpp">
+    <ClCompile Include="Mage.cpp">
       <Filter>Source Files\Game\Character</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Spell.cpp">
+    <ClCompile Include="Spell.cpp">
       <Filter>Source Files\Game\Spell</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SpellTarget.cpp">
+    <ClCompile Include="SpellTarget.cpp">
       <Filter>Source Files\Game\Spell</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SquareAoE.cpp">
+    <ClCompile Include="SquareAoE.cpp">
       <Filter>Source Files\Game\Spell\AoE Target</Filter>
     </ClCompile>
-    <ClCompile Include="Source\AreaOfEffect.cpp">
+    <ClCompile Include="AreaOfEffect.cpp">
       <Filter>Source Files\Game\Spell\AoE Target</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LineAoE.cpp">
+    <ClCompile Include="LineAoE.cpp">
       <Filter>Source Files\Game\Spell\AoE Target</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Effect.cpp">
+    <ClCompile Include="Effect.cpp">
       <Filter>Source Files\Game\Spell\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DashEffect.cpp">
+    <ClCompile Include="DashEffect.cpp">
       <Filter>Source Files\Game\Spell\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Source\HealEffect.cpp">
+    <ClCompile Include="HealEffect.cpp">
       <Filter>Source Files\Game\Spell\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Source\KnockBackEffect.cpp">
+    <ClCompile Include="KnockBackEffect.cpp">
       <Filter>Source Files\Game\Spell\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DamageBuffEffect.cpp">
+    <ClCompile Include="DamageBuffEffect.cpp">
       <Filter>Source Files\Game\Spell\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DiamondAoE.cpp">
+    <ClCompile Include="DiamondAoE.cpp">
       <Filter>Source Files\Game\Spell\AoE Target</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DamageEffect.cpp">
+    <ClCompile Include="DamageEffect.cpp">
       <Filter>Source Files\Game\Spell\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Source\OverTimeEffect.cpp">
+    <ClCompile Include="OverTimeEffect.cpp">
       <Filter>Source Files\Game\Spell\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Source\RootEffect.cpp">
+    <ClCompile Include="RootEffect.cpp">
       <Filter>Source Files\Game\Spell\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Octopus.cpp">
+    <ClCompile Include="Octopus.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\OctopusBaby.cpp">
+    <ClCompile Include="OctopusBaby.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MoveEffect.cpp">
+    <ClCompile Include="MoveEffect.cpp">
       <Filter>Source Files\Game\Spell\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DamageOverTime.cpp">
+    <ClCompile Include="DamageOverTime.cpp">
       <Filter>Source Files\Game\Spell\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObject.cpp">
+    <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Cell.cpp">
+    <ClCompile Include="Cell.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game.cpp">
+    <ClCompile Include="Game.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\UserInterface.cpp">
+    <ClCompile Include="UserInterface.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Button.cpp">
+    <ClCompile Include="Button.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Grid.cpp">
+    <ClCompile Include="Grid.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Panel.cpp">
+    <ClCompile Include="Panel.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Action.h">
+    <ClInclude Include="Action.h">
       <Filter>Header Files\Util\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Activable.h">
+    <ClInclude Include="Activable.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Archer.h">
+    <ClInclude Include="Archer.h">
       <Filter>Header Files\Game\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Source\AreaOfEffect.h">
+    <ClInclude Include="AreaOfEffect.h">
       <Filter>Header Files\Game\Spell\AoE Target</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Button.h">
+    <ClInclude Include="Button.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Callback.h">
+    <ClInclude Include="Callback.h">
       <Filter>Header Files\Util\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Cell.h">
+    <ClInclude Include="Cell.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Character.h">
+    <ClInclude Include="Character.h">
       <Filter>Header Files\Game\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CharacterEvents.h">
+    <ClInclude Include="CharacterEvents.h">
       <Filter>Header Files\Game\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Clickable.h">
+    <ClInclude Include="Clickable.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DamageBuffEffect.h">
+    <ClInclude Include="DamageBuffEffect.h">
       <Filter>Header Files\Game\Spell\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DamageEffect.h">
+    <ClInclude Include="DamageEffect.h">
       <Filter>Header Files\Game\Spell\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DamageOverTime.h">
+    <ClInclude Include="DamageOverTime.h">
       <Filter>Header Files\Game\Spell\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DashEffect.h">
+    <ClInclude Include="DashEffect.h">
       <Filter>Header Files\Game\Spell\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DiamondAoE.h">
+    <ClInclude Include="DiamondAoE.h">
       <Filter>Header Files\Game\Spell\AoE Target</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Event.h">
+    <ClInclude Include="Event.h">
       <Filter>Header Files\Util\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EventCallback.h">
+    <ClInclude Include="EventCallback.h">
       <Filter>Header Files\Util\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EventReceiver.h">
+    <ClInclude Include="EventReceiver.h">
       <Filter>Header Files\Util\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EventService.h">
+    <ClInclude Include="EventService.h">
       <Filter>Header Files\Util\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game.h">
+    <ClInclude Include="Game.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObject.h">
+    <ClInclude Include="GameObject.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjectEvents.h">
+    <ClInclude Include="GameObjectEvents.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Grid.h">
+    <ClInclude Include="Grid.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\HealEffect.h">
+    <ClInclude Include="HealEffect.h">
       <Filter>Header Files\Game\Spell\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Hoverable.h">
+    <ClInclude Include="Hoverable.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Interval.h">
+    <ClInclude Include="Interval.h">
       <Filter>Header Files\Util\Time</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Knight.h">
+    <ClInclude Include="Knight.h">
       <Filter>Header Files\Game\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Source\KnockBackEffect.h">
+    <ClInclude Include="KnockBackEffect.h">
       <Filter>Header Files\Game\Spell\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LineAoE.h">
+    <ClInclude Include="LineAoE.h">
       <Filter>Header Files\Game\Spell\AoE Target</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LogService.h">
+    <ClInclude Include="LogService.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Mage.h">
+    <ClInclude Include="Mage.h">
       <Filter>Header Files\Game\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Modifiable.h">
+    <ClInclude Include="Modifiable.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Source\MouseEventReceiver.h">
+    <ClInclude Include="MouseEventReceiver.h">
       <Filter>Header Files\Util\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\MouseEvents.h">
+    <ClInclude Include="MouseEvents.h">
       <Filter>Header Files\Util\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\MoveEffect.h">
+    <ClInclude Include="MoveEffect.h">
       <Filter>Header Files\Game\Spell\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Source\MyList.h">
+    <ClInclude Include="MyList.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Octopus.h">
+    <ClInclude Include="Octopus.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Source\OctopusBaby.h">
+    <ClInclude Include="OctopusBaby.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Source\OverTimeEffect.h">
+    <ClInclude Include="OverTimeEffect.h">
       <Filter>Header Files\Game\Spell\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Panel.h">
+    <ClInclude Include="Panel.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Source\RootEffect.h">
+    <ClInclude Include="RootEffect.h">
       <Filter>Header Files\Game\Spell\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SDLEvents.h">
+    <ClInclude Include="SDLEvents.h">
       <Filter>Header Files\Util\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ServiceLocator.h">
+    <ClInclude Include="ServiceLocator.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Spell.h">
+    <ClInclude Include="Spell.h">
       <Filter>Header Files\Game\Spell</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SpellTarget.h">
+    <ClInclude Include="SpellTarget.h">
       <Filter>Header Files\Game\Spell</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SquareAoE.h">
+    <ClInclude Include="SquareAoE.h">
       <Filter>Header Files\Game\Spell\AoE Target</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Timeout.h">
+    <ClInclude Include="Timeout.h">
       <Filter>Header Files\Util\Time</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TimeService.h">
+    <ClInclude Include="TimeService.h">
       <Filter>Header Files\Util\Time</Filter>
     </ClInclude>
-    <ClInclude Include="Source\UserInterface.h">
+    <ClInclude Include="UserInterface.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Effect.h">
+    <ClInclude Include="Effect.h">
       <Filter>Header Files\Game\Spell\Effect</Filter>
     </ClInclude>
   </ItemGroup>
