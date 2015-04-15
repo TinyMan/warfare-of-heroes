@@ -2,9 +2,14 @@
 #include <list>
 #include "Modifiable.h"
 #include "Activable.h"
+#include "Sortable.h"
 #include "ServiceLocator.h"
 
 using namespace std;
+
+/* 
+The template argument MUST be inherited from Modifiable, Sortable classes
+*/
 template<class T>
 class MyList :
 	public Modifiable
@@ -52,8 +57,33 @@ public:
 	list<T> * getList() { return &_list; }
 	virtual void setDirty(bool b = true) { _dirty = b; }
 
-	
-	
+	bool needSort()
+	{
+		for (auto it = _list.begin(); it != _list.end(); ++it)
+		{
+			_sorted = !((Sortable*)*it)->needSort();
+			if (!_sorted)
+				break;
+		}
+		return !_sorted;
+	}
+	void sort()
+	{
+		if (needSort())
+		{
+			_list.sort(::compare);
+			for (Sortable * e : _list)
+			{
+				e->setSorted();
+			}
+			setSorted();
+			setDirty();
+		}
+	}
+	virtual void update()
+	{
+		sort();
+	}
 protected:
 	list<T> _list;
 	virtual void setSorted(bool b = true)

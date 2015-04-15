@@ -207,6 +207,9 @@
     <ClCompile Include="Panel.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Sortable.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -358,6 +361,9 @@
     </ClInclude>
     <ClInclude Include="Effect.h">
       <Filter>Header Files\Game\Spell\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Sortable.h">
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

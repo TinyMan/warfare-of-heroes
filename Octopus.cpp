@@ -34,10 +34,8 @@ void Octopus::update()
 	{
 		o->update();
 	}
-	if (_list.isDirty())
-	{
-		_list.getList()->sort(compareZindex);
-	}
+	_list.update();
+	
 }
 void Octopus::initialize()
 {

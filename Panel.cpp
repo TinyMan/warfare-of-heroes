@@ -48,9 +48,6 @@ void Panel::render(SDL_Renderer* r, bool dirty)
 
 void Panel::update()
 {
-	//LOGINFO << "Updating panel ..." << endl;
-	if (MyList::isDirty())
-	{
-		_list.sort(compareZindex);
-	}
+	MyList::update();
+	
 }

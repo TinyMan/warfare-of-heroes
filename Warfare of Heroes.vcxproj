@@ -114,6 +114,7 @@
     <ClCompile Include="RootEffect.cpp" />
     <ClCompile Include="SDLEvents.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
+    <ClCompile Include="Sortable.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="SpellTarget.cpp" />
     <ClCompile Include="SquareAoE.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="RootEffect.h" />
     <ClInclude Include="SDLEvents.h" />
     <ClInclude Include="ServiceLocator.h" />
+    <ClInclude Include="Sortable.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="SpellTarget.h" />
     <ClInclude Include="SquareAoE.h" />

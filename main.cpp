@@ -54,10 +54,10 @@ int main(int argc, char* argv[])
 	b1->Clickable::setCallback(new EventCallback(switcher));
 
 	
-	//p->add(b);
-	//p->add(b1);
-	g->getOctopus()->addBaby(b);
-	g->getOctopus()->addBaby(b1);
+	p->add(b);
+	p->add(b1);
+	g->getOctopus()->addBaby(p);
+	//g->getOctopus()->addBaby(b1);
 
 	g->loop();
 

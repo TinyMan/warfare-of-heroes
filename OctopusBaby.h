@@ -1,12 +1,13 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include "Activable.h"
+#include "Sortable.h"
 
 /* 
 everything that is displayed shoudl be an octopus baby (button, player, ...)
 */
 class OctopusBaby
-	: public Activable
+	: public Activable, public Sortable
 {
 public:
 	OctopusBaby();
@@ -21,8 +22,7 @@ public:
 
 	bool operator<(const OctopusBaby& o) const;
 
+	virtual bool compare(const Sortable* s) const;
 private:
 	int _z_index = 0;
 };
-
-bool compareZindex(const OctopusBaby* o, const OctopusBaby *b);
