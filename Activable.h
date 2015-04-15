@@ -12,6 +12,6 @@ public:
 	bool operator<(const Activable& o);
 
 private:
-	bool _active = false;
+	bool _active = true;
 };
 

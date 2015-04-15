@@ -28,7 +28,7 @@ Panel::~Panel()
 void Panel::render(SDL_Renderer* r, bool dirty)
 {
 	/* if dirty we need to redraw to _texture */
-	bool d = dirty || isDirty();
+	bool d = (dirty || isDirty()) && isActive();
 	if (d)
 	{
 		//LOGINFO << this << " is dirty, need render" << endl;

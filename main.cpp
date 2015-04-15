@@ -49,7 +49,6 @@ int main(int argc, char* argv[])
 		b->setZIndex(t);
 	};
 
-
 	b->Clickable::setCallback(new EventCallback(lambda));
 	b1->Clickable::setCallback(new EventCallback(switcher));
 

@@ -18,7 +18,7 @@ Button::~Button()
 
 void Button::render(SDL_Renderer* r, bool dirty)
 {
-	bool d = dirty || isDirty();
+	bool d = (dirty || isDirty()) && isActive();
 	if (d)
 	{
 		//LOGINFO << "rendering dirty button" << this << endl;
@@ -34,5 +34,7 @@ void Button::render(SDL_Renderer* r, bool dirty)
 }
 bool Button::isInArea(SDL_Point p) const
 {
+	if (!isActive())
+		return false;
 	return p.x >= _rect.x && p.x <= _rect.x + _rect.w && p.y >= _rect.y && p.y <= _rect.y + _rect.h;
 }
