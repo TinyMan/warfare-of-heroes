@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <typeinfo>
 #include <iostream>
 #include "Game.h"
@@ -20,7 +21,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	
+	IMG_Init(IMG_INIT_PNG);
 
 	Game *g = Game::getInstance();
 
@@ -66,6 +67,7 @@ int main(int argc, char* argv[])
 
 
 	system("pause");
+	IMG_Quit();
 	SDL_Quit();
 
 	return 0;
