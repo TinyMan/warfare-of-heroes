@@ -3,7 +3,6 @@
 #include <SDL2/SDL_image.h>
 #include <map>
 #include <iostream>
-#include "ServiceLocator.h"
 
 using namespace std;
 

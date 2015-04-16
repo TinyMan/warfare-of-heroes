@@ -15,6 +15,7 @@
 #include "LineAoE.h"
 #include "Button.h"
 #include "Panel.h"
+#include "TextureManager.h"
 
 using namespace std;
 
@@ -58,7 +59,7 @@ int main(int argc, char* argv[])
 	p->add(b1);
 	g->getOctopus()->addBaby(p);
 	//g->getOctopus()->addBaby(b1);
-
+	
 	g->loop();
 
 	LOGINFO << "Ending @ " << SDL_GetTicks() << endl;

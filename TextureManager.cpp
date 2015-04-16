@@ -1,4 +1,5 @@
 #include "TextureManager.h"
+#include "ServiceLocator.h"
 
 
 TextureManager::TextureManager(SDL_Renderer* r)
