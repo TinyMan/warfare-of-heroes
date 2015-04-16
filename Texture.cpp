@@ -29,7 +29,9 @@ void Texture::render(SDL_Renderer* r, SDL_Rect* srcrect, SDL_Rect* dstrect, STYL
 	{
 		if (!dstrect)
 			dstrect = new SDL_Rect({ 0, 0, MAXWIDTH, MAXHEIGHT });
-		SDL_Rect src = _defaultRect;
+		if (!srcrect)
+			srcrect = new SDL_Rect(_defaultRect);
+		SDL_Rect src = *srcrect;
 		SDL_Rect dst = *dstrect;
 		combineRect(src, dst, s);
 		SDL_RenderCopy(r, _texture, &src, &dst);

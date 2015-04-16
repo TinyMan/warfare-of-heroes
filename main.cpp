@@ -60,7 +60,7 @@ int main(int argc, char* argv[])
 	g->getOctopus()->addBaby(p);
 	//g->getOctopus()->addBaby(b1);
 	ServiceLocator::getTextureManager()->loadTexture("Images/PNG/path3346-6.png", "test");
-	Texture t((*ServiceLocator::getTextureManager())["test"]);
+	Texture t((*ServiceLocator::getTextureManager())["menu_mockup"]);
 	//p->setBackground(t);
 	g->loop();
 
