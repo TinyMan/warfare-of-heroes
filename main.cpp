@@ -59,7 +59,9 @@ int main(int argc, char* argv[])
 	p->add(b1);
 	g->getOctopus()->addBaby(p);
 	//g->getOctopus()->addBaby(b1);
-	
+	ServiceLocator::getTextureManager()->loadTexture("Images/PNG/path3346-6.png", "test");
+	Texture t((*ServiceLocator::getTextureManager())["test"]);
+	//p->setBackground(t);
 	g->loop();
 
 	LOGINFO << "Ending @ " << SDL_GetTicks() << endl;

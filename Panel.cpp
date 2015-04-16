@@ -27,7 +27,6 @@ void Panel::initialize()
 
 Panel::~Panel()
 {
-	SDL_DestroyTexture(_texture);
 }
 
 void Panel::render(SDL_Renderer* r, bool dirty)
@@ -38,6 +37,11 @@ void Panel::render(SDL_Renderer* r, bool dirty)
 	{
 		//LOGINFO << this << " is dirty, need render" << endl;
 		SDL_SetRenderTarget(r, _texture);
+		/* draws the bg */
+		//SDL_Rect rect = { 100, 100, 800, 200 };
+		_background.render(r);// , Texture::STRETCH);// , nullptr, &rect);
+		//SDL_RenderCopy(r, _background, NULL, NULL);
+		
 		/* draw the contained octopus babies onto the texture */
 		for (auto e : _list)
 		{

@@ -118,6 +118,7 @@
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="SpellTarget.cpp" />
     <ClCompile Include="SquareAoE.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Timeout.cpp" />
     <ClCompile Include="TimeService.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="Spell.h" />
     <ClInclude Include="SpellTarget.h" />
     <ClInclude Include="SquareAoE.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Timeout.h" />
     <ClInclude Include="TimeService.h" />
