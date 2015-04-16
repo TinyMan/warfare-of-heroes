@@ -2,6 +2,11 @@
 #include "Game.h"
 #include "ServiceLocator.h"
 
+Panel::Panel()
+{
+	_rect = { 0, 0, GAMEINST->getOctopus()->getWWidth(), GAMEINST->getOctopus()->getWHeight() };
+	initialize();
+}
 Panel::Panel(SDL_Rect rect)
 	: _rect(rect)
 {

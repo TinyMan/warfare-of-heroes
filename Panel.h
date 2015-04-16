@@ -5,8 +5,9 @@ class Panel :
 	public OctopusBaby, public MyList<OctopusBaby*>
 {
 public:
+	Panel();
 	Panel(SDL_Rect rect);
-	Panel(int x = 0, int y = 0, int w = 0, int h = 0);
+	Panel(int x, int y, int w, int h);
 	virtual ~Panel();
 
 	virtual void render(SDL_Renderer*, bool dirty = false);

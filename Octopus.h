@@ -23,6 +23,9 @@ public:
 	SDL_Window* getWindow() const { return _window; }
 	SDL_Renderer* getRenderer() const { return _renderer; }
 
+	int getWWidth() const { return wWidth; }
+	int getWHeight() const { return wHeight; }
+
 private:
 	/* collection of octopus babies */
 	deque<OctopusBaby*> _babies;
@@ -34,5 +37,7 @@ private:
 	stringstream _windowTitle;
 	Uint32 _lastFpsUpdate = 0;
 	Uint32 _fpsUpdateInterval = 1000; /* 1000 ms */
+	int wWidth = 1200;
+	int wHeight = 900;
 };
 

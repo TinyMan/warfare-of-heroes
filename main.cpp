@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 	g->addPlayer(player1);
 	g->addPlayer(player3);
 	
-	Panel* p = new Panel(0, 0, 1200, 900);
+	Panel* p = new Panel();
 	Button* b = new Button(250, 250, 100, 100);
 	Button* b1 = new Button(300, 300, 100, 100);
 	b1->setColor({ 0, 255, 0, 0 });
