@@ -10,13 +10,19 @@ using namespace std;
 class TextureManager
 {
 public:
-	TextureManager();
+	TextureManager(SDL_Renderer* renderer);
 	virtual ~TextureManager();
 
 	void loadTexture(string filename, string texName = "");
 
+	void setRenderer(SDL_Renderer* r) { _renderer = r; }
+	SDL_Renderer* getRenderer() const { return _renderer; }
+
+	SDL_Texture * operator[](string textureName);
 private:
+	SDL_Renderer * _renderer = nullptr;
 	map<string, SDL_Texture*> _textures;
+	// TODO : add a map texture name <-> file name
 
 };
 
