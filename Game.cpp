@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "SDLEvents.h"
 
 Game* Game::_instance = nullptr;
 
@@ -16,16 +17,21 @@ Game::Game()
 	ServiceLocator::provide(_userInterface);
 
 	/* setup event listenenrs */
-	_eventService->listen(typeid(Events::GameObjectEvents::ActivateEvent), Callback(&Game::onActivatedGameObject, this));
-	_eventService->listen(typeid(Events::GameObjectEvents::DeactivateEvent), Callback(&Game::onDeactivatedGameObject, this));
-	_eventService->listen(typeid(Events::CharacterEvents::DieEvent), Callback(&Game::onDie, this));
+	_eventService->listen(typeid(Events::GameObjectEvents::ActivateEvent), EventCallback(&Game::onActivatedGameObject, this));
+	_eventService->listen(typeid(Events::GameObjectEvents::DeactivateEvent), EventCallback(&Game::onDeactivatedGameObject, this));
+	_eventService->listen(typeid(Events::CharacterEvents::DieEvent), EventCallback(&Game::onDie, this));
 	
 	/* generate basic game objects */
 	_grid = new Grid();
-	
+	_octopus = new Octopus();
+
+	initialize();
 }
 
-
+void Game::initialize()
+{
+	_octopus->initialize();
+}
 Game::~Game()
 {
 	/* destroy all last game objects */
@@ -40,16 +46,29 @@ Game::~Game()
 
 void Game::loop()
 {
+	SDL_Event e;
+	Event* ev;
 	cout << "Main loop !" << endl;
 	while (_running)
 	{
 		/* TODO: BEGIN FRAME */
+		_timeService->beginFrame();
 		/* TODO: PROCESS USER INPUT */
-
-		SDL_Delay(100);
+		while (SDL_PollEvent(&e)) {
+			if (e.type == SDL_QUIT)
+			{
+				//Quit the program
+				stop();
+			}
+			ev = SDLEvents::createEventFromSDLEvent(&e);
+			if(ev)
+				_eventService->dispatch(ev);
+		}
+		//SDL_Delay(1);
 
 		/* Update */
 		_timeService->update();
+		_octopus->update();
 		/* TODO: UPDATE */
 		this->update();
 
@@ -59,7 +78,9 @@ void Game::loop()
 		*/
 
 		/* TODO: RENDER */
+		_octopus->render();
 		/* TODO: END FRAME */
+		_timeService->endFrame();
 	}
 }
 
@@ -83,20 +104,20 @@ void Game::addPlayer(Character* c)
 {
 	_players.push_back(c);
 }
-void Game::onDeactivatedGameObject(void*)
+void Game::onDeactivatedGameObject(Event*)
 {
 	ServiceLocator::getLogService()->info << "Catching ev: game object deactivated" << endl;
 	_gameObjects_dirty = true;
 	if (_nb_active_gobjects > 0) /* prevent silly errors */
 		_nb_active_gobjects--;
 }
-void Game::onActivatedGameObject(void*)
+void Game::onActivatedGameObject(Event*)
 {
 	ServiceLocator::getLogService()->info << "Catching ev: game object activated" << endl;
 	_gameObjects_dirty = true;
 	_nb_active_gobjects++;
 }
-void Game::onDie(void* data)
+void Game::onDie(Event* data)
 {
 	if (data == nullptr)
 		return;

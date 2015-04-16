@@ -75,11 +75,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="Activable.cpp" />
     <ClCompile Include="Archer.cpp" />
     <ClCompile Include="AreaOfEffect.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Callback.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Clickable.cpp" />
     <ClCompile Include="DamageBuffEffect.cpp" />
     <ClCompile Include="DamageEffect.cpp" />
     <ClCompile Include="DamageOverTime.cpp" />
@@ -87,11 +90,13 @@
     <ClCompile Include="DiamondAoE.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventReceiver.cpp" />
     <ClCompile Include="EventService.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="HealEffect.cpp" />
+    <ClCompile Include="Hoverable.cpp" />
     <ClCompile Include="Interval.cpp" />
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="KnockBackEffect.cpp" />
@@ -99,10 +104,17 @@
     <ClCompile Include="LogService.cpp" />
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Modifiable.cpp" />
+    <ClCompile Include="MouseEventReceiver.cpp" />
     <ClCompile Include="MoveEffect.cpp" />
+    <ClCompile Include="Octopus.cpp" />
+    <ClCompile Include="OctopusBaby.cpp" />
     <ClCompile Include="OverTimeEffect.cpp" />
+    <ClCompile Include="Panel.cpp" />
     <ClCompile Include="RootEffect.cpp" />
+    <ClCompile Include="SDLEvents.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
+    <ClCompile Include="Sortable.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="SpellTarget.cpp" />
     <ClCompile Include="SquareAoE.cpp" />
@@ -112,12 +124,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="Activable.h" />
     <ClInclude Include="Archer.h" />
     <ClInclude Include="AreaOfEffect.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Callback.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterEvents.h" />
+    <ClInclude Include="Clickable.h" />
     <ClInclude Include="DamageBuffEffect.h" />
     <ClInclude Include="DamageEffect.h" />
     <ClInclude Include="DamageOverTime.h" />
@@ -125,22 +140,34 @@
     <ClInclude Include="DiamondAoE.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="EventCallback.h" />
+    <ClInclude Include="EventReceiver.h" />
     <ClInclude Include="EventService.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectEvents.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="HealEffect.h" />
+    <ClInclude Include="Hoverable.h" />
     <ClInclude Include="Interval.h" />
     <ClInclude Include="Knight.h" />
     <ClInclude Include="KnockBackEffect.h" />
     <ClInclude Include="LineAoE.h" />
     <ClInclude Include="LogService.h" />
     <ClInclude Include="Mage.h" />
+    <ClInclude Include="Modifiable.h" />
+    <ClInclude Include="MouseEventReceiver.h" />
+    <ClInclude Include="MouseEvents.h" />
     <ClInclude Include="MoveEffect.h" />
+    <ClInclude Include="MyList.h" />
+    <ClInclude Include="Octopus.h" />
+    <ClInclude Include="OctopusBaby.h" />
     <ClInclude Include="OverTimeEffect.h" />
+    <ClInclude Include="Panel.h" />
     <ClInclude Include="RootEffect.h" />
+    <ClInclude Include="SDLEvents.h" />
     <ClInclude Include="ServiceLocator.h" />
+    <ClInclude Include="Sortable.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="SpellTarget.h" />
     <ClInclude Include="SquareAoE.h" />

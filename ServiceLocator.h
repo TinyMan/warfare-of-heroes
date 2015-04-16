@@ -7,6 +7,7 @@
 using namespace Events;
 
 #define UI ServiceLocator::getUI()
+#define TIMESERVICE ServiceLocator::getTimeService()
 
 class ServiceLocator
 {

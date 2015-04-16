@@ -41,14 +41,14 @@ void GameObject::setToDelete(bool a)
 }
 
 
-/* TODO:: rename ... */
 /* used only to sort */
-bool compare(const GameObject* g, const GameObject* go)
+bool GameObject::compare(const Sortable* g) const
 {
 //	ServiceLocator::getLogService()->info << "comparing " << g->getId() << " with " << go->getId() << endl;
-	if (g->isActive() == go->isActive())
+	GameObject* go = (GameObject*)g;
+	if (isActive() == go->isActive())
 		return false;
-	return g->isActive() && !go->isActive();
+	return isActive() && !go->isActive();
 }
 ostream& operator<<(ostream& o, const GameObject& go)
 {

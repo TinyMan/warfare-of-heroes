@@ -7,19 +7,19 @@ namespace Events
 {
 	namespace CharacterEvents
 	{
-		class Event : public Events::Event
+		class CharacterEvent : public Events::Event
 		{
 		public:
-			Event(Character* c) : _character(c){}
-			virtual ~Event(){}
+			CharacterEvent(Character* c) : _character(c){}
+			virtual ~CharacterEvent(){}
 			Character* getCharacter() const { return _character; }
 		private:
 			Character* _character;
 		};
-		class DieEvent : public Event
+		class DieEvent : public CharacterEvent
 		{
 		public:
-			DieEvent(Character* c) : Event(c) {}
+			DieEvent(Character* c) : CharacterEvent(c) {}
 			virtual ~DieEvent(){}
 		};
 	}

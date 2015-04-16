@@ -10,6 +10,7 @@
 #include "Grid.h"
 #include "ServiceLocator.h"
 #include "CharacterEvents.h"
+#include "Octopus.h"
 
 #define GAMEINST Game::getInstance()
 
@@ -35,8 +36,9 @@ public:
 	void addPlayer(Character*);
 
 	/* getters */
-	Grid* getGrid() { return _grid; }
-	Character* getPlayer(int id) { return _players.at(id); }
+	Grid* getGrid() const { return _grid; }
+	Character* getPlayer(int id) const { return _players.at(id); }
+	Octopus* getOctopus() const { return _octopus; }
 
 	template<typename... GO>
 	/* Add multiple game objects to the collection */
@@ -50,9 +52,9 @@ public:
 	int getNbActiveGObjects() const { return _nb_active_gobjects; }
 
 	/* event listeners */
-	void onActivatedGameObject(void*);
-	void onDeactivatedGameObject(void*);
-	void onDie(void*);
+	void onActivatedGameObject(Event*);
+	void onDeactivatedGameObject(Event*);
+	void onDie(Event*);
 
 	/* display the current state of the game */
 	void displayState(ostream& o = LOGINFO) const; // display the full state of the game (game objects, grid, players ...)
@@ -81,6 +83,8 @@ private:
 
 	deque<Character*> _players;
 	Grid* _grid;
+
+	Octopus * _octopus;
 
 	bool _running = true;
 	int _turn = 0;

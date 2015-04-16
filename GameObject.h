@@ -3,12 +3,14 @@
 #include <iostream>
 #include "ServiceLocator.h"
 #include "GameObjectEvents.h"
+#include "Sortable.h"
 
 using namespace std;
 using namespace Events::GameObjectEvents;
 class Game;
 
 class GameObject
+	: public Sortable
 {
 public:
 	GameObject();
@@ -29,6 +31,7 @@ public:
 
 	friend ostream& operator<<(ostream& o, const GameObject& go);
 
+	virtual bool compare(const Sortable* s) const;
 protected:
 	Game * getGameInstance() const { return _gameInstance; }
 
@@ -46,6 +49,4 @@ private:
 	Game * _gameInstance;
 };
 
-/* used only to sort */
-bool compare(const GameObject* g, const GameObject* go);
 

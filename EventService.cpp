@@ -15,16 +15,16 @@ namespace Events
 
 	void EventService::dispatch(Event* e) const
 	{
-		LOGINFO << "Dispatching " << typeid(*e).name() << endl;
+		//LOGINFO << "Dispatching " << typeid(*e).name() << endl;
 		if (!_listeners.count(typeid(*e).hash_code()))
 			return;
-		for (const Callback& cb : _listeners.at(typeid(*e).hash_code()))
+		for (auto& cb : _listeners.at(typeid(*e).hash_code()))
 		{
 			cb.call(e);
 		}
 	}
 
-	void EventService::listen(const type_info& ti, const Callback& cb)
+	void EventService::listen(const type_info& ti, const EventCallback& cb)
 	{
 		_listeners[ti.hash_code()].push_back(cb);
 	}

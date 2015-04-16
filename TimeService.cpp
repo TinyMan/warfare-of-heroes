@@ -1,4 +1,5 @@
 #include "TimeService.h"
+#include "ServiceLocator.h"
 
 TimeService::TimeService()
 {
@@ -57,4 +58,16 @@ void TimeService::setInterval(Uint32 t, Callback& cb)
 	_interval.push_back(new Interval(t, cb));
 	
 	//display();
+}
+void TimeService::updateFps()
+{
+	Uint32 t = time();
+	Uint32 delta = t - _lastFpsUpdate;
+	if (delta > _fpsUpdateInterval)
+	{
+		//LOGINFO << "Updating fps count" << endl;
+		_fps = (float)_nbFrames / (delta / 1000.f);
+		_nbFrames = 0;
+		_lastFpsUpdate = t;
+	}
 }

@@ -12,6 +12,8 @@
 #include "DiamondAoE.h"
 #include "DamageEffect.h"
 #include "LineAoE.h"
+#include "Button.h"
+#include "Panel.h"
 
 using namespace std;
 
@@ -33,16 +35,30 @@ int main(int argc, char* argv[])
 	g->addPlayer(player1);
 	g->addPlayer(player3);
 	
-	player1->setToDelete();
-	//g->stop();
-	g->displayState();	
-	g->start();
-	while (g->isRunning())
+	Panel* p = new Panel();
+	Button* b = new Button(250, 250, 100, 100);
+	Button* b1 = new Button(300, 300, 100, 100);
+	b1->setColor({ 0, 255, 0, 0 });
+	b1->setZIndex(5);
+
+	auto lambda = [](Event*) { GAMEINST->stop(); };
+	auto switcher = [=](Event*) 
 	{
-		g->handleUserInput();
-		g->displayState(LOGINFO);
-		// TODO : add textmode gameplay
-	}
+		int t = b1->getZIndex();
+		b1->setZIndex(b->getZIndex());
+		b->setZIndex(t);
+	};
+
+	b->Clickable::setCallback(new EventCallback(lambda));
+	b1->Clickable::setCallback(new EventCallback(switcher));
+
+	
+	p->add(b);
+	p->add(b1);
+	g->getOctopus()->addBaby(p);
+	//g->getOctopus()->addBaby(b1);
+
+	g->loop();
 
 	LOGINFO << "Ending @ " << SDL_GetTicks() << endl;
 
