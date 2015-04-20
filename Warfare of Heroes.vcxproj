@@ -92,8 +92,10 @@
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventReceiver.cpp" />
     <ClCompile Include="EventService.cpp" />
+    <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Glyph.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="HealEffect.cpp" />
     <ClCompile Include="Hoverable.cpp" />
@@ -143,9 +145,11 @@
     <ClInclude Include="EventCallback.h" />
     <ClInclude Include="EventReceiver.h" />
     <ClInclude Include="EventService.h" />
+    <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectEvents.h" />
+    <ClInclude Include="Glyph.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="HealEffect.h" />
     <ClInclude Include="Hoverable.h" />
