@@ -239,3 +239,10 @@ void Font::updateAtlases()
 		_pages[i] = (*ServiceLocator::getTextureManager())[_pages_filename[i]];
 	}
 }
+void Font::setColor(Uint8 r, Uint8 g, Uint8 b)
+{
+	for (auto e : _pages)
+	{
+		SDL_SetTextureColorMod(e, r, g, b);
+	}
+}

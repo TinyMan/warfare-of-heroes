@@ -59,10 +59,11 @@ int main(int argc, char* argv[])
 	//g->getOctopus()->addBaby(b1);
 
 	Font f("Images/FNT/comic_sans_ms.fnt");
-	
+	f.setColor(255, 0, 0);
 	Label* l = new Label(50, 50, 100, 100, "Salut", &f);
 	g->getOctopus()->addBaby(l);
 
+	l->setBackground((*ServiceLocator::getTextureManager())["menu_mockup"]);
 	//g->stop();
 	g->loop();
 

@@ -58,5 +58,6 @@ public:
 	void parsePages(string pageLine);
 	void parseChar(string charLine);
 	void updateAtlases();
+	void setColor(Uint8 r, Uint8 g, Uint8 b);
 };
 
