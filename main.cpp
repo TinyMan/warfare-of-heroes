@@ -15,6 +15,7 @@
 #include "Button.h"
 #include "Panel.h"
 #include "Font.h"
+#include "Label.h"
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -58,17 +59,11 @@ int main(int argc, char* argv[])
 	//g->getOctopus()->addBaby(b1);
 
 	Font f("Images/FNT/comic_sans_ms.fnt");
-	LOGINFO << f._name << endl;
-	LOGINFO << f._chars_count << endl;
-	LOGINFO << f._path_to_files << endl;
-	for (auto e : f._pages_filename)
-	{
-		LOGINFO << e << endl;
-	}
-	cout << f << endl;
-	f.renderText(g->getOctopus()->getRenderer(), "Salut !");
-	SDL_RenderPresent(g->getOctopus()->getRenderer());
-	g->stop();
+	
+	Label* l = new Label(50, 50, 100, 100, "Salut", &f);
+	g->getOctopus()->addBaby(l);
+
+	//g->stop();
 	g->loop();
 
 	LOGINFO << "Ending @ " << SDL_GetTicks() << endl;

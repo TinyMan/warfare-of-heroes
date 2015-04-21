@@ -10,7 +10,6 @@ public:
 	Button(int x, int y, int w, int h);
 	virtual ~Button();
 	virtual void update() {};
-	virtual void render(SDL_Renderer*, bool dirty = false);
 	virtual bool isInArea(SDL_Point) const;
 
 	virtual bool isDirty() { return _dirty; }
@@ -18,8 +17,9 @@ public:
 	SDL_Color getColor() const { return _color; }
 	void setColor(SDL_Color c) { _color = c; }
 
+protected:
+	void internalRender(SDL_Renderer* r, bool force = false);
 private:
-	SDL_Rect _rect;
 	bool _dirty = true;
 	SDL_Color _color;
 };
