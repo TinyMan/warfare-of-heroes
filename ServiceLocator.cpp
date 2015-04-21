@@ -4,6 +4,7 @@ TimeService * ServiceLocator::_timeService = nullptr;
 LogService * ServiceLocator::_logService = nullptr;
 EventService* ServiceLocator::_eventService = nullptr;
 UserInterface* ServiceLocator::_userInterface = nullptr;
+TextureManager* ServiceLocator::_textureManager = nullptr;
 
 TimeService * ServiceLocator::getTimeService()
 {
@@ -21,6 +22,10 @@ UserInterface* ServiceLocator::getUI()
 {
 	return _userInterface;
 }
+TextureManager* ServiceLocator::getTextureManager()
+{
+	return _textureManager;
+}
 
 void ServiceLocator::provide(TimeService * ts)
 {
@@ -37,6 +42,10 @@ void ServiceLocator::provide(EventService* es)
 void ServiceLocator::provide(UserInterface* ui)
 {
 	_userInterface = ui;
+}
+void ServiceLocator::provide(TextureManager* tm)
+{
+	_textureManager = tm;
 }
 
 void ServiceLocator::cleanup()
@@ -60,5 +69,10 @@ void ServiceLocator::cleanup()
 	{
 		delete _userInterface;
 		_userInterface = nullptr;
+	}
+	if (_textureManager != nullptr)
+	{
+		delete _textureManager;
+		_textureManager = nullptr;
 	}
 }
