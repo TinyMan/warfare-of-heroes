@@ -14,13 +14,16 @@
 #include "LineAoE.h"
 #include "Button.h"
 #include "Panel.h"
-
+#include "Font.h"
 using namespace std;
 
 int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	
+	Font f("Comic Sans MS", "Images/FNT/comic_sans_ms.fnt");
+	cout << f << endl;
+	system("pause");
+	exit(0);
 
 	Game *g = Game::getInstance();
 

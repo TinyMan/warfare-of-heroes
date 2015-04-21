@@ -1,16 +1,42 @@
 #include "Font.h"
 
 
-Font::Font()
-	: _glyphs(MAX_GLYPHS)
+Font::Font(string filename, string fnt, string atlas)
+	: _glyphs(MAX_GLYPHS), _name(filename)
 {
+	if (!_name.empty())
+	{
+		if (!fnt.empty())
+			_fntFilename = fnt;
+		if (!atlas.empty())
+		{
+			_atlasFilename = atlas;
+			//SDL_Surface * tmp = IMG_L
+		}
+
+		parse();
+	}
 }
 
 
 Font::~Font()
 {
 }
-
+void Font::parse(string filename)
+{
+	if (filename.empty())
+	{
+		filename = _fntFilename;
+	}
+	ifstream i;
+	i.open(filename, ifstream::in);
+	if (i.is_open())
+	{
+		parse(i);
+	}
+	else
+		cerr << "Error openning " << filename << endl;
+}
 void Font::parse(std::istream& Stream)
 {
 	string Line;
@@ -65,7 +91,10 @@ void Font::parse(std::istream& Stream)
 				//assign the correct value
 				Converter << Value;
 				if (Key == "id")
+				{
 					Converter >> CharID;
+					_glyphs[CharID]._id = CharID;
+				}
 				else if (Key == "x")
 					Converter >> _glyphs[CharID]._x;
 				else if (Key == "y")
@@ -82,8 +111,48 @@ void Font::parse(std::istream& Stream)
 					Converter >> _glyphs[CharID]._x_advance;
 				else if (Key == "page")
 					Converter >> _glyphs[CharID]._page;
+				else if (Key == "chnl")
+					Converter >> _glyphs[CharID]._channel;
 			}
 		}
 	}
 
+}
+void Font::renderText(SDL_Renderer* r, string text)
+{
+	SDL_Point cursor = { 0, 0 };
+	for (char c : text)
+	{
+		Glyph ch = _glyphs[c];
+		// Compute the source rect
+		SDL_Rect src;
+		src.x = ch._x;
+		src.y = ch._y;
+		src.w = ch._w;
+		src.h = ch._h;
+
+		// Compute the destination rect
+		SDL_Rect dst;
+		dst.x = cursor.x + ch._x_offset;
+		dst.y = cursor.y + ch._y_offset;
+		dst.w = ch._w;
+		dst.h = ch._h;
+
+		// Draw the image from the right texture
+		//DrawRect(ch.page, src, dst);
+		SDL_RenderCopy(r, _atlas, &src, &dst);
+
+		// Update the position
+		cursor.x += ch._x_advance;
+	}
+	
+}
+ostream& operator<<(ostream& o, const Font& f)
+{
+	o << "lineheight = " << f._lineHeight << endl;
+	for (auto c : f._glyphs)
+	{
+		o << c << endl;
+	}
+	return o;	
 }
