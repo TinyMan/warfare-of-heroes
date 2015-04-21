@@ -4,8 +4,10 @@
 #include <vector>
 #include <sstream>
 #include <SDL2/SDL.h>
-//#include <SDL2/SDL_img.h>
+#include <SDL2/SDL_image.h>
 #include "Glyph.h"
+#include "Texture.h"
+#include "ServiceLocator.h"
 #define MAX_GLYPHS 256
 using namespace std;
 
@@ -31,6 +33,6 @@ private:
 	string _name;
 	string _fntFilename = "";
 	string _atlasFilename = "";
-	SDL_Texture* _atlas;
+public:	Texture _atlas;
 };
 

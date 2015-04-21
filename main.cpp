@@ -20,10 +20,6 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	Font f("Comic Sans MS", "Images/FNT/comic_sans_ms.fnt");
-	cout << f << endl;
-	system("pause");
-	exit(0);
 
 	Game *g = Game::getInstance();
 
@@ -61,6 +57,11 @@ int main(int argc, char* argv[])
 	g->getOctopus()->addBaby(p);
 	//g->getOctopus()->addBaby(b1);
 
+	Font* f = new Font("Comic Sans MS", "Images/FNT/comic_sans_ms.fnt", "Images/FNT/comic_sans_ms_0.tga");
+	//f._atlas.render(g->getOctopus()->getRenderer(), Texture::CENTER);
+	f->renderText(g->getOctopus()->getRenderer(), "Bonjour");
+	SDL_RenderPresent(g->getOctopus()->getRenderer());
+	g->stop();
 	g->loop();
 
 	LOGINFO << "Ending @ " << SDL_GetTicks() << endl;

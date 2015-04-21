@@ -11,7 +11,8 @@ Font::Font(string filename, string fnt, string atlas)
 		if (!atlas.empty())
 		{
 			_atlasFilename = atlas;
-			//SDL_Surface * tmp = IMG_L
+			ServiceLocator::getTextureManager()->loadTexture(_atlasFilename, _name);
+			_atlas = Texture((*ServiceLocator::getTextureManager())[_name]);
 		}
 
 		parse();
@@ -141,7 +142,7 @@ void Font::renderText(SDL_Renderer* r, string text)
 		// Draw the image from the right texture
 		//DrawRect(ch.page, src, dst);
 		SDL_RenderCopy(r, _atlas, &src, &dst);
-
+		LOGINFO << "Renderinf " << c << endl;
 		// Update the position
 		cursor.x += ch._x_advance;
 	}
