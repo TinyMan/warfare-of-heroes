@@ -1,22 +1,12 @@
 #include "Font.h"
 
 
-Font::Font(string filename, string fnt, string atlas)
-	: _glyphs(MAX_GLYPHS), _name(filename)
+Font::Font(string fnt)
+	: _fntFilename(fnt)
 {
-	if (!_name.empty())
-	{
-		if (!fnt.empty())
-			_fntFilename = fnt;
-		if (!atlas.empty())
-		{
-			_atlasFilename = atlas;
-			ServiceLocator::getTextureManager()->loadTexture(_atlasFilename, _name);
-			_atlas = Texture((*ServiceLocator::getTextureManager())[_name]);
-		}
-
-		parse();
-	}
+	unsigned found = _fntFilename.find_last_of("/\\");
+	_path_to_files = _fntFilename.substr(0, found+1);
+	parse();
 }
 
 
@@ -36,88 +26,50 @@ void Font::parse(string filename)
 		parse(i);
 	}
 	else
-		cerr << "Error openning " << filename << endl;
+		LOGERR << "Error openning " << filename << endl;
+	i.close();
+	updateAtlases();
 }
-void Font::parse(std::istream& Stream)
+void Font::parse(std::istream& stream)
 {
-	string Line;
-	string Read, Key, Value;
-	std::size_t i;
-	while (!Stream.eof())
+	string line;
+	string lineType;
+	size_t i;
+	// until the end of the stream
+	while (!stream.eof())
 	{
-		std::stringstream LineStream;
-		std::getline(Stream, Line);
-		LineStream << Line;
-
-		//read the line's type
-		LineStream >> Read;
-		if (Read == "common")
+		getline(stream, line);
+		i = line.find(" ");
+		lineType = line.substr(0, i);
+		if (lineType == "info")
 		{
-			//this holds common data
-			while (!LineStream.eof())
-			{
-				std::stringstream Converter;
-				LineStream >> Read;
-				i = Read.find('=');
-				Key = Read.substr(0, i);
-				Value = Read.substr(i + 1);
-
-				//assign the correct value
-				Converter << Value;
-				if (Key == "lineHeight")
-					Converter >> _lineHeight;
-				else if (Key == "base")
-					Converter >> _base;
-				else if (Key == "scaleW")
-					Converter >> _scale_width;
-				else if (Key == "scaleH")
-					Converter >> _scale_height;
-				else if (Key == "pages")
-					Converter >> _pages;
-			}
+			parseInfo(line);
 		}
-		else if (Read == "char")
+		else if (lineType == "common")
 		{
-			//this is data for a specific char
-			unsigned short CharID = 0;
-
-			while (!LineStream.eof())
-			{
-				std::stringstream Converter;
-				LineStream >> Read;
-				i = Read.find('=');
-				Key = Read.substr(0, i);
-				Value = Read.substr(i + 1);
-
-				//assign the correct value
-				Converter << Value;
-				if (Key == "id")
-				{
-					Converter >> CharID;
-					_glyphs[CharID]._id = CharID;
-				}
-				else if (Key == "x")
-					Converter >> _glyphs[CharID]._x;
-				else if (Key == "y")
-					Converter >> _glyphs[CharID]._y;
-				else if (Key == "width")
-					Converter >> _glyphs[CharID]._w;
-				else if (Key == "height")
-					Converter >> _glyphs[CharID]._h;
-				else if (Key == "xoffset")
-					Converter >> _glyphs[CharID]._x_offset;
-				else if (Key == "yoffset")
-					Converter >> _glyphs[CharID]._y_offset;
-				else if (Key == "xadvance")
-					Converter >> _glyphs[CharID]._x_advance;
-				else if (Key == "page")
-					Converter >> _glyphs[CharID]._page;
-				else if (Key == "chnl")
-					Converter >> _glyphs[CharID]._channel;
-			}
+			parseCommon(line);
+		}
+		else if (lineType == "page")
+		{
+			parsePages(line);
+		}
+		else if (lineType == "chars")
+		{
+			stringstream conv;
+			i = line.find("count=") + 6;
+			string val = line.substr(i);
+			conv << val;
+			conv >> _chars_count;
+		}
+		else if (lineType == "char")
+		{
+			parseChar(line);
+		}
+		else if (!line.empty())
+		{
+			LOGWARN << "Parsing font file: unknown line type" << endl;
 		}
 	}
-
 }
 void Font::renderText(SDL_Renderer* r, string text)
 {
@@ -141,8 +93,7 @@ void Font::renderText(SDL_Renderer* r, string text)
 
 		// Draw the image from the right texture
 		//DrawRect(ch.page, src, dst);
-		SDL_RenderCopy(r, _atlas, &src, &dst);
-		LOGINFO << "Renderinf " << c << endl;
+		SDL_RenderCopy(r, _pages[ch._page], &src, &dst);
 		// Update the position
 		cursor.x += ch._x_advance;
 	}
@@ -153,7 +104,138 @@ ostream& operator<<(ostream& o, const Font& f)
 	o << "lineheight = " << f._lineHeight << endl;
 	for (auto c : f._glyphs)
 	{
-		o << c << endl;
+		o << c.second << endl;
 	}
 	return o;	
+}
+
+void Font::parseChar(string line)
+{
+	stringstream lineStream;
+	string pair;
+	string key, value;
+	size_t i;
+	lineStream << line;
+	int charID;
+	while (!lineStream.eof())
+	{
+		stringstream conv;
+		lineStream >> pair;
+		i = pair.find("=");
+		key = pair.substr(0, i);
+		value = pair.substr(i + 1);
+		conv << value;
+		if (key == "id")
+		{
+			conv >> charID;
+			_glyphs[charID].parse(line);
+			break;
+		}
+	}
+}
+void Font::parseCommon(string line)
+{
+	stringstream lineStream;
+	string pair;
+	string key, value;
+	size_t i;
+	lineStream << line;
+	while (!lineStream.eof())
+	{
+		stringstream conv;
+		lineStream >> pair;
+		i = pair.find("=");
+		key = pair.substr(0, i);
+		value = pair.substr(i + 1);
+		conv << value;
+		if (key == "lineHeight")
+			conv >> _lineHeight;
+		else if (key == "base")
+			conv >> _base;
+		else if (key == "scaleW")
+			conv >> _scale_width;
+		else if (key == "scaleH")
+			conv >> _scale_height;
+		else if (key == "pages")
+			conv >> _pages_count;
+		else if (key == "packed")
+			conv >> _packed;
+		else if (key == "alphaChnl")
+			conv >> _alpha_chnl;
+		else if (key == "redChnl")
+			conv >> _red_chnl;
+		else if (key == "greenChnl")
+			conv >> _green_chnl;
+		else if (key == "blueChnl")
+			conv >> _blue_chnl;
+
+	}
+	_pages_filename.resize(_pages_count);
+	_pages.resize(_pages_count);
+}
+void Font::parseInfo(string line)
+{
+	stringstream lineStream;
+	string pair;
+	string key, value;
+	size_t i;
+	lineStream << line;
+	while (!lineStream.eof())
+	{
+		stringstream conv;
+		lineStream >> pair;
+		i = pair.find("=");
+		key = pair.substr(0, i);
+		value = pair.substr(i + 1);
+		conv << value;
+		
+		if (key == "face")
+		{
+			i = line.find("face=\"")+6;
+			pair = line.substr(i);
+			i = pair.find('\"');
+			_name = pair.substr(0, i);
+		}
+		else if (key == "size")
+			conv >> _original_size;
+	}
+}
+void Font::parsePages(string line)
+{
+	stringstream lineStream;
+	string pair;
+	string key, value;
+	size_t i;
+	unsigned short pageId = 0;
+	lineStream << line;
+	while (!lineStream.eof())
+	{
+		stringstream conv;
+		lineStream >> pair;
+		i = pair.find("=");
+		key = pair.substr(0, i);
+		value = pair.substr(i + 1);
+		conv << value;		
+		if (key == "id")
+			conv >> pageId;
+		else if (key == "file")
+		{
+			conv >> pair;
+			pair.erase(
+				remove(pair.begin(), pair.end(), '\"'),
+				pair.end()
+				);
+
+			_pages_filename[pageId] = _path_to_files + pair;
+		}
+	}
+
+}
+void Font::updateAtlases()
+{
+	for (unsigned short i = 0; i < _pages_filename.size(); i++)
+	{
+		ServiceLocator::getTextureManager()->loadTexture(_pages_filename[i]);
+		_pages[i] = (*ServiceLocator::getTextureManager())[_pages_filename[i]];
+	}
 }

@@ -1,11 +1,13 @@
 #pragma once
 #include <iostream>
+#include <sstream>
 using namespace std;
 class Glyph
 {
 public:
 	Glyph();
 	virtual ~Glyph();
+	void parse(string line);
 
 	friend ostream& operator<<(ostream& o, const Glyph& g);
 private:

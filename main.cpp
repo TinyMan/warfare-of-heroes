@@ -57,9 +57,16 @@ int main(int argc, char* argv[])
 	g->getOctopus()->addBaby(p);
 	//g->getOctopus()->addBaby(b1);
 
-	Font* f = new Font("Comic Sans MS", "Images/FNT/comic_sans_ms.fnt", "Images/FNT/comic_sans_ms_0.tga");
-	//f._atlas.render(g->getOctopus()->getRenderer(), Texture::CENTER);
-	f->renderText(g->getOctopus()->getRenderer(), "Bonjour");
+	Font f("Images/FNT/comic_sans_ms.fnt");
+	LOGINFO << f._name << endl;
+	LOGINFO << f._chars_count << endl;
+	LOGINFO << f._path_to_files << endl;
+	for (auto e : f._pages_filename)
+	{
+		LOGINFO << e << endl;
+	}
+	cout << f << endl;
+	f.renderText(g->getOctopus()->getRenderer(), "Salut !");
 	SDL_RenderPresent(g->getOctopus()->getRenderer());
 	g->stop();
 	g->loop();
