@@ -2,11 +2,11 @@
 #include "EventCallback.h"
 #include "Game.h"
 
-Button::Button(SDL_Rect rect) : OctopusBaby(rect)
+Button::Button(SDL_Rect rect) : Label(rect.x, rect.y, rect.w, rect.h)
 {
 	_color = { 255, 0, 0, 255 };
 }
-Button::Button(int x, int y, int w, int h) : OctopusBaby( x, y, w, h )
+Button::Button(int x, int y, int w, int h) : Label( x, y, w, h )
 {
 	_color = { 255, 0, 0, 255 };
 }
@@ -40,6 +40,6 @@ void Button::internalRender(SDL_Renderer* r, bool force)
 			//SDL_RenderDrawRect(r, &_rect);
 			SDL_RenderFillRect(r, NULL);
 		}
+		Label::internalRender(r, d);
 	}
-	
 }

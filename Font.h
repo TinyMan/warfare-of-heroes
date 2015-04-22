@@ -10,6 +10,7 @@
 #include "Glyph.h"
 #include "Texture.h"
 #include "ServiceLocator.h"
+#include "Color.h"
 #define MAX_GLYPHS 256
 using namespace std;
 
@@ -22,10 +23,11 @@ public:
 	void parse(string filename = "");
 	void parse(istream& s);
 
-	void renderText(SDL_Renderer* r, string text);
-
+	void renderText(SDL_Renderer* r, string text, Color* c= nullptr);
+	void setColor(Color c) { setColor(c.r(), c.g(), c.b()); }
+	void setColor(Uint8 r, Uint8 g, Uint8 b);
 	friend ostream& operator<<(ostream&, const Font&);
-public:
+private:
 	string _fntFilename = "";
 	string _path_to_files = "";
 
@@ -58,6 +60,5 @@ public:
 	void parsePages(string pageLine);
 	void parseChar(string charLine);
 	void updateAtlases();
-	void setColor(Uint8 r, Uint8 g, Uint8 b);
 };
 

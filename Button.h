@@ -1,9 +1,9 @@
 #pragma once
-#include "OctopusBaby.h"
+#include "Label.h"
 #include "Clickable.h"
 #include "Hoverable.h"
 class Button :
-	public OctopusBaby, public Clickable, public Hoverable
+	public Label, public Clickable, public Hoverable
 {
 public:
 	Button(SDL_Rect);
@@ -16,7 +16,6 @@ public:
 	virtual void setDirty(bool d = true) { _dirty = d; }
 	SDL_Color getColor() const { return _color; }
 	void setColor(SDL_Color c) { _color = c; }
-
 protected:
 	void internalRender(SDL_Renderer* r, bool force = false);
 private:

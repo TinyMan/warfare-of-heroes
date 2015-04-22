@@ -16,13 +16,15 @@ public:
 	bool isDirty() { return _dirty; }
 
 	void update();
-
+	void setFont(Font* f) { _font = f; }
+	Font* getFont() const { return _font; }
+	void setTextColor(Color c) { _text_color = c; }
 protected:
 	void internalRender(SDL_Renderer* r, bool force = false);
 private:
 	string _text;
 	Font* _font;
 	bool _dirty = true;
-
+	Color _text_color = Color::BLACK;
 };
 

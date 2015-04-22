@@ -5,6 +5,7 @@
 #include "OctopusBaby.h"
 #include "ServiceLocator.h"
 #include "MyList.h"
+#include "Color.h"
 using namespace std;
 
 class Octopus

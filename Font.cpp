@@ -71,8 +71,10 @@ void Font::parse(std::istream& stream)
 		}
 	}
 }
-void Font::renderText(SDL_Renderer* r, string text)
+void Font::renderText(SDL_Renderer* r, string text, Color* c)
 {
+	if (c)
+		setColor(*c);
 	SDL_Point cursor = { 0, 0 };
 	for (char c : text)
 	{

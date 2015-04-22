@@ -231,6 +231,9 @@
     <ClCompile Include="Label.cpp">
       <Filter>Source Files\Graphics\Text</Filter>
     </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -400,6 +403,9 @@
     </ClInclude>
     <ClInclude Include="Label.h">
       <Filter>Header Files\Graphics\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

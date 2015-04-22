@@ -39,8 +39,8 @@ int main(int argc, char* argv[])
 	Button* b = new Button(250, 250, 100, 100);
 	Button* b1 = new Button(300, 300, 100, 100);
 	Font f("Images/FNT/comic_sans_ms.fnt");
-	f.setColor(255, 0, 0);
 	Label* l = new Label(50, 50, 100, 100, "Salut", &f);
+	l->setTextColor(Color::RED);
 	b1->setColor({ 0, 255, 0, 255 });
 	b1->setZIndex(5);
 
@@ -64,6 +64,9 @@ int main(int argc, char* argv[])
 	g->getOctopus()->addBaby(l);
 
 	p->setBackground((*ServiceLocator::getTextureManager())["menu_mockup"]);
+	b->setText("Bouton 1");
+	b->setFont(&f);
+	b->setTextColor(Color::GREEN);
 	//g->stop();
 	g->loop();
 
