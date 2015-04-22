@@ -59,7 +59,13 @@ void OctopusBaby::render(SDL_Renderer* r, bool force)
 			{
 				LOGERR << "Error setting render target: " << SDL_GetError() << endl;
 			}
-			_background.render(r, Texture::STRETCH);
+			if (_background.valid())
+				_background.render(r, Texture::STRETCH);
+			else
+			{
+				SDL_SetRenderDrawColor(r, 0, 0, 0, 0);
+				SDL_RenderClear(r);
+			}
 			internalRender(r, d);
 			setDirty(false);
 			SDL_SetRenderTarget(r, old);

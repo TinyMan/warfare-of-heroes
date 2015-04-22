@@ -18,7 +18,10 @@ public:
 	void update();
 	void setFont(Font* f) { _font = f; }
 	Font* getFont() const { return _font; }
-	void setTextColor(Color c) { _text_color = c; }
+	void setTextColor(Color c) { _text_color = c; setDirty(); }
+	Color getTextColor() const { return _text_color; }
+	void setTextSize(int size) { _text_size = size; setDirty(); }
+	int getTextSize() const { return _text_size; }
 protected:
 	void internalRender(SDL_Renderer* r, bool force = false);
 private:
@@ -26,5 +29,6 @@ private:
 	Font* _font;
 	bool _dirty = true;
 	Color _text_color = Color::BLACK;
+	int _text_size = 32;
 };
 

@@ -22,7 +22,7 @@ public:
 	void parse(string filename = "");
 	void parse(istream& s);
 
-	void renderText(SDL_Renderer* r, string text, Color* c= nullptr);
+	void renderText(SDL_Renderer* r, string text, Color* c= nullptr, int size = 32);
 	void setColor(Color c) { setColor(c.r(), c.g(), c.b()); }
 	void setColor(Uint8 r, Uint8 g, Uint8 b);
 	friend ostream& operator<<(ostream&, const Font&);

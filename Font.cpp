@@ -72,11 +72,12 @@ void Font::parse(std::istream& stream)
 		}
 	}
 }
-void Font::renderText(SDL_Renderer* r, string text, Color* c)
+void Font::renderText(SDL_Renderer* r, string text, Color* c, int size)
 {
 	if (c)
 		setColor(*c);
 	SDL_Point cursor = { 0, 0 };
+	float coef = (float)size / _original_size;
 	for (char c : text)
 	{
 		Glyph ch = _glyphs[c];
@@ -89,16 +90,16 @@ void Font::renderText(SDL_Renderer* r, string text, Color* c)
 
 		// Compute the destination rect
 		SDL_Rect dst;
-		dst.x = cursor.x + ch._x_offset;
-		dst.y = cursor.y + ch._y_offset;
-		dst.w = ch._w;
-		dst.h = ch._h;
+		dst.x = cursor.x + int(ch._x_offset*coef);
+		dst.y = cursor.y + int(ch._y_offset*coef);
+		dst.w = int(ch._w*coef);
+		dst.h = int(ch._h*coef);
 
 		// Draw the image from the right texture
 		//DrawRect(ch.page, src, dst);
 		SDL_RenderCopy(r, _pages[ch._page], &src, &dst);
 		// Update the position
-		cursor.x += ch._x_advance;
+		cursor.x += int(ch._x_advance*coef);
 	}
 	
 }

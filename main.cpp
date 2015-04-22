@@ -47,9 +47,8 @@ int main(int argc, char* argv[])
 	auto switcher = [=](Event*) 
 	{
 		
-		string text = l->getText();
-		text += rand() % 26 + 'a';
-		l->setText(text);
+		int s = l->getTextSize();
+		l->setTextSize(s + 2);
 	};
 
 	b->Clickable::setCallback(new EventCallback(&Game::stop, GAMEINST));
@@ -67,6 +66,7 @@ int main(int argc, char* argv[])
 	b->setText("Bouton 1");
 	b->setFont((*ServiceLocator::getFontManager())["Comic Sans MS"]);
 	b->setTextColor(Color::GREEN);
+	l->setTextSize(10);
 	//g->stop();
 	g->loop();
 
