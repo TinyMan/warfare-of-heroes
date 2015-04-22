@@ -38,18 +38,20 @@ int main(int argc, char* argv[])
 	Panel* p = new Panel();
 	Button* b = new Button(250, 250, 100, 100);
 	Button* b1 = new Button(300, 300, 100, 100);
+	Font f("Images/FNT/comic_sans_ms.fnt");
+	f.setColor(255, 0, 0);
+	Label* l = new Label(50, 50, 100, 100, "Salut", &f);
 	b1->setColor({ 0, 255, 0, 255 });
 	b1->setZIndex(5);
 
-	auto lambda = [](Event*) { GAMEINST->stop(); };
 	auto switcher = [=](Event*) 
 	{
-		int t = b1->getZIndex();
-		b1->setZIndex(b->getZIndex());
-		b->setZIndex(t);
+		bool b = l->isActive();
+		l->setActive(!b);
+		//l->setText("Bonjour !");
 	};
 
-	b->Clickable::setCallback(new EventCallback(lambda));
+	b->Clickable::setCallback(new EventCallback(&Game::stop, GAMEINST));
 	b1->Clickable::setCallback(new EventCallback(switcher));
 
 	
@@ -58,9 +60,6 @@ int main(int argc, char* argv[])
 	g->getOctopus()->addBaby(p);
 	//g->getOctopus()->addBaby(b1);
 
-	Font f("Images/FNT/comic_sans_ms.fnt");
-	f.setColor(255, 0, 0);
-	Label* l = new Label(50, 50, 100, 100, "Salut", &f);
 	g->getOctopus()->addBaby(l);
 
 	p->setBackground((*ServiceLocator::getTextureManager())["menu_mockup"]);

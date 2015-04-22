@@ -73,4 +73,6 @@ void OctopusBaby::render(SDL_Renderer* r, bool force)
 			}
 		}
 	}
+	else
+		setDirty(false);
 }
