@@ -1,4 +1,5 @@
 #include "Font.h"
+#include "ServiceLocator.h"
 
 
 Font::Font(string fnt)

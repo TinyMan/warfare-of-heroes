@@ -38,8 +38,8 @@ int main(int argc, char* argv[])
 	Panel* p = new Panel();
 	Button* b = new Button(250, 250, 100, 100);
 	Button* b1 = new Button(300, 300, 100, 100);
-	Font f("Images/FNT/comic_sans_ms.fnt");
-	Label* l = new Label(50, 50, 100, 100, "Salut", &f);
+	ServiceLocator::getFontManager()->loadFont("Images/FNT/comic_sans_ms.fnt");
+	Label* l = new Label(50, 50, 100, 100, "Salut", (*ServiceLocator::getFontManager())["Comic Sans MS"]);
 	l->setTextColor(Color::RED);
 	b1->setColor({ 0, 255, 0, 255 });
 	b1->setZIndex(5);
@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
 
 	p->setBackground((*ServiceLocator::getTextureManager())["menu_mockup"]);
 	b->setText("Bouton 1");
-	b->setFont(&f);
+	b->setFont((*ServiceLocator::getFontManager())["Comic Sans MS"]);
 	b->setTextColor(Color::GREEN);
 	//g->stop();
 	g->loop();

@@ -231,8 +231,11 @@
     <ClCompile Include="Label.cpp">
       <Filter>Source Files\Graphics\Text</Filter>
     </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>Source Files\Graphics\Text</Filter>
+    </ClCompile>
     <ClCompile Include="Color.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -404,8 +407,11 @@
     <ClInclude Include="Label.h">
       <Filter>Header Files\Graphics\Text</Filter>
     </ClInclude>
+    <ClInclude Include="FontManager.h">
+      <Filter>Header Files\Graphics\Text</Filter>
+    </ClInclude>
     <ClInclude Include="Color.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -43,6 +43,7 @@ void Octopus::initialize()
 	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
 	SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
 	ServiceLocator::provide(new TextureManager(_renderer));
+	ServiceLocator::provide(new FontManager());
 }
 void Octopus::updateWindowTitle()
 {

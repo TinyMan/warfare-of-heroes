@@ -9,7 +9,6 @@
 #include <SDL2/SDL_image.h>
 #include "Glyph.h"
 #include "Texture.h"
-#include "ServiceLocator.h"
 #include "Color.h"
 #define MAX_GLYPHS 256
 using namespace std;
@@ -27,6 +26,8 @@ public:
 	void setColor(Color c) { setColor(c.r(), c.g(), c.b()); }
 	void setColor(Uint8 r, Uint8 g, Uint8 b);
 	friend ostream& operator<<(ostream&, const Font&);
+
+	string getName() const { return _name; }
 private:
 	string _fntFilename = "";
 	string _path_to_files = "";
@@ -42,10 +43,10 @@ private:
 	unsigned short _scale_height = 0;
 	unsigned short _pages_count = 0;
 	bool _packed = false;
-	bool _alpha_chnl = false;
-	bool _red_chnl = false;
-	bool _green_chnl = false;
-	bool _blue_chnl = false;
+	unsigned short _alpha_chnl = 0;
+	unsigned short  _red_chnl = 0;
+	unsigned short _green_chnl = 0;
+	unsigned short _blue_chnl = 0;
 	
 	/* pages */
 	vector<string> _pages_filename;
