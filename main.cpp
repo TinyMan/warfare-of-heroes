@@ -46,9 +46,10 @@ int main(int argc, char* argv[])
 
 	auto switcher = [=](Event*) 
 	{
-		bool b = l->isActive();
-		l->setActive(!b);
-		//l->setText("Bonjour !");
+		
+		string text = l->getText();
+		text += rand() % 26 + 'a';
+		l->setText(text);
 	};
 
 	b->Clickable::setCallback(new EventCallback(&Game::stop, GAMEINST));
