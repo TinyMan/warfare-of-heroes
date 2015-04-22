@@ -57,10 +57,9 @@ int main(int argc, char* argv[])
 	
 	p->add(b);
 	p->add(b1);
-	g->getOctopus()->addBaby(p);
-	//g->getOctopus()->addBaby(b1);
+	g->getOctopus()->setFrame(p);
 
-	g->getOctopus()->addBaby(l);
+	p->add(l);
 
 	p->setBackground((*ServiceLocator::getTextureManager())["menu_mockup"]);
 	b->setText("Bouton 1");

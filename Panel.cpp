@@ -23,7 +23,10 @@ Panel::~Panel()
 void Panel::update()
 {
 	MyList::update();
-	
+	for (auto e : _list)
+	{
+		e->update();
+	}
 }
 void Panel::internalRender(SDL_Renderer* r, bool force)
 {
