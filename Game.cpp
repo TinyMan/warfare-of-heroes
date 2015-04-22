@@ -55,6 +55,7 @@ void Game::initialize()
 	button_1->setTextColor(Color::BLUE);
 	button_1->setFont((*ServiceLocator::getFontManager())["Comic Sans MS"]);
 	button_1->setColor({ 255, 0, 0, 255 });
+	button_1->setAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	button_1->Clickable::setCallback(new EventCallback(navigationLambda, menu_root, menu_1));
 	menu_root_inside->add(button_1);
 

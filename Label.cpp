@@ -28,7 +28,7 @@ void Label::internalRender(SDL_Renderer* r, bool force)
 		{
 			if (_font)
 			{
-				_font->renderText(r, _text, &_text_color, _text_size, &_rect, _alignment);
+				_font->renderText(r, _text, &_text_color, _text_size, &_relative_rect, _alignment);
 			}
 		}
 	}

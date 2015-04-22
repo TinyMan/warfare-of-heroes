@@ -22,8 +22,8 @@ public:
 	Color getTextColor() const { return _text_color; }
 	void setTextSize(int size) { _text_size = size; setDirty(); }
 	int getTextSize() const { return _text_size; }
-	void setAlignment(Font::ALIGNMENT a) { _alignment = a; }
-	Font::ALIGNMENT getAlignment() const { return _alignment; }
+	void setAlignment(Uint8 a) { _alignment = a; setDirty(); }
+	Uint8 getAlignment() const { return _alignment; }
 protected:
 	void internalRender(SDL_Renderer* r, bool force = false);
 private:
@@ -32,6 +32,6 @@ private:
 	bool _dirty = true;
 	Color _text_color = Color::BLACK;
 	int _text_size = 32;
-	Font::ALIGNMENT _alignment = Font::LEFT;
+	Uint8 _alignment = Alignment::LEFT | Alignment::CENTERY;
 };
 
