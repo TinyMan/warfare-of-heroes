@@ -67,6 +67,12 @@
     <Filter Include="Source Files\Game\Spell\Effect">
       <UniqueIdentifier>{e4c52563-1dd2-457c-a37f-efb8f6bac551}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphics\Text">
+      <UniqueIdentifier>{bc1e3c9a-ae2b-49cc-8b27-54531babf8b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\Text">
+      <UniqueIdentifier>{266b76b9-0580-4861-93bc-ad2b8b40eda5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -210,10 +216,25 @@
     <ClCompile Include="Sortable.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Source Files\Graphics\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Glyph.cpp">
+      <Filter>Source Files\Graphics\Text</Filter>
+    </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Label.cpp">
+      <Filter>Source Files\Graphics\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>Source Files\Graphics\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
@@ -371,10 +392,25 @@
     <ClInclude Include="Sortable.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Header Files\Graphics\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Glyph.h">
+      <Filter>Header Files\Graphics\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
+    <ClInclude Include="Label.h">
+      <Filter>Header Files\Graphics\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="FontManager.h">
+      <Filter>Header Files\Graphics\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>

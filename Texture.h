@@ -33,6 +33,7 @@ public:
 	void render(SDL_Renderer* r, SDL_Rect* srcrect = nullptr, SDL_Rect* dstrect = nullptr, STYLE s = STRETCH);
 	void render(SDL_Renderer* r, STYLE s, SDL_Rect* srcrect = nullptr, SDL_Rect* dstrect = nullptr) { render(r, srcrect, dstrect, s); }
 	static void combineRect(SDL_Rect& dst, SDL_Rect& src, STYLE style = CENTER);
+	bool valid() const { return _texture != nullptr; }
 protected:
 	void updateInfo();
 

@@ -1,5 +1,4 @@
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
 #include <typeinfo>
 #include <iostream>
 #include "Game.h"
@@ -15,14 +14,13 @@
 #include "LineAoE.h"
 #include "Button.h"
 #include "Panel.h"
-#include "TextureManager.h"
-
+#include "Font.h"
+#include "Label.h"
 using namespace std;
 
 int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	IMG_Init(IMG_INIT_PNG);
 
 	Game *g = Game::getInstance();
 
@@ -40,18 +38,20 @@ int main(int argc, char* argv[])
 	Panel* p = new Panel();
 	Button* b = new Button(250, 250, 100, 100);
 	Button* b1 = new Button(300, 300, 100, 100);
-	b1->setColor({ 0, 255, 0, 0 });
+	ServiceLocator::getFontManager()->loadFont("Images/FNT/comic_sans_ms.fnt");
+	Label* l = new Label(50, 50, 100, 100, "Salut", (*ServiceLocator::getFontManager())["Comic Sans MS"]);
+	l->setTextColor(Color::RED);
+	b1->setColor({ 0, 255, 0, 255 });
 	b1->setZIndex(5);
 
-	auto lambda = [](Event*) { GAMEINST->stop(); };
 	auto switcher = [=](Event*) 
 	{
-		int t = b1->getZIndex();
-		b1->setZIndex(b->getZIndex());
-		b->setZIndex(t);
+		
+		int s = l->getTextSize();
+		l->setTextSize(s + 2);
 	};
 
-	b->Clickable::setCallback(new EventCallback(lambda));
+	b->Clickable::setCallback(new EventCallback(&Game::stop, GAMEINST));
 	b1->Clickable::setCallback(new EventCallback(switcher));
 
 	
@@ -59,9 +59,15 @@ int main(int argc, char* argv[])
 	p->add(b1);
 	g->getOctopus()->addBaby(p);
 	//g->getOctopus()->addBaby(b1);
-	ServiceLocator::getTextureManager()->loadTexture("Images/PNG/path3346-6.png", "test");
-	Texture t((*ServiceLocator::getTextureManager())["menu_mockup"]);
-	//p->setBackground(t);
+
+	g->getOctopus()->addBaby(l);
+
+	p->setBackground((*ServiceLocator::getTextureManager())["menu_mockup"]);
+	b->setText("Bouton 1");
+	b->setFont((*ServiceLocator::getFontManager())["Comic Sans MS"]);
+	b->setTextColor(Color::GREEN);
+	l->setTextSize(10);
+	//g->stop();
 	g->loop();
 
 	LOGINFO << "Ending @ " << SDL_GetTicks() << endl;
@@ -70,7 +76,6 @@ int main(int argc, char* argv[])
 
 
 	system("pause");
-	IMG_Quit();
 	SDL_Quit();
 
 	return 0;

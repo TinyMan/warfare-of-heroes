@@ -16,7 +16,7 @@ void Octopus::render()
 	if (_list.isDirty())
 	{
 		//LOGINFO << "Rendering mother of octopus ! " << endl;
-		SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);
+		SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
 		SDL_RenderClear(_renderer);
 
 		for (auto ob : *_list.getList())
@@ -41,7 +41,9 @@ void Octopus::initialize()
 {
 	_window = SDL_CreateWindow("Test SDL 2.0", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, wWidth, wHeight, SDL_WINDOW_SHOWN);
 	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
+	SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
 	ServiceLocator::provide(new TextureManager(_renderer));
+	ServiceLocator::provide(new FontManager());
 }
 void Octopus::updateWindowTitle()
 {
