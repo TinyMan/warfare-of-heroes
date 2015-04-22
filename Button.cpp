@@ -21,7 +21,7 @@ bool Button::isInArea(SDL_Point p) const
 {
 	if (!isActive())
 		return false;
-	return p.x >= _rect.x && p.x <= _rect.x + _rect.w && p.y >= _rect.y && p.y <= _rect.y + _rect.h;
+	return p.x >= _absolute_rect.x && p.x <= _absolute_rect.x + _absolute_rect.w && p.y >= _absolute_rect.y && p.y <= _absolute_rect.y + _absolute_rect.h;
 }
 
 void Button::internalRender(SDL_Renderer* r, bool force)

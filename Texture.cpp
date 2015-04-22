@@ -1,10 +1,20 @@
 #include "Texture.h"
 #include <iostream>
 #include "ServiceLocator.h"
+#include "Game.h"
 using namespace std;
 Texture::Texture(SDL_Texture* t)
 	: _texture(t)
 {
+	updateInfo();
+}
+Texture::Texture(int w, int h, SDL_Renderer* r, Uint32 f, int a)
+{
+	if (f == SDL_PIXELFORMAT_UNKNOWN)
+		f = SDL_GetWindowPixelFormat(GAMEINST->getOctopus()->getWindow());
+	if (!r)
+		r = GAMEINST->getOctopus()->getRenderer();
+	_texture = SDL_CreateTexture(r, f, a, w, h);
 	updateInfo();
 }
 
@@ -69,4 +79,14 @@ ostream& operator<<(ostream& o, const SDL_Rect& r)
 {
 	o << "{ " << r.x << ", " << r.y << ", " << r.w << ", " << r.h << " }";
 	return o;
+}
+void FillTexture(SDL_Renderer* r, Texture& t, Color c)
+{
+	SDL_Texture* old = SDL_GetRenderTarget(r);
+
+	SDL_SetRenderTarget(r, t);
+	SDL_SetRenderDrawColor(r, c.r(), c.g(), c.b(), c.a());
+	SDL_RenderFillRect(r, NULL);
+
+	SDL_SetRenderTarget(r, old);
 }

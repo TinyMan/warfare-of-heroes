@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "SDLEvents.h"
+#include "Panel.h"
+#include "Button.h"
 
 Game* Game::_instance = nullptr;
 
@@ -25,12 +27,38 @@ Game::Game()
 	_grid = new Grid();
 	_octopus = new Octopus();
 
-	initialize();
 }
 
 void Game::initialize()
 {
 	_octopus->initialize();
+
+	/* creation of menu */
+	// used to navigateto another frame
+	auto navigationLambda = [=](Panel* from, Panel* to, Event* e)
+	{
+		from->setActive(false);
+		to->setActive(true);
+		_octopus->setFrame(to);
+	};
+	Panel* menu_root = new Panel();
+	Panel* menu_1 = new Panel();
+
+	Panel* menu_root_inside = new Panel(400, 200, 300, 500);
+	menu_root->add(menu_root_inside);
+	Texture menu_inside_background(300, 500);
+	FillTexture(_octopus->getRenderer(), menu_inside_background, Color::GREEN);
+	menu_root_inside->setBackground(menu_inside_background);
+
+	Button* button_1 = new Button(50, 50, 150, 50);
+	button_1->setText("Jouer");
+	button_1->setTextColor(Color::BLUE);
+	button_1->setFont((*ServiceLocator::getFontManager())["Comic Sans MS"]);
+	button_1->setColor({ 255, 0, 0, 255 });
+	button_1->Clickable::setCallback(new EventCallback(navigationLambda, menu_root, menu_1));
+	menu_root_inside->add(button_1);
+
+	_octopus->setFrame(menu_root);
 }
 Game::~Game()
 {

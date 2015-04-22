@@ -3,16 +3,16 @@
 
 OctopusBaby::OctopusBaby()
 {
-	_rect = { 0, 0, GAMEINST->getOctopus()->getWWidth(), GAMEINST->getOctopus()->getWHeight() };
+	_relative_rect = { 0, 0, GAMEINST->getOctopus()->getWWidth(), GAMEINST->getOctopus()->getWHeight() };
 	initialize();
 }
 OctopusBaby::OctopusBaby(SDL_Rect r)
-	: _rect(r)
+	: _relative_rect(r)
 {
 	initialize();
 }
 OctopusBaby::OctopusBaby(int x, int y, int w, int h)
-	: _rect({ x, y, w, h })
+	: _relative_rect({ x, y, w, h })
 {
 	initialize();
 }
@@ -22,8 +22,9 @@ OctopusBaby::~OctopusBaby()
 
 void OctopusBaby::initialize()
 {
-	LOGINFO << "Initializing new OctopusBaby" << endl;
-	_texture = SDL_CreateTexture(GAMEINST->getOctopus()->getRenderer(), SDL_GetWindowPixelFormat(GAMEINST->getOctopus()->getWindow()), SDL_TEXTUREACCESS_TARGET, _rect.w, _rect.h);
+	_absolute_rect = _relative_rect;
+	//LOGINFO << "Initializing new OctopusBaby" << endl;
+	_texture = SDL_CreateTexture(GAMEINST->getOctopus()->getRenderer(), SDL_GetWindowPixelFormat(GAMEINST->getOctopus()->getWindow()), SDL_TEXTUREACCESS_TARGET, _relative_rect.w, _relative_rect.h);
 	if (!_texture.valid())
 		LOGERR << "Could not initialize Octopus Baby (failed to create texture)" << endl;
 	SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
@@ -73,7 +74,7 @@ void OctopusBaby::render(SDL_Renderer* r, bool force)
 		if (d)
 		{
 			//LOGINFO << "Rendering Octopus Baby" << endl;
-			if (SDL_RenderCopy(r, _texture, NULL, &_rect) != 0)
+			if (SDL_RenderCopy(r, _texture, NULL, &_relative_rect) != 0)
 			{
 				LOGERR << "Error renderCopy: " << SDL_GetError() << endl;
 			}
@@ -81,4 +82,11 @@ void OctopusBaby::render(SDL_Renderer* r, bool force)
 	}
 	else
 		setDirty(false);
+}
+void OctopusBaby::updateAbsoluteRect()
+{
+	_absolute_rect.x = _relative_rect.x + _container_rect.x;
+	_absolute_rect.y = _relative_rect.y + _container_rect.y;
+	_absolute_rect.w = min(_relative_rect.w, _container_rect.w - _relative_rect.x);
+	_absolute_rect.h = min(_relative_rect.h, _container_rect.h - _relative_rect.y);
 }

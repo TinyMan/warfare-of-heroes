@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <iostream>
+#include "Color.h"
 using namespace std;
 #define MAXWIDTH 1200
 #define MAXHEIGHT 900
@@ -17,6 +18,7 @@ public:
 		CENTER
 	};
 	Texture(SDL_Texture* texture = nullptr);
+	Texture(int w, int h, SDL_Renderer* r = nullptr, Uint32 f = SDL_PIXELFORMAT_UNKNOWN, int a = SDL_TEXTUREACCESS_TARGET);
 	//Texture(const Texture&);
 
 	operator SDL_Texture* () const { return _texture; }
@@ -44,6 +46,8 @@ private:
 	int _access;
 	Uint32 _format;
 	SDL_Rect _defaultRect;
+	bool _destroyTexture = false;
 };
 
 ostream& operator<<(ostream& o, const SDL_Rect&);
+void FillTexture(SDL_Renderer* r, Texture& t, Color c);
