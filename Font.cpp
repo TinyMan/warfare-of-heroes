@@ -72,11 +72,33 @@ void Font::parse(std::istream& stream)
 		}
 	}
 }
-void Font::renderText(SDL_Renderer* r, string text, Color* c, int size)
+void Font::renderText(SDL_Renderer* r, string text, Color* c, int size, SDL_Rect* rect, ALIGNMENT a)
 {
 	if (c)
 		setColor(*c);
 	SDL_Point cursor = { 0, 0 };
+	if (rect)
+	{
+		if (a == UNKWNOWN)
+		{
+			a = _alignment;
+		}
+		switch (a)
+		{
+		case Font::UNKWNOWN:
+			break;
+		case Font::CENTER:
+			cursor.x = rect->x + getPixelLength(text, size)/2;
+			break;
+		case Font::LEFT:
+			break;
+		case Font::RIGHT:
+			cursor.x = rect->x + rect->w - getPixelLength(text, size);
+			break;
+		default:
+			break;
+		}
+	}
 	float coef = (float)size / _original_size;
 	for (char c : text)
 	{
@@ -249,4 +271,14 @@ void Font::setColor(Uint8 r, Uint8 g, Uint8 b)
 	{
 		SDL_SetTextureColorMod(e, r, g, b);
 	}
+}
+int Font::getPixelLength(string text, int size)
+{
+	int s = 0;
+	float coef = (float)size / _original_size;
+	for (char c : text)
+	{
+		s += int(_glyphs[c]._x_advance*coef);
+	}
+	return s;
 }
