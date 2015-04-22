@@ -33,7 +33,10 @@ void TextureManager::loadTexture(string filename, string texName)
 		_textures[texName] = SDL_CreateTextureFromSurface(_renderer, temp);
 		SDL_FreeSurface(temp);
 		if (_textures[texName])
+		{
+			SDL_SetTextureBlendMode(_textures[texName], SDL_BLENDMODE_BLEND);
 			return;
+		}
 	}
 	LOGERR << "Cannot load texture " << texName << " from file " << filename << endl;
 }

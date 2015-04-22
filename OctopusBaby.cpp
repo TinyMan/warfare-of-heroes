@@ -26,6 +26,7 @@ void OctopusBaby::initialize()
 	_texture = SDL_CreateTexture(GAMEINST->getOctopus()->getRenderer(), SDL_GetWindowPixelFormat(GAMEINST->getOctopus()->getWindow()), SDL_TEXTUREACCESS_TARGET, _rect.w, _rect.h);
 	if (!_texture.valid())
 		LOGERR << "Could not initialize Octopus Baby (failed to create texture)" << endl;
+	SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
 }
 void OctopusBaby::setZIndex(int z)
 {

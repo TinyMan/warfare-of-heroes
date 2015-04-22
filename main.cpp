@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 	Panel* p = new Panel();
 	Button* b = new Button(250, 250, 100, 100);
 	Button* b1 = new Button(300, 300, 100, 100);
-	b1->setColor({ 0, 255, 0, 0 });
+	b1->setColor({ 0, 255, 0, 255 });
 	b1->setZIndex(5);
 
 	auto lambda = [](Event*) { GAMEINST->stop(); };
@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
 	Label* l = new Label(50, 50, 100, 100, "Salut", &f);
 	g->getOctopus()->addBaby(l);
 
-	l->setBackground((*ServiceLocator::getTextureManager())["menu_mockup"]);
+	p->setBackground((*ServiceLocator::getTextureManager())["menu_mockup"]);
 	//g->stop();
 	g->loop();
 
