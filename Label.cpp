@@ -6,7 +6,7 @@ Label::Label(string text, Font* f)
 {
 }
 
-Label::Label(int x, int y, int w, int h, string text, Font* f)
+Label::Label(int w, int h, string text, Font* f, int x, int y)
 	: OctopusBaby(x, y, w, h), _text(text), _font(f)
 {
 

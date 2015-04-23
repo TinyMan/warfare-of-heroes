@@ -2,13 +2,10 @@
 #include "EventCallback.h"
 #include "Game.h"
 
-Button::Button(SDL_Rect rect) : Label(rect.x, rect.y, rect.w, rect.h)
+Button::Button(int w, int h) : Label( w, h )
 {
 	_color = { 255, 0, 0, 255 };
-}
-Button::Button(int x, int y, int w, int h) : Label( x, y, w, h )
-{
-	_color = { 255, 0, 0, 255 };
+	setFont((*ServiceLocator::getFontManager())["Comic Sans MS"]);
 }
 
 

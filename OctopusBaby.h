@@ -12,6 +12,7 @@ class OctopusBaby
 {
 public:
 	OctopusBaby();
+	OctopusBaby(int w, int h);
 	OctopusBaby(SDL_Rect rect);
 	OctopusBaby(int x, int y, int w, int h);
 	virtual ~OctopusBaby();
@@ -29,7 +30,13 @@ public:
 
 	void setBackground(Texture bg) { _background = bg; setDirty(); }
 	SDL_Texture* getBackground() const { return _background; }
-	void setContainerRect(SDL_Rect r) { _container_rect = r; updateAbsoluteRect(); }
+	void setContainerRect(SDL_Rect r, int x = 0, int y = 0) { _container_rect = r; setPosition(x, y); }
+	void setContainerRect(SDL_Rect r, Uint8 alignment) { _container_rect = r; setPosition(alignment); }
+
+	void setPosition(Uint8 alignment);
+	void setPosition(int x, int y);
+	void setPositionX(int x);
+	void setPositionY(int y);
 protected:
 	SDL_Rect _relative_rect;
 	SDL_Rect _absolute_rect;

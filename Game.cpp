@@ -44,20 +44,30 @@ void Game::initialize()
 	Panel* menu_root = new Panel();
 	Panel* menu_1 = new Panel();
 
-	Panel* menu_root_inside = new Panel(400, 200, 300, 500);
-	menu_root->add(menu_root_inside);
+	Panel* menu_root_inside = new Panel(300, 500);
+	menu_root->add(menu_root_inside, (Alignment::CENTERY | Alignment::CENTERX));
 	Texture menu_inside_background(300, 500);
 	FillTexture(_octopus->getRenderer(), menu_inside_background, Color::GREEN);
 	menu_root_inside->setBackground(menu_inside_background);
 
-	Button* button_1 = new Button(50, 50, 150, 50);
+	Button* button_1 = new Button(150, 50);
+	menu_root_inside->add(button_1, Alignment::CENTERX);
+	button_1->setPositionY(50);
 	button_1->setText("Jouer");
 	button_1->setTextColor(Color::BLUE);
-	button_1->setFont((*ServiceLocator::getFontManager())["Comic Sans MS"]);
-	button_1->setColor({ 255, 0, 0, 255 });
-	button_1->setAlignment(Alignment::CENTERX | Alignment::CENTERY);
+	button_1->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	button_1->Clickable::setCallback(new EventCallback(navigationLambda, menu_root, menu_1));
-	menu_root_inside->add(button_1);
+
+	Panel* menu_1_inside = new Panel(300, 500);
+	menu_1->add(menu_1_inside, Alignment::CENTERX | Alignment::CENTERY);
+	menu_1_inside->setBackground(menu_inside_background);
+	Button* button_quit = new Button(150, 50);
+	menu_1_inside->add(button_quit, Alignment::CENTERX);
+	button_quit->setPositionY(150);
+	button_quit->setText("Quitter");
+	button_quit->setTextColor(Color::BLUE);
+	button_quit->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
+	button_quit->Clickable::setCallback(new EventCallback(&Game::stop, this));
 
 	_octopus->setFrame(menu_root);
 }

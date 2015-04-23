@@ -5,7 +5,18 @@
 using namespace std;
 #define MAXWIDTH 1200
 #define MAXHEIGHT 900
+class Alignment
+{
+public:
+	static const Uint8 UNKNOWN = 15;
+	static const Uint8 CENTERX = 1;
+	static const Uint8 CENTERY = 2;
+	static const Uint8 LEFT = 4;
+	static const Uint8 RIGHT = 0;
+	static const Uint8 TOP = 8;
+	static const Uint8 BOTTOM = 0;
 
+};
 class Texture
 {
 public:

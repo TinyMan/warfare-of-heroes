@@ -6,6 +6,11 @@ OctopusBaby::OctopusBaby()
 	_relative_rect = { 0, 0, GAMEINST->getOctopus()->getWWidth(), GAMEINST->getOctopus()->getWHeight() };
 	initialize();
 }
+OctopusBaby::OctopusBaby(int w, int h)
+	: _relative_rect({ 0, 0, w, h })
+{
+	initialize();
+}
 OctopusBaby::OctopusBaby(SDL_Rect r)
 	: _relative_rect(r)
 {
@@ -23,6 +28,7 @@ OctopusBaby::~OctopusBaby()
 void OctopusBaby::initialize()
 {
 	_absolute_rect = _relative_rect;
+	_container_rect = { 0, 0, GAMEINST->getOctopus()->getWWidth(), GAMEINST->getOctopus()->getWHeight() };
 	//LOGINFO << "Initializing new OctopusBaby" << endl;
 	_texture = SDL_CreateTexture(GAMEINST->getOctopus()->getRenderer(), SDL_GetWindowPixelFormat(GAMEINST->getOctopus()->getWindow()), SDL_TEXTUREACCESS_TARGET, _relative_rect.w, _relative_rect.h);
 	if (!_texture.valid())
@@ -89,4 +95,34 @@ void OctopusBaby::updateAbsoluteRect()
 	_absolute_rect.y = _relative_rect.y + _container_rect.y;
 	_absolute_rect.w = min(_relative_rect.w, _container_rect.w - _relative_rect.x);
 	_absolute_rect.h = min(_relative_rect.h, _container_rect.h - _relative_rect.y);
+	setDirty();
+}
+void OctopusBaby::setPosition(int x, int y)
+{
+	_relative_rect.x = x;
+	_relative_rect.y = y;
+	updateAbsoluteRect();
+}
+void OctopusBaby::setPosition(Uint8 al)
+{
+	if (al & Alignment::CENTERX)
+		_relative_rect.x = (_container_rect.w / 2) - (_relative_rect.w / 2);
+	else if (!(al & Alignment::LEFT))
+		_relative_rect.x = (_container_rect.w) - _relative_rect.w;
+	if (al & Alignment::CENTERY)
+		_relative_rect.y = (_container_rect.h / 2) - (_relative_rect.h / 2);
+	else if (!(al & Alignment::TOP))
+		_relative_rect.y = _container_rect.h - _relative_rect.h;
+
+	updateAbsoluteRect();
+}
+void OctopusBaby::setPositionX(int x)
+{
+	_relative_rect.x = x;
+	updateAbsoluteRect();
+}
+void OctopusBaby::setPositionY(int y)
+{
+	_relative_rect.y = y;
+	updateAbsoluteRect();
 }

@@ -5,12 +5,8 @@
 Panel::Panel()
 {
 }
-Panel::Panel(SDL_Rect rect)
-	: OctopusBaby(rect)
-{
-}
-Panel::Panel(int x, int y, int w, int h)
-	: OctopusBaby(x, y, w, h )
+Panel::Panel( int w, int h)
+	: OctopusBaby(w, h )
 {
 }
 

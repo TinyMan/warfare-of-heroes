@@ -6,8 +6,7 @@ class Button :
 	public Label, public Clickable, public Hoverable
 {
 public:
-	Button(SDL_Rect);
-	Button(int x, int y, int w, int h);
+	Button(int w, int h);
 	virtual ~Button();
 	virtual void update() {};
 	virtual bool isInArea(SDL_Point) const;
