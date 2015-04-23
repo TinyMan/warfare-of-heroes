@@ -49,7 +49,7 @@ void Octopus::setFrame(Panel* b, void*)
 {
 	if (b)
 	{
-		LOGINFO << "Changing frame" << endl;
+		//LOGINFO << "Changing frame" << endl;
 		//_babies.push_back(b);
 		_frame = b;
 		b->setActive(true);

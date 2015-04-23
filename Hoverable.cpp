@@ -8,9 +8,9 @@ Hoverable::Hoverable() : MouseEventReceiver(typeid(Events::MouseEvents::MotionEv
 		[this](Event* e) 
 	{
 		if (isInArea(((MouseEvents::MouseEvent*)e)->getPos()))
-			_hover = true;
+			onMouseIn((MouseEvents::MotionEvent*)e);
 		else
-			_hover = false;
+			onMouseOut((MouseEvents::MotionEvent*)e);
 		setDirty();
 	}));
 }

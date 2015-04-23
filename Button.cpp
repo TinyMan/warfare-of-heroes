@@ -2,10 +2,14 @@
 #include "EventCallback.h"
 #include "Game.h"
 
-Button::Button(int w, int h) : Label( w, h )
+Button::Button(int w, int h) 
+	: Label(w, h), _regular_bg(w, h), _hover_bg(w, h)
 {
 	_color = { 255, 0, 0, 255 };
 	setFont((*ServiceLocator::getFontManager())["Comic Sans MS"]);
+	FillTexture(GAMEINST->getOctopus()->getRenderer(), _regular_bg, Color::RED);
+	FillTexture(GAMEINST->getOctopus()->getRenderer(), _hover_bg, Color::BLUE);
+	Label::setBackground(_regular_bg);
 }
 
 
@@ -35,7 +39,7 @@ void Button::internalRender(SDL_Renderer* r, bool force)
 				SDL_SetRenderDrawColor(r, _color.r, _color.g, _color.b, _color.a);
 
 			//SDL_RenderDrawRect(r, &_rect);
-			SDL_RenderFillRect(r, NULL);
+			//SDL_RenderFillRect(r, NULL);
 		}
 		Label::internalRender(r, d);
 	}
