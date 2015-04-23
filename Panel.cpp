@@ -24,6 +24,14 @@ void Panel::update()
 		e->update();
 	}
 }
+void Panel::setActive(bool d, void*)
+{
+	for (auto e : _list)
+	{
+		e->setActive(d);
+	}
+	Activable::setActive(d);
+}
 void Panel::internalRender(SDL_Renderer* r, bool force)
 {
 	if (isActive())

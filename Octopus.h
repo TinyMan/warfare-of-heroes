@@ -20,7 +20,8 @@ public:
 
 	virtual void initialize();
 	virtual void updateWindowTitle();
-	void setFrame(Panel*);
+	void setFrame(Panel*, void* = nullptr);
+	void setFrameAsync(Panel*);
 	Panel* getFrame() const { return _frame; }
 
 	SDL_Window* getWindow() const { return _window; }

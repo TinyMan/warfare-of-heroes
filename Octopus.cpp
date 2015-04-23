@@ -45,12 +45,18 @@ void Octopus::updateWindowTitle()
 		_lastFpsUpdate = now;
 	}
 }
-void Octopus::setFrame(Panel* b)
+void Octopus::setFrame(Panel* b, void*)
 {
 	if (b)
 	{
 		LOGINFO << "Changing frame" << endl;
 		//_babies.push_back(b);
 		_frame = b;
+		b->setActive(true);
 	}
+}
+void Octopus::setFrameAsync(Panel* to)
+{
+	_frame->setActive(false);
+	ServiceLocator::getTimeService()->setTimeout(1, Callback(&Octopus::setFrame, this, to));
 }

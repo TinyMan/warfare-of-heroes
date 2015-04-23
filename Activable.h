@@ -7,11 +7,11 @@ public:
 	Activable();
 	virtual ~Activable();
 
-	bool isActive() const { return _active; }
-	void setActive(bool b = true);
+	virtual bool isActive() const { return _active; }
+	virtual void setActive(bool b = true, void* = nullptr);
 	bool operator<(const Activable& o);
 
 private:
-	bool _active = true;
+	bool _active = false;
 };
 

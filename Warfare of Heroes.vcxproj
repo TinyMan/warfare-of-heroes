@@ -111,6 +111,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Modifiable.cpp" />
     <ClCompile Include="MouseEventReceiver.cpp" />
+    <ClCompile Include="MouseEvents.cpp" />
     <ClCompile Include="MoveEffect.cpp" />
     <ClCompile Include="Octopus.cpp" />
     <ClCompile Include="OctopusBaby.cpp" />

@@ -35,11 +35,9 @@ void Game::initialize()
 
 	/* creation of menu */
 	// used to navigateto another frame
-	auto navigationLambda = [=](Panel* from, Panel* to, Event* e)
+	auto navigationLambda = [=](Panel* to, Event* e)
 	{
-		from->setActive(false);
-		to->setActive(true);
-		_octopus->setFrame(to);
+		_octopus->setFrameAsync(to);
 	};
 	Panel* menu_root = new Panel();
 	Panel* menu_1 = new Panel();
@@ -56,14 +54,14 @@ void Game::initialize()
 	button_1->setText("Jouer");
 	button_1->setTextColor(Color::BLUE);
 	button_1->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
-	button_1->Clickable::setCallback(new EventCallback(navigationLambda, menu_root, menu_1));
+	button_1->Clickable::setCallback(new EventCallback(navigationLambda, menu_1));
 
 	Panel* menu_1_inside = new Panel(300, 500);
 	menu_1->add(menu_1_inside, Alignment::CENTERX | Alignment::CENTERY);
 	menu_1_inside->setBackground(menu_inside_background);
 	Button* button_quit = new Button(150, 50);
 	menu_1_inside->add(button_quit, Alignment::CENTERX);
-	button_quit->setPositionY(150);
+	button_quit->setPositionY(50);
 	button_quit->setText("Quitter");
 	button_quit->setTextColor(Color::BLUE);
 	button_quit->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
