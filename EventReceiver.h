@@ -11,7 +11,7 @@ public:
 
 	virtual void onEvent(Event*);
 	virtual void setCallback(EventCallback* cb){ _cb = cb; }
-
+	virtual EventCallback* getCallback() const { return _cb; }
 	virtual bool concernMe(Event*) const = 0;
 private:
 	EventCallback* _cb;

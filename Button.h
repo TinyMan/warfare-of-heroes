@@ -20,6 +20,8 @@ public:
 
 	virtual void onMouseIn(MotionEvent* e) { Hoverable::onMouseIn(e); Label::setBackground(_hover_bg); }
 	virtual void onMouseOut(MotionEvent* e) { Hoverable::onMouseOut(e); Label::setBackground(_regular_bg); }
+
+	virtual Button* clone() const;
 protected:
 	void internalRender(SDL_Renderer* r, bool force = false);
 	Texture _regular_bg;

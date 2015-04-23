@@ -56,27 +56,21 @@ void Game::initialize()
 	button_1->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	button_1->Clickable::setCallback(new EventCallback(navigationLambda, menu_1));
 
-	Button* button_quit = new Button(150, 50);
+	Button* button_quit = button_1->clone();
 	menu_root_inside->add(button_quit, Alignment::CENTERX);
 	button_quit->setPositionY(75 + 75 + 75 + 75);
 	button_quit->setText("Exit");
-	button_quit->setTextColor(Color::BLUE);
-	button_quit->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	button_quit->Clickable::setCallback(new EventCallback(&Game::stop, this));
 
-	Button* button_2 = new Button(150, 50);
+	Button* button_2 = button_quit->clone();
 	menu_root_inside->add(button_2, Alignment::CENTERX);
 	button_2->setPositionY(50 + 75);
 	button_2->setText("How to Play");
-	button_2->setTextColor(Color::BLUE);
-	button_2->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	
-	Button* button_3 = new Button(150, 50);
+	Button* button_3 = button_2->clone();
 	menu_root_inside->add(button_3, Alignment::CENTERX);
 	button_3->setPositionY(50 + 75 + 75);
 	button_3->setText("Settings");
-	button_3->setTextColor(Color::BLUE);
-	button_3->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 
 	Panel* menu_1_inside = new Panel(300, 500);
 	menu_1->add(menu_1_inside, Alignment::CENTERX | Alignment::CENTERY);

@@ -42,3 +42,21 @@ void Button::internalRender(SDL_Renderer* r, bool force)
 		Label::internalRender(r, d);
 	}
 }
+Button* Button::clone() const
+{
+	Button* b = new Button(_relative_rect.w, _relative_rect.h);
+
+	b->setActive(isActive());
+	b->setHover(hover());
+	b->setBackground(_regular_bg);
+	b->setHoverBackground(_hover_bg);
+	b->setText(getText());
+	b->setTextAlignment(getTextAlignment());
+	b->setTextSize(getTextSize());
+	b->setTextColor(getTextColor());
+	b->setColor(getColor());
+	b->setPosition(_relative_rect.x, _relative_rect.y);
+	b->Clickable::setCallback(Clickable::getCallback());
+
+	return b;
+}
