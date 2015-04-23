@@ -29,7 +29,7 @@ public:
 		CENTER
 	};
 	Texture(SDL_Texture* texture = nullptr);
-	Texture(int w, int h, SDL_Renderer* r = nullptr, Uint32 f = SDL_PIXELFORMAT_UNKNOWN, int a = SDL_TEXTUREACCESS_TARGET);
+	Texture(int w, int h, Color c = Color::TRANSPARENT, SDL_Renderer* r = nullptr, Uint32 f = SDL_PIXELFORMAT_UNKNOWN, int a = SDL_TEXTUREACCESS_TARGET);
 	//Texture(const Texture&);
 
 	operator SDL_Texture* () const { return _texture; }

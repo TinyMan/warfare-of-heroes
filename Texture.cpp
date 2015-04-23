@@ -8,13 +8,14 @@ Texture::Texture(SDL_Texture* t)
 {
 	updateInfo();
 }
-Texture::Texture(int w, int h, SDL_Renderer* r, Uint32 f, int a)
+Texture::Texture(int w, int h, Color c, SDL_Renderer* r, Uint32 f, int a)
 {
 	if (f == SDL_PIXELFORMAT_UNKNOWN)
 		f = SDL_GetWindowPixelFormat(GAMEINST->getOctopus()->getWindow());
 	if (!r)
 		r = GAMEINST->getOctopus()->getRenderer();
 	_texture = SDL_CreateTexture(r, f, a, w, h);
+	FillTexture(r, *this, c);
 	updateInfo();
 }
 

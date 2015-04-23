@@ -3,12 +3,10 @@
 #include "Game.h"
 
 Button::Button(int w, int h) 
-	: Label(w, h), _regular_bg(w, h), _hover_bg(w, h)
+	: Label(w, h), _regular_bg(w, h, Color::RED), _hover_bg(w, h, Color::BLUE)
 {
 	_color = { 255, 0, 0, 255 };
 	setFont((*ServiceLocator::getFontManager())["Comic Sans MS"]);
-	FillTexture(GAMEINST->getOctopus()->getRenderer(), _regular_bg, Color::RED);
-	FillTexture(GAMEINST->getOctopus()->getRenderer(), _hover_bg, Color::BLUE);
 	Label::setBackground(_regular_bg);
 }
 
