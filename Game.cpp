@@ -42,7 +42,7 @@ void Game::initialize()
 	Panel* menu_root = new Panel();
 	Panel* menu_1 = new Panel();
 
-	Panel* menu_root_inside = new Panel(300, 500);
+	Panel* menu_root_inside = new Panel(300, 100+75+75+75+75); // 4 boutons de hauteur 50, espacements de 25 entre les boutons et 50 avec les bords du container +25 devant quitter
 	menu_root->add(menu_root_inside, (Alignment::CENTERY | Alignment::CENTERX));
 	Texture menu_inside_background(300, 500);
 	FillTexture(_octopus->getRenderer(), menu_inside_background, Color::GREEN);
@@ -51,21 +51,38 @@ void Game::initialize()
 	Button* button_1 = new Button(150, 50);
 	menu_root_inside->add(button_1, Alignment::CENTERX);
 	button_1->setPositionY(50);
-	button_1->setText("Jouer");
+	button_1->setText("Play");
 	button_1->setTextColor(Color::BLUE);
 	button_1->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	button_1->Clickable::setCallback(new EventCallback(navigationLambda, menu_1));
 
-	Panel* menu_1_inside = new Panel(300, 500);
-	menu_1->add(menu_1_inside, Alignment::CENTERX | Alignment::CENTERY);
-	menu_1_inside->setBackground(menu_inside_background);
 	Button* button_quit = new Button(150, 50);
-	menu_1_inside->add(button_quit, Alignment::CENTERX);
-	button_quit->setPositionY(50);
-	button_quit->setText("Quitter");
+	menu_root_inside->add(button_quit, Alignment::CENTERX);
+	button_quit->setPositionY(75 + 75 + 75 + 75);
+	button_quit->setText("Exit");
 	button_quit->setTextColor(Color::BLUE);
 	button_quit->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	button_quit->Clickable::setCallback(new EventCallback(&Game::stop, this));
+
+	Button* button_2 = new Button(150, 50);
+	menu_root_inside->add(button_2, Alignment::CENTERX);
+	button_2->setPositionY(50 + 75);
+	button_2->setText("How to Play");
+	button_2->setTextColor(Color::BLUE);
+	button_2->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
+	
+	Button* button_3 = new Button(150, 50);
+	menu_root_inside->add(button_3, Alignment::CENTERX);
+	button_3->setPositionY(50 + 75 + 75);
+	button_3->setText("Settings");
+	button_3->setTextColor(Color::BLUE);
+	button_3->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
+
+	Panel* menu_1_inside = new Panel(300, 500);
+	menu_1->add(menu_1_inside, Alignment::CENTERX | Alignment::CENTERY);
+	menu_1_inside->setBackground(menu_inside_background);
+
+	
 
 	_octopus->setFrame(menu_root);
 }
