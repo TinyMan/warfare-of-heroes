@@ -29,7 +29,7 @@ public:
 	virtual bool compare(const Sortable* s) const;
 
 	void setBackground(const Texture& bg) { _background = bg; setDirty(); }
-	SDL_Texture* getBackground() const { return _background; }
+	Texture getBackground() const { return _background; }
 	void setContainerRect(SDL_Rect r, int x = 0, int y = 0) { _container_rect = r; setPosition(x, y); }
 	void setContainerRect(SDL_Rect r, Uint8 alignment) { _container_rect = r; setPosition(alignment); }
 

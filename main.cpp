@@ -26,6 +26,7 @@ int main(int argc, char* argv[])
 
 	LOGINFO << "Starting @ " << SDL_GetTicks() << endl;
 	g->initialize();
+	
 	/*Grid* grid = g->getGrid();
 	grid->generateObstacle();
 

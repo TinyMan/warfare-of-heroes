@@ -11,10 +11,6 @@ TextureManager::TextureManager(SDL_Renderer* r)
 
 TextureManager::~TextureManager()
 {
-	for (auto t : _textures)
-	{
-		SDL_DestroyTexture(t.second);
-	}
 }
 
 void TextureManager::loadTexture(string filename, string texName)
@@ -30,7 +26,7 @@ void TextureManager::loadTexture(string filename, string texName)
 			// TODO: remove extension
 			texName = filename;
 		}
-		_textures[texName] = SDL_CreateTextureFromSurface(_renderer, temp);
+		_textures[texName] = Texture(SDL_CreateTextureFromSurface(_renderer, temp), texName);
 		SDL_FreeSurface(temp);
 		if (_textures[texName])
 		{
@@ -41,7 +37,7 @@ void TextureManager::loadTexture(string filename, string texName)
 	LOGERR << "Cannot load texture " << texName << " from file " << filename << endl;
 }
 
-SDL_Texture* TextureManager::operator[](string id)
+Texture TextureManager::operator[](string id)
 {
 	// TODO : try to load the texture
 	if (_textures.count(id) != 1)

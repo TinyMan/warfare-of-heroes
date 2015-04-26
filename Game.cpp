@@ -45,7 +45,7 @@ void Game::initialize()
 	Panel* menu_root_inside = new Panel(300, 100+75+75+75+75); // 4 boutons de hauteur 50, espacements de 25 entre les boutons et 50 avec les bords du container +25 devant quitter
 	menu_root->add(menu_root_inside, (Alignment::CENTERY | Alignment::CENTERX));
 	Texture menu_inside_background(300, 500);
-	FillTexture(_octopus->getRenderer(), menu_inside_background, Color::GREEN);
+	menu_inside_background.fill(_octopus->getRenderer(), Color::GREEN);
 	menu_root_inside->setBackground(menu_inside_background);
 
 	Button* button_1 = new Button(150, 50);
@@ -88,7 +88,7 @@ Game::~Game()
 		delete _gameObjects.front();
 		_gameObjects.pop_front();
 	}
-
+	delete _octopus;
 	ServiceLocator::cleanup();
 }
 
