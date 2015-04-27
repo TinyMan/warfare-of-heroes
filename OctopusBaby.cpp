@@ -61,11 +61,8 @@ void OctopusBaby::render(SDL_Renderer* r, bool force)
 		bool d = (force || dirty);
 		if (dirty)
 		{
-			SDL_Texture * old = SDL_GetRenderTarget(r);
-			if (SDL_SetRenderTarget(r, _texture) != 0)
-			{
-				LOGERR << "Error setting render target: " << SDL_GetError() << endl;
-			}
+			_texture.setRenderTarget();
+
 			if (_background.valid())
 				_background.render(r, Texture::STRETCH);
 			else
@@ -75,11 +72,11 @@ void OctopusBaby::render(SDL_Renderer* r, bool force)
 			}
 			internalRender(r, d);
 			setDirty(false);
-			SDL_SetRenderTarget(r, old);
+			
+			_texture.resetRenderTarget();
 		}
 		if (d)
 		{
-			//LOGINFO << "Rendering Octopus Baby" << endl;
 			if (SDL_RenderCopy(r, _texture, NULL, &_relative_rect) != 0)
 			{
 				LOGERR << "Error renderCopy: " << SDL_GetError() << endl;

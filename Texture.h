@@ -37,10 +37,11 @@ public:
 		TILE,
 		CENTER
 	};
-	Texture(SDL_Texture* texture = nullptr, string name = "");
+	Texture(SDL_Texture* texture = nullptr);
 	Texture(int w, int h, Color c = Color::TRANSPARENT, SDL_Renderer* r = nullptr, Uint32 f = SDL_PIXELFORMAT_UNKNOWN, int a = SDL_TEXTUREACCESS_TARGET);
 	Texture(const Texture&);
 	Texture& operator=(const Texture&);
+	Texture& operator=( SDL_Texture*);
 
 	operator SDL_Texture* () const { return _texture; }
 
@@ -59,11 +60,15 @@ public:
 	bool valid() const { return _texture != nullptr; }
 	void fill(SDL_Renderer* r, Color c);
 
+	void setRenderTarget();
+	void resetRenderTarget();
 protected:
 	void updateInfo();
 
 private:
 	SDL_Texture* _texture = nullptr;
+	SDL_Texture* _old_renderTarget = nullptr;
+	SDL_Renderer* _renderer = nullptr;
 	int _w;
 	int _h;
 	int _access;

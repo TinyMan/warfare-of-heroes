@@ -5,11 +5,11 @@
 
 map<SDL_Texture*, Uint32> Texture::_garbages;
 
-Texture::Texture(SDL_Texture* t, string name)
-	: _texture(t), _name(name)
+Texture::Texture(SDL_Texture* t)
+	: _texture(t)
 {
 	updateInfo();
-	addRef(t);
+	addRef(_texture);
 }
 Texture::Texture(int w, int h, Color c, SDL_Renderer* r, Uint32 f, int a)
 {
@@ -17,6 +17,7 @@ Texture::Texture(int w, int h, Color c, SDL_Renderer* r, Uint32 f, int a)
 		f = SDL_GetWindowPixelFormat(GAMEINST->getOctopus()->getWindow());
 	if (!r)
 		r = GAMEINST->getOctopus()->getRenderer();
+	_renderer = r;
 	_texture = SDL_CreateTexture(r, f, a, w, h);
 	fill(r, c);
 	updateInfo();
@@ -36,6 +37,15 @@ Texture& Texture::operator=(const Texture& t)
 	updateInfo();
 	addRef(_texture);
 	
+	return *this;
+}
+Texture& Texture::operator=(SDL_Texture* t)
+{
+	delRef(_texture);
+	_texture = t;
+	updateInfo();
+	addRef(_texture);
+
 	return *this;
 }
 Texture::~Texture()
@@ -115,16 +125,40 @@ void Texture::fill(SDL_Renderer* r, Color c)
 		SDL_SetRenderTarget(r, old);
 	}
 }
-
+void Texture::setRenderTarget()
+{
+	if (!_renderer)
+		_renderer = GAMEINST->getOctopus()->getRenderer();
+	if (_renderer)
+	{
+		_old_renderTarget = SDL_GetRenderTarget(_renderer);
+		if (SDL_SetRenderTarget(_renderer, _texture) != 0)
+		{
+			LOGERR << "Error setting render target: " << SDL_GetError() << endl;
+		}
+	}
+}
+void Texture::resetRenderTarget()
+{
+	if (!_renderer)
+		_renderer = GAMEINST->getOctopus()->getRenderer();
+	if (_renderer)
+	{
+		if (SDL_SetRenderTarget(_renderer, _old_renderTarget) != 0)
+		{
+			LOGERR << "Error setting render target: " << SDL_GetError() << endl;
+		}
+		_old_renderTarget = nullptr;
+	}
+}
 void Texture::addRef(SDL_Texture* t)
 {
 	if (t)
 	{
 		if (_garbages.count(t) == 1)
 		{
-			//LOGINFO << "SDL_Texture* " << t << " already registered: ";
 			_garbages[t]++;
-			//LOGINFO << _garbages[t] << endl;
+			//LOGINFO << "SDL_Texture* " << t << " already registered: " << _garbages[t] << endl;
 		}
 		else
 		{

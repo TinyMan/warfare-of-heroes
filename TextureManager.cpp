@@ -26,7 +26,7 @@ void TextureManager::loadTexture(string filename, string texName)
 			// TODO: remove extension
 			texName = filename;
 		}
-		_textures[texName] = Texture(SDL_CreateTextureFromSurface(_renderer, temp), texName);
+		_textures[texName] = SDL_CreateTextureFromSurface(_renderer, temp);
 		SDL_FreeSurface(temp);
 		if (_textures[texName])
 		{
