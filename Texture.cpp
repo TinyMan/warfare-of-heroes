@@ -2,7 +2,7 @@
 #include <iostream>
 #include "ServiceLocator.h"
 #include "Game.h"
-
+#include "Octopus.h"
 map<SDL_Texture*, Uint32> Texture::_garbages;
 
 Texture::Texture(SDL_Texture* t)

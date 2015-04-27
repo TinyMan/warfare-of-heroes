@@ -6,7 +6,7 @@
 #include "Game.h"
 #include "DamageOverTime.h"
 #include "CharacterEvents.h"
-
+#include "Grid.h"
 using namespace std;
 using namespace Events::CharacterEvents;
 

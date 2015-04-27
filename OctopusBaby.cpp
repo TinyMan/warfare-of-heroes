@@ -1,5 +1,6 @@
 #include "OctopusBaby.h"
 #include "Game.h"
+#include "Octopus.h"
 
 OctopusBaby::OctopusBaby()
 {

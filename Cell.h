@@ -4,7 +4,6 @@
 #include "SpellTarget.h"
 #include "OverTimeEffect.h"
 
-class Character;
 
 class Cell
 	: public SpellTarget

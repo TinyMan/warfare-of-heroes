@@ -2,6 +2,10 @@
 #include "SDLEvents.h"
 #include "Panel.h"
 #include "Button.h"
+#include "Octopus.h"
+#include "GameObject.h"
+#include "Character.h"
+#include "Grid.h"
 
 Game* Game::_instance = nullptr;
 

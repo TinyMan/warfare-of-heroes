@@ -128,6 +128,7 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Timeout.cpp" />
     <ClCompile Include="TimeService.cpp" />
+    <ClCompile Include="Tooltip.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +189,7 @@
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Timeout.h" />
     <ClInclude Include="TimeService.h" />
+    <ClInclude Include="Tooltip.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -2,6 +2,7 @@
 #include <string>
 #include <list>
 #include "SpellTarget.h"
+#include "Grid.h"
 class Cell;
 
 using namespace std;
