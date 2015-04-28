@@ -28,8 +28,27 @@ void Label::internalRender(SDL_Renderer* r, bool force)
 		{
 			if (_font)
 			{
-				_font->renderText(r, _text, &_text_color, _text_size, &_relative_rect, _alignment);
+				_font->renderText(r, _text, &_text_color, _text_size, &_text_rect, _alignment);
 			}
 		}
 	}
+}
+void Label::updateAbsoluteRect()
+{
+	OctopusBaby::updateAbsoluteRect();
+	_text_rect = _relative_rect;
+	_text_rect.x = _padding_left;
+	_text_rect.y = _padding_top;
+	_text_rect.w -= _padding_right;
+	_text_rect.h -= _padding_bottom;
+	
+}
+
+void Label::setPadding(int left, int top, int right, int bottom)
+{
+	_padding_left = left;
+	_padding_top = top;
+	_padding_right = right;
+	_padding_bottom = bottom;
+	setDirty();
 }

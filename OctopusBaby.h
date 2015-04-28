@@ -45,7 +45,7 @@ protected:
 	Texture _texture;
 	Texture _background;
 	virtual void internalRender(SDL_Renderer* r, bool force = false) = 0;
-	void updateAbsoluteRect();
+	virtual void updateAbsoluteRect();
 private:
 	int _z_index = 0;
 	void initialize();

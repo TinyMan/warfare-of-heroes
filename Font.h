@@ -29,6 +29,7 @@ public:
 
 	string getName() const { return _name; }
 	int getPixelLength(string text, int size = 32);
+	int getPixelHeight(string text, int size = 32);
 	void setAlignment(Uint8 a) { _alignment = a; }
 	Uint8 getAlignment() const { return _alignment; }
 private:

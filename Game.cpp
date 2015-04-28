@@ -84,7 +84,7 @@ void Game::initialize()
 	
 	Tooltip* tt = new Tooltip(500, 200);
 	tt->setBackground(Texture(500, 200, Color::RED, _octopus->getRenderer()));
-	tt->setText("Tooltip exemple");
+	tt->setText("Tooltip exemple\nThis is \na multiline \nexample of text\n");
 	tt->setTextSize(24);
 	tt->setTitle("Tooltip");
 	tt->setTitleColor(Color::GREEN);
