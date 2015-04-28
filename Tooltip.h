@@ -12,10 +12,13 @@ public:
 	Tooltip(int w, int h);
 	virtual ~Tooltip();
 
-	void setDirty(bool d = true) { _dirty = true; }
+	void setDirty(bool d = true) { _dirty = d; }
 	bool isDirty() { return _dirty; }
 
 	void setTitle(string title) { _title = title; setDirty(); }
+	void setTitleColor(Color c) { _title_color = c; setDirty(); }
+	void setTitleAlignment(Uint8 c) { _title_alignment = c; setDirty(); }
+	void setTitleSize(Uint8 c) { _title_size = c; setDirty(); }
 
 	// 2nd parameter: not yet supported
 	void anchor(OctopusBaby* b, Uint8 alignment = Alignment::TOP | Alignment::LEFT);
@@ -28,6 +31,7 @@ private:
 	string _title;
 	Uint8 _title_alignment = Alignment::TOP | Alignment::LEFT;
 	Uint8 _title_size = 32;
+	Color _title_color = Color::BLACK;
 
 	bool _dirty = true;
 

@@ -26,9 +26,10 @@ public:
 	Uint8 getTextAlignment() const { return _alignment; }
 protected:
 	void internalRender(SDL_Renderer* r, bool force = false);
+	Font* _font;
+
 private:
 	string _text;
-	Font* _font;
 	bool _dirty = true;
 	Color _text_color = Color::BLACK;
 	int _text_size = 32;
