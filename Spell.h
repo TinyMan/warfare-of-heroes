@@ -3,6 +3,7 @@
 #include <list>
 #include "Character.h"
 #include "Cell.h"
+#include "Grid.h"
 #include "SpellTarget.h"
 #include "DamageOverTime.h"
 

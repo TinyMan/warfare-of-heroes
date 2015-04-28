@@ -16,32 +16,25 @@ using namespace std;
 class Font
 {
 public:
-	enum ALIGNMENT
-	{
-		UNKWNOWN,
-		CENTER,
-		LEFT,
-		RIGHT
-	};
 	Font(string fnt_filename = "");
 	virtual ~Font();
 
 	void parse(string filename = "");
 	void parse(istream& s);
 
-	void renderText(SDL_Renderer* r, string text, Color* c= nullptr, int size = 32, SDL_Rect * rect = nullptr, ALIGNMENT al = UNKWNOWN);
+	void renderText(SDL_Renderer* r, string text, Color* c= nullptr, int size = 32, SDL_Rect * rect = nullptr, Uint8 al = Alignment::UNKNOWN);
 	void setColor(Color c) { setColor(c.r(), c.g(), c.b()); }
 	void setColor(Uint8 r, Uint8 g, Uint8 b);
 	friend ostream& operator<<(ostream&, const Font&);
 
 	string getName() const { return _name; }
 	int getPixelLength(string text, int size = 32);
-	void setAlignment(ALIGNMENT a) { _alignment = a; }
-	ALIGNMENT getAlignment() const { return _alignment; }
+	void setAlignment(Uint8 a) { _alignment = a; }
+	Uint8 getAlignment() const { return _alignment; }
 private:
 	string _fntFilename = "";
 	string _path_to_files = "";
-	ALIGNMENT _alignment = LEFT;
+	Uint8 _alignment = Alignment::LEFT | Alignment::CENTERY;
 
 	/* info */
 	string _name;

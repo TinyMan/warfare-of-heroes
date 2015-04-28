@@ -4,7 +4,7 @@
 #include <SDL2/SDL.h>
 #include "OctopusBaby.h"
 #include "ServiceLocator.h"
-#include "MyList.h"
+#include "Panel.h"
 #include "Color.h"
 #include "FontManager.h"
 using namespace std;
@@ -20,7 +20,9 @@ public:
 
 	virtual void initialize();
 	virtual void updateWindowTitle();
-	void addBaby(OctopusBaby*);
+	void setFrame(Panel*, void* = nullptr);
+	void setFrameAsync(Panel*);
+	Panel* getFrame() const { return _frame; }
 
 	SDL_Window* getWindow() const { return _window; }
 	SDL_Renderer* getRenderer() const { return _renderer; }
@@ -29,9 +31,7 @@ public:
 	int getWHeight() const { return wHeight; }
 
 private:
-	/* collection of octopus babies */
-	deque<OctopusBaby*> _babies;
-	MyList<OctopusBaby*> _list;
+	Panel* _frame = nullptr;
 
 	SDL_Window* _window;
 	SDL_Renderer* _renderer;

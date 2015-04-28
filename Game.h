@@ -4,13 +4,11 @@
 #include <list>
 #include <deque>
 #include <sstream>
-
-#include "GameObject.h"
-#include "Character.h"
-#include "Grid.h"
-#include "ServiceLocator.h"
 #include "CharacterEvents.h"
-#include "Octopus.h"
+#include "ServiceLocator.h"
+class Octopus;
+class GameObject;
+class Grid;
 
 #define GAMEINST Game::getInstance()
 

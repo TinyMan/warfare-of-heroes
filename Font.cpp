@@ -72,32 +72,26 @@ void Font::parse(std::istream& stream)
 		}
 	}
 }
-void Font::renderText(SDL_Renderer* r, string text, Color* c, int size, SDL_Rect* rect, ALIGNMENT a)
+void Font::renderText(SDL_Renderer* r, string text, Color* c, int size, SDL_Rect* rect, Uint8 a)
 {
 	if (c)
 		setColor(*c);
 	SDL_Point cursor = { 0, 0 };
 	if (rect)
 	{
-		if (a == UNKWNOWN)
+		if (a == Alignment::UNKNOWN)
 		{
 			a = _alignment;
 		}
-		switch (a)
-		{
-		case Font::UNKWNOWN:
-			break;
-		case Font::CENTER:
-			cursor.x = rect->x + getPixelLength(text, size)/2;
-			break;
-		case Font::LEFT:
-			break;
-		case Font::RIGHT:
-			cursor.x = rect->x + rect->w - getPixelLength(text, size);
-			break;
-		default:
-			break;
-		}
+		if (a & Alignment::CENTERX)
+			cursor.x = (rect->w / 2) - (getPixelLength(text, size)/2);
+		else if (!(a & Alignment::LEFT))
+			cursor.x = rect->w - getPixelLength(text, size);	
+		if (a & Alignment::CENTERY)
+			cursor.y = (rect->h / 2) - (_lineHeight / 2);
+		else if (!(a & Alignment::TOP))
+			cursor.y = rect->h - _lineHeight;
+		
 	}
 	float coef = (float)size / _original_size;
 	for (char c : text)
@@ -282,11 +276,13 @@ void Font::setColor(Uint8 r, Uint8 g, Uint8 b)
 }
 int Font::getPixelLength(string text, int size)
 {
+	//LOGINFO << "Getting pixel length of text " << text << " with size " << size << endl;
 	int s = 0;
 	float coef = (float)size / _original_size;
 	for (char c : text)
 	{
 		s += int(_glyphs[c]._x_advance*coef);
 	}
+	//LOGINFO << "Size = " << s << endl;
 	return s;
 }

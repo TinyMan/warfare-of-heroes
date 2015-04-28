@@ -3,6 +3,7 @@
 
 FontManager::FontManager()
 {
+	loadFont("Images/FNT/comic_sans_ms.fnt");
 }
 
 

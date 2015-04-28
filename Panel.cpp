@@ -5,12 +5,8 @@
 Panel::Panel()
 {
 }
-Panel::Panel(SDL_Rect rect)
-	: OctopusBaby(rect)
-{
-}
-Panel::Panel(int x, int y, int w, int h)
-	: OctopusBaby(x, y, w, h )
+Panel::Panel( int w, int h)
+	: OctopusBaby(w, h )
 {
 }
 
@@ -23,7 +19,18 @@ Panel::~Panel()
 void Panel::update()
 {
 	MyList::update();
-	
+	for (auto e : _list)
+	{
+		e->update();
+	}
+}
+void Panel::setActive(bool d, void*)
+{
+	for (auto e : _list)
+	{
+		e->setActive(d);
+	}
+	Activable::setActive(d);
 }
 void Panel::internalRender(SDL_Renderer* r, bool force)
 {

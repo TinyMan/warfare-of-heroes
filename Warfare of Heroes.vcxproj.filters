@@ -237,6 +237,12 @@
     <ClCompile Include="Color.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="MouseEvents.cpp">
+      <Filter>Source Files\Util\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Tooltip.cpp">
+      <Filter>Source Files\Graphics\Text</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -412,6 +418,9 @@
     </ClInclude>
     <ClInclude Include="Color.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Tooltip.h">
+      <Filter>Header Files\Graphics\Text</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

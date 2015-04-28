@@ -7,7 +7,7 @@ class Label :
 {
 public:
 	Label(string text = "", Font* f = nullptr);
-	Label(int x, int y, int w, int h, string text = "", Font* f = nullptr);
+	Label(int w, int h, string text = "", Font* f = nullptr, int x = 0, int y = 0);
 	virtual ~Label();
 	void setText(string text) { _text = text; setDirty(); }
 	string getText() const { return _text; }
@@ -22,16 +22,17 @@ public:
 	Color getTextColor() const { return _text_color; }
 	void setTextSize(int size) { _text_size = size; setDirty(); }
 	int getTextSize() const { return _text_size; }
-	void setAlignment(Font::ALIGNMENT a) { _alignment = a; }
-	Font::ALIGNMENT getAlignment() const { return _alignment; }
+	void setTextAlignment(Uint8 a) { _alignment = a; setDirty(); }
+	Uint8 getTextAlignment() const { return _alignment; }
 protected:
 	void internalRender(SDL_Renderer* r, bool force = false);
+	Font* _font;
+
 private:
 	string _text;
-	Font* _font;
 	bool _dirty = true;
 	Color _text_color = Color::BLACK;
 	int _text_size = 32;
-	Font::ALIGNMENT _alignment = Font::LEFT;
+	Uint8 _alignment = Alignment::LEFT | Alignment::CENTERY;
 };
 

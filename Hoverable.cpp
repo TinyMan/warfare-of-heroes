@@ -1,6 +1,7 @@
 #include "Hoverable.h"
 #include "ServiceLocator.h"
 #include "MouseEvents.h"
+#include "Tooltip.h"
 
 Hoverable::Hoverable() : MouseEventReceiver(typeid(Events::MouseEvents::MotionEvent))
 {
@@ -8,9 +9,9 @@ Hoverable::Hoverable() : MouseEventReceiver(typeid(Events::MouseEvents::MotionEv
 		[this](Event* e) 
 	{
 		if (isInArea(((MouseEvents::MouseEvent*)e)->getPos()))
-			_hover = true;
+			onMouseIn((MouseEvents::MotionEvent*)e);
 		else
-			_hover = false;
+			onMouseOut((MouseEvents::MotionEvent*)e);
 		setDirty();
 	}));
 }
@@ -18,4 +19,12 @@ Hoverable::Hoverable() : MouseEventReceiver(typeid(Events::MouseEvents::MotionEv
 
 Hoverable::~Hoverable()
 {
+}
+void Hoverable::onMouseIn(MouseEvents::MotionEvent* e)
+{ 
+	_hover = true; 	
+}
+void Hoverable::onMouseOut(MouseEvents::MotionEvent* e)
+{
+	_hover = false;	
 }

@@ -19,13 +19,17 @@ namespace Events
 		class ClickEvent : public MouseEvent
 		{
 		public:
-			ClickEvent(SDL_Point p, Uint8 button = SDL_BUTTON_LEFT) : MouseEvent(p), _button(button){}
-			ClickEvent(int x, int y, Uint8 button = SDL_BUTTON_LEFT) : MouseEvent(x, y), _button(button){}
+			ClickEvent(SDL_Point p, Uint8 button = SDL_BUTTON_LEFT) : MouseEvent(p), _button(button){ _last_click = SDL_GetTicks(); }
+			ClickEvent(int x, int y, Uint8 button = SDL_BUTTON_LEFT) : MouseEvent(x, y), _button(button){ _last_click = SDL_GetTicks(); }
 			virtual ~ClickEvent(){ }
 			Uint8 button() const { return _button; }
+			static bool canClick() { return getTimeBetweenClicks() + _last_click < SDL_GetTicks(); }
+			static Uint32 getTimeBetweenClicks() { return _time_between_clicks; }
 		private:
 			Uint8 _button;
-		};		
+			static Uint32 _last_click;
+			static const Uint32 _time_between_clicks; // milliseconds
+		};
 		class MotionEvent : public MouseEvent
 		{
 		public:

@@ -13,29 +13,17 @@ Octopus::~Octopus()
 
 void Octopus::render()
 {
-	if (_list.isDirty())
+	if (_frame)
 	{
-		//LOGINFO << "Rendering mother of octopus ! " << endl;
-		SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
-		SDL_RenderClear(_renderer);
-
-		for (auto ob : *_list.getList())
-		{
-			ob->render(_renderer, true);
-		}
-		_list.setDirty(false);
+		_frame->render(_renderer);
 	}
 	SDL_RenderPresent(_renderer);
 	updateWindowTitle();	
 }
 void Octopus::update()
 {
-	for (auto o : *_list.getList())
-	{
-		o->update();
-	}
-	_list.update();
-	
+	if(_frame)
+		_frame->update();
 }
 void Octopus::initialize()
 {
@@ -57,12 +45,18 @@ void Octopus::updateWindowTitle()
 		_lastFpsUpdate = now;
 	}
 }
-void Octopus::addBaby(OctopusBaby* b)
+void Octopus::setFrame(Panel* b, void*)
 {
 	if (b)
 	{
-		LOGINFO << "Adding octopus baby" << endl;
+		//LOGINFO << "Changing frame" << endl;
 		//_babies.push_back(b);
-		_list.add(b);
+		_frame = b;
+		b->setActive(true);
 	}
+}
+void Octopus::setFrameAsync(Panel* to)
+{
+	_frame->setActive(false);
+	ServiceLocator::getTimeService()->setTimeout(1, Callback(&Octopus::setFrame, this, to));
 }

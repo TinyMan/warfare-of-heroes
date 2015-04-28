@@ -1,5 +1,12 @@
 #include "Game.h"
 #include "SDLEvents.h"
+#include "Panel.h"
+#include "Button.h"
+#include "Octopus.h"
+#include "GameObject.h"
+#include "Character.h"
+#include "Grid.h"
+#include "Tooltip.h"
 
 Game* Game::_instance = nullptr;
 
@@ -25,12 +32,66 @@ Game::Game()
 	_grid = new Grid();
 	_octopus = new Octopus();
 
-	initialize();
 }
 
 void Game::initialize()
 {
 	_octopus->initialize();
+
+	/* creation of menu */
+	// used to navigateto another frame
+	auto navigationLambda = [=](Panel* to, Event* e)
+	{
+		_octopus->setFrameAsync(to);
+	};
+	Panel* menu_root = new Panel();
+	Panel* menu_1 = new Panel();
+
+	Panel* menu_root_inside = new Panel(300, 100+75+75+75+75); // 4 boutons de hauteur 50, espacements de 25 entre les boutons et 50 avec les bords du container +25 devant quitter
+	menu_root->add(menu_root_inside, (Alignment::CENTERY | Alignment::CENTERX));
+	Texture menu_inside_background(300, 500);
+	menu_inside_background.fill(_octopus->getRenderer(), Color::GREEN);
+	menu_root_inside->setBackground(menu_inside_background);
+
+	Button* button_1 = new Button(150, 50);
+	menu_root_inside->add(button_1, Alignment::CENTERX);
+	button_1->setPositionY(50);
+	button_1->setText("Play");
+	button_1->setTextColor(Color::BLUE);
+	button_1->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
+	button_1->Clickable::setCallback(new EventCallback(navigationLambda, menu_1));
+
+	Button* button_quit = button_1->clone();
+	menu_root_inside->add(button_quit, Alignment::CENTERX);
+	button_quit->setPositionY(75 + 75 + 75 + 75);
+	button_quit->setText("Exit");
+	button_quit->Clickable::setCallback(new EventCallback(&Game::stop, this));
+
+	Button* button_2 = button_quit->clone();
+	menu_root_inside->add(button_2, Alignment::CENTERX);
+	button_2->setPositionY(50 + 75);
+	button_2->setText("How to Play");
+	
+	Button* button_3 = button_2->clone();
+	menu_root_inside->add(button_3, Alignment::CENTERX);
+	button_3->setPositionY(50 + 75 + 75);
+	button_3->setText("Settings");
+
+	Panel* menu_1_inside = new Panel(300, 500);
+	menu_1->add(menu_1_inside, Alignment::CENTERX | Alignment::CENTERY);
+	menu_1_inside->setBackground(menu_inside_background);
+
+	
+	Tooltip* tt = new Tooltip(500, 200);
+	tt->setBackground(Texture(500, 200, Color::RED, _octopus->getRenderer()));
+	tt->setText("Tooltip exemple");
+	tt->setTextSize(24);
+	tt->setTitle("Tooltip");
+	tt->setTitleColor(Color::GREEN);
+	menu_root->add(tt);
+	tt->anchor(button_1);
+		
+	_octopus->setFrame(menu_root);
 }
 Game::~Game()
 {
@@ -40,7 +101,7 @@ Game::~Game()
 		delete _gameObjects.front();
 		_gameObjects.pop_front();
 	}
-
+	delete _octopus;
 	ServiceLocator::cleanup();
 }
 
