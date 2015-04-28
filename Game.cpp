@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "Character.h"
 #include "Grid.h"
+#include "Tooltip.h"
 
 Game* Game::_instance = nullptr;
 
@@ -81,6 +82,11 @@ void Game::initialize()
 	menu_1_inside->setBackground(menu_inside_background);
 
 	
+	Tooltip* tt = new Tooltip(500, 200);
+	tt->setBackground(Texture(500, 200, Color::RED, _octopus->getRenderer()));
+	tt->setText("Text exemple");
+	menu_root->add(tt, Alignment::RIGHT | Alignment::CENTERY);
+	tt->anchor(button_1);
 
 	_octopus->setFrame(menu_root);
 }

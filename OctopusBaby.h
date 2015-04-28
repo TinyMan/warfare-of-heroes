@@ -37,6 +37,7 @@ public:
 	void setPosition(int x, int y);
 	void setPositionX(int x);
 	void setPositionY(int y);
+	SDL_Rect getAbsolutRect() const{ return _absolute_rect; }
 protected:
 	SDL_Rect _relative_rect;
 	SDL_Rect _absolute_rect;
