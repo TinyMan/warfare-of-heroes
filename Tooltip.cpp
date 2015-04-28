@@ -5,6 +5,7 @@ Tooltip::Tooltip(int w, int h)
 	: Label(w, h)
 {
 	setFont((*ServiceLocator::getFontManager())["Comic Sans MS"]);
+	setPadding(5, 5, 5, 5);
 }
 
 
@@ -50,7 +51,7 @@ void Tooltip::internalRender(SDL_Renderer* r, bool force)
 		bool d = (force | isDirty());
 		if (d)
 		{
-			_font->renderText(r, _title, &_title_color, _title_size, &_relative_rect, _title_alignment);
+			_font->renderText(r, _title, &_title_color, _title_size, &_text_rect, _title_alignment);
 		}
 		Label::internalRender(r, d);
 	}

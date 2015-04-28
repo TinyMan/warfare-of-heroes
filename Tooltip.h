@@ -25,7 +25,7 @@ public:
 	void anchor(OctopusBaby* b, int padding_x, int padding_y);
 	void update(); // TODO: update position based on anchor
 protected:
-	void internalRender(SDL_Renderer* r, bool force = false);
+	virtual void internalRender(SDL_Renderer* r, bool force = false);
 
 private:
 	string _title;

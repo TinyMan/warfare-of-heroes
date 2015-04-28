@@ -77,20 +77,31 @@ void Font::renderText(SDL_Renderer* r, string text, Color* c, int size, SDL_Rect
 	if (c)
 		setColor(*c);
 	SDL_Point cursor = { 0, 0 };
+	int initial_x = 0;
 	if (rect)
 	{
+		initial_x = cursor.x = rect->x;
+		cursor.y = rect->y;
 		if (a == Alignment::UNKNOWN)
 		{
 			a = _alignment;
 		}
 		if (a & Alignment::CENTERX)
-			cursor.x = (rect->w / 2) - (getPixelLength(text, size)/2);
+		{
+			cursor.x += (rect->w / 2) - (getPixelLength(text, size) / 2);
+		}
 		else if (!(a & Alignment::LEFT))
-			cursor.x = rect->w - getPixelLength(text, size);	
+		{
+			cursor.x += rect->w - getPixelLength(text, size);
+		}
 		if (a & Alignment::CENTERY)
-			cursor.y = (rect->h / 2) - (_lineHeight / 2);
+		{
+			cursor.y += (rect->h / 2) - (getPixelHeight(text, size) / 2);
+		}
 		else if (!(a & Alignment::TOP))
-			cursor.y = rect->h - _lineHeight;
+		{
+			cursor.y += rect->h - getPixelHeight(text, size);
+		}
 		
 	}
 	float coef = (float)size / _original_size;
@@ -122,7 +133,7 @@ void Font::renderText(SDL_Renderer* r, string text, Color* c, int size, SDL_Rect
 		if (c == '\n')
 		{
 			cursor.y += _lineHeight;
-			cursor.x = 0;
+			cursor.x = initial_x;
 		}
 	}
 	
@@ -284,5 +295,12 @@ int Font::getPixelLength(string text, int size)
 		s += int(_glyphs[c]._x_advance*coef);
 	}
 	//LOGINFO << "Size = " << s << endl;
+	return s;
+}
+int Font::getPixelHeight(string text, int size)
+{
+	int s = _lineHeight;
+	float coef = (float)size / _original_size;
+	s *= int(coef * (count(text.begin(), text.end(), '\n') + 1));
 	return s;
 }
