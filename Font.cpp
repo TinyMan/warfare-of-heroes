@@ -102,26 +102,34 @@ void Font::renderText(SDL_Renderer* r, string text, Color* c, int size, SDL_Rect
 	float coef = (float)size / _original_size;
 	for (char c : text)
 	{
-		Glyph ch = _glyphs[c];
-		// Compute the source rect
-		SDL_Rect src;
-		src.x = ch._x;
-		src.y = ch._y;
-		src.w = ch._w;
-		src.h = ch._h;
+		if (_glyphs.count(c) == 1)
+		{
+			Glyph ch = _glyphs[c];
+			// Compute the source rect
+			SDL_Rect src;
+			src.x = ch._x;
+			src.y = ch._y;
+			src.w = ch._w;
+			src.h = ch._h;
 
-		// Compute the destination rect
-		SDL_Rect dst;
-		dst.x = cursor.x + int(ch._x_offset*coef);
-		dst.y = cursor.y + int(ch._y_offset*coef);
-		dst.w = int(ch._w*coef);
-		dst.h = int(ch._h*coef);
+			// Compute the destination rect
+			SDL_Rect dst;
+			dst.x = cursor.x + int(ch._x_offset*coef);
+			dst.y = cursor.y + int(ch._y_offset*coef);
+			dst.w = int(ch._w*coef);
+			dst.h = int(ch._h*coef);
 
-		// Draw the image from the right texture
-		//DrawRect(ch.page, src, dst);
-		SDL_RenderCopy(r, _pages[ch._page], &src, &dst);
-		// Update the position
-		cursor.x += int(ch._x_advance*coef);
+			// Draw the image from the right texture
+			//DrawRect(ch.page, src, dst);
+			SDL_RenderCopy(r, _pages[ch._page], &src, &dst);
+			// Update the position
+			cursor.x += int(ch._x_advance*coef);
+		}
+		if (c == '\n')
+		{
+			cursor.y += _lineHeight;
+			cursor.x = 0;
+		}
 	}
 	
 }
