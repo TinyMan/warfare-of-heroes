@@ -4,6 +4,8 @@
 using namespace Events;
 using namespace MouseEvents;
 
+class Tooltip;
+
 class Hoverable 
 	: public MouseEventReceiver, public Modifiable
 {
@@ -19,8 +21,8 @@ public:
 		bool b = MouseEventReceiver::concernMe(e);
 		return (b && !_hover) || (!b && _hover); // mouse in or mouse out
 	}
-	virtual void onMouseIn(MouseEvents::MotionEvent* e){ _hover = true; }
-	virtual void onMouseOut(MouseEvents::MotionEvent* e){ _hover = false; }
+	virtual void onMouseIn(MouseEvents::MotionEvent* e);
+	virtual void onMouseOut(MouseEvents::MotionEvent* e);
 private:
 	bool _hover = false;
 };

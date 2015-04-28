@@ -1,5 +1,5 @@
 #include "Tooltip.h"
-
+#include "Hoverable.h"
 
 Tooltip::Tooltip(int w, int h)
 	: Label(w, h)
@@ -16,7 +16,7 @@ void Tooltip::anchor(OctopusBaby* b, Uint8 align)
 {
 	if (b)
 	{
-		_anchored_to = b;		
+		_anchored_to = b;
 	}
 }
 void Tooltip::anchor(OctopusBaby* b, int padding_x, int padding_y)
@@ -35,6 +35,12 @@ void Tooltip::update()
 		_relative_rect.x = _anchor_absolute_rect.x - _container_rect.x + _anchor_padding_x;
 
 		updateAbsoluteRect();
+		if (Hoverable* h = dynamic_cast<Hoverable*>(_anchored_to))
+		{
+			setActive(h->hover());
+		}
+		else
+			setActive(false);
 	}
 }
 void Tooltip::internalRender(SDL_Renderer* r, bool force)

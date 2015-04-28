@@ -84,10 +84,10 @@ void Game::initialize()
 	
 	Tooltip* tt = new Tooltip(500, 200);
 	tt->setBackground(Texture(500, 200, Color::RED, _octopus->getRenderer()));
-	tt->setText("Text exemple");
-	menu_root->add(tt, Alignment::RIGHT | Alignment::CENTERY);
+	tt->setText("Tooltip exemple");
+	menu_root->add(tt);
 	tt->anchor(button_1);
-
+		
 	_octopus->setFrame(menu_root);
 }
 Game::~Game()
