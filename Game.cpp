@@ -90,7 +90,7 @@ void Game::initialize()
 	tt->setTitleColor(Color::GREEN);
 	menu_root->add(tt);
 	tt->anchor(button_1);
-		
+	
 	_octopus->setFrame(menu_root);
 }
 Game::~Game()

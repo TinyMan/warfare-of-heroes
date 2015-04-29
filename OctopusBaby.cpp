@@ -124,3 +124,14 @@ void OctopusBaby::setPositionY(int y)
 	_relative_rect.y = y;
 	updateAbsoluteRect();
 }
+void OctopusBaby::setAlpha(Uint8 alpha)
+{
+	SDL_SetTextureAlphaMod(_texture, alpha);
+	setDirty();
+}
+Uint8 OctopusBaby::getAlpha() const
+{
+	Uint8 alpha;
+	SDL_GetTextureAlphaMod(_texture, &alpha);
+	return alpha;
+}
