@@ -42,6 +42,7 @@ public:
 	// 0 is transparent and 255 is opaque
 	void setAlpha(Uint8 alpha);
 	Uint8 getAlpha() const;
+	virtual bool isInArea(SDL_Point p) const;
 protected:
 	SDL_Rect _relative_rect;
 	SDL_Rect _absolute_rect;

@@ -69,7 +69,11 @@ void Texture::render(SDL_Renderer* r, SDL_Rect* srcrect, SDL_Rect* dstrect, STYL
 	if (r)
 	{
 		if (!dstrect)
-			dstrect = new SDL_Rect({ 0, 0, MAXWIDTH, MAXHEIGHT });
+		{
+			int w, h; 
+			SDL_GetRendererOutputSize( r, &w, &h);
+			dstrect = new SDL_Rect({ 0, 0, w, h });
+		}
 		if (!srcrect)
 			srcrect = new SDL_Rect(_defaultRect);
 		SDL_Rect src = *srcrect;
@@ -171,7 +175,7 @@ void Texture::delRef(SDL_Texture* _texture)
 {
 	if (_texture)
 	{
-		if (_garbages.count(_texture) == 1)
+		if (!_garbages.empty() && _garbages.count(_texture) == 1)
 		{
 			Uint32 c = _garbages[_texture];
 			if (c > 1)

@@ -135,3 +135,9 @@ Uint8 OctopusBaby::getAlpha() const
 	SDL_GetTextureAlphaMod(_texture, &alpha);
 	return alpha;
 }
+bool OctopusBaby::isInArea(SDL_Point p) const
+{
+	if (!isActive())
+		return false;
+	return p.x >= _absolute_rect.x && p.x <= _absolute_rect.x + _absolute_rect.w && p.y >= _absolute_rect.y && p.y <= _absolute_rect.y + _absolute_rect.h;
+}

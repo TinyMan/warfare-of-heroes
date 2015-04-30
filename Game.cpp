@@ -7,6 +7,7 @@
 #include "Character.h"
 #include "Grid.h"
 #include "Tooltip.h"
+#include "CellOctopus.h"
 
 Game* Game::_instance = nullptr;
 
@@ -47,7 +48,7 @@ void Game::initialize()
 	Panel* menu_root = new Panel();
 	Panel* menu_1 = new Panel();
 
-	Panel* menu_root_inside = new Panel(300, 100+75+75+75+75); // 4 boutons de hauteur 50, espacements de 25 entre les boutons et 50 avec les bords du container +25 devant quitter
+	Panel* menu_root_inside = new Panel(300, 100 + 75 + 75 + 75 + 75); // 4 boutons de hauteur 50, espacements de 25 entre les boutons et 50 avec les bords du container +25 devant quitter
 	menu_root->add(menu_root_inside, (Alignment::CENTERY | Alignment::CENTERX));
 	Texture menu_inside_background(300, 500);
 	menu_inside_background.fill(_octopus->getRenderer(), Color::GREEN);
@@ -71,7 +72,7 @@ void Game::initialize()
 	menu_root_inside->add(button_2, Alignment::CENTERX);
 	button_2->setPositionY(50 + 75);
 	button_2->setText("How to Play");
-	
+
 	Button* button_3 = button_2->clone();
 	menu_root_inside->add(button_3, Alignment::CENTERX);
 	button_3->setPositionY(50 + 75 + 75);
@@ -81,7 +82,7 @@ void Game::initialize()
 	menu_1->add(menu_1_inside, Alignment::CENTERX | Alignment::CENTERY);
 	menu_1_inside->setBackground(menu_inside_background);
 
-	
+
 	Tooltip* tt = new Tooltip(500, 200);
 	tt->setBackground(Texture(500, 200, Color::RED, _octopus->getRenderer()));
 	tt->setText("Tooltip exemple\nThis is \na multiline \nexample of text\n");
@@ -90,8 +91,33 @@ void Game::initialize()
 	tt->setTitleColor(Color::GREEN);
 	menu_root->add(tt);
 	tt->anchor(button_1);
-	
-	_octopus->setFrame(menu_root);
+
+	Panel* game_frame = new Panel();
+	Panel* grid = new Panel(15 * 50, 15 * 25);
+	game_frame->add(grid, Alignment::CENTERX | Alignment::CENTERY);
+	double x = 0, y = 0;
+	CellOctopus* _cells[14][30];
+	for (auto & i : _cells)
+	{
+		for (auto& e : i)
+		{
+			e = new CellOctopus();
+			grid->add(e, int(x * 50), int(y * 25));
+			x++;
+			if (x == 14)
+			{
+				x = 0.5;
+				y += 0.5;
+			}
+			else if (x == 14.5)
+			{
+				x = 0;
+				y += 0.5;
+			}
+		}
+	}
+	grid->setBackground(Texture(15 * 50, 15 * 25, Color::BLACK));
+	_octopus->setFrame(game_frame);
 }
 Game::~Game()
 {
