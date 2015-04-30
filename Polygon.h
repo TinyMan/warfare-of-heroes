@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <vector>
+#include <list>
 #include "Color.h"
 #include "Line.h"
 

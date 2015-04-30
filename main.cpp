@@ -39,26 +39,6 @@ int main(int argc, char* argv[])
 	g->addPlayer(player1);
 	g->addPlayer(player3);*/
 
-	Point p1(0, 0);
-	Point p2(25, 0);
-	Point p3(25, 25);
-	Point p4(0, 25);
-		
-
-	Polygon p;
-	p.addPoint(p1);
-	p.addPoint(p2);
-	p.addPoint(p3);
-	p.addPoint(p4);
-	vector<Line> lines = p.getLines();
-	for (auto l : lines)
-	{
-		cout << l << endl;
-	}
-	cout << "Intersection: " << lines[1].intersection(lines[2]) << endl;
-	
-
-	g->stop();
 	g->loop();
 
 	LOGINFO << "Ending @ " << SDL_GetTicks() << endl;

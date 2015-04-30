@@ -18,9 +18,9 @@ void Polygon::addPoint(SDL_Point p)
 
 void Polygon::draw(SDL_Renderer* r, Color c)
 {
-	SDL_SetRenderDrawColor(r, c.r(), c.g(), c.b(), c.a());
 	if (_points.size() > 2)
 	{
+		SDL_SetRenderDrawColor(r, c.r(), c.g(), c.b(), c.a());
 		unsigned int i = _points.size()-1;
 		SDL_RenderDrawLine(r, _points[0].x, _points[0].y, _points[i].x, _points[i].y);
 		for (i = 1; i < _points.size(); i++)
@@ -31,13 +31,33 @@ void Polygon::draw(SDL_Renderer* r, Color c)
 }
 void Polygon::drawFill(SDL_Renderer * r, Color c)
 {
+	if (_points.size() < 3)
+		return;
 	int w, h;
 	SDL_GetRendererOutputSize(r, &w, &h);
+	SDL_SetRenderDrawColor(r, c.r(), c.g(), c.b(), c.a());
 
+	vector<Line> lines = getLines();
+	list<int> intersectionX;
 	// for each line
 	for (int y = 0; y < h; y++)
 	{
-		
+		// build the list of intersections between current scanline and each polygon line
+		intersectionX.clear();
+		Line l(0, y, w, y);
+		for (Line polygon_line : lines)
+		{
+			intersectionX.push_back(polygon_line.intersectX(l));
+		}
+
+		// sort
+		intersectionX.sort();
+
+		// draw
+		for (auto it = intersectionX.begin(); it != intersectionX.end();)
+		{
+			SDL_RenderDrawLine(r, *it++, y, *it++, y);
+		}
 	}
 }
 // Source: http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/
