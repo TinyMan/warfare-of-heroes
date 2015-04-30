@@ -1,12 +1,13 @@
 #pragma once
 #include "OctopusBaby.h"
 #include "Hoverable.h"
+#include "Cell.h"
 
 class CellOctopus :
 	public OctopusBaby, public Hoverable
 {
 public:
-	CellOctopus();
+	CellOctopus(Cell* c);
 	virtual ~CellOctopus();
 
 	virtual void update() {}
@@ -22,6 +23,9 @@ protected:
 
 private:
 	bool _dirty = true;
+
+	Cell* _cell = nullptr;
+
 	static Texture _regular_cell;
 	static Texture _hover_cell;
 	static void drawCell(SDL_Renderer* r, Texture& t, Color c = Color(255, 255, 255, 255));

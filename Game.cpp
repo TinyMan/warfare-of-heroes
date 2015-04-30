@@ -8,6 +8,7 @@
 #include "Grid.h"
 #include "Tooltip.h"
 #include "CellOctopus.h"
+#include "GridOctopus.h"
 
 Game* Game::_instance = nullptr;
 
@@ -47,6 +48,7 @@ void Game::initialize()
 	};
 	Panel* menu_root = new Panel();
 	Panel* menu_1 = new Panel();
+	Panel* game_frame = new Panel();
 
 	Panel* menu_root_inside = new Panel(300, 100 + 75 + 75 + 75 + 75); // 4 boutons de hauteur 50, espacements de 25 entre les boutons et 50 avec les bords du container +25 devant quitter
 	menu_root->add(menu_root_inside, (Alignment::CENTERY | Alignment::CENTERX));
@@ -60,7 +62,7 @@ void Game::initialize()
 	button_1->setText("Play");
 	button_1->setTextColor(Color::BLUE);
 	button_1->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
-	button_1->Clickable::setCallback(new EventCallback(navigationLambda, menu_1));
+	button_1->Clickable::setCallback(new EventCallback(navigationLambda, game_frame));
 
 	Button* button_quit = button_1->clone();
 	menu_root_inside->add(button_quit, Alignment::CENTERX);
@@ -92,32 +94,10 @@ void Game::initialize()
 	menu_root->add(tt);
 	tt->anchor(button_1);
 
-	Panel* game_frame = new Panel();
-	Panel* grid = new Panel(15 * 50, 15 * 25);
+	GridOctopus* grid = new GridOctopus(nullptr);
 	game_frame->add(grid, Alignment::CENTERX | Alignment::CENTERY);
-	double x = 0, y = 0;
-	CellOctopus* _cells[14][30];
-	for (auto & i : _cells)
-	{
-		for (auto& e : i)
-		{
-			e = new CellOctopus();
-			grid->add(e, int(x * 50), int(y * 25));
-			x++;
-			if (x == 14)
-			{
-				x = 0.5;
-				y += 0.5;
-			}
-			else if (x == 14.5)
-			{
-				x = 0;
-				y += 0.5;
-			}
-		}
-	}
-	grid->setBackground(Texture(15 * 50, 15 * 25, Color::BLACK));
-	_octopus->setFrame(game_frame);
+	
+	_octopus->setFrame(menu_root);
 }
 Game::~Game()
 {

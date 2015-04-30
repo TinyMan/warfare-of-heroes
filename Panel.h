@@ -19,6 +19,7 @@ public:
 	virtual void setActive(bool d = true, void* = nullptr);
 protected:
 	virtual void internalRender(SDL_Renderer* r, bool force = false);
+	virtual void updateAbsoluteRect();
 private:
 };
 

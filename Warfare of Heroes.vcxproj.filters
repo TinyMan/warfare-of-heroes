@@ -246,6 +246,9 @@
     <ClCompile Include="CellOctopus.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="GridOctopus.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -426,6 +429,9 @@
       <Filter>Header Files\Graphics\Text</Filter>
     </ClInclude>
     <ClInclude Include="CellOctopus.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GridOctopus.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>

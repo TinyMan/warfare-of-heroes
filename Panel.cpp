@@ -51,3 +51,11 @@ void Panel::internalRender(SDL_Renderer* r, bool force)
 		}
 	}
 }
+void Panel::updateAbsoluteRect()
+{
+	OctopusBaby::updateAbsoluteRect();
+	for (auto e : _list)
+	{
+		e->setContainerRect(_absolute_rect, e->getPosition());
+	}
+}

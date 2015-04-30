@@ -9,8 +9,8 @@ const SDL_Point CellOctopus::p2 = { 25, 0 };
 const SDL_Point CellOctopus::p3 = { 50, 25 };
 const SDL_Point CellOctopus::p4 = { 25, 50 };
 
-CellOctopus::CellOctopus()
-	: OctopusBaby(50, 25)
+CellOctopus::CellOctopus(Cell* c)
+	: OctopusBaby(50, 25), _cell(c)
 {
 	if (!_regular_cell.valid())
 	{
