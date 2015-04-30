@@ -2,6 +2,7 @@
 #include "Character.h"
 #include "Panel.h"
 #include "Label.h"
+#include "ProgressBar.h"
 
 class RecapOctopus :
 	public Panel
@@ -16,5 +17,6 @@ private:
 	Label* _pt = nullptr;
 	Label* _pm = nullptr;
 	Label* _hp = nullptr;
+	ProgressBar* _hp_bar = nullptr;
 };
 

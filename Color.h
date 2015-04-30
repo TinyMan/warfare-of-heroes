@@ -7,6 +7,8 @@ public:
 	Color(Uint8 r = 0, Uint8 g = 0, Uint8 b = 0, Uint8 a = 255);
 	virtual ~Color();
 
+	void setRenderDrawColor(SDL_Renderer* r) const { SDL_SetRenderDrawColor(r, _r, _g, _b, _a); }
+
 	Uint8 r() const { return _r; }
 	Uint8 g() const { return _g; }
 	Uint8 b() const { return _b; }

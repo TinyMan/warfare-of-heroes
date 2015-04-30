@@ -25,8 +25,14 @@ RecapOctopus::RecapOctopus(size_t characterID)
 	_pm = _hp->clone();
 	_pm->setText(to_string(_character->getMP()));
 
+	_hp_bar = new ProgressBar(150, 50);
+	_hp_bar->setBackground(Texture(150, 50));
+	_hp_bar->setValue(50);
+
 	add(_nameLabel, Alignment::TOP | Alignment::CENTERX);
 	_nameLabel->setPositionY(50);
+	add(_hp_bar, Alignment::BOTTOM | Alignment::CENTERX);
+	_hp_bar->setPositionY(500);
 	add(_hp, Alignment::BOTTOM | Alignment::CENTERX);
 	_hp->setPositionY(400);
 	add(_pt, Alignment::BOTTOM | Alignment::CENTERX);
