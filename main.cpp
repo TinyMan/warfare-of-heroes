@@ -17,6 +17,8 @@
 #include "Font.h"
 #include "Label.h"
 #include "Line.h"
+#include "Polygon.h"
+#include "Geometry.h"
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -37,12 +39,25 @@ int main(int argc, char* argv[])
 	g->addPlayer(player1);
 	g->addPlayer(player3);*/
 
-	Line l1(1, 2, 5, 7);
-	Line l2(3, 3, 4, 5);
-	cout << l1 << endl << l2 << endl;
-	cout << "Intersection: " << l1.intersection(l2) << endl;
-	cout << "Intersection x: " << l1.intersectX(l2) << endl;
-	cout << "Intersection y: " << l1.intersectY(l2) << endl;
+	Point p1(0, 0);
+	Point p2(25, 0);
+	Point p3(25, 25);
+	Point p4(0, 25);
+		
+
+	Polygon p;
+	p.addPoint(p1);
+	p.addPoint(p2);
+	p.addPoint(p3);
+	p.addPoint(p4);
+	vector<Line> lines = p.getLines();
+	for (auto l : lines)
+	{
+		cout << l << endl;
+	}
+	cout << "Intersection: " << lines[1].intersection(lines[2]) << endl;
+	
+
 	g->stop();
 	g->loop();
 

@@ -2,13 +2,13 @@
 #include "Geometry.h"
 
 
-Line::Line(SDL_Point p1, SDL_Point p2)
+Line::Line(Point p1, Point p2)
 	: _p1(p1), _p2(p2)
 {
 	calcEquation();
 }
-Line::Line(int x, int y, int x2, int y2)
-	: _p1({ x, y }), _p2({ x2, y2 })
+Line::Line(double x, double y, double x2, double y2)
+	: _p1(x, y ), _p2( x2, y2 )
 {
 	calcEquation();
 }
@@ -20,7 +20,10 @@ Line::~Line()
 
 void Line::calcEquation()
 {
-	_slope = float(_p2.y - _p1.y) / (_p2.x - _p1.x);
+	if (_p2.x != _p1.x)
+		_slope = double(_p2.y - _p1.y) / (_p2.x - _p1.x);
+	else
+		_slope = 0;
 	_c = _p1.y - _slope * _p1.x;
 	// Y = _slope * x + _c
 }
@@ -28,28 +31,23 @@ bool Line::hasIntersection(const Line& l) const
 {
 	return doIntersect(_p1, _p2, l._p1, l._p2);
 }
-SDL_Point Line::intersection(const Line& l) const
+Point Line::intersection(const Line& l) const
 {
-	SDL_Point ret = { 0, 0 };
-	if (_slope != l._slope)
-	{
-		ret.x = int((l._c - _c) / (_slope - l._slope));
-		ret.y = int(_slope * ret.x + _c);
-	}
-	return ret;
+	Point* p = ::intersection(_p1, _p2, l._p1, l._p2);
+	if (p)
+		return *p;
+	else
+		return Point();
 }
 int Line::intersectX(const Line& l) const
 {
-	if (_slope != l._slope)
-	{
-		return int((l._c - _c) / (_slope - l._slope));
-	}
-	return 0;
+	Point p = intersection(l);
+	return int(p.x);
 }
 int Line::intersectY(const Line& l) const
 {
-	SDL_Point p = intersection(l);
-	return p.y;
+	Point p = intersection(l);
+	return int(p.y);
 }
 ostream& operator<<(ostream& o, const Line& l)
 {

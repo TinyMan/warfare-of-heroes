@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "Color.h"
+#include "Line.h"
 
 using namespace std;
 
@@ -19,6 +20,7 @@ public:
 	bool enclosesPoint(SDL_Point p) const;
 
 	int size() const { return _points.size(); }
+	vector<Line> getLines() const;
 	
 	Polygon operator+(const SDL_Point);
 	friend ostream& operator<<(ostream&, const Polygon& p);

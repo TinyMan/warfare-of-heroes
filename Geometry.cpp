@@ -9,6 +9,11 @@ ostream& operator<<(ostream& o, const SDL_Point& p)
 	o << "(" << p.x << ", " << p.y << ")";
 	return o;
 }
+ostream& operator<<(ostream& o, const Point& p)
+{
+	o << (SDL_Point)p;
+	return o;
+}
 ostream& operator<<(ostream& o, const SDL_Rect& r)
 {
 	o << "{ " << r.x << ", " << r.y << ", " << r.w << ", " << r.h << " }";
@@ -71,4 +76,41 @@ bool doIntersect(Point p1, Point q1, Point p2, Point q2)
 	if (o4 == 0 && onSegment(p2, q1, q2)) return true;
 
 	return false; // Doesn't fall in any of the above cases
+}
+
+Point Point::operator-( const Point& p2) const
+{
+	return Point( x - p2.x, y - p2.y );
+}
+Point Point::operator*( const double c) const
+{
+	return Point(x * c, y*c );
+}
+
+Point* intersection(Point p1, Point p2, Point p3, Point p4) {
+	// Store the values for fast access and easy
+	// equations-to-code conversion
+	double x1 = p1.x, x2 = p2.x, x3 = p3.x, x4 = p4.x;
+	double y1 = p1.y, y2 = p2.y, y3 = p3.y, y4 = p4.y;
+
+	double d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+	// If d is zero, there is no intersection
+	if (d == 0) return NULL;
+
+	// Get the x and y
+	double pre = (x1*y2 - y1*x2), post = (x3*y4 - y3*x4);
+	double x = (pre * (x3 - x4) - (x1 - x2) * post) / d;
+	double y = (pre * (y3 - y4) - (y1 - y2) * post) / d;
+
+	// Check if the x and y coordinates are within both lines
+	if (x < min(x1, x2) || x > max(x1, x2) ||
+		x < min(x3, x4) || x > max(x3, x4)) return NULL;
+	if (y < min(y1, y2) || y > max(y1, y2) ||
+		y < min(y3, y4) || y > max(y3, y4)) return NULL;
+
+	// Return the point of intersection
+	Point* ret = new Point();
+	ret->x = x;
+	ret->y = y;
+	return ret;
 }

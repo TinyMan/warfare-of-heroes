@@ -37,7 +37,7 @@ void Polygon::drawFill(SDL_Renderer * r, Color c)
 	// for each line
 	for (int y = 0; y < h; y++)
 	{
-		//TODO
+		
 	}
 }
 // Source: http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/
@@ -49,7 +49,7 @@ bool Polygon::enclosesPoint(SDL_Point p) const
 		return false;
 
 	// Create a point for line segment from p to infinite
-	Point extreme = { INF, p.y };
+	SDL_Point extreme = { INF, p.y };
 
 	// Count intersections of the above line with sides of polygon
 	int count = 0, i = 0;
@@ -75,7 +75,20 @@ bool Polygon::enclosesPoint(SDL_Point p) const
 	// Return true if count is odd, false otherwise
 	return count & 1;  // Same as (count%2 == 1)
 }
-
+vector<Line> Polygon::getLines() const
+{
+	vector<Line> ret;
+	if (_points.size() > 2)
+	{
+		unsigned int i = _points.size() - 1;
+		ret.emplace_back(_points[0].x, _points[0].y, _points[i].x, _points[i].y);
+		for (i = 1; i < _points.size(); i++)
+		{
+			ret.emplace_back(_points[i - 1].x, _points[i - 1].y, _points[i].x, _points[i].y);
+		}
+	}
+	return ret;
+}
 Polygon Polygon::operator+(const SDL_Point p)
 {
 	Polygon po;
