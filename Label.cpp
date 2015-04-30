@@ -52,3 +52,9 @@ void Label::setPadding(int left, int top, int right, int bottom)
 	_padding_bottom = bottom;
 	setDirty();
 }
+Label* Label::clone() const
+{
+	// BROKEN
+	Label * l = new Label(*this);
+	return l;
+}

@@ -10,6 +10,10 @@
 #include "CellOctopus.h"
 #include "GridOctopus.h"
 #include "Chrono.h"
+#include "RecapOctopus.h"
+#include "Archer.h"
+#include "Mage.h"
+#include "Knight.h"
 
 Game* Game::_instance = nullptr;
 
@@ -39,18 +43,29 @@ Game::Game()
 
 void Game::initialize()
 {
+
+	Grid* grid = getGrid();
+	grid->generateObstacle();
+
+	Archer* player1 = new Archer(0, 2);
+	Mage* player3 = new Mage(6, 2);
+	addGameObject(grid, player1, player3);
+	addPlayer(player1);
+	addPlayer(player3);
+
 	_octopus->initialize();
 
-	/* creation of menu */
 	// used to navigateto another frame
 	auto navigationLambda = [=](Panel* to, Event* e)
 	{
 		_octopus->setFrameAsync(to);
 	};
+	/* creation of different frames */
 	Panel* menu_root = new Panel();
 	Panel* menu_1 = new Panel();
 	Panel* game_frame = new Panel();
 
+	/* creation of menu */
 	Panel* menu_root_inside = new Panel(300, 100 + 75 + 75 + 75 + 75); // 4 boutons de hauteur 50, espacements de 25 entre les boutons et 50 avec les bords du container +25 devant quitter
 	menu_root->add(menu_root_inside, (Alignment::CENTERY | Alignment::CENTERX));
 	Texture menu_inside_background(300, 500);
@@ -95,12 +110,19 @@ void Game::initialize()
 	menu_root->add(tt);
 	tt->anchor(button_1);
 
-	GridOctopus* grid = new GridOctopus(nullptr);
-	game_frame->add(grid, Alignment::CENTERX | Alignment::CENTERY);
+	/* creation of game frame */
+	GridOctopus* gridO = new GridOctopus(nullptr);
+	game_frame->add(gridO, Alignment::CENTERX | Alignment::CENTERY);
 	
 	Chrono* chrono = new Chrono();
 	game_frame->add(chrono, Alignment::TOP | Alignment::CENTERX);
-	_octopus->setFrame(menu_root);
+
+	RecapOctopus* recap1 = new RecapOctopus(0);
+	RecapOctopus* recap3 = new RecapOctopus(1);
+	game_frame->add(recap1, Alignment::TOP | Alignment::LEFT);
+	game_frame->add(recap3, Alignment::TOP | Alignment::RIGHT);
+
+	_octopus->setFrame(game_frame);
 }
 Game::~Game()
 {

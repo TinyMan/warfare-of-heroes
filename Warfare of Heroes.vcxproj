@@ -123,6 +123,7 @@
     <ClCompile Include="OverTimeEffect.cpp" />
     <ClCompile Include="Panel.cpp" />
     <ClCompile Include="Polygon.cpp" />
+    <ClCompile Include="RecapOctopus.cpp" />
     <ClCompile Include="RootEffect.cpp" />
     <ClCompile Include="SDLEvents.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="OverTimeEffect.h" />
     <ClInclude Include="Panel.h" />
     <ClInclude Include="Polygon.h" />
+    <ClInclude Include="RecapOctopus.h" />
     <ClInclude Include="RootEffect.h" />
     <ClInclude Include="SDLEvents.h" />
     <ClInclude Include="ServiceLocator.h" />

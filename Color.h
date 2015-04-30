@@ -17,6 +17,7 @@ public:
 	static const Color GREEN;
 	static const Color BLUE;
 	static const Color TRANSPARENT;
+	static const Color WHITE;
 private:
 	Uint8 _r = 0;
 	Uint8 _g = 0;

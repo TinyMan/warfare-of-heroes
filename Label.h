@@ -26,6 +26,8 @@ public:
 	Uint8 getTextAlignment() const { return _alignment; }
 
 	void setPadding(int left = 0, int top = 0, int right = 0, int bottom = 0);
+
+	Label* clone() const;
 protected:
 	void internalRender(SDL_Renderer* r, bool force = false);
 	Font* _font;
