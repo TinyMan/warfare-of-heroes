@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <map>
 #include <iostream>
+#include "Geometry.h"
 #include "Color.h"
 using namespace std;
 
@@ -80,5 +81,3 @@ private:
 	static void delRef(SDL_Texture*);
 	static map<SDL_Texture*, Uint32> _garbages;
 };
-
-ostream& operator<<(ostream& o, const SDL_Rect&);

@@ -10,7 +10,7 @@ GridOctopus::GridOctopus(Grid* g)
 		for (auto& e : i)
 		{
 			e = new CellOctopus(nullptr);
-			add(e, int(x * 50), int(y * 25));
+			add(e, int(x * 50+x), int(y * 25+y));
 			x++;
 			if (x == 14)
 			{

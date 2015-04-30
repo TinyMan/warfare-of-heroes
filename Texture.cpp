@@ -111,11 +111,6 @@ void Texture::combineRect(SDL_Rect& src, SDL_Rect& dst, STYLE style)
 
 }
 
-ostream& operator<<(ostream& o, const SDL_Rect& r)
-{
-	o << "{ " << r.x << ", " << r.y << ", " << r.w << ", " << r.h << " }";
-	return o;
-}
 void Texture::fill(SDL_Renderer* r, Color c)
 {
 	if (_texture)

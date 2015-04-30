@@ -40,6 +40,7 @@ public:
 	void setPositionY(int y);
 	SDL_Rect getAbsolutRect() const{ return _absolute_rect; }
 	SDL_Point getPosition() const { return { _relative_rect.x, _relative_rect.y }; }
+	SDL_Point getAbsolutePosition() const { return{ _absolute_rect.x, _absolute_rect.y }; }
 
 	// 0 is transparent and 255 is opaque
 	void setAlpha(Uint8 alpha);

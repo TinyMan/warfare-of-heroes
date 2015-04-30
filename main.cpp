@@ -16,6 +16,7 @@
 #include "Panel.h"
 #include "Font.h"
 #include "Label.h"
+#include "Line.h"
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -35,7 +36,14 @@ int main(int argc, char* argv[])
 	g->addGameObject(grid, player1, player3);
 	g->addPlayer(player1);
 	g->addPlayer(player3);*/
-	
+
+	Line l1(1, 2, 5, 7);
+	Line l2(3, 3, 4, 5);
+	cout << l1 << endl << l2 << endl;
+	cout << "Intersection: " << l1.intersection(l2) << endl;
+	cout << "Intersection x: " << l1.intersectX(l2) << endl;
+	cout << "Intersection y: " << l1.intersectY(l2) << endl;
+	g->stop();
 	g->loop();
 
 	LOGINFO << "Ending @ " << SDL_GetTicks() << endl;

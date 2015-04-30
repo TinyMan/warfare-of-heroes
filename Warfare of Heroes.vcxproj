@@ -98,6 +98,7 @@
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Glyph.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridOctopus.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="KnockBackEffect.cpp" />
     <ClCompile Include="Label.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="LineAoE.cpp" />
     <ClCompile Include="LogService.cpp" />
     <ClCompile Include="Mage.cpp" />
@@ -119,6 +121,7 @@
     <ClCompile Include="OctopusBaby.cpp" />
     <ClCompile Include="OverTimeEffect.cpp" />
     <ClCompile Include="Panel.cpp" />
+    <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="RootEffect.cpp" />
     <ClCompile Include="SDLEvents.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
@@ -161,6 +164,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectEvents.h" />
+    <ClInclude Include="Geometry.h" />
     <ClInclude Include="Glyph.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridOctopus.h" />
@@ -170,6 +174,7 @@
     <ClInclude Include="Knight.h" />
     <ClInclude Include="KnockBackEffect.h" />
     <ClInclude Include="Label.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="LineAoE.h" />
     <ClInclude Include="LogService.h" />
     <ClInclude Include="Mage.h" />
@@ -182,6 +187,7 @@
     <ClInclude Include="OctopusBaby.h" />
     <ClInclude Include="OverTimeEffect.h" />
     <ClInclude Include="Panel.h" />
+    <ClInclude Include="Polygon.h" />
     <ClInclude Include="RootEffect.h" />
     <ClInclude Include="SDLEvents.h" />
     <ClInclude Include="ServiceLocator.h" />
