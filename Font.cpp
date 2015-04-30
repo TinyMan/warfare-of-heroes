@@ -85,15 +85,7 @@ void Font::renderText(SDL_Renderer* r, string text, Color* c, int size, SDL_Rect
 		if (a == Alignment::UNKNOWN)
 		{
 			a = _alignment;
-		}
-		if (a & Alignment::CENTERX)
-		{
-			cursor.x += (rect->w / 2) - (getPixelLength(text, size) / 2);
-		}
-		else if (!(a & Alignment::LEFT))
-		{
-			cursor.x += rect->w - getPixelLength(text, size);
-		}
+		}		
 		if (a & Alignment::CENTERY)
 		{
 			cursor.y += (rect->h / 2) - (getPixelHeight(text, size) / 2);
@@ -105,8 +97,22 @@ void Font::renderText(SDL_Renderer* r, string text, Color* c, int size, SDL_Rect
 		
 	}
 	float coef = (float)size / _original_size;
+	bool newline = true;
+	size_t i = 0;
 	for (char c : text)
 	{
+		if (newline)
+		{
+			if (a & Alignment::CENTERX)
+			{
+				cursor.x += (rect->w / 2) - (getPixelLength(text.substr(i, text.find('\n', i)), size) / 2);
+			}
+			else if (!(a & Alignment::LEFT))
+			{
+				cursor.x += rect->w - getPixelLength(text.substr(i, text.find('\n', i)), size);
+			}
+			newline = false;
+		}
 		if (_glyphs.count(c) == 1)
 		{
 			Glyph ch = _glyphs[c];
@@ -134,7 +140,9 @@ void Font::renderText(SDL_Renderer* r, string text, Color* c, int size, SDL_Rect
 		{
 			cursor.y += _lineHeight;
 			cursor.x = initial_x;
+			newline = true;
 		}
+		i++;
 	}
 	
 }

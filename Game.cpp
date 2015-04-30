@@ -9,6 +9,7 @@
 #include "Tooltip.h"
 #include "CellOctopus.h"
 #include "GridOctopus.h"
+#include "Chrono.h"
 
 Game* Game::_instance = nullptr;
 
@@ -97,6 +98,8 @@ void Game::initialize()
 	GridOctopus* grid = new GridOctopus(nullptr);
 	game_frame->add(grid, Alignment::CENTERX | Alignment::CENTERY);
 	
+	Chrono* chrono = new Chrono();
+	game_frame->add(chrono, Alignment::TOP | Alignment::CENTERX);
 	_octopus->setFrame(menu_root);
 }
 Game::~Game()
