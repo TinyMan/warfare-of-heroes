@@ -44,7 +44,7 @@ void CellOctopus::internalRender(SDL_Renderer* r, bool force)
 		}
 	}
 }
-void CellOctopus::drawCell(SDL_Renderer* r, Texture& t, Color c)
+void CellOctopus::drawCell(SDL_Renderer* r, Texture& t, Color c, Color borderColor)
 {
 	if (polygon.size() == 0)
 	{

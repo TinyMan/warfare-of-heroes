@@ -45,18 +45,21 @@ void Polygon::drawFill(SDL_Renderer * r, Color c)
 		// build the list of intersections between current scanline and each polygon line
 		intersectionX.clear();
 		Line l(0, y, w, y);
+		Point tmp;
 		for (Line polygon_line : lines)
 		{
-			intersectionX.push_back(polygon_line.intersectX(l));
+			if (polygon_line.intersection(l, &tmp))
+				intersectionX.push_back((int)tmp.x);
 		}
 
 		// sort
 		intersectionX.sort();
 
-		// draw
-		for (auto it = intersectionX.begin(); it != intersectionX.end();)
+		// draw;
+		vector<int> x(intersectionX.begin(), intersectionX.end());
+		for (unsigned int i = 0; i < x.size(); i+=2)
 		{
-			SDL_RenderDrawLine(r, *it++, y, *it++, y);
+			SDL_RenderDrawLine(r, x[i], y, x[i+1], y);
 		}
 	}
 }

@@ -32,7 +32,7 @@ private:
 
 	static Texture _regular_cell;
 	static Texture _hover_cell;
-	static void drawCell(SDL_Renderer* r, Texture& t, Color c = Color(255, 255, 255, 255));
+	static void drawCell(SDL_Renderer* r, Texture& t, Color c = Color(255, 255, 255, 127), Color borderColor = Color(255,255,255,255));
 	static Polygon polygon;
 	static const SDL_Point p1;
 	static const SDL_Point p2;

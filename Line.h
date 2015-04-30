@@ -12,9 +12,13 @@ public:
 
 	bool hasIntersection(const Line& l) const;
 	Point intersection(const Line& l) const;
+	bool intersection(const Line& l, Point* p) const;
 	int intersectX(const Line& l) const;
 	int intersectY(const Line& l) const;
 	friend ostream& operator<<(ostream& o, const Line& l);
+
+	Point p1() const { return _p1; }
+	Point p2() const { return _p2; }
 private:
 	Point _p1;
 	Point _p2;

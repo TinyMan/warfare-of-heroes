@@ -39,6 +39,16 @@ Point Line::intersection(const Line& l) const
 	else
 		return Point();
 }
+bool Line::intersection(const Line& l, Point* p) const
+{
+	Point * tmp = ::intersection(_p1, _p2, l._p1, l._p2);
+	if (tmp)
+	{
+		*p = *tmp;
+		return true;
+	}
+	return false;
+}
 int Line::intersectX(const Line& l) const
 {
 	Point p = intersection(l);
