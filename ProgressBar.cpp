@@ -27,14 +27,15 @@ void ProgressBar::internalRender(SDL_Renderer* r, bool force)
 		if (d)
 		{
 			LOGINFO << "Drawing ProgressBar " << endl;
-			SDL_Rect rect = { 0, 0, _relative_rect.w, _relative_rect.h };
-
-			_foreground.setRenderDrawColor(r);
-			SDL_RenderDrawRect(r, &rect);
+			SDL_Rect rect = { 0, 0 , _relative_rect.w, _relative_rect.h };
 
 			rect.w *= _value / 100;
-
+			_foreground_color.setRenderDrawColor(r);
 			SDL_RenderFillRect(r, &rect);
+
+			rect.w = _relative_rect.w;
+			_border_color.setRenderDrawColor(r);
+			SDL_RenderDrawRect(r, &rect);
 		}
 	}
 }

@@ -46,12 +46,15 @@ public:
 	void setAlpha(Uint8 alpha);
 	Uint8 getAlpha() const;
 	virtual bool isInArea(SDL_Point p) const;
+	void setBgColor(Color c) { _background_color = c; setDirty(); }
+	Color getBgColor() const { return _background_color; }
 protected:
 	SDL_Rect _relative_rect;
 	SDL_Rect _absolute_rect;
 	SDL_Rect _container_rect;
 	Texture _texture;
 	Texture _background;
+	Color _background_color = Color::TRANSPARENT;
 	virtual void internalRender(SDL_Renderer* r, bool force = false) = 0;
 	virtual void updateAbsoluteRect();
 private:
