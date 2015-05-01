@@ -51,8 +51,13 @@ public:
 	// Getters :
 	string getName() const { return _name; }
 	int getHP() const;
+	string getHPString() const { return to_string(_hitPoints) + "/" + to_string(hpMax); }
+	float getHPPercent() const { return (_hitPoints * 100.f) / hpMax; }
 	int getMP() const;
 	int getCP() const;
+	int getHPMax() const { return hpMax; }
+	int getMPMax() const { return mpMax; }
+	int getCPMax() const { return cpMax; }
 	const Cell* getCell() const{ return _hisCell; }
 	int getBonusDamage() const { return _bonusDamage; }
 	Spell* getSpell(int spellID) const { return _spells.at(spellID); }

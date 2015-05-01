@@ -11,6 +11,20 @@ public:
 	RecapOctopus(size_t characterID);
 	virtual ~RecapOctopus();
 
+	// etc ...
+	virtual bool concernMe(Event* e) const;
+	void onEvent(Event* e);
+
+protected:
+	virtual void onLoseHP(LoseHpEvent* e);
+	virtual void onLoseMP(LoseMPEvent* e);
+	virtual void onLoseCP(LoseCPEvent* e);
+	virtual void onGainCP(GainCPEvent* e);
+
+	void updateHP() { _hp->setText(_character->getHPString()); _hp_bar->setValue(_character->getHPPercent()); }
+	void updateMP() { _pm->setText(to_string(_character->getMP())); }
+	void updateCP() { _pt->setText(to_string(_character->getCP())); }
+
 private:
 	Character* _character = nullptr;
 	Label* _nameLabel = nullptr;

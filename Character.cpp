@@ -33,6 +33,7 @@ void Character::lowerHitPoint(int amount)
 		{
 			_hitPoints -= amount;
 		}
+		(new LoseHpEvent(this, amount))->dispatch();
 	}
 }
 
@@ -59,6 +60,7 @@ void Character::removeCapaciyPoint(int amount)
 	_capacityPoints -= amount;
 	if (_capacityPoints < 0)
 		_capacityPoints = 0;
+	(new LoseCPEvent(this, amount))->dispatch();
 }
 void Character::addBonusDamage(int amount)
 {

@@ -39,8 +39,8 @@ public:
 	Cell* getCellFromCellAndDir(const Cell&, DIRECTION d, int pathLength);
 	DIRECTION getDir(const Cell& c1, const Cell& c2);
 
-	static const int WIDTH = 30;
-	static const int HEIGHT = 14;
+	static const int WIDTH = 14;
+	static const int HEIGHT = 30;
 
 	virtual void beginTurn();
 

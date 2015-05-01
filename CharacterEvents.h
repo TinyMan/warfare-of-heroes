@@ -22,5 +22,51 @@ namespace Events
 			DieEvent(Character* c) : CharacterEvent(c) {}
 			virtual ~DieEvent(){}
 		};
+		/* losing and gaining stat trigger these */
+		class LoseGainStatEvent : public CharacterEvent
+		{
+		public:
+			LoseGainStatEvent(Character* c, int amount) : CharacterEvent(c), _amount(amount) {}
+			virtual ~LoseGainStatEvent(){}
+			int getAmount() const { return _amount; }
+		private:
+			int _amount;
+		};
+		class LoseHpEvent : public LoseGainStatEvent
+		{
+		public:
+			LoseHpEvent(Character* c, int amount) : LoseGainStatEvent(c, amount){}
+			virtual ~LoseHpEvent(){}
+		};
+		class GainHPEvent : public LoseGainStatEvent
+		{
+		public:
+			GainHPEvent(Character* c, int amount) : LoseGainStatEvent(c, amount){}
+			virtual ~GainHPEvent(){}
+		};
+		class LoseMPEvent : public LoseGainStatEvent
+		{
+		public:
+			LoseMPEvent(Character* c, int amount) : LoseGainStatEvent(c, amount) {}
+			virtual ~LoseMPEvent(){}
+		};
+		class GainMPEvent : public LoseGainStatEvent
+		{
+		public:
+			GainMPEvent(Character* c, int amount) : LoseGainStatEvent(c, amount){}
+			virtual ~GainMPEvent(){}
+		};
+		class LoseCPEvent : public LoseGainStatEvent
+		{
+		public:
+			LoseCPEvent(Character* c, int amount) : LoseGainStatEvent(c, amount) {}
+			virtual ~LoseCPEvent(){}
+		};
+		class GainCPEvent : public LoseGainStatEvent
+		{
+		public:
+			GainCPEvent(Character* c, int amount) : LoseGainStatEvent(c, amount){}
+			virtual ~GainCPEvent(){}
+		};
 	}
 }

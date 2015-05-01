@@ -13,21 +13,20 @@ RecapOctopus::RecapOctopus(size_t characterID)
 
 	_nameLabel = new Label(150, 50, _character->getName(), (*ServiceLocator::getFontManager())["Comic Sans MS"]);
 	_nameLabel->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
-	_nameLabel->setBackground(Texture(150, 50));
 
-	_hp = new Label(150, 50, to_string(_character->getHP()), (*ServiceLocator::getFontManager())["Comic Sans MS"]);
+	_hp = new Label(150, 50, _character->getHPString(), (*ServiceLocator::getFontManager())["Comic Sans MS"]);
 	_hp->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
-	_hp->setBackground(Texture(150, 50));
 
-	_pt = _hp->clone();
-	_pt->setText(to_string(_character->getCP()));
 
-	_pm = _hp->clone();
-	_pm->setText(to_string(_character->getMP()));
+	_pt = new Label(150, 50, to_string(_character->getCP()), (*ServiceLocator::getFontManager())["Comic Sans MS"]);
+	_pt->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
+
+
+	_pm = new Label(150, 50, to_string(_character->getMP()), (*ServiceLocator::getFontManager())["Comic Sans MS"]);
+	_pm->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 
 	_hp_bar = new ProgressBar(150, 50);
-	_hp_bar->setBackground(Texture(150, 50));
-	_hp_bar->setValue(50);
+	_hp_bar->setValue(_character->getHPPercent());
 
 	add(_nameLabel, Alignment::TOP | Alignment::CENTERX);
 	_nameLabel->setPositionY(50);
@@ -39,9 +38,52 @@ RecapOctopus::RecapOctopus(size_t characterID)
 	_pt->setPositionY(300);
 	add(_pm, Alignment::BOTTOM | Alignment::CENTERX);
 	_pm->setPositionY(200);
+	// TODO: bind to internal events (character events) to receive changes to the data (hp, mp, pt...)
+	ServiceLocator::getEventService()->listen(typeid(LoseCPEvent), EventCallback(&RecapOctopus::onEvent, this));
+	ServiceLocator::getEventService()->listen(typeid(LoseHpEvent), EventCallback(&RecapOctopus::onEvent, this));
+	ServiceLocator::getEventService()->listen(typeid(LoseMPEvent), EventCallback(&RecapOctopus::onEvent, this));
+	ServiceLocator::getEventService()->listen(typeid(GainCPEvent), EventCallback(&RecapOctopus::onEvent, this));
+	ServiceLocator::getEventService()->listen(typeid(GainHPEvent), EventCallback(&RecapOctopus::onEvent, this));
+	ServiceLocator::getEventService()->listen(typeid(GainMPEvent), EventCallback(&RecapOctopus::onEvent, this));
 }
 
 
 RecapOctopus::~RecapOctopus()
 {
+}
+
+void RecapOctopus::onLoseHP(LoseHpEvent* e)
+{
+	updateHP();
+}
+void RecapOctopus::onLoseMP(LoseMPEvent* e)
+{
+	updateMP();
+}
+void RecapOctopus::onLoseCP(LoseCPEvent* e)
+{
+	updateCP();
+}
+void RecapOctopus::onGainCP(GainCPEvent* e)
+{
+	updateCP();
+}
+bool RecapOctopus::concernMe(Event* e) const
+{
+	if (CharacterEvent* ev = dynamic_cast<CharacterEvent*>(e))
+	{
+		return ev->getCharacter() == _character;
+	}
+	return false;
+}
+void RecapOctopus::onEvent(Event* e)
+{
+	if (concernMe(e))
+	{
+	//	LOGINFO << "RecapOctopus got an event" << endl;
+		if (LoseCPEvent* ev = dynamic_cast<LoseCPEvent*>(e))
+			onLoseCP(ev);
+		if (LoseHpEvent* ev = dynamic_cast<LoseHpEvent*>(e))
+			onLoseHP(ev);
+	}
 }
