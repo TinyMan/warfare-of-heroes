@@ -34,7 +34,7 @@ void Button::internalRender(SDL_Renderer* r, bool force)
 			if (hover())
 				SDL_SetRenderDrawColor(r, 0, 0, 255, 255);
 			else
-				SDL_SetRenderDrawColor(r, _color.r, _color.g, _color.b, _color.a);
+				_color.setRenderDrawColor(r);
 
 			//SDL_RenderDrawRect(r, &_rect);
 			//SDL_RenderFillRect(r, NULL);

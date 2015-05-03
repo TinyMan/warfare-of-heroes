@@ -16,3 +16,13 @@ Color::Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 Color::~Color()
 {
 }
+
+
+bool Color::operator == (const Color& c) const
+{
+	return c._r == _r && c._g == _g && c._b == _b && c._a == _a;
+}
+bool Color::operator != (const Color& c) const
+{
+	return !(c == *this);
+}

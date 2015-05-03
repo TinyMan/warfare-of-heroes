@@ -28,7 +28,7 @@ public:
 
 	virtual bool compare(const Sortable* s) const;
 
-	void setBackground(const Texture& bg) { _background = bg; setDirty(); }
+	void setBackground(const Texture& bg) { setIfDifferent(_background, bg); }
 	Texture getBackground() const { return _background; }
 	void setContainerRect(SDL_Rect r, SDL_Point p) { setContainerRect(r, p.x, p.y); }
 	void setContainerRect(SDL_Rect r, int x = 0, int y = 0) { _container_rect = r; setPosition(x, y); }
@@ -46,8 +46,9 @@ public:
 	void setAlpha(Uint8 alpha);
 	Uint8 getAlpha() const;
 	virtual bool isInArea(SDL_Point p) const;
-	void setBgColor(Color c) { _background_color = c; setDirty(); }
+	void setBgColor(Color c) { setIfDifferent(_background_color, c); }
 	Color getBgColor() const { return _background_color; }
+
 protected:
 	SDL_Rect _relative_rect;
 	SDL_Rect _absolute_rect;
@@ -57,6 +58,8 @@ protected:
 	Color _background_color = Color::TRANSPARENT;
 	virtual void internalRender(SDL_Renderer* r, bool force = false) = 0;
 	virtual void updateAbsoluteRect();
+
+	
 private:
 	int _z_index = 0;
 	void initialize();

@@ -118,7 +118,7 @@ void Game::initialize()
 	game_frame->add(chrono, Alignment::TOP | Alignment::CENTERX);
 	auto l = [=](Event*)
 	{
-		_players[0]->lowerHitPoint(100);
+		chrono->setText("Bonjourno");
 	};
 	chrono->Clickable::setCallback(new EventCallback(l));
 

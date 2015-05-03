@@ -125,8 +125,13 @@ void OctopusBaby::setPositionY(int y)
 }
 void OctopusBaby::setAlpha(Uint8 alpha)
 {
-	SDL_SetTextureAlphaMod(_texture, alpha);
-	setDirty();
+	Uint8 a;
+	SDL_GetTextureAlphaMod(_texture, &a);
+	if (a != alpha)
+	{
+		SDL_SetTextureAlphaMod(_texture, alpha);
+		setDirty();
+	}
 }
 Uint8 OctopusBaby::getAlpha() const
 {

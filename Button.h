@@ -13,8 +13,8 @@ public:
 
 	virtual bool isDirty() { return _dirty; }
 	virtual void setDirty(bool d = true) { _dirty = d; }
-	SDL_Color getColor() const { return _color; }
-	void setColor(SDL_Color c) { _color = c; }
+	Color getColor() const { return _color; }
+	void setColor(Color c) { Label::setIfDifferent(_color, c); }
 	virtual void setBackground(const Texture& bg) { _regular_bg = bg; if (!hover()) Label::setBackground(bg); }
 	virtual void setHoverBackground(const Texture& bg) { _hover_bg = bg; if (hover()) Label::setBackground(bg); }
 
@@ -28,6 +28,6 @@ protected:
 	Texture _hover_bg;
 private:
 	bool _dirty = true;
-	SDL_Color _color;
+	Color _color;
 };
 

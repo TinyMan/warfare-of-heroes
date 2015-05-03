@@ -21,6 +21,9 @@ public:
 	static const Color BLUE;
 	static const Color TRANSPARENT;
 	static const Color WHITE;
+
+	bool operator==(const Color& c) const;
+	bool operator!=(const Color& c) const;
 private:
 	Uint8 _r = 0;
 	Uint8 _g = 0;

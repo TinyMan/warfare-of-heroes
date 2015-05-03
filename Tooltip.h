@@ -15,10 +15,10 @@ public:
 	void setDirty(bool d = true) { _dirty = d; }
 	bool isDirty() { return _dirty; }
 
-	void setTitle(string title) { _title = title; setDirty(); }
-	void setTitleColor(Color c) { _title_color = c; setDirty(); }
-	void setTitleAlignment(Uint8 c) { _title_alignment = c; setDirty(); }
-	void setTitleSize(Uint8 c) { _title_size = c; setDirty(); }
+	void setTitle(string title) { setIfDifferent(_title, title); }
+	void setTitleColor(Color c) { setIfDifferent(_title_color, c); }
+	void setTitleAlignment(Uint8 c) { setIfDifferent(_title_alignment, c); }
+	void setTitleSize(Uint8 c) { setIfDifferent(_title_size, c); }
 
 	// 2nd parameter: not yet supported
 	void anchor(OctopusBaby* b, Uint8 alignment = Alignment::TOP | Alignment::LEFT);

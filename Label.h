@@ -9,7 +9,7 @@ public:
 	Label(string text = "", Font* f = nullptr);
 	Label(int w, int h, string text = "", Font* f = nullptr, int x = 0, int y = 0);
 	virtual ~Label();
-	void setText(string text) { _text = text; setDirty(); }
+	void setText(string text) { setIfDifferent(_text, text); }
 	string getText() const { return _text; }
 
 	void setDirty(bool d = true) { _dirty = d; }
@@ -18,11 +18,11 @@ public:
 	void update();
 	void setFont(Font* f) { _font = f; }
 	Font* getFont() const { return _font; }
-	void setTextColor(Color c) { _text_color = c; setDirty(); }
+	void setTextColor(Color c) { setIfDifferent(_text_color, c); }
 	Color getTextColor() const { return _text_color; }
-	void setTextSize(int size) { _text_size = size; setDirty(); }
+	void setTextSize(int size) { setIfDifferent(_text_size, size); }
 	int getTextSize() const { return _text_size; }
-	void setTextAlignment(Uint8 a) { _alignment = a; setDirty(); }
+	void setTextAlignment(Uint8 a) { setIfDifferent(_alignment, a); }
 	Uint8 getTextAlignment() const { return _alignment; }
 
 	void setPadding(int left = 0, int top = 0, int right = 0, int bottom = 0);
