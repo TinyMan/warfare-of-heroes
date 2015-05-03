@@ -470,5 +470,8 @@
     <ClInclude Include="ProgressBar.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="SpellEvents.h">
+      <Filter>Header Files\Game\Spell</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

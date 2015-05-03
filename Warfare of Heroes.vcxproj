@@ -199,6 +199,7 @@
     <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="Sortable.h" />
     <ClInclude Include="Spell.h" />
+    <ClInclude Include="SpellEvents.h" />
     <ClInclude Include="SpellTarget.h" />
     <ClInclude Include="SquareAoE.h" />
     <ClInclude Include="Texture.h" />

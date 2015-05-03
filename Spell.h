@@ -6,6 +6,7 @@
 #include "Grid.h"
 #include "SpellTarget.h"
 #include "DamageOverTime.h"
+#include "SpellEvents.h"
 
 using namespace std;
 
