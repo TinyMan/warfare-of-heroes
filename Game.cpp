@@ -116,11 +116,6 @@ void Game::initialize()
 	
 	Chrono* chrono = new Chrono();
 	game_frame->add(chrono, Alignment::TOP | Alignment::CENTERX);
-	auto l = [=](Event*)
-	{
-		chrono->setText("Bonjourno");
-	};
-	chrono->Clickable::setCallback(new EventCallback(l));
 
 	RecapOctopus* recap1 = new RecapOctopus(0);
 	RecapOctopus* recap3 = new RecapOctopus(1);

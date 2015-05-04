@@ -8,7 +8,8 @@ Chrono::Chrono()
 {
 	setText("xxx's turn\nTime left: xx sec");
 	setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
-	// TODO: set callback etc
+	auto l = [=](Event*) { GAMEINST->endTurn(); };
+	Clickable::setCallback(new EventCallback(l));
 }
 
 
