@@ -52,6 +52,13 @@ RecapOctopus::~RecapOctopus()
 {
 }
 
+void RecapOctopus::update()
+{
+	updateCP();
+	updateHP();
+	updateMP();
+
+}
 void RecapOctopus::onLoseHP(LoseHpEvent* e)
 {
 	updateHP();

@@ -4,10 +4,12 @@
 
 Panel::Panel()
 {
+	setBgColor(Color::BLACK);
 }
 Panel::Panel( int w, int h)
 	: OctopusBaby(w, h )
 {
+	setBgColor(Color::BLACK);
 }
 
 

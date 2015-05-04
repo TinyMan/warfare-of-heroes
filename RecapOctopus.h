@@ -14,6 +14,7 @@ public:
 	// etc ...
 	virtual bool concernMe(Event* e) const;
 	void onEvent(Event* e);
+	virtual void update();
 
 protected:
 	virtual void onLoseHP(LoseHpEvent* e);
