@@ -279,6 +279,9 @@
     <ClCompile Include="ProgressBar.cpp">
       <Filter>Source Files\Graphics\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="SpellRecap.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -484,6 +487,9 @@
     </ClInclude>
     <ClInclude Include="OctopusBaby.h">
       <Filter>Header Files\Graphics\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellRecap.h">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

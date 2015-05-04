@@ -1,5 +1,5 @@
 #include "Label.h"
-
+#include "ServiceLocator.h"
 
 Label::Label(string text, Font* f)
 	: _text(text), _font(f)
@@ -9,7 +9,9 @@ Label::Label(string text, Font* f)
 Label::Label(int w, int h, string text, Font* f, int x, int y)
 	: OctopusBaby(x, y, w, h), _text(text), _font(f)
 {
-
+	if (f == nullptr)
+		_font = (*ServiceLocator::getFontManager())["Comic Sans MS"];
+	setTextColor(Color::FONTCOLOR);
 }
 Label::~Label()
 {

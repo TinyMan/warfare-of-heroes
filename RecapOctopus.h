@@ -23,8 +23,8 @@ protected:
 	virtual void onGainCP(GainCPEvent* e);
 
 	void updateHP() { _hp->setText(_character->getHPString()); _hp_bar->setValue(_character->getHPPercent()); }
-	void updateMP() { _pm->setText(to_string(_character->getMP())); }
-	void updateCP() { _pt->setText(to_string(_character->getCP())); }
+	void updateMP() { _pm->setText("MP: " + to_string(_character->getMP())); }
+	void updateCP() { _pt->setText("PC: " + to_string(_character->getCP())); }
 
 private:
 	Character* _character = nullptr;

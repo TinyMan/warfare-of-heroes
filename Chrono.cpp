@@ -10,6 +10,7 @@ Chrono::Chrono()
 	setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	auto l = [=](Event*) { GAMEINST->endTurn(); };
 	Clickable::setCallback(new EventCallback(l));
+	setBgColor(Color::BGCOLOR);
 }
 
 

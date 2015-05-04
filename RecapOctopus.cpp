@@ -6,23 +6,21 @@
 RecapOctopus::RecapOctopus(size_t characterID)
 	: Panel(200, 600), _character(GAMEINST->getPlayer(characterID))
 {
-	if(characterID & 1)
-		setBackground(Texture(200, 600, Color::WHITE));
-	else
-		setBackground(Texture(200, 600, Color::BLUE));
+	
+	setBgColor(Color::BGCOLOR);
 
-	_nameLabel = new Label(150, 50, _character->getName(), (*ServiceLocator::getFontManager())["Comic Sans MS"]);
+	_nameLabel = new Label(150, 50, _character->getName(), (*ServiceLocator::getFontManager())["LifeCraft"]);
 	_nameLabel->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 
-	_hp = new Label(150, 50, _character->getHPString(), (*ServiceLocator::getFontManager())["Comic Sans MS"]);
+	_hp = new Label(150, 50, _character->getHPString(), (*ServiceLocator::getFontManager())["LifeCraft"]);
 	_hp->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 
 
-	_pt = new Label(150, 50, to_string(_character->getCP()), (*ServiceLocator::getFontManager())["Comic Sans MS"]);
+	_pt = new Label(150, 50, to_string(_character->getCP()), (*ServiceLocator::getFontManager())["LifeCraft"]);
 	_pt->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 
 
-	_pm = new Label(150, 50, to_string(_character->getMP()), (*ServiceLocator::getFontManager())["Comic Sans MS"]);
+	_pm = new Label(150, 50, to_string(_character->getMP()), (*ServiceLocator::getFontManager())["LifeCraft"]);
 	_pm->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 
 	_hp_bar = new ProgressBar(150, 50);
@@ -54,10 +52,10 @@ RecapOctopus::~RecapOctopus()
 
 void RecapOctopus::update()
 {
+	Panel::update();
 	updateCP();
 	updateHP();
 	updateMP();
-
 }
 void RecapOctopus::onLoseHP(LoseHpEvent* e)
 {

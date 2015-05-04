@@ -14,6 +14,7 @@
 #include "Archer.h"
 #include "Mage.h"
 #include "Knight.h"
+#include "SpellRecap.h"
 
 Game* Game::_instance = nullptr;
 
@@ -76,7 +77,7 @@ void Game::initialize()
 	menu_root_inside->add(button_1, Alignment::CENTERX);
 	button_1->setPositionY(50);
 	button_1->setText("Play");
-	button_1->setTextColor(Color::BLUE);
+	button_1->setTextColor(Color(240,190));
 	button_1->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	button_1->Clickable::setCallback(new EventCallback(navigationLambda, game_frame));
 
@@ -122,7 +123,10 @@ void Game::initialize()
 	game_frame->add(recap1, Alignment::TOP | Alignment::LEFT);
 	game_frame->add(recap3, Alignment::TOP | Alignment::RIGHT);
 
-	_octopus->setFrame(game_frame);
+	SpellRecap* sr = new SpellRecap(_players[0]);
+	game_frame->add(sr, Alignment::BOTTOM | Alignment::LEFT);
+
+	_octopus->setFrame(menu_root);
 	start();
 }
 Game::~Game()

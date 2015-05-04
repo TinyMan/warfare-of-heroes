@@ -130,6 +130,7 @@
     <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="Sortable.cpp" />
     <ClCompile Include="Spell.cpp" />
+    <ClCompile Include="SpellRecap.cpp" />
     <ClCompile Include="SpellTarget.cpp" />
     <ClCompile Include="SquareAoE.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="Sortable.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="SpellEvents.h" />
+    <ClInclude Include="SpellRecap.h" />
     <ClInclude Include="SpellTarget.h" />
     <ClInclude Include="SquareAoE.h" />
     <ClInclude Include="Texture.h" />

@@ -21,7 +21,8 @@ public:
 	static const Color BLUE;
 	static const Color TRANSPARENT;
 	static const Color WHITE;
-
+	static const Color FONTCOLOR;
+	static const Color BGCOLOR;
 	bool operator==(const Color& c) const;
 	bool operator!=(const Color& c) const;
 private:

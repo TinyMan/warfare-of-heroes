@@ -51,7 +51,7 @@ public:
 	// Getters :
 	string getName() const { return _name; }
 	int getHP() const;
-	string getHPString() const { return to_string(_hitPoints) + "/" + to_string(hpMax); }
+	string getHPString() const { return "HP: " + to_string(_hitPoints) + "/" + to_string(hpMax); }
 	float getHPPercent() const { return (_hitPoints * 100.f) / hpMax; }
 	int getMP() const;
 	int getCP() const;
@@ -64,6 +64,7 @@ public:
 	bool hisTurn() const { return _myTurn; }
 	virtual void displayBasic(ostream& o) const;
 	bool isDead() const { return _dead; }
+	map<int, Spell*> getSpells() const { return _spells; }
 
 	/* every children have to implement those methods */
 	// Attacks :
