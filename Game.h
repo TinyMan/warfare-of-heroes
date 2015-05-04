@@ -36,6 +36,7 @@ public:
 	/* getters */
 	Grid* getGrid() const { return _grid; }
 	Character* getPlayer(int id) const { return _players.at(id); }
+	Character* getCurrentPlayer() const { return _players.at(_player_turn); }
 	Octopus* getOctopus() const { return _octopus; }
 
 	template<typename... GO>
@@ -62,8 +63,12 @@ public:
 	/* starting game */
 	void initialize();
 	void start();
+
+	/* related to the turn */
 	void beginTurn();
 	void endTurn(void* data=nullptr);
+	Uint32 getTimeLeft() const { return  (_turn_max_duration + _turn_start) - TIMESERVICE->time(); }
+	Uint32 getTurnStartTime() const { return _turn_start; }
 
 	/* ending game */
 	void stop(void*d=nullptr) { _running = false; }
@@ -87,6 +92,9 @@ private:
 	bool _running = true;
 	int _turn = 0;
 	int _player_turn = 0; // the current player ID which play 
+
+	Uint32 _turn_start = 0; // timestamps of the begining of the turn
+	Uint32 _turn_max_duration = 90000; // number of millisecond per turn (max)
 
 	/* ptr to different services */
 	TimeService * _timeService = nullptr;

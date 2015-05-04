@@ -7,5 +7,6 @@ class Chrono :
 public:
 	Chrono();
 	virtual ~Chrono();
+	virtual void update();
 };
 

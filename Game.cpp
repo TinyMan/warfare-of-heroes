@@ -301,6 +301,8 @@ void Game::beginTurn()
 	UI->addAction(Action(Callback(&Game::endTurn, this), "I'm done"));
 	_players.at(_player_turn)->beginTurn();
 	_grid->beginTurn();
+	_turn_start = TIMESERVICE->time();
+	TIMESERVICE->setTimeout(_turn_max_duration, Callback(&Game::endTurn, this));
 }
 void Game::endTurn(void* )
 {
