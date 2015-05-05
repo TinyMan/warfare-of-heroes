@@ -29,3 +29,5 @@ inline double Dot(const Point& a, const Point& b){ return (a.x*b.x) + (a.y*b.y);
 inline double PerpDot(const Point& a, const Point& b){ return (a.y*b.x) - (a.x*b.y); }
 
 Point* intersection(Point p1, Point p2, Point p3, Point p4);
+
+bool operator==(const SDL_Rect&, const SDL_Rect&);
