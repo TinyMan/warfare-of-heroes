@@ -31,9 +31,13 @@ public:
 	void setMaxScope(int max_scope) { _max_scope = max_scope; }
 	void setInline(bool il) { _is_inline = il; }
 	void addEffect(Effect* effect);
+	void setDescription(string descr) { _description = descr; }
 
 	/* getters */
 	int getMaxScope() const { return _max_scope; }
+	int getCPCost() const { return _cp_cost; }
+	string getName() const { return _name; }
+	string getDescription() const { return _description; }
 
 	friend ostream& operator<<(ostream& o, const Spell& s);
 protected:	
@@ -44,6 +48,7 @@ protected:
 	int _mp_cost;
 	bool _is_inline;
 	string _name;
+	string _description = "Spell's Description";
 
 	list<Effect*> _effects;
 	Character* _caster;

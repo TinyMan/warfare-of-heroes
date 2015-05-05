@@ -65,6 +65,7 @@ void Game::initialize()
 	Panel* menu_root = new Panel();
 	Panel* menu_1 = new Panel();
 	Panel* game_frame = new Panel();
+	game_frame->setBgColor(Color::WHITE);
 
 	/* creation of menu */
 	Panel* menu_root_inside = new Panel(300, 100 + 75 + 75 + 75 + 75); // 4 boutons de hauteur 50, espacements de 25 entre les boutons et 50 avec les bords du container +25 devant quitter
@@ -126,7 +127,7 @@ void Game::initialize()
 	SpellRecap* sr = new SpellRecap(_players[0]);
 	game_frame->add(sr, Alignment::BOTTOM | Alignment::LEFT);
 
-	_octopus->setFrame(menu_root);
+	_octopus->setFrame(game_frame);
 	start();
 }
 Game::~Game()

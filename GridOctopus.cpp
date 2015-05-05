@@ -4,6 +4,7 @@
 GridOctopus::GridOctopus(Grid* g)
 	: Panel(Grid::WIDTH * 50, Grid::HEIGHT/2 * 25), _grid(g)
 {
+	setBgColor(Color::TRANSPARENT);
 	double x = 0, y = 0;
 	for (auto & i : _cells)
 	{

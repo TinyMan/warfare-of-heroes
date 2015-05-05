@@ -7,7 +7,7 @@ Button::Button(int w, int h)
 {
 	_color = { 255, 0, 0, 255 };
 	setFont((*ServiceLocator::getFontManager())["LifeCraft"]);
-	Label::setBgColor(Color::BGCOLOR);
+	Label::setBackground(_regular_bg);
 }
 
 

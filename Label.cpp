@@ -10,7 +10,7 @@ Label::Label(int w, int h, string text, Font* f, int x, int y)
 	: OctopusBaby(x, y, w, h), _text(text), _font(f)
 {
 	if (f == nullptr)
-		_font = (*ServiceLocator::getFontManager())["Comic Sans MS"];
+		_font = (*ServiceLocator::getFontManager())["LifeCraft"];
 	setTextColor(Color::FONTCOLOR);
 }
 Label::~Label()

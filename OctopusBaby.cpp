@@ -62,6 +62,7 @@ void OctopusBaby::render(SDL_Renderer* r, bool force)
 		bool d = (force || dirty);
 		if (dirty)
 		{
+			//LOGINFO << "octopusbaby is dirty" << endl;
 			_texture.setRenderTarget();
 
 			if (_background.valid())
@@ -77,6 +78,7 @@ void OctopusBaby::render(SDL_Renderer* r, bool force)
 		}
 		if (d)
 		{
+			//LOGINFO << "Rendering octopusbaby" << endl;
 			if (SDL_RenderCopy(r, _texture, NULL, &_relative_rect) != 0)
 			{
 				LOGERR << "Error renderCopy: " << SDL_GetError() << endl;
