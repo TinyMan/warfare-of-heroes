@@ -49,7 +49,7 @@ void Game::initialize()
 	Grid* grid = getGrid();
 	grid->generateObstacle();
 
-	Archer* player1 = new Archer(0, 2);
+	Archer* player1 = new Archer(5, 5);
 	Mage* player3 = new Mage(6, 2);
 	addGameObject(grid, player1, player3);
 	addPlayer(player1);
@@ -114,7 +114,7 @@ void Game::initialize()
 	tt->anchor(button_1);
 
 	/* creation of game frame */
-	GridOctopus* gridO = new GridOctopus(nullptr);
+	GridOctopus* gridO = new GridOctopus(_grid);
 	game_frame->add(gridO, Alignment::CENTERX | Alignment::CENTERY);
 	
 	Chrono* chrono = new Chrono();
@@ -130,7 +130,7 @@ void Game::initialize()
 	game_frame->add(sr, Alignment::BOTTOM | Alignment::LEFT);
 	game_frame->add(sr1, Alignment::BOTTOM | Alignment::LEFT);
 
-	PlayerOctopus* p = new PlayerOctopus();
+	PlayerOctopus* p = new PlayerOctopus(_players[0], gridO);
 
 	gridO->add(p);
 	_octopus->setFrame(game_frame);

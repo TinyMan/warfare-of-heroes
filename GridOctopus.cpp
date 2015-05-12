@@ -6,12 +6,13 @@ GridOctopus::GridOctopus(Grid* g)
 {
 	setBgColor(Color::TRANSPARENT);
 	double x = 0, y = 0;
-	for (auto & i : _cells)
+	for (size_t j = 0; j < Grid::HEIGHT; j++)
 	{
-		for (auto& e : i)
+		for (size_t i = 0; i < Grid::WIDTH; i++)
 		{
-			e = new CellOctopus(nullptr);
-			add(e, int(x * 50), int(y * 25));
+			_cells[i][j] = new CellOctopus(_grid->getCellAt(i, j));
+			add(_cells[i][j], int(x * 50), int(y * 25));
+
 			x++;
 			if (x == 14)
 			{
@@ -30,4 +31,25 @@ GridOctopus::GridOctopus(Grid* g)
 
 GridOctopus::~GridOctopus()
 {
+}
+
+CellOctopus* GridOctopus::getCellOctopus(const Cell* c) const
+{
+	bool found = false;
+	size_t i = 0;
+	size_t j;
+	while (!found && i < Grid::WIDTH)
+	{
+		j = 0;
+		while (!found && j < Grid::HEIGHT)
+		{
+			found = _cells[i][j]->getCell() == c;
+			j++;
+		}
+		i++;
+	}
+	if (found)
+		return _cells[--i][--j];
+	else
+		return nullptr;
 }

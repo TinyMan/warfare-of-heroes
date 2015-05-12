@@ -21,6 +21,7 @@ public:
 	virtual void onMouseOut(MouseEvents::MotionEvent* e);
 	virtual void updateAbsoluteRect();
 
+	Cell* getCell() const { return _cell; }
 protected:
 	virtual void internalRender(SDL_Renderer* r, bool force = false);
 

@@ -3,8 +3,8 @@
 
 Texture PlayerOctopus::_basic_player;
 
-PlayerOctopus::PlayerOctopus()
-	: OctopusBaby(50,60)
+PlayerOctopus::PlayerOctopus(Character* c, GridOctopus* grid)
+	: OctopusBaby(PLAYER_WIDTH, PLAYER_HEIGHT), _character(c), _grid(grid)
 {
 	if (!_basic_player.valid())
 	{
@@ -20,7 +20,34 @@ PlayerOctopus::~PlayerOctopus()
 
 void PlayerOctopus::update()
 {
+	if (isActive())
+	{
+		if (_character)
+		{
+			//LOGINFO << "updating player octopus" << endl;
 
+			// update position based on cell
+			const Cell* c = _character->getCell();
+			//LOGINFO << "player is on cell " << *c << endl;
+
+			if (c)
+			{
+				SDL_Rect cellRect = _grid->getCellOctopus(c)->getRelativeRect();
+				//LOGINFO << "rect is " << cellRect << endl;
+
+				SDL_Point midDown = { cellRect.x + cellRect.w / 2, cellRect.y + cellRect.h };
+
+				double ratiox = (double)_relative_rect.w / _basic_player.getWidth();
+				double ratioy = (double)_relative_rect.h / _basic_player.getHeight();
+				double ratio = min(ratioy, ratiox);
+				setPosition(midDown.x - _basic_player.getWidth() * ratio / 2, midDown.y - _basic_player.getHeight() * ratio);
+			
+				//LOGINFO << "new position: " << getPosition() << endl;
+			}
+
+		}
+		//setActive(false);
+	}
 }
 void PlayerOctopus::internalRender(SDL_Renderer* r, bool force)
 {
@@ -29,8 +56,7 @@ void PlayerOctopus::internalRender(SDL_Renderer* r, bool force)
 		bool d = (force || isDirty());
 		if (d)
 		{
-			SDL_Rect dst;
-			dst.x = 0; dst.y = 0;
+			SDL_Rect dst = _relative_rect;
 			double ratiox = (double)_relative_rect.w /_basic_player.getWidth();
 			double ratioy = (double)_relative_rect.h / _basic_player.getHeight();
 			double ratio = min(ratioy, ratiox);
