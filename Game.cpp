@@ -125,7 +125,9 @@ void Game::initialize()
 	game_frame->add(recap3, Alignment::TOP | Alignment::RIGHT);
 
 	SpellRecap* sr = new SpellRecap(_players[0]);
+	SpellRecap* sr1 = new SpellRecap(_players[1]);
 	game_frame->add(sr, Alignment::BOTTOM | Alignment::LEFT);
+	game_frame->add(sr1, Alignment::BOTTOM | Alignment::LEFT);
 
 	_octopus->setFrame(game_frame);
 	start();

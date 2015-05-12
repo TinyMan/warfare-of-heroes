@@ -6,7 +6,7 @@ SpellRecap::SpellRecap(Character* c)
 {
 	createSpellButtons();
 
-	_selected_spell_name = new Label(200, 50);
+	_selected_spell_name = new Label(250, 50);
 	_selected_spell_name->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	add(_selected_spell_name, Alignment::TOP | Alignment::RIGHT);
 	_selected_spell_name->setPositionY(20);
@@ -26,14 +26,18 @@ SpellRecap::~SpellRecap()
 
 void SpellRecap::update()
 {
-	Panel::update();
-	map<int, Spell*>  spells = _character->getSpells();
-	for (auto& e : _label_spells)
+	setActive(_character == GAMEINST->getCurrentPlayer());
+	if (isActive())
 	{
-		e.second->setText(to_string(spells[e.first]->getCPCost()) + " CP");
+		Panel::update();
+		map<int, Spell*>  spells = _character->getSpells();
+		for (auto& e : _label_spells)
+		{
+			e.second->setText(to_string(spells[e.first]->getCPCost()) + " CP");
+		}
+		_selected_spell_name->setText(spells[_selected_spell]->getName());
+		_selected_spell_description->setText(spells[_selected_spell]->getDescription());
 	}
-	_selected_spell_name->setText(spells[_selected_spell]->getName());
-	_selected_spell_description->setText(spells[_selected_spell]->getDescription());
 }
 void SpellRecap::createSpellButtons()
 {
