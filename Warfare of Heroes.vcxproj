@@ -122,6 +122,7 @@
     <ClCompile Include="OctopusBaby.cpp" />
     <ClCompile Include="OverTimeEffect.cpp" />
     <ClCompile Include="Panel.cpp" />
+    <ClCompile Include="PlayerOctopus.cpp" />
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="RecapOctopus.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="OctopusBaby.h" />
     <ClInclude Include="OverTimeEffect.h" />
     <ClInclude Include="Panel.h" />
+    <ClInclude Include="PlayerOctopus.h" />
     <ClInclude Include="Polygon.h" />
     <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="RecapOctopus.h" />

@@ -15,6 +15,7 @@
 #include "Mage.h"
 #include "Knight.h"
 #include "SpellRecap.h"
+#include "PlayerOctopus.h"
 
 Game* Game::_instance = nullptr;
 
@@ -129,6 +130,9 @@ void Game::initialize()
 	game_frame->add(sr, Alignment::BOTTOM | Alignment::LEFT);
 	game_frame->add(sr1, Alignment::BOTTOM | Alignment::LEFT);
 
+	PlayerOctopus* p = new PlayerOctopus();
+
+	gridO->add(p);
 	_octopus->setFrame(game_frame);
 	start();
 }
