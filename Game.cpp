@@ -120,6 +120,7 @@ void Game::initialize()
 	GridOctopus* gridO = new GridOctopus(_grid, 800, 400);
 	game_inside->add(gridO, Alignment::CENTERX | Alignment::CENTERY);
 
+	Cell* cccc = gridO->getCellFromPoint(Point(200, 500));
 	//PlayerOctopus* p = new PlayerOctopus(_players[0], gridO);
 
 	//	gridO->add(p);

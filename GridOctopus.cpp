@@ -77,11 +77,12 @@ GridOctopus::~GridOctopus()
 {
 
 }
-Cell* GridOctopus::getCellFromPoint(const Point & p) const
+Cell* GridOctopus::getCellFromPoint(const Point & point) const
 {
-	// TODO not complete
-	int x = (p.x / _cellDimensions.x + p.y / _cellDimensions.y) / 2;
-	int y = (p.y / _cellDimensions.y - p.x / _cellDimensions.x) / 2;
+	Point p = toLocalCoordinates(point);
+	int x = int((p.x / _cellDimensions.x + p.y / _cellDimensions.y) / 2);
+	int y = int((p.y / _cellDimensions.y - p.x / _cellDimensions.x) / 2);
+	LOGINFO << "Getting cell " << x << ", " << y << " from coordinates " << point << " (relatives: " << p << ")" << endl;
 
 	return _grid->getCellAt(x, y);
 }

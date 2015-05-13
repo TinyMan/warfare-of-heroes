@@ -50,6 +50,7 @@ public:
 	void setBgColor(Color c) { setIfDifferent(_background_color, c); }
 	Color getBgColor() const { return _background_color; }
 
+	Point toLocalCoordinates(const Point& p) const;
 protected:
 	SDL_Rect _relative_rect;
 	SDL_Rect _absolute_rect;

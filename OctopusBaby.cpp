@@ -150,3 +150,8 @@ bool OctopusBaby::isInArea(SDL_Point p) const
 		return false;
 	return p.x >= _absolute_rect.x && p.x <= _absolute_rect.x + _absolute_rect.w && p.y >= _absolute_rect.y && p.y <= _absolute_rect.y + _absolute_rect.h;
 }
+
+Point OctopusBaby::toLocalCoordinates(const Point& p) const
+{
+	return p - Point(_absolute_rect.x, _absolute_rect.y);
+}
