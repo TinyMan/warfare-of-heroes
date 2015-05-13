@@ -40,7 +40,7 @@ public:
 	DIRECTION getDir(const Cell& c1, const Cell& c2);
 
 	static const int WIDTH = 14;
-	static const int HEIGHT = 30;
+	static const int HEIGHT = 14;
 
 	virtual void beginTurn();
 

@@ -113,13 +113,17 @@ void Game::initialize()
 	tt->anchor(button_1);
 
 	/* creation of game frame */
-	/*GridOctopus* gridO = new GridOctopus(_grid);
-	game_frame->add(gridO, Alignment::CENTERX | Alignment::CENTERY);
+	Panel * game_inside = new Panel(800, 600);
+	game_inside->setBgColor(Color::WHITE);
+	game_frame->add(game_inside, Alignment::TOP|Alignment::CENTERX);
+
+	GridOctopus* gridO = new GridOctopus(_grid, 800, 400);
+	game_inside->add(gridO, Alignment::CENTERX | Alignment::CENTERY);
 
 	//PlayerOctopus* p = new PlayerOctopus(_players[0], gridO);
 
 	//	gridO->add(p);
-	*/
+	
 	Chrono* chrono = new Chrono();
 	game_frame->add(chrono, Alignment::TOP | Alignment::CENTERX);
 
