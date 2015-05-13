@@ -1,6 +1,7 @@
 #include "OctopusBaby.h"
 #include "Game.h"
 #include "Octopus.h"
+#include "SpellRecap.h"
 
 OctopusBaby::OctopusBaby()
 {
@@ -86,7 +87,9 @@ void OctopusBaby::render(SDL_Renderer* r, bool force)
 		}
 	}
 	else
-		setDirty(false);
+	{
+		//setDirty(false);
+	}
 }
 void OctopusBaby::updateAbsoluteRect()
 {

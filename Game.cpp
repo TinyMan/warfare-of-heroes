@@ -7,7 +7,6 @@
 #include "Character.h"
 #include "Grid.h"
 #include "Tooltip.h"
-#include "CellOctopus.h"
 #include "GridOctopus.h"
 #include "Chrono.h"
 #include "RecapOctopus.h"
@@ -114,9 +113,13 @@ void Game::initialize()
 	tt->anchor(button_1);
 
 	/* creation of game frame */
-	GridOctopus* gridO = new GridOctopus(_grid);
+	/*GridOctopus* gridO = new GridOctopus(_grid);
 	game_frame->add(gridO, Alignment::CENTERX | Alignment::CENTERY);
-	
+
+	//PlayerOctopus* p = new PlayerOctopus(_players[0], gridO);
+
+	//	gridO->add(p);
+	*/
 	Chrono* chrono = new Chrono();
 	game_frame->add(chrono, Alignment::TOP | Alignment::CENTERX);
 
@@ -130,9 +133,6 @@ void Game::initialize()
 	game_frame->add(sr, Alignment::BOTTOM | Alignment::LEFT);
 	game_frame->add(sr1, Alignment::BOTTOM | Alignment::LEFT);
 
-	PlayerOctopus* p = new PlayerOctopus(_players[0], gridO);
-
-	gridO->add(p);
 	_octopus->setFrame(game_frame);
 	start();
 }
@@ -309,6 +309,7 @@ void Game::beginTurn()
 	_grid->beginTurn();
 	_turn_start = TIMESERVICE->time();
 	TIMESERVICE->setTimeout(_turn_max_duration, Callback(&Game::endTurn, this));
+	(new BeginTurnEvent(_players.at(_player_turn)))->dispatch();
 }
 void Game::endTurn(void* )
 {

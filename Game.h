@@ -116,3 +116,14 @@ public:
 
 };
 
+
+namespace Events
+{
+	class BeginTurnEvent : public Event
+	{
+	public:
+		BeginTurnEvent(Character* c): _c(c){}
+		~BeginTurnEvent(){}
+		Character* _c;
+	};
+}

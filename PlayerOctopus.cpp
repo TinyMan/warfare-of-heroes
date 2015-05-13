@@ -30,7 +30,7 @@ void PlayerOctopus::update()
 			const Cell* c = _character->getCell();
 			//LOGINFO << "player is on cell " << *c << endl;
 
-			if (c)
+			/*if (c)
 			{
 				SDL_Rect cellRect = _grid->getCellOctopus(c)->getRelativeRect();
 				//LOGINFO << "rect is " << cellRect << endl;
@@ -43,7 +43,7 @@ void PlayerOctopus::update()
 				setPosition(midDown.x - _basic_player.getWidth() * ratio / 2, midDown.y - _basic_player.getHeight() * ratio);
 			
 				//LOGINFO << "new position: " << getPosition() << endl;
-			}
+			}*/
 
 		}
 		//setActive(false);
@@ -61,8 +61,8 @@ void PlayerOctopus::internalRender(SDL_Renderer* r, bool force)
 			double ratioy = (double)_relative_rect.h / _basic_player.getHeight();
 			double ratio = min(ratioy, ratiox);
 
-			dst.w = _basic_player.getWidth() * ratio;
-			dst.h = _basic_player.getHeight() * ratio;
+			dst.w = int(_basic_player.getWidth() * ratio);
+			dst.h = int(_basic_player.getHeight() * ratio);
 
 			SDL_RenderCopy(r, _basic_player, nullptr, &dst);
 		}

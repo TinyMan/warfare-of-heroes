@@ -81,7 +81,6 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Callback.cpp" />
     <ClCompile Include="Cell.cpp" />
-    <ClCompile Include="CellOctopus.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Chrono.cpp" />
     <ClCompile Include="Clickable.cpp" />
@@ -149,7 +148,6 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Callback.h" />
     <ClInclude Include="Cell.h" />
-    <ClInclude Include="CellOctopus.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterEvents.h" />
     <ClInclude Include="Chrono.h" />

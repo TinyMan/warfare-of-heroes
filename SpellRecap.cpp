@@ -16,6 +16,7 @@ SpellRecap::SpellRecap(Character* c)
 	add(_selected_spell_description, 150, 100 );
 
 	setBgColor(Color::BGCOLOR);
+	ServiceLocator::getEventService()->listen(typeid(BeginTurnEvent), [=](Event* e) { setActive(_character == GAMEINST->getCurrentPlayer()); });
 }
 
 
@@ -25,8 +26,7 @@ SpellRecap::~SpellRecap()
 }
 
 void SpellRecap::update()
-{
-	setActive(_character == GAMEINST->getCurrentPlayer());
+{	
 	if (isActive())
 	{
 		Panel::update();
@@ -38,6 +38,7 @@ void SpellRecap::update()
 		_selected_spell_name->setText(spells[_selected_spell]->getName());
 		_selected_spell_description->setText(spells[_selected_spell]->getDescription());
 	}
+	
 }
 void SpellRecap::createSpellButtons()
 {
