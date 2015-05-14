@@ -98,6 +98,7 @@ GridOctopus::GridOctopus(Grid* grid, unsigned int width, unsigned int height)
 		}
 	}
 
+	setEveryMovesNotification(true);
 }
 
 GridOctopus::~GridOctopus()
@@ -124,11 +125,6 @@ Cell* GridOctopus::getCellFromPoint(const Point & p) const
 
 void GridOctopus::update()
 {
-	if (hover())
-	{
-		//TODO change (this is just to debug)
-		setDirty();
-	}
 }
 void GridOctopus::internalRender(SDL_Renderer* r, bool force)
 {
@@ -137,14 +133,29 @@ void GridOctopus::internalRender(SDL_Renderer* r, bool force)
 		bool d = (force | isDirty());
 		if (d)
 		{
-			SDL_Point p;
-			SDL_GetMouseState(&p.x, &p.y);
-			Cell* higlighted_cell = getCellFromPoint(p);
-
-			if (higlighted_cell)
+			if (_higlighted_cell)
 			{
-				_cellsPolygon[higlighted_cell->getNumber()].drawFill(r, Color::BLUE);
+				_cellsPolygon[_higlighted_cell->getNumber()].drawFill(r, Color::BLUE);
 			}
 		}
 	}
+}
+
+void GridOctopus::onMouseMove(MouseEvents::MotionEvent* e)
+{
+	Hoverable::onMouseMove(e);
+	Cell* c = getCellFromPoint(e->getPos());
+	if (_higlighted_cell != c)
+	{
+		_higlighted_cell = c;
+	}
+	else
+	{
+		setDirty(false);
+	}
+}
+void GridOctopus::onMouseOut(MouseEvents::MotionEvent* e)
+{
+	Hoverable::onMouseOut(e);
+	_higlighted_cell = nullptr;
 }

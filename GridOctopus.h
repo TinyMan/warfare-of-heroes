@@ -31,6 +31,9 @@ public:
 			return false;
 		return p.x >= _absolute_rect.x && p.x <= _absolute_rect.x + _absolute_rect.w && p.y >= _absolute_rect.y && p.y <= _absolute_rect.y + _absolute_rect.h;
 	}
+	virtual void onMouseMove(MouseEvents::MotionEvent* e);
+	virtual void onMouseOut(MouseEvents::MotionEvent* e);
+
 protected:
 	virtual void internalRender(SDL_Renderer* r, bool force = false) override;
 
@@ -43,5 +46,6 @@ private:
 	map<unsigned int, Polygon> _cellsPolygon;
 
 	Point _cellDimensions;
+	Cell* _higlighted_cell = nullptr;
 
 };
