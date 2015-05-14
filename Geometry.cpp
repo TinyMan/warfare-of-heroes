@@ -4,6 +4,14 @@ SDL_Point operator+(const SDL_Point p1, const SDL_Point p2)
 {
 	return{ p1.x + p2.x, p1.y + p2.y };
 }
+bool Point::operator!=(const Point& p) const
+{
+	return !(*this == p);
+}
+bool Point::operator==(const Point& p) const
+{
+	return (p.x == x) && (p.y == y);
+}
 ostream& operator<<(ostream& o, const SDL_Point& p)
 {
 	o << "(" << p.x << ", " << p.y << ")";

@@ -7,6 +7,8 @@ TextureManager::TextureManager(SDL_Renderer* r)
 {
 	loadTexture("Images/PNG/Maquette_menu.png", "menu_mockup");
 	loadTexture("Images/PNG/path3346-6.png", "player_basic");
+	loadTexture("Images/PNG/Chevalier_Exemple.png", "knight");
+	
 }
 
 

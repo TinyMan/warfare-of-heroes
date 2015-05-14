@@ -26,5 +26,6 @@ private:
 	GridOctopus* _grid;
 
 	static Texture _basic_player;
+	double getRatio() const;
 };
 

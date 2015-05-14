@@ -15,6 +15,8 @@ public:
 	operator SDL_Point() const { return{ int(x), int(y) }; }
 	Point operator-(const Point&) const;
 	Point operator*(const double) const;
+	bool operator!=(const Point&) const;
+	bool operator==(const Point&) const;
 };
 
 SDL_Point operator+(const SDL_Point p1, const SDL_Point p2);

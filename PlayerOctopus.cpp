@@ -8,8 +8,9 @@ PlayerOctopus::PlayerOctopus(Character* c, GridOctopus* grid)
 {
 	if (!_basic_player.valid())
 	{
-		_basic_player = (*ServiceLocator::getTextureManager())["player_basic"];
+		_basic_player = (*ServiceLocator::getTextureManager())["knight"];
 	}
+	setBgColor(Color::TRANSPARENT);
 }
 
 
@@ -24,29 +25,22 @@ void PlayerOctopus::update()
 	{
 		if (_character)
 		{
-			//LOGINFO << "updating player octopus" << endl;
-
 			// update position based on cell
 			const Cell* c = _character->getCell();
-			//LOGINFO << "player is on cell " << *c << endl;
 
-			/*if (c)
+			if (c)
 			{
-				SDL_Rect cellRect = _grid->getCellOctopus(c)->getRelativeRect();
-				//LOGINFO << "rect is " << cellRect << endl;
+				Point cellCenter = toContainerCoordinates(_grid->toAbsoluteCoordinates(_grid->getCellCenter(c)));
+				
+				double ratio = getRatio();
 
-				SDL_Point midDown = { cellRect.x + cellRect.w / 2, cellRect.y + cellRect.h };
-
-				double ratiox = (double)_relative_rect.w / _basic_player.getWidth();
-				double ratioy = (double)_relative_rect.h / _basic_player.getHeight();
-				double ratio = min(ratioy, ratiox);
-				setPosition(midDown.x - _basic_player.getWidth() * ratio / 2, midDown.y - _basic_player.getHeight() * ratio);
-			
-				//LOGINFO << "new position: " << getPosition() << endl;
-			}*/
-
+				SDL_Point pos = { int(cellCenter.x - _basic_player.getWidth() * ratio / 2), int(cellCenter.y - _basic_player.getHeight() * ratio + 7)};
+				if ((Point)pos != getPosition())
+				{
+					setPosition(pos.x, pos.y);
+				}
+			}
 		}
-		//setActive(false);
 	}
 }
 void PlayerOctopus::internalRender(SDL_Renderer* r, bool force)
@@ -56,15 +50,21 @@ void PlayerOctopus::internalRender(SDL_Renderer* r, bool force)
 		bool d = (force || isDirty());
 		if (d)
 		{
+			double ratio = getRatio();
 			SDL_Rect dst = _relative_rect;
-			double ratiox = (double)_relative_rect.w /_basic_player.getWidth();
-			double ratioy = (double)_relative_rect.h / _basic_player.getHeight();
-			double ratio = min(ratioy, ratiox);
+			dst.w = int(ratio * _basic_player.getWidth());
+			dst.h = int(ratio * _basic_player.getHeight());
+			dst.x = 0;
+			dst.y = 0;
+			_basic_player.render(r, nullptr, &dst);
 
-			dst.w = int(_basic_player.getWidth() * ratio);
-			dst.h = int(_basic_player.getHeight() * ratio);
 
-			SDL_RenderCopy(r, _basic_player, nullptr, &dst);
 		}
 	}
+}
+double PlayerOctopus::getRatio() const
+{
+	double ratiox = (double)_relative_rect.w / _basic_player.getWidth();
+	double ratioy = (double)_relative_rect.h / _basic_player.getHeight();
+	return min(ratioy, ratiox);
 }

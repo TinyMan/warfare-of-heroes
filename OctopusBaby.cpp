@@ -155,3 +155,11 @@ Point OctopusBaby::toLocalCoordinates(const Point& p) const
 {
 	return p - Point(_absolute_rect.x, _absolute_rect.y);
 }
+Point OctopusBaby::toAbsoluteCoordinates(const Point& p) const
+{
+	return p + Point(_absolute_rect.x, _absolute_rect.y);
+}
+Point OctopusBaby::toContainerCoordinates(const Point& p) const
+{
+	return p - Point(_container_rect.x, _container_rect.y);
+}

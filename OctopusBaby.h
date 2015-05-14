@@ -51,6 +51,8 @@ public:
 	Color getBgColor() const { return _background_color; }
 
 	Point toLocalCoordinates(const Point& p) const;
+	Point toAbsoluteCoordinates(const Point& p) const;
+	Point toContainerCoordinates(const Point& p) const;
 protected:
 	SDL_Rect _relative_rect;
 	SDL_Rect _absolute_rect;
