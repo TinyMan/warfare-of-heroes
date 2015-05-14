@@ -136,7 +136,7 @@ void GridOctopus::internalRender(SDL_Renderer* r, bool force)
 			if (_higlighted_cell)
 			{
 				_cellsPolygon[_higlighted_cell->getNumber()].drawFill(r, Color::BLUE);
-			}
+			}			
 		}
 	}
 }
@@ -158,4 +158,19 @@ void GridOctopus::onMouseOut(MouseEvents::MotionEvent* e)
 {
 	Hoverable::onMouseOut(e);
 	_higlighted_cell = nullptr;
+}
+Point GridOctopus::getCellCenter(const Cell* cell) const
+{ 
+	if (!cell)
+		throw string("Cell cannot be null");
+	unsigned int n = cell->getNumber();
+	if (_cellsPolygon.count(n) != 1)
+		throw string("Unknown cell");
+
+	Polygon poly = _cellsPolygon.at(n);
+
+	vector<Point> points = poly.getPoints();
+
+	Point pos(points[1].x, points[0].y);
+	return pos;
 }

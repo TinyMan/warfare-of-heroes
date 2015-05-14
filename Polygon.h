@@ -25,6 +25,8 @@ public:
 	
 	Polygon operator+(const Point&);
 	friend ostream& operator<<(ostream&, const Polygon& p);
+
+	vector<Point> getPoints() const { return _points; }
 private:
 	vector<Point> _points;
 };
