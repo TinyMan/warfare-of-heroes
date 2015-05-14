@@ -14,17 +14,17 @@ public:
 	Polygon();
 	virtual ~Polygon();
 
-	void addPoint(SDL_Point p);
+	void addPoint(Point p);
 	
 	void draw(SDL_Renderer* r, Color c);
 	void drawFill(SDL_Renderer* r, Color c);
-	bool enclosesPoint(SDL_Point p) const;
+	bool enclosesPoint(const Point &p) const;
 
 	int size() const { return _points.size(); }
 	vector<Line> getLines() const;
 	
-	Polygon operator+(const SDL_Point);
+	Polygon operator+(const Point&);
 	friend ostream& operator<<(ostream&, const Polygon& p);
 private:
-	vector<SDL_Point> _points;
+	vector<Point> _points;
 };

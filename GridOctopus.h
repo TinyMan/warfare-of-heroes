@@ -1,11 +1,12 @@
 #pragma once
+#include <unordered_map>
 #include "OctopusBaby.h"
 #include "Polygon.h"
 #include "Grid.h"
 #include "Hoverable.h"
 
 class GridOctopus
-	: public OctopusBaby
+	: public OctopusBaby, public Hoverable
 {
 public:
 	/* represent the grid grid, in a container of size width x height 
@@ -20,12 +21,18 @@ public:
 
 	Cell* getCellFromPoint(const Point& p) const;
 
-	virtual void update() override{};
+	virtual void update() override;
 	virtual bool isDirty() override { return _dirty; }
 	virtual void setDirty(bool d = true) override { _dirty = d; }
 
+	virtual bool isInArea(SDL_Point p) const
+	{
+		if (!isActive())
+			return false;
+		return p.x >= _absolute_rect.x && p.x <= _absolute_rect.x + _absolute_rect.w && p.y >= _absolute_rect.y && p.y <= _absolute_rect.y + _absolute_rect.h;
+	}
 protected:
-	virtual void internalRender(SDL_Renderer* r, bool force = false) override{};
+	virtual void internalRender(SDL_Renderer* r, bool force = false) override;
 
 private:
 	bool _dirty = true;
@@ -33,6 +40,7 @@ private:
 	unsigned int _width;
 	unsigned int _height;
 	Polygon _cellPolygon;
+	map<unsigned int, Polygon> _cellsPolygon;
 
 	Point _cellDimensions;
 

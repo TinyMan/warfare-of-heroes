@@ -3,11 +3,17 @@
 
 Grid::Grid()
 {
-	for (int i = 0; i < WIDTH; i++)
+	
+	for (int i = -WIDTH +1; i < WIDTH; i++)
 	{
-		for (int j = 0; j < HEIGHT; j++)
+		for (int j = -HEIGHT +1; j < HEIGHT; j++)
 		{
-			arrayOfCells[i][j] = Cell(i, j);
+			int n = toCellNumber(i, j);
+			if (n >= 0 && n < CELLS_NUMBER)
+			{
+				_cells[n] = Cell( n, i, j);
+				_cells_coordinates[i][j] = n;
+			}
 		}
 	}
 }
@@ -18,47 +24,59 @@ Grid::~Grid()
 }
 
 void Grid::generateObstacle() {
-	for (int i = 0; i < 4; i++)
+	/*for (int i = 0; i < 4; i++)
 	{
 		int x = rand() % WIDTH;
 		int y = rand() % HEIGHT;
 		arrayOfCells[x][y].setType(Cell::Obstacle);
-	}
+	}*/
 }
 
 void Grid::display(ostream& o) const
 {
-	for (auto &a : arrayOfCells)
+	for (auto &c : _cells)
 	{
-		for (const Cell &c : a)
-		{
-			if (c.getType() != Cell::Free)
-				o << c << endl;
-		}
+		if (c.second.getType() != Cell::Free)
+			o << c.second << endl;
 	}
 }
-
+void Grid::setObject(SpellTarget* go, unsigned int n)
+{
+	_cells.at(n).setObject(go);
+}
 void Grid::setObject(SpellTarget* go, int i, int j)
 {
-	if (i < Grid::WIDTH && j < Grid::HEIGHT)
+	if (validCoordinates(i, j))
 	{
-		arrayOfCells[i][j].setObject(go);
+		setObject(go, toCellNumber(i, j));
 	}
 }
 
 Cell* Grid::getCellAt(int i, int j)
 {
-	if (i>WIDTH || j>HEIGHT || i < 0 || j < 0)
+	if (!validCoordinates(i, j))
 	{
 		LOGERR << "Index de getCellAt() hors de la grille !" << endl;
 		return nullptr;
 	}
-	return &arrayOfCells[i][j];
+	return getCell(toCellNumber(i, j));
 }
-
+Cell* Grid::getCell(unsigned int n)
+{
+	if (_cells.count(n) != 1)
+	{
+		LOGERR << "Trying to get cell " << n << " but it is non existant" << endl;
+		return nullptr;
+	}
+	return &_cells.at(n);
+}
+int Grid::getCellDistance(unsigned int n, unsigned int n2)
+{
+	return getCellDistance(_cells.at(n), _cells.at(n2));
+}
 int Grid::getCellDistance(int i, int j, int x, int y)
 {
-	int ret = getCellDistance(arrayOfCells[i][j], arrayOfCells[x][y]);
+	int ret = getCellDistance(toCellNumber(i,j), toCellNumber(x, y));
 	return ret;
 }
 
@@ -118,11 +136,9 @@ Grid::DIRECTION Grid::getDir(const Cell& c1, const Cell& c2)
 
 void Grid::beginTurn()
 {
-	for (auto& l : arrayOfCells)
+	for (auto& c : _cells)
 	{
-		for (Cell& c : l)
-		{
-			c.beginTurn();
-		}
+		c.second.beginTurn();
 	}
+	
 }

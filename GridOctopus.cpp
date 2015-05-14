@@ -10,6 +10,12 @@ GridOctopus::GridOctopus(Grid* grid, unsigned int width, unsigned int height)
 	_cellDimensions.y = (double)_height / Grid::HEIGHT;
 
 
+	_cellPolygon.addPoint({ 0, _cellDimensions.y / 2 });
+	_cellPolygon.addPoint({ _cellDimensions.x/2, 0});
+	_cellPolygon.addPoint({ _cellDimensions.x, _cellDimensions.y / 2 });
+	_cellPolygon.addPoint({ _cellDimensions.x/2, _cellDimensions.y });
+
+
 	// draw the grid
 	/* code from leekwars
 	for (var i = 0; i < this.tilesX; i++) {
@@ -72,17 +78,73 @@ GridOctopus::GridOctopus(Grid* grid, unsigned int width, unsigned int height)
 	}
 	bg.resetRenderTarget();
 	setBackground(bg);
+
+	unsigned int n = 0;
+	for (int j = 0; j < Grid::HEIGHT * 2 - 1; ++j)
+	{
+		bool big = j % 2 == 0;
+		int width = big ? Grid::WIDTH : Grid::WIDTH - 1;
+
+		for (int i = 0; i < width; i++)
+		{
+			Point pos;
+			pos.x = i * _cellDimensions.x + (!big * _cellDimensions.x / 2);
+			pos.y = j * _cellDimensions.y/2;
+
+			Polygon poly = _cellPolygon + pos;
+
+			_cellsPolygon.emplace(n, poly);
+			n++;
+		}
+	}
+
 }
+
 GridOctopus::~GridOctopus()
 {
 
 }
-Cell* GridOctopus::getCellFromPoint(const Point & point) const
+Cell* GridOctopus::getCellFromPoint(const Point & p) const
 {
-	Point p = toLocalCoordinates(point);
-	int x = int((p.x / _cellDimensions.x + p.y / _cellDimensions.y) / 2);
-	int y = int((p.y / _cellDimensions.y - p.x / _cellDimensions.x) / 2);
-	LOGINFO << "Getting cell " << x << ", " << y << " from coordinates " << point << " (relatives: " << p << ")" << endl;
+	Point point = toLocalCoordinates(p);
+	auto& it = _cellsPolygon.begin();
+	bool found = false;
+	do
+	{
+		found = it->second.enclosesPoint(point);
+	} while (!found && ++it != _cellsPolygon.end());
 
-	return _grid->getCellAt(x, y);
+	if (found)
+	{
+		return _grid->getCell(it->first);
+	}
+	else
+		return nullptr;
+}
+
+void GridOctopus::update()
+{
+	if (hover())
+	{
+		//TODO change (this is just to debug)
+		setDirty();
+	}
+}
+void GridOctopus::internalRender(SDL_Renderer* r, bool force)
+{
+	if (isActive())
+	{
+		bool d = (force | isDirty());
+		if (d)
+		{
+			SDL_Point p;
+			SDL_GetMouseState(&p.x, &p.y);
+			Cell* higlighted_cell = getCellFromPoint(p);
+
+			if (higlighted_cell)
+			{
+				_cellsPolygon[higlighted_cell->getNumber()].drawFill(r, Color::BLUE);
+			}
+		}
+	}
 }

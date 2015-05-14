@@ -11,7 +11,7 @@ Polygon::~Polygon()
 {
 }
 
-void Polygon::addPoint(SDL_Point p)
+void Polygon::addPoint(Point p)
 {
 	_points.push_back(p);
 }
@@ -22,10 +22,10 @@ void Polygon::draw(SDL_Renderer* r, Color c)
 	{
 		SDL_SetRenderDrawColor(r, c.r(), c.g(), c.b(), c.a());
 		unsigned int i = _points.size()-1;
-		SDL_RenderDrawLine(r, _points[0].x, _points[0].y, _points[i].x, _points[i].y);
+		SDL_RenderDrawLine(r, (int)_points[0].x, (int)_points[0].y, (int)_points[i].x, (int)_points[i].y);
 		for (i = 1; i < _points.size(); i++)
 		{
-			SDL_RenderDrawLine(r, _points[i - 1].x, _points[i - 1].y, _points[i].x, _points[i].y);
+			SDL_RenderDrawLine(r, (int)_points[i - 1].x, (int)_points[i - 1].y, (int)_points[i].x, (int)_points[i].y);
 		}
 	}
 }
@@ -64,7 +64,7 @@ void Polygon::drawFill(SDL_Renderer * r, Color c)
 	}
 }
 // Source: http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/
-bool Polygon::enclosesPoint(SDL_Point p) const
+bool Polygon::enclosesPoint(const Point &p) const
 {
 	unsigned int n = _points.size();
 	// There must be at least 3 vertices in polygon[]
@@ -72,7 +72,7 @@ bool Polygon::enclosesPoint(SDL_Point p) const
 		return false;
 
 	// Create a point for line segment from p to infinite
-	SDL_Point extreme = { INF, p.y };
+	Point extreme = { INF, p.y };
 
 	// Count intersections of the above line with sides of polygon
 	int count = 0, i = 0;
@@ -112,7 +112,7 @@ vector<Line> Polygon::getLines() const
 	}
 	return ret;
 }
-Polygon Polygon::operator+(const SDL_Point p)
+Polygon Polygon::operator+(const Point& p)
 {
 	Polygon po;
 	for (auto e : _points)
