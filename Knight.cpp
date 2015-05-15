@@ -14,15 +14,19 @@ Knight::Knight(int x , int y , string name) : Character(x, y, name)
 	hpMax = _hitPoints = HP_MAX;
 
 	_spells[DASH] = new Spell("Dash", this, 2, 3, 0, 0, 0, 2, false);
+	_spells[DASH]->setDescription("The Knight leaps forward to a maximum of 2 cells.");
 	_spells[DASH]->addEffect(new DashEffect(this));
 
 	_spells[HEAL] = new Spell("Heal", this, 2, 2, 0, 0, 0, 0, false);
+	_spells[HEAL]->setDescription("Calls the mighty magic healing upon the Knight.");
 	_spells[HEAL]->addEffect(new HealEffect(50, this));
 
 	_spells[SWORD_DESTINY] = new Spell("Sword of Destiny", this, 2, 10, 0, 0, 0, 1, false);
+	_spells[SWORD_DESTINY]->setDescription("The almighty Sword of Destiny comes from the sky to slay an enemy, \ndealing huge damages to a single target.");
 	_spells[SWORD_DESTINY]->addEffect(new DamageEffect(250, this));
 
 	_spells[SWORD_FORWARD] = new Spell("Sword Forward", this, 2, 5, 0, 0, 0, 6, true);
+	_spells[SWORD_FORWARD]->setDescription("Expends its sword in a line to damage all the enemies within that line.");
 	_spells[SWORD_FORWARD]->addEffect(new DamageEffect(90, this));
 	
 }
