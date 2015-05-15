@@ -35,6 +35,8 @@ public:
 	virtual void onMouseMove(MouseEvents::MotionEvent* e);
 	virtual void onMouseOut(MouseEvents::MotionEvent* e);
 
+	void mark(unsigned int cell, Color color = Color::BLUE);
+	void unmark(unsigned int cell);
 protected:
 	virtual void internalRender(SDL_Renderer* r, bool force = false) override;
 
@@ -43,8 +45,11 @@ private:
 	Grid* _grid;
 	unsigned int _width;
 	unsigned int _height;
-	vector<Polygon> _cellPolygons;
-	map<unsigned int, vector<Polygon>> _cellsPolygon;
+	Polygon _cellDrawPolygon;
+	vector<Polygon> _cellHitBox;
+	map<unsigned int, Polygon> _cellsDrawPolygons;
+	map<unsigned int, vector<Polygon>> _cellsHitboxes;
+	map<unsigned int, Color> _markedCells;
 
 	Point _cellDimensions;
 	Cell* _higlighted_cell = nullptr;
