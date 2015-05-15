@@ -12,6 +12,10 @@ bool Point::operator==(const Point& p) const
 {
 	return (p.x == x) && (p.y == y);
 }
+Point& Point::operator/(int n) const
+{
+	return *(new Point(x / n, y / n));
+}
 ostream& operator<<(ostream& o, const SDL_Point& p)
 {
 	o << "(" << p.x << ", " << p.y << ")";

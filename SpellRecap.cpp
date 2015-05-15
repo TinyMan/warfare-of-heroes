@@ -1,8 +1,8 @@
 #include "SpellRecap.h"
+#include "GridOctopus.h"
 
-
-SpellRecap::SpellRecap(Character* c)
-	: _character(c), Panel(1200, 300)
+SpellRecap::SpellRecap(Character* c, GridOctopus* grid)
+	: _character(c), Panel(1200, 300), _grid(grid)
 {
 	createSpellButtons();
 
@@ -16,7 +16,7 @@ SpellRecap::SpellRecap(Character* c)
 	add(_selected_spell_description, 150, 100 );
 
 	setBgColor(Color::BGCOLOR);
-	ServiceLocator::getEventService()->listen(typeid(BeginTurnEvent), [=](Event* e) { setActive(_character == GAMEINST->getCurrentPlayer()); });
+	ServiceLocator::getEventService()->listen(typeid(BeginTurnEvent), [=](Event* e) { setActive(_character == GAMEINST->getCurrentPlayer()); _grid->unmarkAll(); });
 }
 
 
@@ -81,7 +81,10 @@ void SpellRecap::selectSpell(int spellID)
 {
 	if (spellID != _selected_spell)
 	{
+		//LOGINFO << "Selected spell number " << spellID << endl;
+		_grid->unmarkAll();
 		_selected_spell = spellID;
 		setDirty();
+		_grid->mark(_character->getSpell(_selected_spell)->getCellsInRange(), Color(255,0,0,128));
 	}
 }

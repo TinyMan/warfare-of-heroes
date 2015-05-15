@@ -15,6 +15,8 @@ public:
 	Uint8 b() const { return _b; }
 	Uint8 a() const { return _a; }
 
+	operator Uint32 () const;
+
 	static const Color BLACK;
 	static const Color RED;
 	static const Color GREEN;
@@ -25,6 +27,7 @@ public:
 	static const Color BGCOLOR;
 	bool operator==(const Color& c) const;
 	bool operator!=(const Color& c) const;
+	bool operator<(const Color& c) const;
 private:
 	Uint8 _r = 0;
 	Uint8 _g = 0;

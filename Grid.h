@@ -49,7 +49,7 @@ public:
 	static const int HEIGHT = 14;
 	static const unsigned int CELLS_NUMBER = (WIDTH * 2 - 1) * HEIGHT - WIDTH + 1;
 
-	static unsigned int toCellNumber(int x, int y) { return CELLS_NUMBER/2 + x * WIDTH + y * (HEIGHT - 1); }
+	static unsigned int toCellNumber(int x, int y) { return (CELLS_NUMBER-1)/2 + x * WIDTH + y * (HEIGHT - 1); }
 
 	virtual void beginTurn();
 

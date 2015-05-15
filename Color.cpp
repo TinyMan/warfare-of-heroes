@@ -29,3 +29,11 @@ bool Color::operator != (const Color& c) const
 {
 	return !(c == *this);
 }
+bool Color::operator<(const Color& c) const
+{
+	return (Uint32)*this < c;
+}
+Color::operator Uint32 () const
+{
+	return	_r << 24 | _g << 16 | _b << 8 | _a;
+}

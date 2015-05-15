@@ -17,6 +17,7 @@ public:
 	Point operator*(const double) const;
 	bool operator!=(const Point&) const;
 	bool operator==(const Point&) const;
+	Point& operator/(int n) const;
 };
 
 SDL_Point operator+(const SDL_Point p1, const SDL_Point p2);

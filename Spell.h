@@ -38,6 +38,7 @@ public:
 	int getCPCost() const { return _cp_cost; }
 	string getName() const { return _name; }
 	string getDescription() const { return _description; }
+	vector<unsigned int> getCellsInRange() const;
 
 	friend ostream& operator<<(ostream& o, const Spell& s);
 protected:	

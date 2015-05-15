@@ -84,6 +84,30 @@ void Spell::beginTurn()
 	if (_cooldown > 0)
 		_cooldown--;
 }
+vector<unsigned int> Spell::getCellsInRange() const
+{// TODO: add inline check
+	Grid* grid = GAMEINST->getGrid();
+	const Cell* casterCell = _caster->getCell();
+	int x = casterCell->getPosX(), y = casterCell->getPosY();
+	vector<unsigned int> ret;
+	for (int i = -_max_scope; i <= _max_scope; i++)
+	{
+		for (int j = -_max_scope; j <= _max_scope; j++)
+		{
+			SpellTarget* target = grid->getCellAt(x + i, y + j);
+			if (target)
+			{
+				int distance = _caster->getDistance(*target);
+				if (distance <= _max_scope && distance >= _min_scope && (!_is_inline || casterCell->isInLine(*target->getCell())))
+				{
+					ret.push_back(target->getCell()->getNumber());
+				}
+			}
+		}
+	}
+	return ret;
+}
+
 ostream& operator<<(ostream& o, const Spell& s)
 {
 	o << "Displaying spell: " << s._name << endl;

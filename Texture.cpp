@@ -118,9 +118,13 @@ void Texture::fill(SDL_Renderer* r, Color c)
 		SDL_Texture* old = SDL_GetRenderTarget(r);
 
 		SDL_SetRenderTarget(r, *this);
-		SDL_SetRenderDrawColor(r, c.r(), c.g(), c.b(), c.a());
-		SDL_RenderFillRect(r, NULL);
+		Uint8 oldR, oldG, oldB, oldA;
 
+		SDL_GetRenderDrawColor(r, &oldR, &oldG, &oldB, &oldA);
+		SDL_SetRenderDrawColor(r, c.r(), c.g(), c.b(), c.a());
+		SDL_RenderClear(r);
+
+		SDL_SetRenderDrawColor(r, oldR, oldG, oldB, oldA);
 		SDL_SetRenderTarget(r, old);
 	}
 }

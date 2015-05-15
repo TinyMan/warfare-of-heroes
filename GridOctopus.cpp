@@ -160,17 +160,33 @@ void GridOctopus::internalRender(SDL_Renderer* r, bool force)
 		if (d)
 		{
 			if (_higlighted_cell)
-			{				
-				_cellsDrawPolygons[_higlighted_cell->getNumber()].drawFill(r, Color::BLUE);
+			{
+				drawCell(r, _higlighted_cell->getNumber(), Color::BLUE);
+				
 			}
+
 			for (auto& p : _markedCells)
 			{
-				_cellsDrawPolygons[p.first].drawFill(r, p.second);
+				drawCell(r, p.first, p.second);
 			}
 		}
 	}
 }
 
+void GridOctopus::drawCell(SDL_Renderer* r, unsigned int cell, Color color)
+{
+	if (_coloredCells.count(color) != 1)
+	{
+		_coloredCells[color] = Texture((int)_cellDimensions.x, (int)_cellDimensions.y, Color::TRANSPARENT, r);
+		_coloredCells[color].setRenderTarget();
+		_cellsDrawPolygons[0].drawFill(r, color);
+		_coloredCells[color].resetRenderTarget();
+		SDL_SetTextureBlendMode(_coloredCells[color], SDL_BLENDMODE_BLEND);
+	}
+	Point pos = getCellCenter(cell) - _cellDimensions / 2;
+	SDL_Rect dst = { (int)pos.x, (int)pos.y, (int)_cellDimensions.x, (int)_cellDimensions.y };
+	_coloredCells[color].render(r,nullptr, &dst);
+}
 void GridOctopus::onMouseMove(MouseEvents::MotionEvent* e)
 {
 	Hoverable::onMouseMove(e);
@@ -193,7 +209,11 @@ Point GridOctopus::getCellCenter(const Cell* cell) const
 { 
 	if (!cell)
 		throw string("Cell cannot be null");
-	unsigned int n = cell->getNumber();
+
+	return getCellCenter(cell->getNumber());
+}
+Point GridOctopus::getCellCenter(unsigned int n) const
+{
 	if (_cellsHitboxes.count(n) != 1)
 		throw string("Unknown cell");
 
@@ -203,13 +223,26 @@ Point GridOctopus::getCellCenter(const Cell* cell) const
 
 	return points[2];
 }
+void GridOctopus::mark(vector<unsigned int> cells, Color color)
+{
+	for (unsigned int c : cells)
+	{
+		mark(c, color);
+	}
+}
 void GridOctopus::mark(unsigned int cell, Color color)
 {
 	if (cell > Grid::CELLS_NUMBER)
 		throw string("cell number not in range");
 	_markedCells[cell] = color;
+	setDirty();
 }
 void GridOctopus::unmark(unsigned int cell)
 {
 	_markedCells.erase(cell);
+}
+void GridOctopus::unmarkAll()
+{
+	_markedCells.clear();
+	setDirty();
 }

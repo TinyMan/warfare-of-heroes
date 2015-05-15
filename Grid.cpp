@@ -3,19 +3,43 @@
 
 Grid::Grid()
 {
-	
-	for (int i = -WIDTH +1; i < WIDTH; i++)
+	unsigned int n = 0;
+	int nextX = -13;
+	int nextY = 0;
+	for (int j = 0; j < Grid::HEIGHT * 2 - 1; ++j)
 	{
-		for (int j = -HEIGHT +1; j < HEIGHT; j++)
+		bool big = j % 2 == 0;
+		int width = big ? Grid::WIDTH : Grid::WIDTH - 1;
+
+		int y = nextY;
+		int x = nextX;
+		for (int i = 0; i < width; i++)
 		{
-			int n = toCellNumber(i, j);
+			if (n >= 0 && n < CELLS_NUMBER)
+			{
+				_cells[n] = Cell(n, x, y);
+				_cells_coordinates[x][y] = n;
+			}
+			x++;
+			y--;
+			n++;
+		}
+		if (big)
+		{
+			nextX++;
+		}
+		else
+		{
+			nextY++;
+		}
+	}
+
+			/*int n = toCellNumber(i, j);
 			if (n >= 0 && n < CELLS_NUMBER)
 			{
 				_cells[n] = Cell( n, i, j);
 				_cells_coordinates[i][j] = n;
-			}
-		}
-	}
+			}*/
 }
 
 

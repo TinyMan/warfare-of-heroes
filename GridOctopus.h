@@ -21,6 +21,7 @@ public:
 
 	Cell* getCellFromPoint(const Point& p) const;
 	Point getCellCenter(const Cell* cell) const;
+	Point getCellCenter(unsigned int cell) const;
 
 	virtual void update() override;
 	virtual bool isDirty() override { return _dirty; }
@@ -35,10 +36,13 @@ public:
 	virtual void onMouseMove(MouseEvents::MotionEvent* e);
 	virtual void onMouseOut(MouseEvents::MotionEvent* e);
 
+	void mark(vector<unsigned int> cells, Color color = Color::BLUE);
 	void mark(unsigned int cell, Color color = Color::BLUE);
 	void unmark(unsigned int cell);
+	void unmarkAll();
 protected:
 	virtual void internalRender(SDL_Renderer* r, bool force = false) override;
+	virtual void drawCell(SDL_Renderer* r, unsigned int cell, Color c);
 
 private:
 	bool _dirty = true;
@@ -50,6 +54,7 @@ private:
 	map<unsigned int, Polygon> _cellsDrawPolygons;
 	map<unsigned int, vector<Polygon>> _cellsHitboxes;
 	map<unsigned int, Color> _markedCells;
+	map<Color, Texture> _coloredCells;
 
 	Point _cellDimensions;
 	Cell* _higlighted_cell = nullptr;
