@@ -9,12 +9,24 @@ GridOctopus::GridOctopus(Grid* grid, unsigned int width, unsigned int height)
 	_cellDimensions.x = (double)_width / Grid::WIDTH;
 	_cellDimensions.y = (double)_height / Grid::HEIGHT;
 
+	Polygon p1, p2, p3, p4; // triangles
+	p1.addPoint(Point(0, _cellDimensions.y / 2));
+	p1.addPoint(Point(_cellDimensions.x / 2, 0));
+	p1.addPoint(Point(_cellDimensions.x / 2, _cellDimensions.y / 2));
+	p2.addPoint(Point(_cellDimensions.x / 2, 0));
+	p2.addPoint(Point(_cellDimensions.x, _cellDimensions.y / 2));
+	p2.addPoint(Point(_cellDimensions.x / 2, _cellDimensions.y / 2));
+	p3.addPoint(Point(_cellDimensions.x, _cellDimensions.y / 2));
+	p3.addPoint(Point(_cellDimensions.x / 2, _cellDimensions.y / 2));
+	p3.addPoint(Point(_cellDimensions.x / 2, _cellDimensions.y));
+	p4.addPoint(Point(0, _cellDimensions.y / 2));
+	p4.addPoint(Point(_cellDimensions.x / 2, _cellDimensions.y / 2));
+	p4.addPoint(Point(_cellDimensions.x / 2, _cellDimensions.y));
 
-	_cellPolygon.addPoint({ 0, _cellDimensions.y / 2 });
-	_cellPolygon.addPoint({ _cellDimensions.x/2, 0});
-	_cellPolygon.addPoint({ _cellDimensions.x, _cellDimensions.y / 2 });
-	_cellPolygon.addPoint({ _cellDimensions.x/2, _cellDimensions.y });
-
+	_cellPolygons.push_back(p1);
+	_cellPolygons.push_back(p2);
+	_cellPolygons.push_back(p3);
+	_cellPolygons.push_back(p4);
 
 	// draw the grid
 	/* code from leekwars
@@ -91,8 +103,11 @@ GridOctopus::GridOctopus(Grid* grid, unsigned int width, unsigned int height)
 			pos.x = i * _cellDimensions.x + (!big * _cellDimensions.x / 2);
 			pos.y = j * _cellDimensions.y/2;
 
-			Polygon poly = _cellPolygon + pos;
-
+			vector<Polygon> poly = _cellPolygons;
+			for (auto& e : poly)
+			{
+				e = e + pos;
+			}
 			_cellsPolygon.emplace(n, poly);
 			n++;
 		}
@@ -112,7 +127,12 @@ Cell* GridOctopus::getCellFromPoint(const Point & p) const
 	bool found = false;
 	do
 	{
-		found = it->second.enclosesPoint(point);
+		for (auto& e : it->second)
+		{
+			found = e.enclosesPoint(point);
+			if (found)
+				break;
+		}		
 	} while (!found && ++it != _cellsPolygon.end());
 
 	if (found)
@@ -135,7 +155,10 @@ void GridOctopus::internalRender(SDL_Renderer* r, bool force)
 		{
 			if (_higlighted_cell)
 			{
-				_cellsPolygon[_higlighted_cell->getNumber()].drawFill(r, Color::BLUE);
+				for (auto& e : _cellsPolygon[_higlighted_cell->getNumber()])
+				{
+					e.drawFill(r, Color::BLUE);
+				}
 			}			
 		}
 	}
@@ -167,10 +190,9 @@ Point GridOctopus::getCellCenter(const Cell* cell) const
 	if (_cellsPolygon.count(n) != 1)
 		throw string("Unknown cell");
 
-	Polygon poly = _cellsPolygon.at(n);
+	Polygon poly = _cellsPolygon.at(n)[0];
 
 	vector<Point> points = poly.getPoints();
 
-	Point pos(points[1].x, points[0].y);
-	return pos;
+	return points[2];
 }

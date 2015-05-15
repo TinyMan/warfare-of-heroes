@@ -43,8 +43,8 @@ private:
 	Grid* _grid;
 	unsigned int _width;
 	unsigned int _height;
-	Polygon _cellPolygon;
-	map<unsigned int, Polygon> _cellsPolygon;
+	vector<Polygon> _cellPolygons;
+	map<unsigned int, vector<Polygon>> _cellsPolygon;
 
 	Point _cellDimensions;
 	Cell* _higlighted_cell = nullptr;
