@@ -53,10 +53,13 @@ void Polygon::drawFill(SDL_Renderer * r, Color c)
 		}
 
 		// sort
+		intersectionX.unique();
 		intersectionX.sort();
 
 		// draw;
 		vector<int> x(intersectionX.begin(), intersectionX.end());
+		if (x.size() < 2)
+			continue;
 		for (unsigned int i = 0; i < x.size(); i+=2)
 		{
 			SDL_RenderDrawLine(r, x[i], y, x[i+1], y);

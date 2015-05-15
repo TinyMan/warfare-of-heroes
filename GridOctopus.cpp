@@ -155,10 +155,17 @@ void GridOctopus::internalRender(SDL_Renderer* r, bool force)
 		{
 			if (_higlighted_cell)
 			{
-				for (auto& e : _cellsPolygon[_higlighted_cell->getNumber()])
+				Polygon poly;
+				poly.addPoint(_cellsPolygon[_higlighted_cell->getNumber()][0].getPoints()[0]);
+				poly.addPoint(_cellsPolygon[_higlighted_cell->getNumber()][0].getPoints()[1]);
+				poly.addPoint(_cellsPolygon[_higlighted_cell->getNumber()][1].getPoints()[1]);
+				poly.addPoint(_cellsPolygon[_higlighted_cell->getNumber()][2].getPoints()[2]);
+
+				poly.drawFill(r, Color::BLUE);
+				/*for (auto& e : _cellsPolygon[_higlighted_cell->getNumber()])
 				{
 					e.drawFill(r, Color::BLUE);
-				}
+				}*/
 			}			
 		}
 	}
