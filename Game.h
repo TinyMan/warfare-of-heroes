@@ -95,6 +95,7 @@ private:
 
 	Uint32 _turn_start = 0; // timestamps of the begining of the turn
 	Uint32 _turn_max_duration = 90000; // number of millisecond per turn (max)
+	Timeout* _endOfTurn_timeout = nullptr;
 
 	/* ptr to different services */
 	TimeService * _timeService = nullptr;

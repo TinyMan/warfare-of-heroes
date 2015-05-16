@@ -315,7 +315,7 @@ void Game::beginTurn()
 	_players.at(_player_turn)->beginTurn();
 	_grid->beginTurn();
 	_turn_start = TIMESERVICE->time();
-	TIMESERVICE->setTimeout(_turn_max_duration, Callback(&Game::endTurn, this));
+	_endOfTurn_timeout = TIMESERVICE->setTimeout(_turn_max_duration, Callback(&Game::endTurn, this));
 	(new BeginTurnEvent(_players.at(_player_turn)))->dispatch();
 }
 void Game::endTurn(void* )
@@ -324,5 +324,6 @@ void Game::endTurn(void* )
 	_turn += _player_turn;
 	_player_turn = _player_turn == 0 ? 1 : 0;
 	UI->clear();
+	TIMESERVICE->removeTimeout(_endOfTurn_timeout);
 	beginTurn();
 }
