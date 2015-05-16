@@ -285,6 +285,12 @@
     <ClCompile Include="SpellButton.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="TargetSelector.cpp">
+      <Filter>Source Files\Game\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="DiamondSelector.cpp">
+      <Filter>Source Files\Game\Spell\AoE Target</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -499,6 +505,12 @@
     </ClInclude>
     <ClInclude Include="GridEvents.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetSelector.h">
+      <Filter>Header Files\Game\Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="DiamondSelector.h">
+      <Filter>Header Files\Game\Spell\AoE Target</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

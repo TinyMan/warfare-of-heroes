@@ -11,12 +11,29 @@ namespace Events
 			GridEvent(){}
 			virtual ~GridEvent(){}
 		};
-		class CellClick : public GridEvent
+		class CellEvent : public GridEvent
 		{
 		public:
-			CellClick(unsigned int c) : cell(c){}
+			CellEvent(unsigned int c) : cellNumber(c){}
+			CellEvent(Cell* c) : cellPtr(c){}
+			virtual ~CellEvent() {}
+			unsigned int cellNumber = 9999;
+			Cell* cellPtr = nullptr;
+		};
+		class CellClick : public CellEvent
+		{
+		public:
+			template<typename T>
+			CellClick(Uint8 _button, T c) : CellEvent(c), button(_button){}
 			virtual ~CellClick() {}
-			unsigned int cell;
+			Uint8 button;
+		};
+		class CellHover : public CellEvent
+		{
+		public:
+			template<typename T>
+			CellHover(T c) : CellEvent(c){}
+			~CellHover(){}
 		};
 	}
 

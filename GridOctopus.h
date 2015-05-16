@@ -46,6 +46,8 @@ public:
 	void unmark(unsigned int cell);
 	void unmark(vector<unsigned int> cells);
 	void unmarkAll();
+
+	const Cell* _higlighted_cell = nullptr;
 protected:
 	virtual void internalRender(SDL_Renderer* r, bool force = false) override;
 	virtual void drawCell(SDL_Renderer* r, unsigned int cell, Color c);
@@ -63,6 +65,5 @@ private:
 	map<Color, Texture> _coloredCells;
 
 	Point _cellDimensions;
-	Cell* _higlighted_cell = nullptr;
 
 };

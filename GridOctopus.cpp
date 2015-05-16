@@ -160,11 +160,6 @@ void GridOctopus::internalRender(SDL_Renderer* r, bool force)
 		bool d = (force | isDirty());
 		if (d)
 		{
-			if (_higlighted_cell)
-			{
-				drawCell(r, _higlighted_cell->getNumber(), Color::BLUE);
-				
-			}
 
 			for (auto& p : _markedCells)
 			{
@@ -192,9 +187,10 @@ void GridOctopus::onMouseMove(MouseEvents::MotionEvent* e)
 {
 	Hoverable::onMouseMove(e);
 	Cell* c = getCellFromPoint(e->getPos());
-	if (_higlighted_cell != c)
+	if (c && _higlighted_cell != c)
 	{
 		_higlighted_cell = c;
+		(new CellHover(c))->dispatch();
 	}
 	else
 	{
@@ -262,6 +258,6 @@ void GridOctopus::onClick(ClickEvent* e)
 	{
 		unsigned int cell = c->getNumber();
 
-		(new CellClick(cell))->dispatch();
+		(new CellClick(e->button(), cell))->dispatch();
 	}
 }

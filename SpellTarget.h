@@ -21,6 +21,7 @@ public:
 	virtual void displayBasic(ostream& o) const =0;
 	virtual const Cell* getCell() const = 0;
 	virtual bool hisTurn() const = 0;
+	virtual list<Cell*> getCells() const { list<Cell*> ret; ret.push_back((Cell*)getCell()); return ret; }
 
 	/* setters */
 	virtual void lowerHitPoint(int amount) = 0;

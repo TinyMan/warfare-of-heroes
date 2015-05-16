@@ -7,6 +7,7 @@
 #include "SpellTarget.h"
 #include "DamageOverTime.h"
 #include "SpellEvents.h"
+#include "TargetSelector.h"
 
 using namespace std;
 
@@ -33,6 +34,7 @@ public:
 	void setInline(bool il) { _is_inline = il; }
 	void addEffect(Effect* effect);
 	void setDescription(string descr) { _description = descr; }
+	void setTargetSelector(TargetSelector* s);
 
 	/* getters */
 	int getMaxScope() const { return _max_scope; }
@@ -40,6 +42,7 @@ public:
 	string getName() const { return _name; }
 	string getDescription() const { return _description; }
 	vector<unsigned int> getCellsInRange() const;
+	SpellTarget* getTargetFromCell(Cell* c) const;
 
 	friend ostream& operator<<(ostream& o, const Spell& s);
 protected:	
@@ -54,6 +57,7 @@ protected:
 
 	list<Effect*> _effects;
 	Character* _caster;
+	TargetSelector* _selector = nullptr;
 private:
 	int _max_cooldown;
 	int _cooldown = 0;

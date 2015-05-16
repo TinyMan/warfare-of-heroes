@@ -26,6 +26,10 @@ public:
 	void unselectSpell(int spellID);
 
 	virtual void clickOnCell(unsigned int c);
+	virtual void hoverCell(Cell* c);
+
+	const Color range_color = Color(0, 255, 0, 128);
+	const Color range_hover_color = Color(255, 0, 0, 128);
 private:
 	GridOctopus* _grid = nullptr;
 	Character* _character = nullptr;
@@ -35,8 +39,12 @@ private:
 
 	Label* _selected_spell_name = nullptr;
 	Label* _selected_spell_description = nullptr;
+	vector<unsigned int> _selected_spell_range;
+	vector<unsigned int> _selected_spell_aoe;
 
 	int _selected_spell = NO_SPELL;
+
+	Cell* _hovered_cell = nullptr;
 
 	void createSpellButtons();
 

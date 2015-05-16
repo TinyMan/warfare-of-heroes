@@ -4,6 +4,7 @@
 #include "DamageOverTime.h"
 #include "DamageBuffEffect.h"
 #include "KnockBackEffect.h"
+#include "DiamondSelector.h"
 
 Archer::Archer(int x, int y, string name) : Character(x, y, name)
 {
@@ -15,6 +16,7 @@ Archer::Archer(int x, int y, string name) : Character(x, y, name)
 	_spells[VOLLEY] = new Spell("Arrow Volley", this, 4, 10, 0, 0, 0, 8, false);
 	_spells[VOLLEY]->setDescription("Shoots a bunch of arrows in the air, \nwhich then fall into a zone, dealing damages to the enemies present in the area.");
 	_spells[VOLLEY]->addEffect(new DamageEffect(120, this));
+	_spells[VOLLEY]->setTargetSelector(new DiamondSelector(2));
 
 	_spells[SB_ARROW] = new Spell("Step-Back Arrow", this, 4, 6, 0, 0, 0, 3, true);
 	_spells[SB_ARROW]->setDescription("Shoots an arrow in a line, \nupon hitting an enemy, it makes him move backwards for 2 cells.");

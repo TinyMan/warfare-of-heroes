@@ -17,8 +17,25 @@ SpellRecap::SpellRecap(Character* c, GridOctopus* grid)
 	add(_selected_spell_description, 150, 100 );
 
 	setBgColor(Color::BGCOLOR);
-	EVENTSERVICE->listen(typeid(BeginTurnEvent), [=](Event* e) { setActive(_character == GAMEINST->getCurrentPlayer()); unselectSpell(_selected_spell); });
-	EVENTSERVICE->listen(typeid(CellClick), [=](Event* e) { CellClick* ev = dynamic_cast<CellClick*>(e); if(ev)clickOnCell(ev->cell); });
+	EVENTSERVICE->listen(typeid(BeginTurnEvent), [=](Event* e) { 
+		setActive(_character == GAMEINST->getCurrentPlayer()); 
+		unselectSpell(_selected_spell); 
+	});
+	EVENTSERVICE->listen(typeid(CellClick), [=](Event* e) { 
+		CellClick* ev = dynamic_cast<CellClick*>(e); 
+		if (ev)
+		{
+			if (ev->button == SDL_BUTTON_LEFT)
+				clickOnCell(ev->cellNumber);
+			else
+				unselectSpell(_selected_spell);
+		}
+	});
+	EVENTSERVICE->listen(typeid(CellHover), [=](Event* e) { 
+		CellHover* ev = dynamic_cast<CellHover*>(e);
+		if (ev)
+			hoverCell(ev->cellPtr); 
+	});
 }
 
 
@@ -82,17 +99,21 @@ void SpellRecap::selectSpell(int spellID)
 	{
 		if (spells.count(_selected_spell) == 1)
 			_buttons_spells[_selected_spell]->unselect();
-		_selected_spell = spellID;
-		setDirty();
-		_grid->mark(_character->getSpell(_selected_spell)->getCellsInRange(), Color(255,0,0,128));
 
+		_selected_spell = spellID;
+		_selected_spell_range = _character->getSpell(_selected_spell)->getCellsInRange();
+		_grid->mark(_selected_spell_range, range_color);
+
+		setDirty();
 	}
 }
 void SpellRecap::unselectSpell(int spellID)
 {
 	if (spellID == _selected_spell &&spells.count(_selected_spell) == 1)
 	{
-		_grid->unmark(_character->getSpell(_selected_spell)->getCellsInRange());
+		_grid->unmark(_selected_spell_range);
+		_grid->unmark(_selected_spell_aoe);
+		_selected_spell_range.clear();
 		_selected_spell = NO_SPELL;
 		setDirty();
 	}
@@ -103,12 +124,37 @@ void SpellRecap::clickOnCell(unsigned int c)
 		return;
 	if (spells.count(_selected_spell) == 1)
 	{
-		unsigned int s = _selected_spell;
+		spells[_selected_spell]->cast(c);
 		unselectSpell(_selected_spell);
-		spells[s]->cast(c);
 	}
 	else
 	{
 		GAMEINST->getCurrentPlayer()->move(c);
 	}
+}
+void SpellRecap::hoverCell(Cell* c)
+{
+	if (!isActive() || !c || _hovered_cell == c)
+		return;
+	if (_hovered_cell)
+		_grid->unmark(_hovered_cell->getNumber());
+
+	_grid->unmark(_selected_spell_aoe);
+	_grid->mark(_selected_spell_range, range_color);
+
+	if (find(_selected_spell_range.begin(), _selected_spell_range.end(), c->getNumber()) != _selected_spell_range.end())
+	{		
+		list<Cell* > cells = spells[_selected_spell]->getTargetFromCell(c)->getCells();
+		_selected_spell_aoe.clear();
+		for (Cell* c : cells)
+			_selected_spell_aoe.push_back(c->getCell()->getNumber());
+		_grid->mark(_selected_spell_aoe, range_hover_color);
+	}
+	else
+	{
+		//_grid->mark(c->getNumber(), Color::BLUE);
+	}
+
+	_hovered_cell = c;
+	_grid->setDirty();
 }

@@ -3,7 +3,7 @@
 /* definition */
 
 Spell::Spell(string name, Character* caster, int cd,int cp_cost, int mp_cost, int hp_cost, int min_scope, int max_scope, bool is_inline)
-	: _name(name), _caster(caster), _max_cooldown(cd), _cp_cost(cp_cost), _mp_cost(mp_cost), _hp_cost(hp_cost), _min_scope(min_scope), _max_scope(max_scope), _is_inline(is_inline)
+	: _name(name), _caster(caster), _max_cooldown(cd), _cp_cost(cp_cost), _mp_cost(mp_cost), _hp_cost(hp_cost), _min_scope(min_scope), _max_scope(max_scope), _is_inline(is_inline), _selector(new TargetSelector())
 {
 }
 
@@ -11,11 +11,20 @@ Spell::Spell(string name, Character* caster, int cd,int cp_cost, int mp_cost, in
 Spell::~Spell()
 {	
 }
+SpellTarget* Spell::getTargetFromCell(Cell* c) const
+{
+	if (_selector)
+	{
+		return _selector->getTargetFromCell(c);
+	}
+	return nullptr;
+}
 bool Spell::cast(unsigned int cell)
 {
-	SpellTarget* target = GAMEINST->getGrid()->getCell(cell);
+	SpellTarget* target = getTargetFromCell(GAMEINST->getGrid()->getCell(cell));
 	if (target)
-		return cast(target);
+		return cast(target);	
+	
 	return false;
 }
 bool Spell::cast(SpellTarget* target)
@@ -114,6 +123,15 @@ vector<unsigned int> Spell::getCellsInRange() const
 	return ret;
 }
 
+void Spell::setTargetSelector(TargetSelector* s)
+{
+	if (s != _selector)
+	{
+		if (_selector)
+			delete _selector;
+		_selector = s;
+	}
+}
 ostream& operator<<(ostream& o, const Spell& s)
 {
 	o << "Displaying spell: " << s._name << endl;
