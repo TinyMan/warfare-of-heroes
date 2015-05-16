@@ -172,6 +172,7 @@
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="Glyph.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="GridEvents.h" />
     <ClInclude Include="GridOctopus.h" />
     <ClInclude Include="HealEffect.h" />
     <ClInclude Include="Hoverable.h" />

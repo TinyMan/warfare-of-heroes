@@ -123,6 +123,14 @@ bool Character::move(int i, int j, bool moveWanted)
 
 	return false;
 }
+bool Character::move(unsigned int cell, bool moveWanted)
+{
+	Cell* c = GAMEINST->getGrid()->getCell(cell);
+	if (c != nullptr)
+		return move(*c, moveWanted);
+
+	return false;
+}
 
 void Character::beginTurn()
 {

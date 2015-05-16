@@ -1,5 +1,6 @@
 #include "SpellRecap.h"
 #include "GridOctopus.h"
+#include "ServiceLocator.h"
 
 SpellRecap::SpellRecap(Character* c, GridOctopus* grid)
 	: _character(c), Panel(1200, 300), _grid(grid), spells(_character->getSpells())
@@ -16,7 +17,8 @@ SpellRecap::SpellRecap(Character* c, GridOctopus* grid)
 	add(_selected_spell_description, 150, 100 );
 
 	setBgColor(Color::BGCOLOR);
-	ServiceLocator::getEventService()->listen(typeid(BeginTurnEvent), [=](Event* e) { setActive(_character == GAMEINST->getCurrentPlayer()); _grid->unmarkAll(); });
+	EVENTSERVICE->listen(typeid(BeginTurnEvent), [=](Event* e) { setActive(_character == GAMEINST->getCurrentPlayer()); unselectSpell(_selected_spell); });
+	EVENTSERVICE->listen(typeid(CellClick), [=](Event* e) { CellClick* ev = dynamic_cast<CellClick*>(e); if(ev)clickOnCell(ev->cell); });
 }
 
 
@@ -88,10 +90,25 @@ void SpellRecap::selectSpell(int spellID)
 }
 void SpellRecap::unselectSpell(int spellID)
 {
-	if (spellID == _selected_spell)
+	if (spellID == _selected_spell &&spells.count(_selected_spell) == 1)
 	{
 		_grid->unmark(_character->getSpell(_selected_spell)->getCellsInRange());
 		_selected_spell = NO_SPELL;
 		setDirty();
+	}
+}
+void SpellRecap::clickOnCell(unsigned int c)
+{
+	if (!isActive())
+		return;
+	if (spells.count(_selected_spell) == 1)
+	{
+		unsigned int s = _selected_spell;
+		unselectSpell(_selected_spell);
+		spells[s]->cast(c);
+	}
+	else
+	{
+		GAMEINST->getCurrentPlayer()->move(c);
 	}
 }

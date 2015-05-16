@@ -79,6 +79,7 @@ public:
 	// Il faut créer une méthode de pathfinding qui permettra de se déplacer de plus d'une case à la fois.
 	bool move(int i, int j, bool moveWanted=true);
 	bool move(Cell& c, bool moveWanted=true);
+	bool move(unsigned int cell, bool moveWanted  = true);
 
 	void actionCallback(int actionID, void*);
 	void targetSelectorForCharacter(int spellIID, void* d = nullptr);

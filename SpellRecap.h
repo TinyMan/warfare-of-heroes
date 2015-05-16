@@ -4,12 +4,14 @@
 #include "Spell.h"
 #include "SpellButton.h"
 #include "Label.h"
+#include "GridEvents.h"
 class Character;
 class GridOctopus;
 
 #define NO_SPELL 9999
 
 using namespace std;
+using namespace Events::GridEvents;
 
 class SpellRecap :
 	public Panel
@@ -23,6 +25,7 @@ public:
 	void selectSpell(int spellID);
 	void unselectSpell(int spellID);
 
+	virtual void clickOnCell(unsigned int c);
 private:
 	GridOctopus* _grid = nullptr;
 	Character* _character = nullptr;

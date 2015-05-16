@@ -11,7 +11,13 @@ Spell::Spell(string name, Character* caster, int cd,int cp_cost, int mp_cost, in
 Spell::~Spell()
 {	
 }
-
+bool Spell::cast(unsigned int cell)
+{
+	SpellTarget* target = GAMEINST->getGrid()->getCell(cell);
+	if (target)
+		return cast(target);
+	return false;
+}
 bool Spell::cast(SpellTarget* target)
 {
 

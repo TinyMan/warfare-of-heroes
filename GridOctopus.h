@@ -4,9 +4,13 @@
 #include "Polygon.h"
 #include "Grid.h"
 #include "Hoverable.h"
+#include "Clickable.h"
+#include "GridEvents.h"
+
+using namespace Events::GridEvents;
 
 class GridOctopus
-	: public OctopusBaby, public Hoverable
+	: public OctopusBaby, public Hoverable, public Clickable
 {
 public:
 	/* represent the grid grid, in a container of size width x height 
@@ -35,6 +39,7 @@ public:
 	}
 	virtual void onMouseMove(MouseEvents::MotionEvent* e);
 	virtual void onMouseOut(MouseEvents::MotionEvent* e);
+	virtual void onClick(ClickEvent* e);
 
 	void mark(vector<unsigned int> cells, Color color = Color::BLUE);
 	void mark(unsigned int cell, Color color = Color::BLUE);

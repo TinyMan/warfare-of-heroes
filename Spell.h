@@ -18,6 +18,7 @@ public:
 	virtual ~Spell();
 
 	virtual bool cast(SpellTarget* target = nullptr);
+	virtual bool cast(unsigned int cell);
 	virtual void beginTurn();
 
 	virtual bool canCastOn(SpellTarget* target);

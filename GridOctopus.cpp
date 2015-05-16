@@ -120,6 +120,7 @@ GridOctopus::GridOctopus(Grid* grid, unsigned int width, unsigned int height)
 	}
 
 	setEveryMovesNotification(true);
+
 }
 
 GridOctopus::~GridOctopus()
@@ -252,5 +253,15 @@ void GridOctopus::unmark(vector<unsigned int> cells)
 	for (unsigned int c : cells)
 	{
 		unmark(c);
+	}
+}
+void GridOctopus::onClick(ClickEvent* e)
+{
+	Point pos = e->getPos();
+	if (Cell* c = getCellFromPoint(pos))
+	{
+		unsigned int cell = c->getNumber();
+
+		(new CellClick(cell))->dispatch();
 	}
 }

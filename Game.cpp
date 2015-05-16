@@ -49,7 +49,7 @@ void Game::initialize()
 	grid->generateObstacle();
 
 	Knight* player1 = new Knight(0, 0);
-	Mage* player3 = new Mage(6, 2);
+	Mage* player3 = new Mage(3, 2);
 	addGameObject(grid, player1, player3);
 	addPlayer(player1);
 	addPlayer(player3);
