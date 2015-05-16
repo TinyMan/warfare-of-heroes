@@ -80,7 +80,7 @@ Cell* Grid::getCellAt(int i, int j)
 {
 	if (!validCoordinates(i, j))
 	{
-		LOGERR << "Index de getCellAt() hors de la grille !" << endl;
+	//	LOGERR << "Index de getCellAt() hors de la grille !" << endl;
 		return nullptr;
 	}
 	return getCell(toCellNumber(i, j));
@@ -89,7 +89,7 @@ Cell* Grid::getCell(unsigned int n)
 {
 	if (_cells.count(n) != 1)
 	{
-		LOGERR << "Trying to get cell " << n << " but it is non existant" << endl;
+	//	LOGERR << "Trying to get cell " << n << " but it is non existant" << endl;
 		return nullptr;
 	}
 	return &_cells.at(n);

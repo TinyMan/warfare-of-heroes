@@ -2,7 +2,7 @@
 #include "GridOctopus.h"
 
 SpellRecap::SpellRecap(Character* c, GridOctopus* grid)
-	: _character(c), Panel(1200, 300), _grid(grid)
+	: _character(c), Panel(1200, 300), _grid(grid), spells(_character->getSpells())
 {
 	createSpellButtons();
 
@@ -30,13 +30,15 @@ void SpellRecap::update()
 	if (isActive())
 	{
 		Panel::update();
-		map<int, Spell*>  spells = _character->getSpells();
 		for (auto& e : _label_spells)
 		{
 			e.second->setText(to_string(spells[e.first]->getCPCost()) + " CP");
 		}
-		_selected_spell_name->setText(spells[_selected_spell]->getName());
-		_selected_spell_description->setText(spells[_selected_spell]->getDescription());
+		if (spells.count(_selected_spell) == 1)
+		{
+			_selected_spell_name->setText(spells[_selected_spell]->getName());
+			_selected_spell_description->setText(spells[_selected_spell]->getDescription());
+		}
 	}
 	
 }
@@ -44,15 +46,10 @@ void SpellRecap::createSpellButtons()
 {
 	if (_character == nullptr)
 		return;
-	auto selectSpellLambda = [=](int id, Event* e)
-	{
-		selectSpell(id);
-	};
 	for (auto& spell : _character->getSpells())
 	{
 		// creation of button
-		_buttons_spells[spell.first] = new Button(50, 50);
-		_buttons_spells[spell.first]->Clickable::setCallback(new EventCallback(selectSpellLambda, spell.first));
+		_buttons_spells[spell.first] = new SpellButton(spell.first, this);
 
 		// creation of labels (next to button)
 		_label_spells[spell.first] = new Label(100, 50);
@@ -81,10 +78,20 @@ void SpellRecap::selectSpell(int spellID)
 {
 	if (spellID != _selected_spell)
 	{
-		//LOGINFO << "Selected spell number " << spellID << endl;
-		_grid->unmarkAll();
+		if (spells.count(_selected_spell) == 1)
+			_buttons_spells[_selected_spell]->unselect();
 		_selected_spell = spellID;
 		setDirty();
 		_grid->mark(_character->getSpell(_selected_spell)->getCellsInRange(), Color(255,0,0,128));
+
+	}
+}
+void SpellRecap::unselectSpell(int spellID)
+{
+	if (spellID == _selected_spell)
+	{
+		_grid->unmark(_character->getSpell(_selected_spell)->getCellsInRange());
+		_selected_spell = NO_SPELL;
+		setDirty();
 	}
 }

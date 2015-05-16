@@ -240,9 +240,17 @@ void GridOctopus::mark(unsigned int cell, Color color)
 void GridOctopus::unmark(unsigned int cell)
 {
 	_markedCells.erase(cell);
+	setDirty();
 }
 void GridOctopus::unmarkAll()
 {
 	_markedCells.clear();
 	setDirty();
+}
+void GridOctopus::unmark(vector<unsigned int> cells)
+{
+	for (unsigned int c : cells)
+	{
+		unmark(c);
+	}
 }

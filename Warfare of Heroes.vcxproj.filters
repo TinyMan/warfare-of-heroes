@@ -282,6 +282,9 @@
     <ClCompile Include="PlayerOctopus.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="SpellButton.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -489,6 +492,9 @@
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="PlayerOctopus.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellButton.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>

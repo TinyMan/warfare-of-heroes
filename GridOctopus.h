@@ -39,6 +39,7 @@ public:
 	void mark(vector<unsigned int> cells, Color color = Color::BLUE);
 	void mark(unsigned int cell, Color color = Color::BLUE);
 	void unmark(unsigned int cell);
+	void unmark(vector<unsigned int> cells);
 	void unmarkAll();
 protected:
 	virtual void internalRender(SDL_Renderer* r, bool force = false) override;
