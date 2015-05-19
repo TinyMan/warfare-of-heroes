@@ -156,5 +156,4 @@ void SpellRecap::hoverCell(Cell* c)
 	}
 
 	_hovered_cell = c;
-	_grid->setDirty();
 }

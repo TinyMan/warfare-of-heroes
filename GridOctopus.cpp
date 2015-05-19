@@ -188,6 +188,7 @@ void GridOctopus::drawCell(SDL_Renderer* r, unsigned int cell, Color color)
 void GridOctopus::onMouseMove(MouseEvents::MotionEvent* e)
 {
 	Hoverable::onMouseMove(e);
+	setDirty(false);
 	Cell* c = getCellFromPoint(e->getPos());
 	if (c && _higlighted_cell != c)
 	{
@@ -233,19 +234,23 @@ void GridOctopus::mark(unsigned int cell, Color color)
 {
 	if (cell > Grid::CELLS_NUMBER)
 		throw string("cell number not in range");
-	_markedCells[cell] = color;
-	setDirty();
+	OctopusBaby::setIfDifferent(_markedCells[cell], color);
+	//setDirty();
 }
 void GridOctopus::unmark(unsigned int cell)
 {
-	_markedCells.erase(cell);
-	setDirty();
+	if(_markedCells.erase(cell) ==1)
+		setDirty();
 }
 void GridOctopus::unmarkAll()
 {
-	_markedCells.clear();
-	setDirty();
+	if (_markedCells.size() > 0)
+	{
+		_markedCells.clear();
+		setDirty();
+	}
 }
+
 void GridOctopus::unmark(vector<unsigned int> cells)
 {
 	for (unsigned int c : cells)
