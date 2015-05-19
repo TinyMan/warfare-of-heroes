@@ -132,7 +132,19 @@ GridOctopus::~GridOctopus()
 Cell* GridOctopus::getCellFromPoint(const Point & p) const
 {
 	Point point = toLocalCoordinates(p);
-	auto& it = _cellsHitboxes.begin();
+
+	/*
+	Optimization:
+	Since p could be at the bottom or the right of the grid, we don't need to iterate through the whole grid (it takes time)
+	We can calculate how many lines thereare between 0 and p.y (lets say j)
+	Then we need to find the cell number of the j-th line
+	Same for column
+	*/
+	unsigned int n_lines = max(int((point.y) / _cellDimensions.y)-1, 0);
+	unsigned int n_columns = max(int((point.x) / _cellDimensions.x), 0);
+	unsigned int n = n_lines * (Grid::WIDTH * 2 - 1) + n_columns;
+
+	auto& it = _cellsHitboxes.find(n);
 	bool found = false;
 	do
 	{
