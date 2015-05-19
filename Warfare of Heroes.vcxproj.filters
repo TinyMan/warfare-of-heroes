@@ -291,6 +291,9 @@
     <ClCompile Include="DiamondSelector.cpp">
       <Filter>Source Files\Game\Spell\AoE Target</Filter>
     </ClCompile>
+    <ClCompile Include="BasicLineSelector.cpp">
+      <Filter>Source Files\Game\Spell\AoE Target</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -510,6 +513,9 @@
       <Filter>Header Files\Game\Spell</Filter>
     </ClInclude>
     <ClInclude Include="DiamondSelector.h">
+      <Filter>Header Files\Game\Spell\AoE Target</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicLineSelector.h">
       <Filter>Header Files\Game\Spell\AoE Target</Filter>
     </ClInclude>
   </ItemGroup>

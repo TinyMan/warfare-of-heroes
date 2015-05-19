@@ -48,7 +48,8 @@ void Game::initialize()
 	Grid* grid = getGrid();
 	grid->generateObstacle();
 
-	Archer* player1 = new Archer(0, 0);
+	Archer* player2 = new Archer(0, 0);
+	Knight* player1 = new Knight(-2, -2);
 	Mage* player3 = new Mage(3, 2);
 	addGameObject(grid, player1, player3);
 	addPlayer(player1);

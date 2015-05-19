@@ -78,6 +78,7 @@
     <ClCompile Include="Activable.cpp" />
     <ClCompile Include="Archer.cpp" />
     <ClCompile Include="AreaOfEffect.cpp" />
+    <ClCompile Include="BasicLineSelector.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Callback.cpp" />
     <ClCompile Include="Cell.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Activable.h" />
     <ClInclude Include="Archer.h" />
     <ClInclude Include="AreaOfEffect.h" />
+    <ClInclude Include="BasicLineSelector.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Callback.h" />
     <ClInclude Include="Cell.h" />

@@ -4,6 +4,7 @@
 #include "DashEffect.h"
 #include "DamageEffect.h"
 #include "LineAoE.h"
+#include "BasicLineSelector.h"
 
 
 Knight::Knight(int x , int y , string name) : Character(x, y, name)
@@ -28,6 +29,17 @@ Knight::Knight(int x , int y , string name) : Character(x, y, name)
 	_spells[SWORD_FORWARD] = new Spell("Sword Forward", this, 2, 5, 0, 0, 0, 6, true);
 	_spells[SWORD_FORWARD]->setDescription("Expends its sword in a line to damage all the enemies within that line.");
 	_spells[SWORD_FORWARD]->addEffect(new DamageEffect(90, this));
+	_spells[SWORD_FORWARD]->setTargetSelector(new BasicLineSelector(6, [=](Cell* second, Grid::DIRECTION * dir){
+		const Cell* first = getCell();
+		if (first == second) throw("First cell and Second cell should not be the same !");
+		Grid * grid = GAMEINST->getGrid();
+		Grid::DIRECTION d = grid->getDir(*first, *second);
+
+		Cell* _last = grid->getCellFromCellAndDir(*first, d, 1);
+		if (dir)
+			*dir = d;
+		return _last; 
+	}));
 	
 }
 

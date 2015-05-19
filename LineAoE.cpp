@@ -26,6 +26,13 @@ LineAoE::LineAoE(const Cell* first, const Cell* second, int range)
 	LOGINFO << "|-- Last: " << *_last << endl;*/
 	extrapole();
 }
+LineAoE::LineAoE(const Cell* first, Grid::DIRECTION direction, int range)
+	: AreaOfEffect("Line AoE"), _first(first)
+{
+	if (direction == Grid::UNKNOWN) throw("Unknown direction");
+	_last = GAMEINST->getGrid()->getCellFromCellAndDir(*first, direction, range - 1);
+	extrapole();
+}
 
 
 LineAoE::~LineAoE()
