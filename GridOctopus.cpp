@@ -9,16 +9,17 @@ GridOctopus::GridOctopus(Grid* grid, unsigned int width, unsigned int height)
 	_cellDimensions.x = (double)_width / Grid::WIDTH;
 	_cellDimensions.y = (double)_height / Grid::HEIGHT;
 
+	const double PAD = 0.5;
 	Polygon p1, p2, p3, p4; // triangles
 	p1.addPoint(Point(0, _cellDimensions.y / 2));
 	p1.addPoint(Point(_cellDimensions.x / 2, 0));
 	p1.addPoint(Point(_cellDimensions.x / 2, _cellDimensions.y / 2));
 	p2.addPoint(Point(_cellDimensions.x / 2, 0));
-	p2.addPoint(Point(_cellDimensions.x, _cellDimensions.y / 2));
+	p2.addPoint(Point(_cellDimensions.x + PAD, _cellDimensions.y / 2));
 	p2.addPoint(Point(_cellDimensions.x / 2, _cellDimensions.y / 2));
 	p3.addPoint(Point(_cellDimensions.x, _cellDimensions.y / 2));
 	p3.addPoint(Point(_cellDimensions.x / 2, _cellDimensions.y / 2));
-	p3.addPoint(Point(_cellDimensions.x / 2, _cellDimensions.y));
+	p3.addPoint(Point(_cellDimensions.x / 2, _cellDimensions.y + PAD));
 	p4.addPoint(Point(0, _cellDimensions.y / 2));
 	p4.addPoint(Point(_cellDimensions.x / 2, _cellDimensions.y / 2));
 	p4.addPoint(Point(_cellDimensions.x / 2, _cellDimensions.y));
@@ -105,8 +106,8 @@ GridOctopus::GridOctopus(Grid* grid, unsigned int width, unsigned int height)
 		for (int i = 0; i < width; i++)
 		{
 			Point pos;
-			pos.x = i * _cellDimensions.x + (!big * _cellDimensions.x / 2);
-			pos.y = j * _cellDimensions.y/2;
+			pos.x = (i * _cellDimensions.x + (!big * _cellDimensions.x / 2+1));
+			pos.y = (j * _cellDimensions.y/2+0.9);
 
 			vector<Polygon> poly = _cellHitBox;
 			for (auto& e : poly)
@@ -114,7 +115,8 @@ GridOctopus::GridOctopus(Grid* grid, unsigned int width, unsigned int height)
 				e = e + pos;
 			}
 			_cellsHitboxes.emplace(n, poly); 
-			_cellsDrawPolygons.emplace(n, _cellDrawPolygon + pos);
+			_cellsDrawPolygons.emplace(n, _cellDrawPolygon + pos); 
+			_cellsDrawPolygons[n][0].x = floor(_cellsDrawPolygons[n][0].x - 0.1);
 			n++;
 		}
 	}

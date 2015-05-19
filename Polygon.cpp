@@ -44,7 +44,7 @@ void Polygon::drawFill(SDL_Renderer * r, Color c)
 	{
 		// build the list of intersections between current scanline and each polygon line
 		intersectionX.clear();
-		Line l(0, y, w, y);
+		Line l(0, y, w+1, y);
 		Point tmp;
 		for (Line polygon_line : lines)
 		{
@@ -124,7 +124,10 @@ Polygon Polygon::operator+(const Point& p)
 	}
 	return po;
 }
-
+Point& Polygon::operator[](unsigned int index)
+{
+	return _points[index];
+}
 ostream& operator<<(ostream& o, const Polygon& p)
 {
 	o << "Polygon: ";

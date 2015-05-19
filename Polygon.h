@@ -24,6 +24,8 @@ public:
 	vector<Line> getLines() const;
 	
 	Polygon operator+(const Point&);
+	Point& operator[](unsigned int index);
+
 	friend ostream& operator<<(ostream&, const Polygon& p);
 
 	vector<Point> getPoints() const { return _points; }
