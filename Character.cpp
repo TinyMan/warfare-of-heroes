@@ -95,14 +95,13 @@ int Character::getCP() const
 
 bool Character::moveSingle(Cell& c, bool moveWanted)
 {
-	LOGINFO << _name << " is moving from " << *_hisCell << " to " << c << endl;
 	try
 	{
 		int distance = GAMEINST->getGrid()->getCellDistance(c, *_hisCell);
 		if (distance > 1)
 			throw "try of cheat";
 		else if(distance > _movementPoints && moveWanted)
-			throw "invalid move";
+			throw "not enough movement point";
 		_hisCell->free();
 		c.setObject(this);
 		_hisCell->setType(Cell::Free);
@@ -121,15 +120,15 @@ bool Character::move(Cell& c, bool moveWanted)
 {
 	LOGINFO << _name << " is moving from " << *_hisCell << " to " << c << endl;
 	list<Cell*> path = GAMEINST->getGrid()->pathFinder.getPathAStar(_hisCell, &c);
-	LOGINFO << "Path: " << endl;
+	/*LOGINFO << "Path: " << endl;
 	for (Cell* c : path)
 	{
 		LOGINFO << "(";
 		c->displayBasic(LOGINFO);
 		LOGINFO << ") -> ";
 	}
-	LOGINFO << endl;
-	if (path.size() > (unsigned int)_movementPoints)
+	LOGINFO << endl;*/
+	if (path.size()-1 > (unsigned int)_movementPoints)
 		return false;
 	for (Cell* c : path)
 	{
