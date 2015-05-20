@@ -5,7 +5,7 @@
 #include "Cell.h"
 #include "GameObject.h"
 #include "SpellTarget.h"
-
+#include "PathFinder.h"
 
 using namespace std;
 
@@ -35,6 +35,7 @@ public:
 
 	Cell* getCellAt(int i, int j);
 	Cell* getCell(unsigned int n);
+	list<Cell*> getAdjacentCells(Cell* c);
 
 	// TODO: return the cell distance between cells at index i,j and x,y
 	int getCellDistance(int i, int j, int x, int y);
@@ -57,10 +58,11 @@ public:
 	{
 		return i > (-WIDTH) && i <(WIDTH) && j >(-HEIGHT) && j < HEIGHT;
 	}
+	PathFinder<Cell*> pathFinder;
+
 private:
 	map<unsigned int, Cell> _cells;
 	map<int, map<int, unsigned int>> _cells_coordinates;
-
 };
 
 

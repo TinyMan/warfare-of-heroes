@@ -80,6 +80,7 @@ public:
 	bool move(int i, int j, bool moveWanted=true);
 	bool move(Cell& c, bool moveWanted=true);
 	bool move(unsigned int cell, bool moveWanted  = true);
+	bool moveSingle(Cell& c, bool moveWanted = true);
 
 	void actionCallback(int actionID, void*);
 	void targetSelectorForCharacter(int spellIID, void* d = nullptr);

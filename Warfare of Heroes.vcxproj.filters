@@ -518,5 +518,8 @@
     <ClInclude Include="BasicLineSelector.h">
       <Filter>Header Files\Game\Spell\AoE Target</Filter>
     </ClInclude>
+    <ClInclude Include="PathFinder.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

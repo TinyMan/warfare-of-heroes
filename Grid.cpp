@@ -2,6 +2,8 @@
 
 
 Grid::Grid()
+//bind(&Grid::getAdjacentCells, this), [](Cell* c) { return true; }, [=](Cell* c1, Cell* c2) {return (double)getCellDistance(*c1, *c2); }
+	: pathFinder(bind(&Grid::getAdjacentCells, this, placeholders::_1), [](Cell* c) { return c && c->getType() == Cell::Free; }, [=](Cell* c1, Cell* c2) {return (double)getCellDistance(*c1, *c2); })
 {
 	unsigned int n = 0;
 	int nextX = -13;
@@ -165,4 +167,20 @@ void Grid::beginTurn()
 		c.second.beginTurn();
 	}
 	
+}
+
+list<Cell*> Grid::getAdjacentCells(Cell* c)
+{
+	list<Cell*> ret;
+	
+	if (c)
+	{
+		int x = c->getPosX();
+		int y = c->getPosY();
+		ret.push_back(getCellAt(x + 1, y));
+		ret.push_back(getCellAt(x - 1, y));
+		ret.push_back(getCellAt(x, y + 1));
+		ret.push_back(getCellAt(x, y - 1));
+	}
+	return ret;
 }
