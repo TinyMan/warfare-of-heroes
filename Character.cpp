@@ -95,45 +95,42 @@ int Character::getCP() const
 
 bool Character::moveSingle(Cell& c, bool moveWanted)
 {
-	try
-	{
-		int distance = GAMEINST->getGrid()->getCellDistance(c, *_hisCell);
-		if (distance > 1)
-			throw "try of cheat";
-		else if(distance > _movementPoints && moveWanted)
+	int distance = GAMEINST->getGrid()->getCellDistance(c, *_hisCell);
+	if (distance > 1)
+		throw "Cheat error";
+	else if (distance > _movementPoints && moveWanted)
+		throw "not enough movement point";
+
+	(new MoveEvent(this, _hisCell, &c))->dispatch();
+	_hisCell->free();
+	c.setObject(this);
+	_hisCell->setType(Cell::Free);
+	_hisCell = &c;
+
+	if (moveWanted)
+		_movementPoints -= distance;
+
+	return true;
+}
+bool Character::move(Cell& c, bool moveWanted)
+{
+	//LOGINFO << _name << " is moving from " << *_hisCell << " to " << c << endl;
+	list<Cell*> path = GAMEINST->getGrid()->pathFinder.getPathAStar(_hisCell, &c);
+
+	try{
+		if (path.empty())
+			throw "no path found";
+		else if (path.size() > (unsigned int)_movementPoints)
 			throw "not enough movement point";
-		_hisCell->free();
-		c.setObject(this);
-		_hisCell->setType(Cell::Free);
-		_hisCell = &c;
-		if (moveWanted)
-			_movementPoints -= distance;
+		for (Cell* c : path)
+		{
+			moveSingle(*c, moveWanted);
+		}
 	}
 	catch (const char* msg)
 	{
 		LOGERR << "cannot move: " << msg << endl;
 		return false;
-	}
-	return true;
-}
-bool Character::move(Cell& c, bool moveWanted)
-{
-	LOGINFO << _name << " is moving from " << *_hisCell << " to " << c << endl;
-	list<Cell*> path = GAMEINST->getGrid()->pathFinder.getPathAStar(_hisCell, &c);
-	/*LOGINFO << "Path: " << endl;
-	for (Cell* c : path)
-	{
-		LOGINFO << "(";
-		c->displayBasic(LOGINFO);
-		LOGINFO << ") -> ";
-	}
-	LOGINFO << endl;*/
-	if (path.size()-1 > (unsigned int)_movementPoints)
-		return false;
-	for (Cell* c : path)
-	{
-		if (moveSingle(*c, moveWanted) == false)
-			return false;
 	}
 	return true;
 }

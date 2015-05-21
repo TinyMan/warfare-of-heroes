@@ -1,7 +1,7 @@
 #pragma once
 #include "Event.h"
 class Character;
-
+class Cell;
 
 namespace Events
 {
@@ -15,6 +15,14 @@ namespace Events
 			Character* getCharacter() const { return _character; }
 		private:
 			Character* _character;
+		};
+		class MoveEvent : public CharacterEvent
+		{
+		public:
+			MoveEvent(Character* c, Cell* _origin, Cell* dst) : CharacterEvent(c), destination(dst), origin(_origin) {}
+			virtual ~MoveEvent(){}
+			Cell* destination;
+			Cell* origin;
 		};
 		class DieEvent : public CharacterEvent
 		{

@@ -4,6 +4,28 @@ SDL_Point operator+(const SDL_Point p1, const SDL_Point p2)
 {
 	return{ p1.x + p2.x, p1.y + p2.y };
 }
+bool operator==(SDL_Point p1, SDL_Point p2)
+{
+	return p1.x == p2.x && p1.y == p2.y;
+}
+Point Point::operator-(const Point& p2) const
+{
+	return Point(x - p2.x, y - p2.y);
+}
+Point Point::operator*(double c) const
+{
+	return Point(x * c, y*c);
+}
+bool Point::operator <= (const Point& p) const
+{
+	Point p1 = abs(*this);
+	Point p2 = abs(p);
+	return p1.x <= p2.x && p1.y <= p2.y;
+}
+Point Point::operator+(const Point& p1) const
+{
+	return Point(p1.x + x, p1.y + y);
+}
 bool Point::operator!=(const Point& p) const
 {
 	return !(*this == p);
@@ -12,9 +34,13 @@ bool Point::operator==(const Point& p) const
 {
 	return (p.x == x) && (p.y == y);
 }
-Point& Point::operator/(int n) const
+Point Point::operator/(int n) const
 {
-	return *(new Point(x / n, y / n));
+	return Point(x / n, y / n);
+}
+Point abs(const Point& p)
+{
+	return Point(abs(p.x), abs(p.y));
 }
 ostream& operator<<(ostream& o, const SDL_Point& p)
 {
@@ -88,15 +114,6 @@ bool doIntersect(Point p1, Point q1, Point p2, Point q2)
 	if (o4 == 0 && onSegment(p2, q1, q2)) return true;
 
 	return false; // Doesn't fall in any of the above cases
-}
-
-Point Point::operator-( const Point& p2) const
-{
-	return Point( x - p2.x, y - p2.y );
-}
-Point Point::operator*( const double c) const
-{
-	return Point(x * c, y*c );
 }
 
 Point* intersection(Point p1, Point p2, Point p3, Point p4) {

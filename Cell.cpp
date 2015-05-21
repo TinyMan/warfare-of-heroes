@@ -85,6 +85,10 @@ void Cell::beginTurn()
 		e->beginTurn();
 	}
 }
+bool Cell::adjacent(Cell* c) const
+{
+	return getDistance(*c) == 1;
+}
 void Cell::displayBasic(ostream& o) const
 {
 	o << *this;

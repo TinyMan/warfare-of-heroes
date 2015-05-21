@@ -25,7 +25,7 @@ public:
 	SpellTarget* getObject() const { return _object; }
 	void displayBasic(ostream& o) const;
 	bool hisTurn() const { if (_object) return _object->hisTurn(); else return false; }
-
+	bool adjacent(Cell* c) const;
 
 	bool isInView(const Cell & c) const;
 	bool isInView(const SpellTarget & c) const;

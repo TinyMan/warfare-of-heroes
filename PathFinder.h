@@ -51,6 +51,8 @@ public:
 
 	list<T> getPathAStar(T from, T to)
 	{
+		if (!_isWalkable(to))
+			return list<T>();
 		Node<T> first(from);
 		Node<T> last(to);
 
@@ -139,7 +141,7 @@ public:
 			last = last->parent;
 			ret.push_front(*last);
 		}
-
+		ret.pop_front();
 		return ret;
 	}
 private:

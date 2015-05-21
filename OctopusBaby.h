@@ -35,7 +35,7 @@ public:
 	void setContainerRect(SDL_Rect r, Uint8 alignment) { _container_rect = r; setPosition(alignment); }
 
 	void setPosition(Uint8 alignment);
-	void setPosition(int x, int y);
+	virtual void setPosition(int x, int y);
 	void setPositionX(int x);
 	void setPositionY(int y);
 	SDL_Rect getAbsolutRect() const{ return _absolute_rect; }
