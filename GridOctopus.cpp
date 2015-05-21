@@ -106,8 +106,8 @@ GridOctopus::GridOctopus(Grid* grid, unsigned int width, unsigned int height)
 		for (int i = 0; i < width; i++)
 		{
 			Point pos;
-			pos.x = (i * _cellDimensions.x + (!big * _cellDimensions.x / 2+1));
-			pos.y = (j * _cellDimensions.y/2+0.9);
+			pos.x = (i * _cellDimensions.x + (!big * _cellDimensions.x / 2+0.9));
+			pos.y = (j * _cellDimensions.y/2);
 
 			vector<Polygon> poly = _cellHitBox;
 			for (auto& e : poly)
@@ -115,8 +115,9 @@ GridOctopus::GridOctopus(Grid* grid, unsigned int width, unsigned int height)
 				e = e + pos;
 			}
 			_cellsHitboxes.emplace(n, poly); 
-			_cellsDrawPolygons.emplace(n, _cellDrawPolygon + pos); 
+			_cellsDrawPolygons.emplace(n, _cellDrawPolygon + pos);
 			_cellsDrawPolygons[n][0].x = floor(_cellsDrawPolygons[n][0].x - 0.1);
+			_cellsDrawPolygons[n].convertInt();
 			n++;
 		}
 	}

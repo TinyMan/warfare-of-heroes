@@ -22,7 +22,10 @@ public:
 
 	int size() const { return _points.size(); }
 	vector<Line> getLines() const;
-	
+
+	// convert the polygon to integer coordinates system
+	void convertInt();
+
 	Polygon operator+(const Point&);
 	Point& operator[](unsigned int index);
 

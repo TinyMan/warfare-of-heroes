@@ -4,7 +4,7 @@ SDL_Point operator+(const SDL_Point p1, const SDL_Point p2)
 {
 	return{ p1.x + p2.x, p1.y + p2.y };
 }
-bool operator==(SDL_Point p1, SDL_Point p2)
+bool operator==(const SDL_Point p1, const SDL_Point p2)
 {
 	return p1.x == p2.x && p1.y == p2.y;
 }

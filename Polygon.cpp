@@ -124,6 +124,14 @@ Polygon Polygon::operator+(const Point& p)
 	}
 	return po;
 }
+void Polygon::convertInt()
+{
+	SDL_Point p = { 0, 0 };
+	for (auto &e : _points)
+	{
+		e = (SDL_Point)e + p;
+	}
+}
 Point& Polygon::operator[](unsigned int index)
 {
 	return _points[index];
