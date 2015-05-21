@@ -75,6 +75,7 @@ void PlayerOctopus::update()
 
 				moving = false;
 
+				_grid->unmark(destination_cell->getNumber());
 				pathNext();
 			}
 
@@ -107,7 +108,8 @@ void PlayerOctopus::addMove(Cell* c)
 	if (path.empty() || c->adjacent(path.back()))
 	{
 		path.push_back(c);
-		_character->displayBasic(LOGINFO);
+		_grid->mark(c->getNumber(), Color(127,127,127,50));
+	//	_character->displayBasic(LOGINFO);
 	//	LOGINFO << " Adding move !" << endl;
 		pathNext();
 	}
