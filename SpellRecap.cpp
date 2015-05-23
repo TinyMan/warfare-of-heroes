@@ -136,7 +136,7 @@ void SpellRecap::hoverCell(Cell* c)
 {
 	if (!isActive() || !c || _hovered_cell == c)
 		return;
-	if (_hovered_cell)
+	if (_hovered_cell && find(_selected_spell_range.begin(), _selected_spell_range.end(), _hovered_cell->getNumber()) != _selected_spell_range.end())
 		_grid->unmark(_hovered_cell->getNumber());
 
 	_grid->unmark(_selected_spell_aoe);

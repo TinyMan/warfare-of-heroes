@@ -82,6 +82,9 @@ void PlayerOctopus::update()
 			setPosition(newPos);
 		}
 
+		// update z-index
+		setZIndex(real_cell->getNumber());
+
 	}
 }
 void PlayerOctopus::internalRender(SDL_Renderer* r, bool force)
