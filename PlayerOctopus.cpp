@@ -49,7 +49,7 @@ void PlayerOctopus::update()
 		//LOGINFO << "Position: " << getPosition() << endl;
 		if (!real_cell)
 			teleport(real_cell = _character->getCell());
-		else if (real_cell != destination_cell)
+		else if (real_cell != destination_cell && _land_time + move_delay < TIMESERVICE->time())
 		{
 			//LOGINFO << "Moving" << endl;
 
@@ -59,10 +59,14 @@ void PlayerOctopus::update()
 			Point origin_pos = toContainerCoordinates(_grid->toAbsoluteCoordinates(_grid->getCellCenter(real_cell)));
 			Point dest_pos = toContainerCoordinates(_grid->toAbsoluteCoordinates(_grid->getCellCenter(destination_cell)));
 			Point delta = abs(origin_pos - dest_pos);
+			Point middle = (origin_pos - dest_pos) / 2;
 
 			Point step = ((dest_pos - origin_pos) * dt)/move_time;
-			
-			Point pos = origin_pos + step;
+
+			// jump
+			Point jump(0, 0.4* abs(middle.y - step.y));
+
+			Point pos = origin_pos + step - jump;
 			Point newPos = pos + PADDING;
 
 
@@ -99,8 +103,7 @@ void PlayerOctopus::internalRender(SDL_Renderer* r, bool force)
 			dst.h = int(_ratio * _basic_player.getHeight());
 			dst.x = 0;
 			dst.y = 0;
-			_basic_player.render(r, nullptr, &dst);
-
+			SDL_RenderCopyEx(r, _basic_player, nullptr, &dst, 0.0, nullptr, (SDL_RendererFlip)orientation);
 
 		}
 	}
@@ -121,18 +124,22 @@ void PlayerOctopus::pathNext()
 {
 	if (!moving && !path.empty())
 	{
-
+		// set the next destination
 		destination_cell = path.front();
 
 
-
-		// TODO: jump
-
-		// TODO: orientation
+		// orientation
+		if (destination_cell->getPosX() > real_cell->getPosX() || (destination_cell->getPosX() == real_cell->getPosX() && destination_cell->getPosY() < real_cell->getPosY()))
+		{
+			orientation = RIGHT;
+		}
+		else
+			orientation = LEFT;
 
 		path.pop_front();
 		moving = true;
-		movement_begin = TIMESERVICE->time();
+		movement_begin = TIMESERVICE->time() + move_delay;
+		_land_time = TIMESERVICE->time();
 	}
 }
 void PlayerOctopus::teleport(const Cell* c)

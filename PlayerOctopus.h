@@ -10,6 +10,13 @@ class PlayerOctopus :
 	public OctopusBaby
 {
 public:
+	enum ORIENTATION
+	{
+		LEFT = SDL_FLIP_NONE,
+		RIGHT = SDL_FLIP_HORIZONTAL
+	};
+	//typedef SDL_RendererFlip ORIENTATION;
+
 	PlayerOctopus(Character* c, GridOctopus* grid);
 	virtual ~PlayerOctopus();
 
@@ -21,7 +28,9 @@ public:
 
 	void computePixelPos();
 
-	static const Uint32 move_time = 200;
+	static const Uint32 move_time = 300;
+	static const Uint32 jump_height = 35;
+	static const Uint32 move_delay = 200;
 	virtual void setPosition(int x, int y) override { OctopusBaby::setPosition(x, y); }
 	virtual void setPosition(Point pos);
 	//virtual void updateAbsoluteRect() override { OctopusBaby::updateAbsoluteRect(); teleport(_character->getCell()); }
@@ -32,10 +41,12 @@ private:
 	bool _dirty = true;
 	Character* _character;
 	GridOctopus* _grid;
+	ORIENTATION orientation;
 
 	const Cell* destination_cell;
 	const Cell* origin_cell;
 	const Cell* real_cell;
+	Uint32 _land_time = 0;
 
 
 	static Texture _basic_player;

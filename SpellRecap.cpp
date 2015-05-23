@@ -114,6 +114,7 @@ void SpellRecap::unselectSpell(int spellID)
 		_grid->unmark(_selected_spell_range);
 		_grid->unmark(_selected_spell_aoe);
 		_selected_spell_range.clear();
+		_selected_spell_aoe.clear();
 		_selected_spell = NO_SPELL;
 		setDirty();
 	}
