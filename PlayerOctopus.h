@@ -29,7 +29,7 @@ public:
 	void computePixelPos();
 
 	static const Uint32 move_time = 300;
-	static const Uint32 jump_height = 35;
+	static const Uint32 jump_height = 5;
 	static const Uint32 move_delay = 200;
 	virtual void setPosition(int x, int y) override { OctopusBaby::setPosition(x, y); }
 	virtual void setPosition(Point pos);

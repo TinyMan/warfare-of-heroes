@@ -64,7 +64,7 @@ void PlayerOctopus::update()
 			Point step = ((dest_pos - origin_pos) * dt)/move_time;
 
 			// jump
-			Point jump(0, 0.4* abs(middle.y - step.y));
+			Point jump(0, sqrt(pow(jump_height, 2) - (pow(jump_height,2) * abs(delta.y - step.y))/pow( delta.y, 2)));
 
 			Point pos = origin_pos + step - jump;
 			Point newPos = pos + PADDING;
