@@ -36,7 +36,7 @@ RecapOctopus::RecapOctopus(size_t characterID)
 	_pt->setPositionY(300);
 	add(_pm, Alignment::BOTTOM | Alignment::CENTERX);
 	_pm->setPositionY(200);
-	// TODO: bind to internal events (character events) to receive changes to the data (hp, mp, pt...)
+
 	ServiceLocator::getEventService()->listen(typeid(LoseCPEvent), EventCallback(&RecapOctopus::onEvent, this));
 	ServiceLocator::getEventService()->listen(typeid(LoseHpEvent), EventCallback(&RecapOctopus::onEvent, this));
 	ServiceLocator::getEventService()->listen(typeid(LoseMPEvent), EventCallback(&RecapOctopus::onEvent, this));
@@ -91,4 +91,17 @@ void RecapOctopus::onEvent(Event* e)
 		if (LoseHpEvent* ev = dynamic_cast<LoseHpEvent*>(e))
 			onLoseHP(ev);
 	}
+}
+void RecapOctopus::internalRender(SDL_Renderer* r, bool force ) 
+{
+	if (isActive())
+	{
+		bool dirty = isDirty();
+		bool d = (force || dirty);
+		if (d)
+		{
+
+		}
+	}
+	Panel::internalRender(r, force);
 }

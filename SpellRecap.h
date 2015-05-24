@@ -30,6 +30,9 @@ public:
 
 	const Color range_color = Color(0, 255, 0, 128);
 	const Color range_hover_color = Color(255, 0, 0, 128);
+
+protected:
+	virtual void internalRender(SDL_Renderer* r, bool force = false) override;
 private:
 	GridOctopus* _grid = nullptr;
 	Character* _character = nullptr;

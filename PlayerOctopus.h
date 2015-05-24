@@ -33,7 +33,7 @@ public:
 	static const Uint32 move_delay = 200;
 	virtual void setPosition(int x, int y) override { OctopusBaby::setPosition(x, y); }
 	virtual void setPosition(Point pos);
-	//virtual void updateAbsoluteRect() override { OctopusBaby::updateAbsoluteRect(); teleport(_character->getCell()); }
+
 protected:
 	virtual void internalRender(SDL_Renderer* r, bool force = false);
 

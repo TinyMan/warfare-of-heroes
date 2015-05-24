@@ -26,6 +26,7 @@ protected:
 	void updateMP() { _pm->setText("MP: " + to_string(_character->getMP())); }
 	void updateCP() { _pt->setText("PC: " + to_string(_character->getCP())); }
 
+	virtual void internalRender(SDL_Renderer* r, bool force = false) override;
 private:
 	Character* _character = nullptr;
 	Label* _nameLabel = nullptr;

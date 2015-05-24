@@ -158,3 +158,16 @@ void SpellRecap::hoverCell(Cell* c)
 
 	_hovered_cell = c;
 }
+void SpellRecap::internalRender(SDL_Renderer* r, bool force)
+{
+	if (isActive())
+	{
+		bool d = force || isDirty();
+		if (d)
+		{
+
+		}
+	}
+	Panel::internalRender(r, force);
+
+}
