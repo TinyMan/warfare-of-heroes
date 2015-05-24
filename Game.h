@@ -75,7 +75,7 @@ public:
 	bool isRunning() const { return _running; }
 
 	static Game* getInstance() { if (!_instance) _instance = new Game; return _instance; }
-
+	static const Uint16 fps_limit = 100;
 private:
 	/* the collection of all game objects, sorted with the active ones on the front and the inactive ones after them */
 	list<GameObject*> _gameObjects;

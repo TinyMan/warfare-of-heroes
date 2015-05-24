@@ -160,23 +160,32 @@ void Game::loop()
 {
 	SDL_Event e;
 	Event* ev;
-	cout << "Main loop !" << endl;
+	Uint32 last_time = 0;
+	Uint32 accumulator = 0;
+
+	//cout << "Main loop !" << endl;
+
 	while (_running)
 	{
 		/* TODO: BEGIN FRAME */
 		_timeService->beginFrame();
 		/* TODO: PROCESS USER INPUT */
-		while (SDL_PollEvent(&e)) {
-			if (e.type == SDL_QUIT)
-			{
-				//Quit the program
-				stop();
+		while (accumulator < 1000 / fps_limit){
+			while (SDL_PollEvent(&e)) {
+				if (e.type == SDL_QUIT)
+				{
+					//Quit the program
+					stop();
+				}
+				ev = SDLEvents::createEventFromSDLEvent(&e);
+				if (ev)
+					_eventService->dispatch(ev);
 			}
-			ev = SDLEvents::createEventFromSDLEvent(&e);
-			if(ev)
-				_eventService->dispatch(ev);
+			// sleeping
+			SDL_Delay(((1000 / fps_limit) - accumulator) / 5);
+			// mise a jour du temps
+			accumulator += SDL_GetTicks() - last_time - accumulator;
 		}
-		//SDL_Delay(1);
 
 		/* Update */
 		_timeService->update();
@@ -188,6 +197,12 @@ void Game::loop()
 
 		cout << "Number of active game objects: " << getNbActiveGObjects() << endl;
 		*/
+
+		// on mémorise le possible retard qu'on a prit
+		accumulator -= 1000 / fps_limit;
+
+		// on indique le dernier instant d'affichage
+		last_time = SDL_GetTicks();
 
 		/* TODO: RENDER */
 		_octopus->render();
