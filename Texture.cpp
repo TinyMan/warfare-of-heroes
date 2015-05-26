@@ -93,8 +93,24 @@ void Texture::combineRect(SDL_Rect& src, SDL_Rect& dst, STYLE style)
 		break;
 	case Texture::FILL:
 		break;
-	case Texture::FIT:
+	case Texture::FIT:{
+		double ratiox = (double)dst.w / src.w;
+		double ratioy = (double)dst.h / src.h;
+		double ratio = ratioy;
+		if (ratioy < ratiox)
+		{
+			dst.x = int((dst.w - ratioy * src.w) / 2);
+			ratio = ratioy;
+		}
+		else
+		{
+			dst.y = int((dst.h - ratiox * src.h) / 2);
+			ratio = ratiox;
+		}
+		dst.w = int(src.w * ratio);
+		dst.h = int(src.h * ratio);
 		break;
+	}
 	case Texture::TILE:
 		break;
 	case Texture::CENTER:

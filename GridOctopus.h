@@ -51,6 +51,7 @@ public:
 protected:
 	virtual void internalRender(SDL_Renderer* r, bool force = false) override;
 	virtual void drawCell(SDL_Renderer* r, unsigned int cell, Color c);
+	virtual void drawObstacle(SDL_Renderer* r, unsigned int cell, unsigned int type = Cell::Tree);
 
 private:
 	bool _dirty = true;
@@ -63,6 +64,7 @@ private:
 	map<unsigned int, vector<Polygon>> _cellsHitboxes;
 	map<unsigned int, Color> _markedCells;
 	map<Color, Texture> _coloredCells;
+	map<unsigned int, Texture> _obstacles_tex;
 
 	Point _cellDimensions;
 

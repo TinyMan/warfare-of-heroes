@@ -60,11 +60,11 @@ public:
 	}
 	PathFinder<Cell*> pathFinder;
 
-	vector<unsigned int> getObstacles() const { return _obstacles; }
+	vector<Cell*> getObstacles() const { return _obstacles; }
 private:
 	map<unsigned int, Cell> _cells;
 	map<int, map<int, unsigned int>> _cells_coordinates;
-	vector<unsigned int>  _obstacles;
+	vector<Cell*>  _obstacles;
 };
 
 
