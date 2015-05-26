@@ -12,6 +12,8 @@ public:
 	typedef enum _STATE {
 		Free, PlayerOnIt, Obstacle
 	};
+	static const int Tree = 0;
+	static const int Rock = 1;
 	Cell(unsigned int number = 0, int x = 0, int y = 0);
 	~Cell();
 
@@ -48,6 +50,7 @@ public:
 	virtual void beginTurn();
 
 	friend ostream& operator<<(ostream&, const Cell&);
+	int obstacle_type = rand() % 2;
 private:
 	_STATE _cellType;
 	int _posX;

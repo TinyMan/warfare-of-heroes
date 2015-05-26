@@ -180,6 +180,10 @@ void GridOctopus::internalRender(SDL_Renderer* r, bool force)
 			{
 				drawCell(r, p.first, p.second);
 			}
+			for (auto& o : _grid->getObstacles())
+			{
+				drawCell(r, o, Color::BLACK);
+			}
 		}
 	}
 }

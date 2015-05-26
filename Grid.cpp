@@ -50,12 +50,12 @@ Grid::~Grid()
 }
 
 void Grid::generateObstacle() {
-	/*for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 4; i++)
 	{
-		int x = rand() % WIDTH;
-		int y = rand() % HEIGHT;
-		arrayOfCells[x][y].setType(Cell::Obstacle);
-	}*/
+		unsigned int n = rand() % CELLS_NUMBER;
+		_cells[n].setType(Cell::Obstacle);
+		_obstacles.push_back(n);
+	}
 }
 
 void Grid::display(ostream& o) const
