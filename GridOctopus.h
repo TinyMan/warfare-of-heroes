@@ -27,7 +27,10 @@ public:
 	Point getCellCenter(const Cell* cell) const;
 	Point getCellCenter(unsigned int cell) const;
 	Point getCellDimensions() const { return _cellDimensions;}
-
+	int getZIndexFromCell(unsigned int cell) const
+	{
+		return (int)getCellCenter(cell).y;
+	}
 	virtual void update() override;
 	virtual bool isDirty() override { return _dirty; }
 	virtual void setDirty(bool d = true) override { _dirty = d; }
@@ -52,8 +55,7 @@ public:
 protected:
 	virtual void internalRender(SDL_Renderer* r, bool force = false) override;
 	virtual void drawCell(SDL_Renderer* r, unsigned int cell, Color c);
-	virtual void drawObstacle(SDL_Renderer* r, unsigned int cell, unsigned int type = Cell::Tree);
-
+	
 private:
 	bool _dirty = true;
 	Grid* _grid;

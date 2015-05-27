@@ -180,10 +180,6 @@ void GridOctopus::internalRender(SDL_Renderer* r, bool force)
 			{
 				drawCell(r, p.first, p.second);
 			}
-			/*for (auto& o : _grid->getObstacles())
-			{
-				drawObstacle(r, o->getNumber(), o->obstacle_type);
-			}*/
 		}
 	}
 }
@@ -201,28 +197,6 @@ void GridOctopus::drawCell(SDL_Renderer* r, unsigned int cell, Color color)
 	Point pos = getCellCenter(cell) - _cellDimensions / 2;
 	SDL_Rect dst = { (int)pos.x, (int)pos.y, (int)_cellDimensions.x, (int)_cellDimensions.y };
 	_coloredCells[color].render(r,nullptr, &dst);
-}
-void GridOctopus::drawObstacle(SDL_Renderer* r, unsigned int cell, unsigned int type)
-{
-	if (_obstacles_tex.count(type) != 1)
-	{
-		string texName = "obstacle_" + to_string(type);
-		Texture tex =	(*ServiceLocator::getTextureManager())[texName];
-		_obstacles_tex[type] = Texture((int)_cellDimensions.x * 2, (int)_cellDimensions.y*2, Color::TRANSPARENT, r);
-		_obstacles_tex[type].setRenderTarget();
-		tex.render(r, Texture::FIT);
-		if (type == Cell::Tree)
-		{
-			SDL_Rect dst = { 0, 0, _obstacles_tex[type].getWidth() / 2, _obstacles_tex[type].getHeight() };
-			tex.render(r, Texture::FIT, nullptr, &dst);
-		}
-		_obstacles_tex[type].resetRenderTarget();
-		SDL_SetTextureBlendMode(_obstacles_tex[type], SDL_BLENDMODE_BLEND);
-	}
-	Point pos = getCellCenter(cell) - _cellDimensions*1.5 / 2;
-	pos.y -= _cellDimensions.y / 1.5;
-	SDL_Rect dst = { (int)pos.x, (int)pos.y, int(_cellDimensions.x*1.75), int(_cellDimensions.y*1.75) };
-	_obstacles_tex[type].render(r, nullptr, &dst);
 }
 void GridOctopus::onMouseMove(MouseEvents::MotionEvent* e)
 {

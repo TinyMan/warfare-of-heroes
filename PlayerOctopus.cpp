@@ -87,8 +87,7 @@ void PlayerOctopus::update()
 		}
 
 		// update z-index
-		setZIndex(real_cell->getNumber());
-
+		setZIndex(_grid->getZIndexFromCell(destination_cell->getNumber()));
 	}
 }
 void PlayerOctopus::internalRender(SDL_Renderer* r, bool force)

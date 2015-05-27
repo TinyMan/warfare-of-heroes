@@ -4,7 +4,8 @@ map<unsigned int, Texture> ObstacleOctopus::_obstacles_tex;
 ObstacleOctopus::ObstacleOctopus(Cell* cell, GridOctopus* grid)
 	: _grid(grid), _cell(cell)
 {
-	setZIndex(cell->getNumber());
+
+	setZIndex(_grid->getZIndexFromCell(cell->getNumber()));
 }
 
 

@@ -135,7 +135,7 @@ void Game::initialize()
 	}
 	
 	Chrono* chrono = new Chrono();
-	game_frame->add(chrono, Alignment::TOP | Alignment::CENTERX);
+	game_inside->add(chrono, Alignment::TOP | Alignment::CENTERX);
 
 	RecapOctopus* recap1 = new RecapOctopus(0);
 	RecapOctopus* recap3 = new RecapOctopus(1);

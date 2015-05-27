@@ -7,7 +7,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	Game *g = Game::getInstance();
 
 	LOGINFO << "Starting @ " << SDL_GetTicks() << endl;
