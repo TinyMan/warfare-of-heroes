@@ -61,6 +61,7 @@ public:
 	PathFinder<Cell*> pathFinder;
 
 	vector<Cell*> getObstacles() const { return _obstacles; }
+	static const int nbObstacles = 10;
 private:
 	map<unsigned int, Cell> _cells;
 	map<int, map<int, unsigned int>> _cells_coordinates;

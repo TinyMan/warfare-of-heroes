@@ -50,7 +50,7 @@ Grid::~Grid()
 }
 
 void Grid::generateObstacle() {
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < nbObstacles; i++)
 	{
 		unsigned int n = rand() % CELLS_NUMBER;
 		_cells[n].setType(Cell::Obstacle);
