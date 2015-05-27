@@ -15,6 +15,7 @@
 #include "Knight.h"
 #include "SpellRecap.h"
 #include "PlayerOctopus.h"
+#include "ObstacleOctopus.h"
 
 Game* Game::_instance = nullptr;
 
@@ -126,6 +127,12 @@ void Game::initialize()
 
 	game_inside->add(p);
 	game_inside->add(p1);
+
+
+	for (auto& c : grid->getObstacles())
+	{
+		game_inside->add(new ObstacleOctopus(c, gridO));
+	}
 	
 	Chrono* chrono = new Chrono();
 	game_frame->add(chrono, Alignment::TOP | Alignment::CENTERX);

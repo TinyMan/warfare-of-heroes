@@ -26,6 +26,7 @@ public:
 	Cell* getCellFromPoint(const Point& p) const;
 	Point getCellCenter(const Cell* cell) const;
 	Point getCellCenter(unsigned int cell) const;
+	Point getCellDimensions() const { return _cellDimensions;}
 
 	virtual void update() override;
 	virtual bool isDirty() override { return _dirty; }

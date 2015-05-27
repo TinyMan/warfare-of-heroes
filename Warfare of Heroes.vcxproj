@@ -119,6 +119,7 @@
     <ClCompile Include="MouseEventReceiver.cpp" />
     <ClCompile Include="MouseEvents.cpp" />
     <ClCompile Include="MoveEffect.cpp" />
+    <ClCompile Include="ObstacleOctopus.cpp" />
     <ClCompile Include="Octopus.cpp" />
     <ClCompile Include="OctopusBaby.cpp" />
     <ClCompile Include="OverTimeEffect.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="MouseEvents.h" />
     <ClInclude Include="MoveEffect.h" />
     <ClInclude Include="MyList.h" />
+    <ClInclude Include="ObstacleOctopus.h" />
     <ClInclude Include="Octopus.h" />
     <ClInclude Include="OctopusBaby.h" />
     <ClInclude Include="OverTimeEffect.h" />

@@ -294,6 +294,9 @@
     <ClCompile Include="BasicLineSelector.cpp">
       <Filter>Source Files\Game\Spell\AoE Target</Filter>
     </ClCompile>
+    <ClCompile Include="ObstacleOctopus.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -520,6 +523,9 @@
     </ClInclude>
     <ClInclude Include="PathFinder.h">
       <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ObstacleOctopus.h">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
