@@ -16,6 +16,11 @@ Character::Character(int x, int y, string name) : _name(name)
 
 Character::~Character()
 {
+	for (auto& s : getSpells())
+	{
+		delete s.second;
+	}
+	_hisCell->free();
 }
 
 void Character::lowerHitPoint(int amount)

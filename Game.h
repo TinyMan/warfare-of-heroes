@@ -62,7 +62,7 @@ public:
 
 	/* starting game */
 	void initialize();
-	void start();
+	void start(Character* player1, Character* player2);
 
 	/* related to the turn */
 	void beginTurn();

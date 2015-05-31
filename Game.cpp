@@ -48,14 +48,7 @@ void Game::initialize()
 
 	Grid* grid = getGrid();
 	grid->generateObstacle();
-
-	//Archer* player2 = new Archer(0, 0);
-	Knight* player1 = new Knight(-2, -2);
-	Mage* player3 = new Mage(3, 2);
-	addGameObject(grid, player1, player3);
-	addPlayer(player1);
-	addPlayer(player3);
-
+		
 	_octopus->initialize();
 
 	// used to navigateto another frame
@@ -66,8 +59,6 @@ void Game::initialize()
 	/* creation of different frames */
 	Panel* menu_root = new Panel();
 	Panel* menu_1 = new Panel();
-	Panel* game_frame = new Panel();
-	game_frame->setBgColor(Color::WHITE);
 
 	/* creation of menu */
 	Panel* menu_root_inside = new Panel(300, 100 + 75 + 75 + 75 + 75); // 4 boutons de hauteur 50, espacements de 25 entre les boutons et 50 avec les bords du container +25 devant quitter
@@ -82,7 +73,7 @@ void Game::initialize()
 	button_1->setText("Play");
 	button_1->setTextColor(Color(240,190));
 	button_1->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
-	button_1->Clickable::setCallback(new EventCallback(navigationLambda, game_frame));
+	//button_1->Clickable::setCallback(new EventCallback([=](Event*){ start(player1, player3); }));
 
 	Button* button_quit = button_1->clone();
 	menu_root_inside->add(button_quit, Alignment::CENTERX);
@@ -114,42 +105,9 @@ void Game::initialize()
 	menu_root->add(tt);
 	tt->anchor(button_1);
 
-	/* creation of game frame */
-	Panel * game_inside = new Panel(800, 600);
-	game_inside->setBgColor(Color::WHITE);
-	game_frame->add(game_inside, Alignment::TOP|Alignment::CENTERX);
-
-	GridOctopus* gridO = new GridOctopus(_grid, 800, 400);
-	game_inside->add(gridO, Alignment::CENTERX | Alignment::CENTERY);
 	
-	PlayerOctopus* p = new PlayerOctopus(_players[0], gridO);
-	PlayerOctopus* p1 = new PlayerOctopus(_players[1], gridO);
+	_octopus->setFrame(menu_root);
 
-	game_inside->add(p);
-	game_inside->add(p1);
-
-
-	for (auto& c : grid->getObstacles())
-	{
-		game_inside->add(new ObstacleOctopus(c, gridO));
-	}
-	
-	Chrono* chrono = new Chrono();
-	game_inside->add(chrono, Alignment::TOP | Alignment::CENTERX);
-
-	RecapOctopus* recap1 = new RecapOctopus(0);
-	RecapOctopus* recap3 = new RecapOctopus(1);
-	game_frame->add(recap1, Alignment::TOP | Alignment::LEFT);
-	game_frame->add(recap3, Alignment::TOP | Alignment::RIGHT);
-
-	SpellRecap* sr = new SpellRecap(_players[0], gridO);
-	SpellRecap* sr1 = new SpellRecap(_players[1], gridO);
-	game_frame->add(sr, Alignment::BOTTOM | Alignment::LEFT);
-	game_frame->add(sr1, Alignment::BOTTOM | Alignment::LEFT);
-
-	_grid->getCellAt(0, 1);
-	_octopus->setFrame(game_frame);
-	start();
 }
 Game::~Game()
 {
@@ -326,8 +284,49 @@ void Game::handleUserInput()
 	cin >> choice;
 	UI->handleChoice(choice);
 }
-void Game::start()
+void Game::start(Character* player1, Character* player2)
 {
+	LOGINFO << "Starting the game !" << endl;
+	//addGameObject(player1, player2);
+	addPlayer(player1);
+	addPlayer(player2);
+
+	Panel* game_frame = new Panel();
+	game_frame->setBgColor(Color::WHITE);
+
+	/* creation of game frame */
+	Panel * game_inside = new Panel(800, 600);
+	game_inside->setBgColor(Color::WHITE);
+	game_frame->add(game_inside, Alignment::TOP | Alignment::CENTERX);
+
+	GridOctopus* gridO = new GridOctopus(_grid, 800, 400);
+	game_inside->add(gridO, Alignment::CENTERX | Alignment::CENTERY);
+
+	PlayerOctopus* p = new PlayerOctopus(_players[0], gridO);
+	PlayerOctopus* p1 = new PlayerOctopus(_players[1], gridO);
+
+	game_inside->add(p);
+	game_inside->add(p1);
+
+
+	for (auto& c : getGrid()->getObstacles())
+	{
+		game_inside->add(new ObstacleOctopus(c, gridO));
+	}
+
+	Chrono* chrono = new Chrono();
+	game_inside->add(chrono, Alignment::TOP | Alignment::CENTERX);
+
+	RecapOctopus* recap1 = new RecapOctopus(0);
+	RecapOctopus* recap3 = new RecapOctopus(1);
+	game_frame->add(recap1, Alignment::TOP | Alignment::LEFT);
+	game_frame->add(recap3, Alignment::TOP | Alignment::RIGHT);
+
+	SpellRecap* sr = new SpellRecap(_players[0], gridO);
+	SpellRecap* sr1 = new SpellRecap(_players[1], gridO);
+	game_frame->add(sr, Alignment::BOTTOM | Alignment::LEFT);
+	game_frame->add(sr1, Alignment::BOTTOM | Alignment::LEFT);
+	_octopus->setFrameAsync(game_frame);
 	beginTurn();
 }
 void Game::beginTurn()
