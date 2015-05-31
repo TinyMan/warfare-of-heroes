@@ -3,6 +3,10 @@
 
 MenuSelection::MenuSelection() : Panel()
 {
+	Archer* a = new Archer(-2,12);
+	Knight* k = new Knight(-14,5);
+	Mage* m = new Mage(0,3);
+
 	Panel* selection_top = new Panel(1200, 200);
 	this->add(selection_top, (Alignment::TOP | Alignment::LEFT));
 	selection_top->setBgColor(Color::WHITE);
@@ -52,55 +56,62 @@ MenuSelection::MenuSelection() : Panel()
 	Button* choice1 = new Button(125, 125);
 	selection_bottom->add(choice1);
 	choice1->setPosition(200, 100);
+	choice1->Clickable::setCallback(new EventCallback([=](Event*) {selectClass(a); }));
 
 	Button* choice2 = new Button(125, 125);
 	selection_bottom->add(choice2);
 	choice2->setPosition(200 - 62, 100 + 125);
+	choice2->Clickable::setCallback(new EventCallback([=](Event*) {selectClass(k); }));
 
 	Button* choice3 = new Button(125, 125);
 	selection_bottom->add(choice3);
 	choice3->setPosition(200 + 63, 100 + 125);
+	choice3->Clickable::setCallback(new EventCallback([=](Event*) {selectClass(m); }));
 
 	Panel* spellInfos = new Panel(500, 300);
 	this->add(spellInfos);
 	spellInfos->setBgColor(Color::BLACK);
 	spellInfos->setPosition(600, 275);
 
-	Label* nomClasse = new Label(150, 25, "Nom Classe", (*ServiceLocator::getFontManager())["LifeCraft"]);
+	nomClasse = new Label(150, 25, "Nom Classe", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	spellInfos->add(nomClasse);
 	nomClasse->setPosition(25, 10);
 
-	Label* descrClasse = new Label(400, 35, "Description de la classe : bla bla bla bla bla bla bla", (*ServiceLocator::getFontManager())["LifeCraft"]);
+	descrClasse = new Label(400, 35, "Description de la classe : bla bla bla bla bla bla bla", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	spellInfos->add(descrClasse);
 	descrClasse->setPosition(15, 35);
 	descrClasse->setTextSize(22);
 
-	Button* spell1 = new Button(75, 75);
+	spell1 = new Button(75, 75);
 	spellInfos->add(spell1);
 	spell1->setPosition(50, 100);
+	spell1->Clickable::setCallback(new EventCallback([=](Event*) {selectSpell(0); }));
 
-	Button* spell2 = new Button(75, 75);
+	spell2 = new Button(75, 75);
 	spellInfos->add(spell2);
 	spell2->setPosition(50 + 100, 100);
+	spell2->Clickable::setCallback(new EventCallback([=](Event*) {selectSpell(1); }));
 
-	Button* spell3 = new Button(75, 75);
+	spell3 = new Button(75, 75);
 	spellInfos->add(spell3);
 	spell3->setPosition(50 + 100 + 100, 100);
+	spell3->Clickable::setCallback(new EventCallback([=](Event*) {selectSpell(2); }));
 
-	Button* spell4 = new Button(75, 75);
+	spell4 = new Button(75, 75);
 	spellInfos->add(spell4);
 	spell4->setPosition(50 + 100 + 100 + 100, 100);
+	spell4->Clickable::setCallback(new EventCallback([=](Event*) {selectSpell(3); }));
 
-	Label* nomSpell = new Label(150, 50, "Nom Spell", (*ServiceLocator::getFontManager())["LifeCraft"]);
+	nomSpell = new Label(400, 50, "Nom Spell", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	spellInfos->add(nomSpell);
 	nomSpell->setPosition(25, 175);
 
-	Label* descrSpell = new Label(400, 35, "Description du Spell : bla bla bla bla bla", (*ServiceLocator::getFontManager())["LifeCraft"]);
+	descrSpell = new Label(400, 35, "Description du Spell : bla bla bla bla bla", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	spellInfos->add(descrSpell);
 	descrSpell->setPosition(25, 205);
 	descrSpell->setTextSize(22);
 
-	Label* infos = new Label(400, 35, "Cost : X , Range : Y , inline / aoe", (*ServiceLocator::getFontManager())["LifeCraft"]);
+	infos = new Label(400, 35, "Cost : X , Range : Y , inline / aoe", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	spellInfos->add(infos);
 	infos->setPosition(25, 235);
 	infos->setTextSize(22);
@@ -109,4 +120,30 @@ MenuSelection::MenuSelection() : Panel()
 
 MenuSelection::~MenuSelection()
 {
+}
+
+void MenuSelection::selectClass(Character* c) {
+	if (c != _selected_class)
+	{
+		_selected_class = c;
+		updateClass();
+	}
+}
+
+void MenuSelection::selectSpell(int s) {
+	if (s != _selected_spell_id)
+	{
+		_selected_spell_id = s;
+		updateSpell();
+	}
+}
+
+void MenuSelection::updateClass() {
+	nomClasse->setText(_selected_class->getName());
+}
+
+void MenuSelection::updateSpell() {
+	nomSpell->setText(_selected_class->getSpell(_selected_spell_id)->getName());
+	descrSpell->setText(_selected_class->getSpell(_selected_spell_id)->getDescription());
+	infos->setText("Cost : " + to_string(_selected_class->getSpell(_selected_spell_id)->getCPCost()) + ", Range : " + to_string(_selected_class->getSpell(_selected_spell_id)->getMaxScope()));
 }
