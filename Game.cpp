@@ -15,6 +15,7 @@
 #include "Knight.h"
 #include "SpellRecap.h"
 #include "PlayerOctopus.h"
+#include "MenuSelection.h"
 #include "ObstacleOctopus.h"
 
 Game* Game::_instance = nullptr;
@@ -67,6 +68,8 @@ void Game::initialize()
 	Panel* menu_root = new Panel();
 	Panel* menu_1 = new Panel();
 	Panel* game_frame = new Panel();
+	/* Creation of selection menu */
+	Panel* menu_selection = new MenuSelection();
 	game_frame->setBgColor(Color::WHITE);
 
 	/* creation of menu */
@@ -148,7 +151,7 @@ void Game::initialize()
 	game_frame->add(sr1, Alignment::BOTTOM | Alignment::LEFT);
 
 	_grid->getCellAt(0, 1);
-	_octopus->setFrame(game_frame);
+	_octopus->setFrame(menu_selection);
 	start();
 }
 Game::~Game()
