@@ -21,20 +21,26 @@ MenuSelection::MenuSelection() : Panel()
 	j2->setPositionX(1000);
 	j2->setPositionY(50);
 
-	Button* choiceJ1 = new Button(75, 75);
+	choiceJ1 = new Button(75, 75);
 	selection_top->add(choiceJ1);
 	choiceJ1->setHover(false);
 	choiceJ1->setPosition(110, 100);
+	/*Texture t = (*ServiceLocator::getTextureManager())["obstacle_0"];
+	choiceJ1->setBackground(t);
+	choiceJ1->setHoverBackground(t);*/
 
 	Label* nameJ1 = new Label(150, 50, "Nom ici", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	selection_top->add(nameJ1);
 	nameJ1->setPositionX(325);
 	nameJ1->setPositionY(110);
 
-	Button* choiceJ2 = new Button(75, 75);
+	choiceJ2 = new Button(75, 75);
 	selection_top->add(choiceJ2);
 	choiceJ2->setHover(false);
 	choiceJ2->setPosition(1015, 100);
+	/*Texture t2 = (*ServiceLocator::getTextureManager())["obstacle_1"];
+	choiceJ2->setBackground(t2);
+	choiceJ2->setHoverBackground(t2);*/
 
 	Label* nameJ2 = new Label(150, 50, "Nom ici", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	selection_top->add(nameJ2);
@@ -47,6 +53,7 @@ MenuSelection::MenuSelection() : Panel()
 	button_selec_1->setPadding(50);
 	button_selec_1->setPositionY(100);
 	button_selec_1->setPositionX(500);
+	button_selec_1->Clickable::setCallback(new EventCallback([=](Event*) {ready(); }));
 
 	Panel* selection_bottom = new Panel(1200, 600);
 	this->add(selection_bottom);
@@ -146,4 +153,31 @@ void MenuSelection::updateSpell() {
 	nomSpell->setText(_selected_class->getSpell(_selected_spell_id)->getName());
 	descrSpell->setText(_selected_class->getSpell(_selected_spell_id)->getDescription());
 	infos->setText("Cost : " + to_string(_selected_class->getSpell(_selected_spell_id)->getCPCost()) + ", Range : " + to_string(_selected_class->getSpell(_selected_spell_id)->getMaxScope()));
+}
+
+
+void MenuSelection::updateIcone1() {
+	choiceJ1->setBackground((*ServiceLocator::getTextureManager())["icon_" + j1->getType()]);
+	choiceJ1->setHoverBackground((*ServiceLocator::getTextureManager())["icon_" + j1->getType()]);
+}
+
+
+void MenuSelection::updateIcone2() {
+	choiceJ2->setBackground((*ServiceLocator::getTextureManager())["icon_" + j2->getType()]);
+	choiceJ2->setHoverBackground((*ServiceLocator::getTextureManager())["icon_" + j2->getType()]);
+}
+
+
+void MenuSelection::ready() {
+	if (j1 == nullptr)
+	{
+		j1 = _selected_class;
+		updateIcone1();
+	}
+	else if (j2 == nullptr)
+	{
+		j2 = _selected_class;
+		updateIcone2();
+		// gameStart(j1,j2);
+	}
 }

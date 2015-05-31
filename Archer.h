@@ -1,5 +1,7 @@
 #pragma once
 #include "Character.h"
+#include "ServiceLocator.h"
+#include "TextureManager.h"
 
 class Archer : public Character
 {

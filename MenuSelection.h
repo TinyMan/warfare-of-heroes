@@ -29,13 +29,21 @@ public:
 	void selectSpell(int x);
 	void updateClass();
 	void updateSpell();
+	void updateIcone1();
+	void updateIcone2();
+	void ready();
 private:
-	Character* _selected_class = new Archer();
+	Character* _selected_class;
 	int _selected_spell_id;
+
+	Button* choiceJ1;
+	Button* choiceJ2;
 	
+	// Classes :
 	Label* nomClasse;
 	Label* descrClasse;
 
+	// Spells :
 	Button* spell1;
 	Button* spell2;
 	Button* spell3;
@@ -43,6 +51,10 @@ private:
 	Label* nomSpell;
 	Label* descrSpell;
 	Label* infos;
+
+	// Selection :
+	Character* j1 = nullptr;
+	Character* j2 = nullptr;
 
 
 };

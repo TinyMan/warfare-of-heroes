@@ -2,6 +2,8 @@
 #include "Character.h"
 #include "Cell.h"
 #include "DiamondAoE.h"
+#include "ServiceLocator.h"
+#include "TextureManager.h"
 
 class Mage : public Character
 {
@@ -16,6 +18,7 @@ public:
 	static const int ERUPTION = 1;
 	static const int ROOT = 2;
 	static const int FIREBALL = 3;
+
 
 	Mage(int x = 0, int y = 0, string name = "Gandalf");
 	~Mage();

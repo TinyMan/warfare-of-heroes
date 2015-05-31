@@ -12,6 +12,9 @@ TextureManager::TextureManager(SDL_Renderer* r)
 	loadTexture("Images/PNG/fondrectangle.png", "fondrectangle");
 	loadTexture("Images/PNG/Arbre.png", "obstacle_0");
 	loadTexture("Images/PNG/Cailloux.png", "obstacle_1");
+	loadTexture("Images/PNG/Cailloux.png", "icon_mage");
+	loadTexture("Images/PNG/Arbre.png", "icon_archer");
+	loadTexture("Images/PNG/Chevalier_Exemple.png", "icon_knight");
 	
 }
 
