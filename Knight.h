@@ -1,8 +1,6 @@
 #pragma once
 #include "Character.h"
 #include "Cell.h"
-#include "ServiceLocator.h"
-#include "TextureManager.h"
 
 class Knight : public Character
 {

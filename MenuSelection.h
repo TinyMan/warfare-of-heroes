@@ -34,11 +34,13 @@ public:
 	void ready();
 private:
 	Character* _selected_class;
-	int _selected_spell_id;
+	int _selected_spell_id=0;
 
 	Button* choiceJ1;
+	Label* nameJ1;
 	Button* choiceJ2;
-	
+	Label* nameJ2;
+
 	// Classes :
 	Label* nomClasse;
 	Label* descrClasse;

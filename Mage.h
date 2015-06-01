@@ -2,8 +2,6 @@
 #include "Character.h"
 #include "Cell.h"
 #include "DiamondAoE.h"
-#include "ServiceLocator.h"
-#include "TextureManager.h"
 
 class Mage : public Character
 {

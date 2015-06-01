@@ -29,7 +29,7 @@ MenuSelection::MenuSelection() : Panel()
 	choiceJ1->setBackground(t);
 	choiceJ1->setHoverBackground(t);*/
 
-	Label* nameJ1 = new Label(150, 50, "Nom ici", (*ServiceLocator::getFontManager())["LifeCraft"]);
+	nameJ1 = new Label(150, 50, "J1", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	selection_top->add(nameJ1);
 	nameJ1->setPositionX(325);
 	nameJ1->setPositionY(110);
@@ -42,7 +42,7 @@ MenuSelection::MenuSelection() : Panel()
 	choiceJ2->setBackground(t2);
 	choiceJ2->setHoverBackground(t2);*/
 
-	Label* nameJ2 = new Label(150, 50, "Nom ici", (*ServiceLocator::getFontManager())["LifeCraft"]);
+	nameJ2 = new Label(150, 50, "J2", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	selection_top->add(nameJ2);
 	nameJ2->setPositionX(800);
 	nameJ2->setPositionY(110);
@@ -53,6 +53,7 @@ MenuSelection::MenuSelection() : Panel()
 	button_selec_1->setPadding(50);
 	button_selec_1->setPositionY(100);
 	button_selec_1->setPositionX(500);
+	button_selec_1->setBgColor(Color::RED);
 	button_selec_1->Clickable::setCallback(new EventCallback([=](Event*) {ready(); }));
 
 	Panel* selection_bottom = new Panel(1200, 600);
@@ -64,21 +65,27 @@ MenuSelection::MenuSelection() : Panel()
 	selection_bottom->add(choice1);
 	choice1->setPosition(200, 100);
 	choice1->Clickable::setCallback(new EventCallback([=](Event*) {selectClass(a); }));
+	choice1->setHoverBackground((*ServiceLocator::getTextureManager())["icon_archer"]);
+	choice1->setBackground((*ServiceLocator::getTextureManager())["icon_archer"]);
 
-	Button* choice2 = new Button(125, 125);
+	Button* choice2 = choice1->clone();
 	selection_bottom->add(choice2);
 	choice2->setPosition(200 - 62, 100 + 125);
 	choice2->Clickable::setCallback(new EventCallback([=](Event*) {selectClass(k); }));
+	choice2->setBackground((*ServiceLocator::getTextureManager())["icon_knight"]);
+	choice2->setHoverBackground((*ServiceLocator::getTextureManager())["icon_knight"]);
 
-	Button* choice3 = new Button(125, 125);
+	Button* choice3 = choice1->clone();
 	selection_bottom->add(choice3);
 	choice3->setPosition(200 + 63, 100 + 125);
 	choice3->Clickable::setCallback(new EventCallback([=](Event*) {selectClass(m); }));
+	choice3->setBackground((*ServiceLocator::getTextureManager())["icon_mage"]);
+	choice3->setHoverBackground((*ServiceLocator::getTextureManager())["icon_mage"]);
 
-	Panel* spellInfos = new Panel(500, 300);
+	Panel* spellInfos = new Panel(500, 400);
 	this->add(spellInfos);
 	spellInfos->setBgColor(Color::BLACK);
-	spellInfos->setPosition(600, 275);
+	spellInfos->setPosition(600, 250);
 
 	nomClasse = new Label(150, 25, "Nom Classe", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	spellInfos->add(nomClasse);
@@ -113,14 +120,15 @@ MenuSelection::MenuSelection() : Panel()
 	spellInfos->add(nomSpell);
 	nomSpell->setPosition(25, 175);
 
-	descrSpell = new Label(400, 35, "Description du Spell : bla bla bla bla bla", (*ServiceLocator::getFontManager())["LifeCraft"]);
+	descrSpell = new Label(500, 150, "Description du Spell : bla bla bla bla bla", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	spellInfos->add(descrSpell);
 	descrSpell->setPosition(25, 205);
 	descrSpell->setTextSize(22);
+	descrSpell->setTextAlignment(Alignment::CENTERY | Alignment::LEFT);
 
 	infos = new Label(400, 35, "Cost : X , Range : Y , inline / aoe", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	spellInfos->add(infos);
-	infos->setPosition(25, 235);
+	infos->setPosition(25, 350);
 	infos->setTextSize(22);
 }
 
@@ -138,15 +146,30 @@ void MenuSelection::selectClass(Character* c) {
 }
 
 void MenuSelection::selectSpell(int s) {
-	if (s != _selected_spell_id)
-	{
 		_selected_spell_id = s;
 		updateSpell();
-	}
 }
 
 void MenuSelection::updateClass() {
 	nomClasse->setText(_selected_class->getName());
+	int rang;
+	if (_selected_class->getType() == "archer")
+		rang = 1;
+	else if (_selected_class->getType() == "knight")
+		rang = 5;
+	else
+		rang = 9;
+
+	spell1->setBackground((*ServiceLocator::getTextureManager())["icon_spell_"+to_string(rang)]);
+	spell1->setHoverBackground((*ServiceLocator::getTextureManager())["icon_spell_" + to_string(rang)]);
+	spell2->setBackground((*ServiceLocator::getTextureManager())["icon_spell_" + to_string(rang + 1)]);
+	spell2->setHoverBackground((*ServiceLocator::getTextureManager())["icon_spell_" + to_string(rang+1)]);
+	spell3->setBackground((*ServiceLocator::getTextureManager())["icon_spell_" + to_string(rang + 2)]);
+	spell3->setHoverBackground((*ServiceLocator::getTextureManager())["icon_spell_" + to_string(rang + 2)]);
+	spell4->setBackground((*ServiceLocator::getTextureManager())["icon_spell_" + to_string(rang + 3)]);
+	spell4->setHoverBackground((*ServiceLocator::getTextureManager())["icon_spell_" + to_string(rang + 3)]);
+
+	selectSpell(0);
 }
 
 void MenuSelection::updateSpell() {
@@ -159,12 +182,14 @@ void MenuSelection::updateSpell() {
 void MenuSelection::updateIcone1() {
 	choiceJ1->setBackground((*ServiceLocator::getTextureManager())["icon_" + j1->getType()]);
 	choiceJ1->setHoverBackground((*ServiceLocator::getTextureManager())["icon_" + j1->getType()]);
+	nameJ1->setText(j1->getName());
 }
 
 
 void MenuSelection::updateIcone2() {
 	choiceJ2->setBackground((*ServiceLocator::getTextureManager())["icon_" + j2->getType()]);
 	choiceJ2->setHoverBackground((*ServiceLocator::getTextureManager())["icon_" + j2->getType()]);
+	nameJ2->setText(j2->getName());
 }
 
 

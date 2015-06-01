@@ -15,17 +15,17 @@ Archer::Archer(int x, int y, string name) : Character(x, y, name)
 	hpMax = _hitPoints = HP_MAX;
 
 	_spells[VOLLEY] = new Spell("Arrow Volley", this, 4, 10, 0, 0, 0, 8, false);
-	_spells[VOLLEY]->setDescription("Shoots a bunch of arrows in the air, \nwhich then fall into a zone, dealing damages to the enemies present in the area.");
+	_spells[VOLLEY]->setDescription("Shoots a bunch of arrows in the air, \nwhich then fall into a zone, \ndealing damages to the enemies present in the area.");
 	_spells[VOLLEY]->addEffect(new DamageEffect(120, this));
 	_spells[VOLLEY]->setTargetSelector(new DiamondSelector(2));
 
 	_spells[SB_ARROW] = new Spell("Step-Back Arrow", this, 4, 6, 0, 0, 0, 3, true);
-	_spells[SB_ARROW]->setDescription("Shoots an arrow in a line, \nupon hitting an enemy, it makes him move backwards for 2 cells.");
+	_spells[SB_ARROW]->setDescription("Shoots an arrow in a line, \nupon hitting an enemy, \nit makes him move backwards for 2 cells.");
 	_spells[SB_ARROW]->addEffect(new KnockBackEffect(2, this));
 	_spells[SB_ARROW]->addEffect(new DamageEffect(70, this));
 
 	_spells[FLAMED_ARROW] = new Spell("Flamed Arrow", this, 4, 5, 0, 0, 0, 6, false);
-	_spells[FLAMED_ARROW]->setDescription("Launches an arrow set on fire to damage and cause a 3 turn burn to the enemy. ");
+	_spells[FLAMED_ARROW]->setDescription("Launches an arrow set on fire to damage and \ncause a 3 turn burn to the enemy. ");
 	_spells[FLAMED_ARROW]->addEffect(new DamageEffect(80, this));
 	_spells[FLAMED_ARROW]->addEffect(new DamageOverTime(20, 3, this, "Flamed Arrow DoT"));
 

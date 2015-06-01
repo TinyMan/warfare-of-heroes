@@ -3,11 +3,11 @@
 #include "Game.h"
 
 Button::Button(int w, int h) 
-	: Label(w, h), _regular_bg(w, h, Color::RED), _hover_bg(w, h, Color::BLUE)
+	: Label(w, h)//, _regular_bg(w, h, Color::RED), _hover_bg(w, h, Color::BLUE)
 {
 	_color = { 255, 0, 0, 255 };
 	setFont((*ServiceLocator::getFontManager())["LifeCraft"]);
-	Label::setBackground(_regular_bg);
+	//Label::setBackground(_regular_bg);
 }
 
 

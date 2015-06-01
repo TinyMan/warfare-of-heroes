@@ -7,7 +7,6 @@
 #include "DamageOverTime.h"
 #include "CharacterEvents.h"
 #include "Grid.h"
-#include "TextureManager.h"
 using namespace std;
 using namespace Events::CharacterEvents;
 
