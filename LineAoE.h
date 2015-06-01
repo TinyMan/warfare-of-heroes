@@ -8,6 +8,7 @@ class LineAoE :
 public:
 	LineAoE(const Cell* first, const Cell* last);
 	LineAoE(const Cell* first, const Cell* second, int range);
+	LineAoE(const Cell* first, Grid::DIRECTION direction, int range);
 
 	virtual ~LineAoE();
 

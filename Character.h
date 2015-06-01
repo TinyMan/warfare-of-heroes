@@ -6,7 +6,7 @@
 #include "Game.h"
 #include "DamageOverTime.h"
 #include "CharacterEvents.h"
-
+#include "Grid.h"
 using namespace std;
 using namespace Events::CharacterEvents;
 
@@ -51,14 +51,20 @@ public:
 	// Getters :
 	string getName() const { return _name; }
 	int getHP() const;
+	string getHPString() const { return "HP: " + to_string(_hitPoints) + "/" + to_string(hpMax); }
+	float getHPPercent() const { return (_hitPoints * 100.f) / hpMax; }
 	int getMP() const;
 	int getCP() const;
+	int getHPMax() const { return hpMax; }
+	int getMPMax() const { return mpMax; }
+	int getCPMax() const { return cpMax; }
 	const Cell* getCell() const{ return _hisCell; }
 	int getBonusDamage() const { return _bonusDamage; }
 	Spell* getSpell(int spellID) const { return _spells.at(spellID); }
 	bool hisTurn() const { return _myTurn; }
 	virtual void displayBasic(ostream& o) const;
 	bool isDead() const { return _dead; }
+	map<int, Spell*> getSpells() const { return _spells; }
 
 	/* every children have to implement those methods */
 	// Attacks :
@@ -73,6 +79,8 @@ public:
 	// Il faut créer une méthode de pathfinding qui permettra de se déplacer de plus d'une case à la fois.
 	bool move(int i, int j, bool moveWanted=true);
 	bool move(Cell& c, bool moveWanted=true);
+	bool move(unsigned int cell, bool moveWanted  = true);
+	bool moveSingle(Cell& c, bool moveWanted = true);
 
 	void actionCallback(int actionID, void*);
 	void targetSelectorForCharacter(int spellIID, void* d = nullptr);

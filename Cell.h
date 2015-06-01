@@ -4,7 +4,6 @@
 #include "SpellTarget.h"
 #include "OverTimeEffect.h"
 
-class Character;
 
 class Cell
 	: public SpellTarget
@@ -13,19 +12,22 @@ public:
 	typedef enum _STATE {
 		Free, PlayerOnIt, Obstacle
 	};
-	Cell(int x=0, int y=0);
+	static const int Tree = 0;
+	static const int Rock = 1;
+	Cell(unsigned int number = 0, int x = 0, int y = 0);
 	~Cell();
 
 	/* getters */
 	_STATE getType() const { return _cellType; }
 	int getPosX() const { return _posX; }
 	int getPosY() const { return _posY;	}
+	unsigned int getNumber() const { return _number; }
 	int getDistance(const Cell & c) const;
 	const Cell* getCell() const { return this; }
 	SpellTarget* getObject() const { return _object; }
 	void displayBasic(ostream& o) const;
 	bool hisTurn() const { if (_object) return _object->hisTurn(); else return false; }
-
+	bool adjacent(Cell* c) const;
 
 	bool isInView(const Cell & c) const;
 	bool isInView(const SpellTarget & c) const;
@@ -48,10 +50,12 @@ public:
 	virtual void beginTurn();
 
 	friend ostream& operator<<(ostream&, const Cell&);
+	int obstacle_type = rand() % 2;
 private:
 	_STATE _cellType;
 	int _posX;
 	int _posY;
+	unsigned int _number;
 
 	SpellTarget* _object = nullptr;
 	list<OverTimeEffect*> _effects;

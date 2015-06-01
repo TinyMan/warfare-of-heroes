@@ -16,8 +16,10 @@ public:
 	TimeService();
 	virtual ~TimeService();
 
-	virtual void setTimeout(Uint32 t, Callback&  callback);
-	virtual void setInterval(Uint32 t, Callback& callback);
+	virtual Timeout * setTimeout(Uint32 t, Callback&  callback);
+	virtual void removeTimeout(Timeout* t);
+	virtual Interval* setInterval(Uint32 t, Callback& callback);
+	virtual void removeInterval(Interval* t);	
 	virtual void update();
 	virtual void display()
 	{

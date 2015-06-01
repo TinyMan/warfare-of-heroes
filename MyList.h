@@ -55,7 +55,14 @@ public:
 		return found;
 	}
 	list<T> * getList() { return &_list; }
-	virtual void setDirty(bool b = true) { _dirty = b; }
+	virtual void setDirty(bool b = true)
+	{ 
+		_dirty = b;
+		for (auto &e : _list)
+		{
+			e->setDirty(b);
+		}
+	}
 
 	bool needSort()
 	{

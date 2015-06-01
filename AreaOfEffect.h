@@ -2,6 +2,7 @@
 #include <string>
 #include <list>
 #include "SpellTarget.h"
+#include "Grid.h"
 class Cell;
 
 using namespace std;
@@ -13,12 +14,12 @@ public:
 	AreaOfEffect(string name="Unknown AoE");
 	virtual ~AreaOfEffect();
 
-	list<Cell*> getCells() const { return _cells; }
 	void addCell(Cell* c);
 
 	/* getters */
 	virtual void displayBasic(ostream& o) const;
 	virtual bool hisTurn() const { return true; }
+	list<Cell*> getCells() const override { return _cells; }
 
 	/* setters */
 	virtual void lowerHitPoint(int amount);

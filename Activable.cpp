@@ -10,7 +10,7 @@ Activable::~Activable()
 {
 }
 
-void Activable::setActive(bool b)
+void Activable::setActive(bool b, void*)
 { 
 	if (_active != b)
 	{

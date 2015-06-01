@@ -2,13 +2,12 @@
 #include "EventCallback.h"
 #include "Game.h"
 
-Button::Button(SDL_Rect rect) : _rect(rect)
+Button::Button(int w, int h) 
+	: Label(w, h), _regular_bg(w, h, Color::RED), _hover_bg(w, h, Color::BLUE)
 {
-	_color = { 255, 0, 0, 0 };
-}
-Button::Button(int x, int y, int w, int h) : _rect({ x, y, w, h })
-{
-	_color = { 255, 0, 0, 0 };
+	_color = { 255, 0, 0, 255 };
+	setFont((*ServiceLocator::getFontManager())["LifeCraft"]);
+	Label::setBackground(_regular_bg);
 }
 
 
@@ -16,25 +15,48 @@ Button::~Button()
 {
 }
 
-void Button::render(SDL_Renderer* r, bool dirty)
-{
-	bool d = (dirty || isDirty()) && isActive();
-	if (d)
-	{
-		//LOGINFO << "rendering dirty button" << this << endl;
-		if (hover())
-			SDL_SetRenderDrawColor(r, 0, 0, 255, 0);
-		else
-			SDL_SetRenderDrawColor(r, _color.r, _color.g, _color.b, _color.a);
 
-		//SDL_RenderDrawRect(r, &_rect);
-		SDL_RenderFillRect(r, &_rect);
-		setDirty(false);
-	}
-}
 bool Button::isInArea(SDL_Point p) const
 {
 	if (!isActive())
 		return false;
-	return p.x >= _rect.x && p.x <= _rect.x + _rect.w && p.y >= _rect.y && p.y <= _rect.y + _rect.h;
+	return p.x >= _absolute_rect.x && p.x <= _absolute_rect.x + _absolute_rect.w && p.y >= _absolute_rect.y && p.y <= _absolute_rect.y + _absolute_rect.h;
+}
+
+void Button::internalRender(SDL_Renderer* r, bool force)
+{
+	if (isActive())
+	{
+		bool d = (force || isDirty());
+		if (d)
+		{
+			//LOGINFO << "rendering dirty button" << this << endl;
+			if (hover())
+				SDL_SetRenderDrawColor(r, 0, 0, 255, 255);
+			else
+				_color.setRenderDrawColor(r);
+
+			//SDL_RenderDrawRect(r, &_rect);
+			//SDL_RenderFillRect(r, NULL);
+		}
+		Label::internalRender(r, d);
+	}
+}
+Button* Button::clone() const
+{
+	Button* b = new Button(_relative_rect.w, _relative_rect.h);
+
+	b->setActive(isActive());
+	b->setHover(hover());
+	b->setBackground(_regular_bg);
+	b->setHoverBackground(_hover_bg);
+	b->setText(getText());
+	b->setTextAlignment(getTextAlignment());
+	b->setTextSize(getTextSize());
+	b->setTextColor(getTextColor());
+	b->setColor(getColor());
+	b->setPosition(_relative_rect.x, _relative_rect.y);
+	b->Clickable::setCallback(Clickable::getCallback());
+
+	return b;
 }

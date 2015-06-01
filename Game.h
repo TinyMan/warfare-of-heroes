@@ -4,13 +4,11 @@
 #include <list>
 #include <deque>
 #include <sstream>
-
-#include "GameObject.h"
-#include "Character.h"
-#include "Grid.h"
-#include "ServiceLocator.h"
 #include "CharacterEvents.h"
-#include "Octopus.h"
+#include "ServiceLocator.h"
+class Octopus;
+class GameObject;
+class Grid;
 
 #define GAMEINST Game::getInstance()
 
@@ -38,6 +36,7 @@ public:
 	/* getters */
 	Grid* getGrid() const { return _grid; }
 	Character* getPlayer(int id) const { return _players.at(id); }
+	Character* getCurrentPlayer() const { return _players.at(_player_turn); }
 	Octopus* getOctopus() const { return _octopus; }
 
 	template<typename... GO>
@@ -63,16 +62,20 @@ public:
 
 	/* starting game */
 	void initialize();
-	void start();
+	void start(Character* player1, Character* player2);
+
+	/* related to the turn */
 	void beginTurn();
 	void endTurn(void* data=nullptr);
+	Uint32 getTimeLeft() const { return  (_turn_max_duration + _turn_start) - TIMESERVICE->time(); }
+	Uint32 getTurnStartTime() const { return _turn_start; }
 
 	/* ending game */
 	void stop(void*d=nullptr) { _running = false; }
 	bool isRunning() const { return _running; }
 
 	static Game* getInstance() { if (!_instance) _instance = new Game; return _instance; }
-
+	static const Uint16 fps_limit = 100;
 private:
 	/* the collection of all game objects, sorted with the active ones on the front and the inactive ones after them */
 	list<GameObject*> _gameObjects;
@@ -89,6 +92,10 @@ private:
 	bool _running = true;
 	int _turn = 0;
 	int _player_turn = 0; // the current player ID which play 
+
+	Uint32 _turn_start = 0; // timestamps of the begining of the turn
+	Uint32 _turn_max_duration = 90000; // number of millisecond per turn (max)
+	Timeout* _endOfTurn_timeout = nullptr;
 
 	/* ptr to different services */
 	TimeService * _timeService = nullptr;
@@ -110,3 +117,14 @@ public:
 
 };
 
+
+namespace Events
+{
+	class BeginTurnEvent : public Event
+	{
+	public:
+		BeginTurnEvent(Character* c): _c(c){}
+		~BeginTurnEvent(){}
+		Character* _c;
+	};
+}

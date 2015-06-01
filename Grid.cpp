@@ -2,12 +2,36 @@
 
 
 Grid::Grid()
+	: pathFinder(bind(&Grid::getAdjacentCells, this, placeholders::_1), [](Cell* c) { return c && c->getType() == Cell::Free; }, [=](Cell* c1, Cell* c2) {return (double)getCellDistance(*c1, *c2); })
 {
-	for (int i = 0; i < WIDTH; i++)
+	unsigned int n = 0;
+	int nextX = -13;
+	int nextY = 0;
+	for (int j = 0; j < Grid::HEIGHT * 2 - 1; ++j)
 	{
-		for (int j = 0; j < HEIGHT; j++)
+		bool big = j % 2 == 0;
+		int width = big ? Grid::WIDTH : Grid::WIDTH - 1;
+
+		int y = nextY;
+		int x = nextX;
+		for (int i = 0; i < width; i++)
 		{
-			arrayOfCells[i][j] = Cell(i, j);
+			if (n >= 0 && n < CELLS_NUMBER)
+			{
+				_cells[n] = Cell(n, x, y);
+				_cells_coordinates[x][y] = n;
+			}
+			x++;
+			y--;
+			n++;
+		}
+		if (big)
+		{
+			nextX++;
+		}
+		else
+		{
+			nextY++;
 		}
 	}
 }
@@ -18,47 +42,59 @@ Grid::~Grid()
 }
 
 void Grid::generateObstacle() {
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < nbObstacles; i++)
 	{
-		int x = rand() % WIDTH;
-		int y = rand() % HEIGHT;
-		arrayOfCells[x][y].setType(Cell::Obstacle);
+		unsigned int n = rand() % CELLS_NUMBER;
+		_cells[n].setType(Cell::Obstacle);
+		_obstacles.push_back(&_cells[n]);
 	}
 }
 
 void Grid::display(ostream& o) const
 {
-	for (auto &a : arrayOfCells)
+	for (auto &c : _cells)
 	{
-		for (const Cell &c : a)
-		{
-			if (c.getType() != Cell::Free)
-				o << c << endl;
-		}
+		if (c.second.getType() != Cell::Free)
+			o << c.second << endl;
 	}
 }
-
+void Grid::setObject(SpellTarget* go, unsigned int n)
+{
+	_cells.at(n).setObject(go);
+}
 void Grid::setObject(SpellTarget* go, int i, int j)
 {
-	if (i < Grid::WIDTH && j < Grid::HEIGHT)
+	if (validCoordinates(i, j))
 	{
-		arrayOfCells[i][j].setObject(go);
+		setObject(go, toCellNumber(i, j));
 	}
 }
 
 Cell* Grid::getCellAt(int i, int j)
 {
-	if (i>WIDTH || j>HEIGHT || i < 0 || j < 0)
+	if (!validCoordinates(i, j))
 	{
-		LOGERR << "Index de getCellAt() hors de la grille !" << endl;
+	//	LOGERR << "Index de getCellAt() hors de la grille !" << endl;
 		return nullptr;
 	}
-	return &arrayOfCells[i][j];
+	return getCell(toCellNumber(i, j));
 }
-
+Cell* Grid::getCell(unsigned int n)
+{
+	if (_cells.count(n) != 1)
+	{
+	//	LOGERR << "Trying to get cell " << n << " but it is non existant" << endl;
+		return nullptr;
+	}
+	return &_cells.at(n);
+}
+int Grid::getCellDistance(unsigned int n, unsigned int n2)
+{
+	return getCellDistance(_cells.at(n), _cells.at(n2));
+}
 int Grid::getCellDistance(int i, int j, int x, int y)
 {
-	int ret = getCellDistance(arrayOfCells[i][j], arrayOfCells[x][y]);
+	int ret = getCellDistance(toCellNumber(i,j), toCellNumber(x, y));
 	return ret;
 }
 
@@ -118,11 +154,25 @@ Grid::DIRECTION Grid::getDir(const Cell& c1, const Cell& c2)
 
 void Grid::beginTurn()
 {
-	for (auto& l : arrayOfCells)
+	for (auto& c : _cells)
 	{
-		for (Cell& c : l)
-		{
-			c.beginTurn();
-		}
+		c.second.beginTurn();
 	}
+	
+}
+
+list<Cell*> Grid::getAdjacentCells(Cell* c)
+{
+	list<Cell*> ret;
+	
+	if (c)
+	{
+		int x = c->getPosX();
+		int y = c->getPosY();
+		ret.push_back(getCellAt(x + 1, y));
+		ret.push_back(getCellAt(x - 1, y));
+		ret.push_back(getCellAt(x, y + 1));
+		ret.push_back(getCellAt(x, y - 1));
+	}
+	return ret;
 }

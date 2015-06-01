@@ -4,55 +4,60 @@
 
 Panel::Panel()
 {
-	_rect = { 0, 0, GAMEINST->getOctopus()->getWWidth(), GAMEINST->getOctopus()->getWHeight() };
-	initialize();
+	setBgColor(Color::BLACK);
 }
-Panel::Panel(SDL_Rect rect)
-	: _rect(rect)
+Panel::Panel( int w, int h)
+	: OctopusBaby(w, h )
 {
-	initialize();
-}
-Panel::Panel(int x, int y, int w, int h)
-	: _rect({ x, y, w, h })
-{
-	initialize();
+	setBgColor(Color::BLACK);
 }
 
-void Panel::initialize()
-{
-	/*LOGINFO << "Initialising new Panel" << endl;
-	LOGINFO << _rect.w << " " << _rect.h << endl;*/
-	_texture = SDL_CreateTexture(GAMEINST->getOctopus()->getRenderer(), SDL_GetWindowPixelFormat(GAMEINST->getOctopus()->getWindow()), SDL_TEXTUREACCESS_TARGET, _rect.w, _rect.h);
-}
+
 
 Panel::~Panel()
 {
-	SDL_DestroyTexture(_texture);
-}
-
-void Panel::render(SDL_Renderer* r, bool dirty)
-{
-	/* if dirty we need to redraw to _texture */
-	bool d = (dirty || isDirty()) && isActive();
-	if (d)
-	{
-		//LOGINFO << this << " is dirty, need render" << endl;
-		SDL_SetRenderTarget(r, _texture);
-		/* draw the contained octopus babies onto the texture */
-		for (auto e : _list)
-		{
-			//LOGINFO << "Rendering a baby in the panel " << endl;
-			e->render(r, d);
-		}
-		SDL_SetRenderTarget(r, NULL);
-		/* the texture is now up to date */
-		setDirty(false);
-	}
-	SDL_RenderCopy(r, _texture, NULL, &_rect);
 }
 
 void Panel::update()
 {
 	MyList::update();
-	
+	for (auto e : _list)
+	{
+		e->update();
+	}
+}
+void Panel::setActive(bool d, void*)
+{
+	for (auto e : _list)
+	{
+		e->setActive(d);
+	}
+	Activable::setActive(d);
+}
+void Panel::internalRender(SDL_Renderer* r, bool force)
+{
+	if (isActive())
+	{
+		bool dirty = isDirty();
+		bool d = (force || dirty);
+		if (d)
+		{
+			//LOGINFO << "rendering dirty panel" << endl;
+
+			// draw the contained octopus babies onto the texture 
+			for (auto e : _list)
+			{
+				//LOGINFO << "Rendering a baby in the panel " << endl;
+				e->render(r, d);
+			}
+		}
+	}
+}
+void Panel::updateAbsoluteRect()
+{
+	OctopusBaby::updateAbsoluteRect();
+	for (auto e : _list)
+	{
+		e->setContainerRect(_absolute_rect, e->getPosition());
+	}
 }

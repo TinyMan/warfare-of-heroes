@@ -16,6 +16,11 @@ Character::Character(int x, int y, string name) : _name(name)
 
 Character::~Character()
 {
+	for (auto& s : getSpells())
+	{
+		delete s.second;
+	}
+	_hisCell->free();
 }
 
 void Character::lowerHitPoint(int amount)
@@ -33,6 +38,7 @@ void Character::lowerHitPoint(int amount)
 		{
 			_hitPoints -= amount;
 		}
+		(new LoseHpEvent(this, amount))->dispatch();
 	}
 }
 
@@ -59,6 +65,7 @@ void Character::removeCapaciyPoint(int amount)
 	_capacityPoints -= amount;
 	if (_capacityPoints < 0)
 		_capacityPoints = 0;
+	(new LoseCPEvent(this, amount))->dispatch();
 }
 void Character::addBonusDamage(int amount)
 {
@@ -91,23 +98,43 @@ int Character::getCP() const
 	return(_capacityPoints);
 }
 
+bool Character::moveSingle(Cell& c, bool moveWanted)
+{
+	int distance = GAMEINST->getGrid()->getCellDistance(c, *_hisCell);
+	if (distance > 1)
+		throw "Cheat error";
+	else if (distance > _movementPoints && moveWanted)
+		throw "not enough movement point";
+
+	(new MoveEvent(this, _hisCell, &c))->dispatch();
+	_hisCell->free();
+	c.setObject(this);
+	_hisCell->setType(Cell::Free);
+	_hisCell = &c;
+
+	if (moveWanted)
+		_movementPoints -= distance;
+
+	return true;
+}
 bool Character::move(Cell& c, bool moveWanted)
 {
-	LOGINFO << _name << " is moving from " << *_hisCell << " to " << c << endl;
-	try
-	{
-		int distance = GAMEINST->getGrid()->getCellDistance(c, *_hisCell);
-		if (distance > _movementPoints && moveWanted) throw "not enough movement points";
-		_hisCell->free();
-		c.setObject(this);
-		_hisCell->setType(Cell::Free);
-		_hisCell = &c;
-		if (moveWanted)
-			_movementPoints -= distance;	
+	//LOGINFO << _name << " is moving from " << *_hisCell << " to " << c << endl;
+	list<Cell*> path = GAMEINST->getGrid()->pathFinder.getPathAStar(_hisCell, &c);
+
+	try{
+		if (path.empty())
+			throw "no path found";
+		else if (path.size() > (unsigned int)_movementPoints)
+			throw "not enough movement point";
+		for (Cell* c : path)
+		{
+			moveSingle(*c, moveWanted);
+		}
 	}
-	catch (const char * msg)
+	catch (const char* msg)
 	{
-		LOGERR << "Cannot move : " << msg << endl;
+		LOGERR << "cannot move: " << msg << endl;
 		return false;
 	}
 	return true;
@@ -118,6 +145,14 @@ bool Character::move(int i, int j, bool moveWanted)
 	Cell* cell = GAMEINST->getGrid()->getCellAt(i, j);
 	if (cell != nullptr)		
 			return move(*cell,moveWanted);
+
+	return false;
+}
+bool Character::move(unsigned int cell, bool moveWanted)
+{
+	Cell* c = GAMEINST->getGrid()->getCell(cell);
+	if (c != nullptr)
+		return move(*c, moveWanted);
 
 	return false;
 }
