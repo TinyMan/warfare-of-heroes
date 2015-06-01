@@ -19,6 +19,7 @@ SpellButton::SpellButton(int spellID, SpellRecap* recap)
 	else
 		id = 9;
 	this->setBackground((*ServiceLocator::getTextureManager())["icon_spell_" + to_string(id+spellID)]);
+	this->setHoverBackground((*ServiceLocator::getTextureManager())["icon_spell_" + to_string(id + spellID)]);
 }
 
 

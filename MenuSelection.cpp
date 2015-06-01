@@ -43,10 +43,10 @@ MenuSelection::MenuSelection() : Panel()
 	nameJ2->setPositionX(800);
 	nameJ2->setPositionY(110);
 
-	Button* button_selec_1 = new Button(150, 50);
+	button_selec_1 = new Button(150, 50);
 	selection_top->add(button_selec_1);
 	button_selec_1->setText("Pret");
-	button_selec_1->setPadding(50);
+	button_selec_1->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	button_selec_1->setPositionY(100);
 	button_selec_1->setPositionX(500);
 	button_selec_1->setBgColor(Color::RED);
@@ -206,6 +206,7 @@ void MenuSelection::ready() {
 	{
 		j2 = _selected_class;
 		updateIcone2();
+		button_selec_1->setText("Jouer !");
 	}
 	/*
 	if (j1 == a || j2 == a)

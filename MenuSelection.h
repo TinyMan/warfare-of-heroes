@@ -59,6 +59,7 @@ private:
 	Label* infos;
 
 	// Selection :
+	Button* button_selec_1;
 	Character* j1 = nullptr;
 	Character* j2 = nullptr;
 
