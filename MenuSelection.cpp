@@ -3,10 +3,6 @@
 
 MenuSelection::MenuSelection() : Panel()
 {
-	Archer* a = new Archer(-2,12);
-	Knight* k = new Knight(-14,5);
-	Mage* m = new Mage(0,3);
-
 	Panel* selection_top = new Panel(1200, 200);
 	this->add(selection_top, (Alignment::TOP | Alignment::LEFT));
 	selection_top->setBgColor(Color::WHITE);
@@ -194,6 +190,8 @@ void MenuSelection::updateIcone2() {
 
 
 void MenuSelection::ready() {
+	// TOUT CHANGER
+	// IL FAUT TOUT CHANGER
 	if (j1 == nullptr)
 	{
 		j1 = _selected_class;
@@ -201,8 +199,57 @@ void MenuSelection::ready() {
 	}
 	else if (j2 == nullptr)
 	{
-		j2 = _selected_class;
+		if (_selected_class == j1)
+		{
+			if (_selected_class->getType() == "archer")
+			{
+				j2 = new Archer(7, 10);
+				delete k;
+				delete m;
+			}
+			else if (_selected_class->getType() == "knight")
+			{
+				j2 = new Knight(3, 2);
+				delete a;
+				delete m;
+			}
+			else if (_selected_class->getType() == "mage")
+			{
+				j2 = new Mage(-7, 8);
+				delete a;
+				delete k;
+			}
+			else
+			{
+				if (j1 == a)
+				{
+					if (j2 == k)
+						delete m;
+					if (j2 == m)
+						delete k;
+				}
+				if (j1 == k)
+				{
+					if (j2 == a)
+						delete m;
+					if (j2 == m)
+						delete a;
+				}
+				if (j1 == m)
+				{
+					if (j2 == k)
+						delete a;
+					if (j2 == a)
+						delete k;
+				}
+			}
+
+		}
+		else
+			j2 = _selected_class;
+		
+
 		updateIcone2();
-		// gameStart(j1,j2);
+		GAMEINST->start(j1,j2);
 	}
 }
