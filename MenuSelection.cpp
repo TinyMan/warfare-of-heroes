@@ -192,64 +192,35 @@ void MenuSelection::updateIcone2() {
 void MenuSelection::ready() {
 	// TOUT CHANGER
 	// IL FAUT TOUT CHANGER
+	if (j1 != nullptr && j2 != nullptr && j1 != j2)
+	{
+		GAMEINST->start(j1, j2);
+	}
+
 	if (j1 == nullptr)
 	{
 		j1 = _selected_class;
 		updateIcone1();
 	}
-	else if (j2 == nullptr)
+	else if (j2 == nullptr && _selected_class != j1)
 	{
-		if (_selected_class == j1)
-		{
-			if (_selected_class->getType() == "archer")
-			{
-				j2 = new Archer(7, 10);
-				delete k;
-				delete m;
-			}
-			else if (_selected_class->getType() == "knight")
-			{
-				j2 = new Knight(3, 2);
-				delete a;
-				delete m;
-			}
-			else if (_selected_class->getType() == "mage")
-			{
-				j2 = new Mage(-7, 8);
-				delete a;
-				delete k;
-			}
-			else
-			{
-				if (j1 == a)
-				{
-					if (j2 == k)
-						delete m;
-					if (j2 == m)
-						delete k;
-				}
-				if (j1 == k)
-				{
-					if (j2 == a)
-						delete m;
-					if (j2 == m)
-						delete a;
-				}
-				if (j1 == m)
-				{
-					if (j2 == k)
-						delete a;
-					if (j2 == a)
-						delete k;
-				}
-			}
-
-		}
-		else
-			j2 = _selected_class;
-		
-
+		j2 = _selected_class;
 		updateIcone2();
-		GAMEINST->start(j1,j2);
 	}
+	/*
+	if (j1 == a || j2 == a)
+	{
+		if (j1 == k || j2 == k)
+			delete m;
+		if (j1 == m || j2 == m)
+			delete k;
+	}
+	else if (j1 == k || j2 == k)
+	{
+		if (j1 == m || j2 == m)
+			delete a;
+	}*/
+	
+	
+	
 }

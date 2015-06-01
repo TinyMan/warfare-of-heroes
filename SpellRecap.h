@@ -24,6 +24,7 @@ public:
 
 	void selectSpell(int spellID);
 	void unselectSpell(int spellID);
+	Character* getCharacter() const { return _character; };
 
 	virtual void clickOnCell(unsigned int c);
 	virtual void hoverCell(Cell* c);

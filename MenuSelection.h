@@ -33,9 +33,9 @@ public:
 	void updateIcone2();
 	void ready();
 private:
-	Archer* a = new Archer(-2, 12);
-	Knight* k = new Knight(-14, 5);
-	Mage* m = new Mage(0, 3);
+	Archer* a = new Archer(0,0);
+	Knight* k = new Knight(1, 1);
+	Mage* m = new Mage(3, 3);
 
 	Character* _selected_class;
 	int _selected_spell_id=0;
