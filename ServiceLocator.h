@@ -5,6 +5,7 @@
 #include "UserInterface.h"
 #include "TextureManager.h"
 #include "FontManager.h"
+#include "SoundService.h"
 
 using namespace Events;
 
@@ -21,6 +22,7 @@ public:
 	static void provide(UserInterface*);
 	static void provide(TextureManager*);
 	static void provide(FontManager*);
+	static void provide(SoundService*);
 
 	static TimeService * getTimeService();
 	static LogService * getLogService();
@@ -28,6 +30,7 @@ public:
 	static UserInterface* getUI();
 	static TextureManager* getTextureManager();
 	static FontManager* getFontManager();
+	static SoundService* getSoundService();
 
 	static void cleanup();
 
@@ -38,5 +41,6 @@ private:
 	static UserInterface* _userInterface;
 	static TextureManager* _textureManager;
 	static FontManager* _fontManager;
+	static SoundService* _soundService;
 };
 

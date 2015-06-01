@@ -6,6 +6,7 @@ EventService* ServiceLocator::_eventService = nullptr;
 UserInterface* ServiceLocator::_userInterface = nullptr;
 TextureManager* ServiceLocator::_textureManager = nullptr;
 FontManager* ServiceLocator::_fontManager = nullptr;
+SoundService* ServiceLocator::_soundService = nullptr;
 
 TimeService * ServiceLocator::getTimeService()
 {
@@ -32,6 +33,11 @@ FontManager* ServiceLocator::getFontManager()
 	return _fontManager;
 }
 
+SoundService* ServiceLocator::getSoundService()
+{
+	return _soundService;
+}
+
 void ServiceLocator::provide(TimeService * ts)
 {
 	_timeService = ts;
@@ -55,6 +61,10 @@ void ServiceLocator::provide(TextureManager* tm)
 void ServiceLocator::provide(FontManager* tm)
 {
 	_fontManager = tm;
+}
+void ServiceLocator::provide(SoundService* tm)
+{
+	_soundService = tm;
 }
 
 void ServiceLocator::cleanup()
@@ -89,5 +99,10 @@ void ServiceLocator::cleanup()
 	{
 		delete _fontManager;
 		_fontManager = nullptr;
+	}
+	if (_soundService != nullptr)
+	{
+		delete _soundService;
+		_soundService = nullptr;
 	}
 }
