@@ -7,7 +7,11 @@ RecapOctopus::RecapOctopus(size_t characterID)
 	: Panel(200, 600), _character(GAMEINST->getPlayer(characterID))
 {
 	
-	setBgColor(Color::BGCOLOR);
+	//setBgColor(Color::BGCOLOR);
+	Texture tata = (*ServiceLocator::getTextureManager())["fondcaca"];//Penser à changer le nom
+	if (characterID == 1)
+		tata = (*ServiceLocator::getTextureManager())["fondteub"]; //Penser à changer le nom
+	setBackground(tata); //Penser à changer le nom
 
 	_nameLabel = new Label(150, 50, _character->getName(), (*ServiceLocator::getFontManager())["LifeCraft"]);
 	_nameLabel->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);

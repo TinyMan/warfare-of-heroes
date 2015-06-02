@@ -16,7 +16,11 @@ SpellRecap::SpellRecap(Character* c, GridOctopus* grid)
 	_selected_spell_description->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	add(_selected_spell_description, 150, 100 );
 
-	setBgColor(Color::BGCOLOR);
+	//setBgColor(Color::BGCOLOR);
+	Texture textureFond = (*ServiceLocator::getTextureManager())["fondjoba"];//Penser à changer le nom
+	setBackground(textureFond);
+
+
 	EVENTSERVICE->listen(typeid(BeginTurnEvent), [=](Event* e) { 
 		setActive(_character == GAMEINST->getCurrentPlayer()); 
 		unselectSpell(_selected_spell); 

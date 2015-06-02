@@ -27,6 +27,11 @@ TextureManager::TextureManager(SDL_Renderer* r)
 	loadTexture("Images/PNG/sort10.png", "icon_spell_1"); 
 	loadTexture("Images/PNG/sort11.png", "icon_spell_4");
 	loadTexture("Images/PNG/sort12.png", "icon_spell_3");
+	loadTexture("Images/PNG/TestFond.png", "fondcaca"); //Penser à changer le nom
+	loadTexture("Images/PNG/TestFonddroite.png", "fondteub"); //Penser à changer le nom
+	loadTexture("Images/PNG/FondChrono.png", "fondjobi"); //Penser à changer le nom
+	loadTexture("Images/PNG/FondSortEnBas.png", "fondjoba"); //Penser à changer le nom
+	
 
 }
 

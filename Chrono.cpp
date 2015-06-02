@@ -10,7 +10,9 @@ Chrono::Chrono()
 	setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	auto l = [=](Event*) { GAMEINST->endTurn(); };
 	Clickable::setCallback(new EventCallback(l));
-	setBgColor(Color::BGCOLOR);
+	//setBgColor(Color::BGCOLOR);
+	Texture textureFond = (*ServiceLocator::getTextureManager())["fondjobi"];//Penser à changer le nom
+	setBackground(textureFond);
 }
 
 
