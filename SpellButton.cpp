@@ -2,7 +2,7 @@
 #include "SpellRecap.h"
 
 SpellButton::SpellButton(int spellID, SpellRecap* recap)
-	: Button(50, 50), _spell_id(spellID), _spell_recap(recap)
+	: Button(WIDTH, HEIGHT), _spell_id(spellID), _spell_recap(recap)
 {
 	auto clickLambda = [=](Event* e)
 	{

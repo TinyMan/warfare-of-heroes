@@ -43,6 +43,7 @@ public:
 	string getDescription() const { return _description; }
 	vector<unsigned int> getCellsInRange() const;
 	SpellTarget* getTargetFromCell(Cell* c) const;
+	int getCooldown() const { return _cooldown; }
 
 	friend ostream& operator<<(ostream& o, const Spell& s);
 protected:	

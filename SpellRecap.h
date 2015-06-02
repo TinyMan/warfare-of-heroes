@@ -38,6 +38,7 @@ private:
 	Character* _character = nullptr;
 	map<int, SpellButton*> _buttons_spells;
 	map<int, Label*> _label_spells;
+	map<int, Label*> _label_cooldown;
 	map<int, Spell*>  spells;
 
 	Label* _selected_spell_name = nullptr;

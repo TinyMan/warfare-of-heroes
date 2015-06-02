@@ -73,7 +73,7 @@ void Game::initialize()
 	button_1->setText("Play");
 	button_1->setTextColor(Color(240,190));
 	button_1->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
-	//button_1->Clickable::setCallback(new EventCallback([=](Event*){ start(player1, player3); }));
+	button_1->Clickable::setCallback(new EventCallback([=](Event*){ start(new Mage(-13,0), new Archer(13,0)); }));
 
 	Button* button_quit = button_1->clone();
 	menu_root_inside->add(button_quit, Alignment::CENTERX);

@@ -16,6 +16,8 @@ public:
 	void unselect();
 	void persistentSelect();
 
+	static const int WIDTH = 70;
+	static const int HEIGHT = 70;
 private:
 	int _spell_id;
 	SpellRecap* _spell_recap;
