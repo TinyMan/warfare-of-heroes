@@ -138,7 +138,7 @@ void Font::renderText(SDL_Renderer* r, string text, Color* c, int size, SDL_Rect
 		}
 		if (c == '\n')
 		{
-			cursor.y += _lineHeight;
+			cursor.y += int(_lineHeight*coef);
 			cursor.x = initial_x;
 			newline = true;
 		}

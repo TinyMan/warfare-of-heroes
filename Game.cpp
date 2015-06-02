@@ -15,6 +15,7 @@
 #include "Knight.h"
 #include "SpellRecap.h"
 #include "PlayerOctopus.h"
+#include "MenuSelection.h"
 #include "ObstacleOctopus.h"
 
 Game* Game::_instance = nullptr;
@@ -48,7 +49,7 @@ void Game::initialize()
 
 	Grid* grid = getGrid();
 	grid->generateObstacle();
-		
+
 	_octopus->initialize();
 
 	// used to navigateto another frame
@@ -59,6 +60,9 @@ void Game::initialize()
 	/* creation of different frames */
 	Panel* menu_root = new Panel();
 	Panel* menu_1 = new Panel();
+	/* Creation of selection menu */
+	Panel* menu_selection = new MenuSelection();
+
 
 	/* creation of menu */
 	Panel* menu_root_inside = new Panel(300, 100 + 75 + 75 + 75 + 75); // 4 boutons de hauteur 50, espacements de 25 entre les boutons et 50 avec les bords du container +25 devant quitter
@@ -105,10 +109,10 @@ void Game::initialize()
 	menu_root->add(tt);
 	tt->anchor(button_1);
 
-	
-	_octopus->setFrame(menu_root);
 
-}
+	_octopus->setFrame(menu_selection);
+
+	}
 Game::~Game()
 {
 	/* destroy all last game objects */
@@ -310,7 +314,7 @@ void Game::start(Character* player1, Character* player2)
 
 
 	for (auto& c : getGrid()->getObstacles())
-	{
+{
 		game_inside->add(new ObstacleOctopus(c, gridO));
 	}
 

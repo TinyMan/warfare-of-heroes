@@ -7,6 +7,7 @@
 
 Mage::Mage(int x, int y, string name) : Character(x, y, name)
 {
+	_type = "mage";
 	// Initializing the Archer's HP, MP and CP with it's constants.
 	mpMax = MP_MAX;
 	cpMax = CP_MAX;
@@ -17,7 +18,7 @@ Mage::Mage(int x, int y, string name) : Character(x, y, name)
 	_spells[ROOT]->addEffect(new RootEffect(3, this));
 
 	_spells[FIREBALL] = new Spell("Fireball of the Doom", this, 4, 5, 0, 0, 0, 4, false);
-	_spells[FIREBALL]->setDescription("Throws a huge fireball at an enemy,\n dealing tons of damages and increasing the Mage’s next turn damages.");
+	_spells[FIREBALL]->setDescription("Throws a huge fireball at an enemy,\n dealing tons of damages and increasing \nthe Mage’s next turn damages.");
 	_spells[FIREBALL]->addEffect(new DamageEffect(150, this));
 	DamageBuffEffect* e = new DamageBuffEffect(200, 3, this);
 	e->setTarget(this);
@@ -29,7 +30,7 @@ Mage::Mage(int x, int y, string name) : Character(x, y, name)
 	_spells[THUNDER]->setTargetSelector(new DiamondSelector(2));
 
 	_spells[ERUPTION] = new Spell("Eruption", this, 2, 4, 0, 0, 0, 7, false);
-	_spells[ERUPTION]->setDescription("Causes the floor to burn for 3 turn,\n each player standing on a burned cell takes damages at the beginning of his turn.");
+	_spells[ERUPTION]->setDescription("Causes the floor to burn for 3 turn,\n each player standing on a burned cell \ntakes damages at the beginning of his turn.");
 	_spells[ERUPTION]->addEffect(new DamageOverTime(100, 6, this, "Eruption DoT"));
 	_spells[ERUPTION]->setTargetSelector(new DiamondSelector(2));
 	

@@ -17,6 +17,7 @@ public:
 	static const int ROOT = 2;
 	static const int FIREBALL = 3;
 
+
 	Mage(int x = 0, int y = 0, string name = "Gandalf");
 	~Mage();
 

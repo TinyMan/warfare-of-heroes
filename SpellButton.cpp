@@ -9,6 +9,17 @@ SpellButton::SpellButton(int spellID, SpellRecap* recap)
 		persistentSelect();
 	};
 	Clickable::setCallback(new EventCallback(clickLambda));
+
+	int id;
+	_spell_recap->getCharacter()->getType();
+	if (_spell_recap->getCharacter()->getType() == "archer")
+		id = 1;
+	else if (_spell_recap->getCharacter()->getType() == "knight")
+		id = 5;
+	else
+		id = 9;
+	this->setBackground((*ServiceLocator::getTextureManager())["icon_spell_" + to_string(id+spellID)]);
+	this->setHoverBackground((*ServiceLocator::getTextureManager())["icon_spell_" + to_string(id + spellID)]);
 }
 
 

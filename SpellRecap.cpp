@@ -46,6 +46,7 @@ SpellRecap::~SpellRecap()
 
 void SpellRecap::update()
 {	
+	setActive(_character == GAMEINST->getCurrentPlayer());
 	if (isActive())
 	{
 		Panel::update();
