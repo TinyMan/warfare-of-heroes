@@ -32,11 +32,14 @@ Game::Game()
 	ServiceLocator::provide(_logService);
 	ServiceLocator::provide(_timeService);
 	ServiceLocator::provide(_userInterface);
+	ServiceLocator::provide(new SoundService());
 
 	/* setup event listenenrs */
 	_eventService->listen(typeid(Events::GameObjectEvents::ActivateEvent), EventCallback(&Game::onActivatedGameObject, this));
 	_eventService->listen(typeid(Events::GameObjectEvents::DeactivateEvent), EventCallback(&Game::onDeactivatedGameObject, this));
 	_eventService->listen(typeid(Events::CharacterEvents::DieEvent), EventCallback(&Game::onDie, this));
+	_eventService->listen(typeid(BeginGameEvent), EventCallback([=](Event*) { ServiceLocator::getSoundService()->playMusic(); }));
+	_eventService->listen(typeid(FinishGameEvent), EventCallback([=](Event*) { ServiceLocator::getSoundService()->stopMusic(); }));
 	
 	/* generate basic game objects */
 	_grid = new Grid();
@@ -49,7 +52,7 @@ void Game::initialize()
 
 	Grid* grid = getGrid();
 	grid->generateObstacle();
-
+		
 	_octopus->initialize();
 
 	// used to navigateto another frame
@@ -62,7 +65,6 @@ void Game::initialize()
 	Panel* menu_1 = new Panel();
 	/* Creation of selection menu */
 	Panel* menu_selection = new MenuSelection();
-
 
 	/* creation of menu */
 	Panel* menu_root_inside = new Panel(300, 100 + 75 + 75 + 75 + 75); // 4 boutons de hauteur 50, espacements de 25 entre les boutons et 50 avec les bords du container +25 devant quitter
@@ -109,10 +111,10 @@ void Game::initialize()
 	menu_root->add(tt);
 	tt->anchor(button_1);
 
-
+	
 	_octopus->setFrame(menu_selection);
 
-	}
+}
 Game::~Game()
 {
 	/* destroy all last game objects */
@@ -139,16 +141,16 @@ void Game::loop()
 		/* TODO: BEGIN FRAME */
 		_timeService->beginFrame();
 		/* TODO: PROCESS USER INPUT */
-		while (SDL_PollEvent(&e)) {
-			if (e.type == SDL_QUIT)
-			{
-				//Quit the program
-				stop();
+			while (SDL_PollEvent(&e)) {
+				if (e.type == SDL_QUIT)
+				{
+					//Quit the program
+					stop();
+				}
+				ev = SDLEvents::createEventFromSDLEvent(&e);
+				if (ev)
+					_eventService->dispatch(ev);
 			}
-			ev = SDLEvents::createEventFromSDLEvent(&e);
-			if (ev)
-				_eventService->dispatch(ev);
-		}
 
 		/* Update */
 		_timeService->update();
@@ -202,6 +204,7 @@ void Game::onDie(Event* data)
 		return;
 	char a;
 	Character* c = (Character*)((DieEvent*)data)->getCharacter();
+	(new FinishGameEvent())->dispatch();
 	LOGINFO << c->getName() << " died !" << endl;	
 	LOGINFO << "Do you want to replay (y/n) ?" << endl;
 	cin >> a;
@@ -297,7 +300,7 @@ void Game::start(Character* player1, Character* player2)
 
 
 	for (auto& c : getGrid()->getObstacles())
-{
+	{
 		game_inside->add(new ObstacleOctopus(c, gridO));
 	}
 
@@ -314,6 +317,7 @@ void Game::start(Character* player1, Character* player2)
 	game_frame->add(sr, Alignment::BOTTOM | Alignment::LEFT);
 	game_frame->add(sr1, Alignment::BOTTOM | Alignment::LEFT);
 	_octopus->setFrameAsync(game_frame);
+	(new BeginGameEvent())->dispatch();
 	beginTurn();
 }
 void Game::beginTurn()

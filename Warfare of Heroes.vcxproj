@@ -50,7 +50,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2main.lib;SDL2.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2main.lib;SDL2.lib;SDL2_image.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -69,7 +69,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2main.lib;SDL2.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2main.lib;SDL2.lib;SDL2_image.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -133,6 +133,7 @@
     <ClCompile Include="SDLEvents.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="Sortable.cpp" />
+    <ClCompile Include="SoundService.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="SpellButton.cpp" />
     <ClCompile Include="SpellRecap.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="SDLEvents.h" />
     <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="Sortable.h" />
+    <ClInclude Include="SoundService.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="SpellButton.h" />
     <ClInclude Include="SpellEvents.h" />

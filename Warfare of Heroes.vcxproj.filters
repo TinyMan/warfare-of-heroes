@@ -297,6 +297,9 @@
     <ClCompile Include="ObstacleOctopus.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="SoundService.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
     <ClCompile Include="MenuSelection.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
@@ -532,6 +535,9 @@
     </ClInclude>
     <ClInclude Include="MenuSelection.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundService.h">
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
