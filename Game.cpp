@@ -139,21 +139,15 @@ void Game::loop()
 		/* TODO: BEGIN FRAME */
 		_timeService->beginFrame();
 		/* TODO: PROCESS USER INPUT */
-		while (accumulator < 1000 / fps_limit){
-			while (SDL_PollEvent(&e)) {
-				if (e.type == SDL_QUIT)
-				{
-					//Quit the program
-					stop();
-				}
-				ev = SDLEvents::createEventFromSDLEvent(&e);
-				if (ev)
-					_eventService->dispatch(ev);
+		while (SDL_PollEvent(&e)) {
+			if (e.type == SDL_QUIT)
+			{
+				//Quit the program
+				stop();
 			}
-			// sleeping
-			SDL_Delay(((1000 / fps_limit) - accumulator) / 5);
-			// mise a jour du temps
-			accumulator += SDL_GetTicks() - last_time - accumulator;
+			ev = SDLEvents::createEventFromSDLEvent(&e);
+			if (ev)
+				_eventService->dispatch(ev);
 		}
 
 		/* Update */
@@ -161,17 +155,6 @@ void Game::loop()
 		_octopus->update();
 		/* TODO: UPDATE */
 		this->update();
-
-		/*
-
-		cout << "Number of active game objects: " << getNbActiveGObjects() << endl;
-		*/
-
-		// on mémorise le possible retard qu'on a prit
-		accumulator -= 1000 / fps_limit;
-
-		// on indique le dernier instant d'affichage
-		last_time = SDL_GetTicks();
 
 		/* TODO: RENDER */
 		_octopus->render();
