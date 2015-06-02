@@ -15,6 +15,7 @@
 #include "Knight.h"
 #include "SpellRecap.h"
 #include "PlayerOctopus.h"
+#include "MenuSelection.h"
 #include "ObstacleOctopus.h"
 
 Game* Game::_instance = nullptr;
@@ -48,7 +49,7 @@ void Game::initialize()
 
 	Grid* grid = getGrid();
 	grid->generateObstacle();
-		
+
 	_octopus->initialize();
 
 	// used to navigateto another frame
@@ -59,6 +60,9 @@ void Game::initialize()
 	/* creation of different frames */
 	Panel* menu_root = new Panel();
 	Panel* menu_1 = new Panel();
+	/* Creation of selection menu */
+	Panel* menu_selection = new MenuSelection();
+
 
 	/* creation of menu */
 	Panel* menu_root_inside = new Panel(300, 100 + 75 + 75 + 75 + 75); // 4 boutons de hauteur 50, espacements de 25 entre les boutons et 50 avec les bords du container +25 devant quitter
@@ -73,7 +77,7 @@ void Game::initialize()
 	button_1->setText("Play");
 	button_1->setTextColor(Color(240,190));
 	button_1->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
-	//button_1->Clickable::setCallback(new EventCallback([=](Event*){ start(player1, player3); }));
+	button_1->Clickable::setCallback(new EventCallback([=](Event*){ start(new Mage(-13,0), new Archer(13,0)); }));
 
 	Button* button_quit = button_1->clone();
 	menu_root_inside->add(button_quit, Alignment::CENTERX);
@@ -105,10 +109,10 @@ void Game::initialize()
 	menu_root->add(tt);
 	tt->anchor(button_1);
 
-	
-	_octopus->setFrame(menu_root);
 
-}
+	_octopus->setFrame(menu_selection);
+
+	}
 Game::~Game()
 {
 	/* destroy all last game objects */
@@ -135,21 +139,15 @@ void Game::loop()
 		/* TODO: BEGIN FRAME */
 		_timeService->beginFrame();
 		/* TODO: PROCESS USER INPUT */
-		while (accumulator < 1000 / fps_limit){
-			while (SDL_PollEvent(&e)) {
-				if (e.type == SDL_QUIT)
-				{
-					//Quit the program
-					stop();
-				}
-				ev = SDLEvents::createEventFromSDLEvent(&e);
-				if (ev)
-					_eventService->dispatch(ev);
+		while (SDL_PollEvent(&e)) {
+			if (e.type == SDL_QUIT)
+			{
+				//Quit the program
+				stop();
 			}
-			// sleeping
-			SDL_Delay(((1000 / fps_limit) - accumulator) / 5);
-			// mise a jour du temps
-			accumulator += SDL_GetTicks() - last_time - accumulator;
+			ev = SDLEvents::createEventFromSDLEvent(&e);
+			if (ev)
+				_eventService->dispatch(ev);
 		}
 
 		/* Update */
@@ -157,17 +155,6 @@ void Game::loop()
 		_octopus->update();
 		/* TODO: UPDATE */
 		this->update();
-
-		/*
-
-		cout << "Number of active game objects: " << getNbActiveGObjects() << endl;
-		*/
-
-		// on mémorise le possible retard qu'on a prit
-		accumulator -= 1000 / fps_limit;
-
-		// on indique le dernier instant d'affichage
-		last_time = SDL_GetTicks();
 
 		/* TODO: RENDER */
 		_octopus->render();
@@ -310,7 +297,7 @@ void Game::start(Character* player1, Character* player2)
 
 
 	for (auto& c : getGrid()->getObstacles())
-	{
+{
 		game_inside->add(new ObstacleOctopus(c, gridO));
 	}
 

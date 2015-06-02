@@ -9,6 +9,7 @@
 
 Knight::Knight(int x , int y , string name) : Character(x, y, name)
 {
+	_type = "knight";
 	// Initializing the Knight's HP, MP and CP with it's constants.
 	mpMax = MP_MAX;
 	cpMax = CP_MAX;

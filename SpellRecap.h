@@ -24,6 +24,7 @@ public:
 
 	void selectSpell(int spellID);
 	void unselectSpell(int spellID);
+	Character* getCharacter() const { return _character; };
 
 	virtual void clickOnCell(unsigned int c);
 	virtual void hoverCell(Cell* c);
@@ -38,6 +39,7 @@ private:
 	Character* _character = nullptr;
 	map<int, SpellButton*> _buttons_spells;
 	map<int, Label*> _label_spells;
+	map<int, Label*> _label_cooldown;
 	map<int, Spell*>  spells;
 
 	Label* _selected_spell_name = nullptr;

@@ -46,12 +46,27 @@ SpellRecap::~SpellRecap()
 
 void SpellRecap::update()
 {	
+	setActive(_character == GAMEINST->getCurrentPlayer());
 	if (isActive())
 	{
 		Panel::update();
 		for (auto& e : _label_spells)
 		{
 			e.second->setText(to_string(spells[e.first]->getCPCost()) + " CP");
+		}
+		for (auto& e : _label_cooldown)
+		{
+			int cd = spells[e.first]->getCooldown();
+			if (cd > 0)
+			{
+				e.second->setText(to_string(cd) + " turn");
+				_buttons_spells[e.first]->setEnabled(false);
+			}
+			else
+			{
+				e.second->setText("Usable !");
+				_buttons_spells[e.first]->setEnabled(true);
+			}
 		}
 		if (spells.count(_selected_spell) == 1)
 		{
@@ -65,32 +80,48 @@ void SpellRecap::createSpellButtons()
 {
 	if (_character == nullptr)
 		return;
+	const int START_X = 200;
+	const int START_Y = SpellButton::HEIGHT;
+	const int SPACING = 100;
+
 	for (auto& spell : _character->getSpells())
 	{
 		// creation of button
 		_buttons_spells[spell.first] = new SpellButton(spell.first, this);
 
 		// creation of labels (next to button)
-		_label_spells[spell.first] = new Label(100, 50);
+		_label_spells[spell.first] = new Label(SPACING, SpellButton::HEIGHT);
 		_label_spells[spell.first]->setPadding(10);
 		_label_spells[spell.first]->setTextAlignment(Alignment::LEFT | Alignment::CENTERY);
+
+		_label_cooldown[spell.first] = new Label(SpellButton::WIDTH*2, SpellButton::HEIGHT);
+		_label_cooldown[spell.first]->setTextAlignment(Alignment::LEFT | Alignment::BOTTOM);
 	}
 
 	/* add of buttons */
-	int x = 150;
-	int y = 20;
+	int x = START_X;
+	int y = START_Y;
 	for (auto b : _buttons_spells)
 	{
 		add(b.second, x, y);
-		x += 50 + 100;
+		x += SpellButton::WIDTH + SPACING;
 	}
 
 	/* add of labels */
-	x = 200;
+	x = START_X + SpellButton::WIDTH;
 	for (auto b : _label_spells)
 	{
 		add(b.second, x, y);
-		x += 50 + 100;
+		x += SpellButton::WIDTH + SPACING;
+	}
+
+	/* add of labels */
+	x = START_X;
+	y = 0;
+	for (auto b : _label_cooldown)
+	{
+		add(b.second, x, y);
+		x += SpellButton::WIDTH + SPACING;
 	}
 }
 void SpellRecap::selectSpell(int spellID)

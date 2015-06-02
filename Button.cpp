@@ -3,11 +3,11 @@
 #include "Game.h"
 
 Button::Button(int w, int h) 
-	: Label(w, h), _regular_bg(w, h, Color::RED), _hover_bg(w, h, Color::BLUE)
+	: Label(w, h)//, _regular_bg(w, h, Color::RED), _hover_bg(w, h, Color::BLUE)
 {
 	_color = { 255, 0, 0, 255 };
 	setFont((*ServiceLocator::getFontManager())["LifeCraft"]);
-	Label::setBackground(_regular_bg);
+	//Label::setBackground(_regular_bg);
 }
 
 
@@ -15,10 +15,13 @@ Button::~Button()
 {
 }
 
+void Button::update()
+{
+}
 
 bool Button::isInArea(SDL_Point p) const
 {
-	if (!isActive())
+	if (!isActive() || !isEnabled())
 		return false;
 	return p.x >= _absolute_rect.x && p.x <= _absolute_rect.x + _absolute_rect.w && p.y >= _absolute_rect.y && p.y <= _absolute_rect.y + _absolute_rect.h;
 }
@@ -30,14 +33,11 @@ void Button::internalRender(SDL_Renderer* r, bool force)
 		bool d = (force || isDirty());
 		if (d)
 		{
-			//LOGINFO << "rendering dirty button" << this << endl;
-			if (hover())
-				SDL_SetRenderDrawColor(r, 0, 0, 255, 255);
-			else
-				_color.setRenderDrawColor(r);
-
-			//SDL_RenderDrawRect(r, &_rect);
-			//SDL_RenderFillRect(r, NULL);
+			if (!isEnabled())
+			{
+				SDL_SetRenderDrawColor(r, 0, 0, 0, 128);
+				SDL_RenderFillRect(r, NULL);
+			}
 		}
 		Label::internalRender(r, d);
 	}

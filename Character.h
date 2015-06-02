@@ -22,6 +22,7 @@ private:
 
 protected:
 	string _name;
+	string _type;
 	int _hitPoints;
 	int _movementPoints;
 	int _capacityPoints;
@@ -50,6 +51,7 @@ public:
 
 	// Getters :
 	string getName() const { return _name; }
+	string getType() const { return _type; }
 	int getHP() const;
 	string getHPString() const { return "HP: " + to_string(_hitPoints) + "/" + to_string(hpMax); }
 	float getHPPercent() const { return (_hitPoints * 100.f) / hpMax; }
