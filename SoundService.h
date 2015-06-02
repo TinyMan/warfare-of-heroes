@@ -18,7 +18,7 @@ public:
 	virtual void toggleMusic();
 	virtual void playEffect(string id);
 
-	const string MUSIC_FILENAME = "sound/music.wav";
+	const string MUSIC_FILENAME = "sound/theme.wav";
 
 private:
 	map<string, Mix_Chunk*> _chunks;

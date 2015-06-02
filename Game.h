@@ -127,4 +127,16 @@ namespace Events
 		~BeginTurnEvent(){}
 		Character* _c;
 	};
+	class BeginGameEvent : public Event
+	{
+	public:
+		BeginGameEvent(){}
+		~BeginGameEvent(){}
+	};
+	class FinishGameEvent : public Event
+	{
+	public:
+		FinishGameEvent(){}
+		~FinishGameEvent(){}
+	};
 }

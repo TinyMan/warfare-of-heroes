@@ -31,11 +31,14 @@ Game::Game()
 	ServiceLocator::provide(_logService);
 	ServiceLocator::provide(_timeService);
 	ServiceLocator::provide(_userInterface);
+	ServiceLocator::provide(new SoundService());
 
 	/* setup event listenenrs */
 	_eventService->listen(typeid(Events::GameObjectEvents::ActivateEvent), EventCallback(&Game::onActivatedGameObject, this));
 	_eventService->listen(typeid(Events::GameObjectEvents::DeactivateEvent), EventCallback(&Game::onDeactivatedGameObject, this));
 	_eventService->listen(typeid(Events::CharacterEvents::DieEvent), EventCallback(&Game::onDie, this));
+	_eventService->listen(typeid(BeginGameEvent), EventCallback([=](Event*) { ServiceLocator::getSoundService()->playMusic(); }));
+	_eventService->listen(typeid(FinishGameEvent), EventCallback([=](Event*) { ServiceLocator::getSoundService()->stopMusic(); }));
 	
 	/* generate basic game objects */
 	_grid = new Grid();
@@ -73,7 +76,7 @@ void Game::initialize()
 	button_1->setText("Play");
 	button_1->setTextColor(Color(240,190));
 	button_1->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
-	//button_1->Clickable::setCallback(new EventCallback([=](Event*){ start(player1, player3); }));
+	button_1->Clickable::setCallback(new EventCallback([=](Event*){ start(new Archer(0,0), new Mage(0,1)); }));
 
 	Button* button_quit = button_1->clone();
 	menu_root_inside->add(button_quit, Alignment::CENTERX);
@@ -215,6 +218,7 @@ void Game::onDie(Event* data)
 		return;
 	char a;
 	Character* c = (Character*)((DieEvent*)data)->getCharacter();
+	(new FinishGameEvent())->dispatch();
 	LOGINFO << c->getName() << " died !" << endl;	
 	LOGINFO << "Do you want to replay (y/n) ?" << endl;
 	cin >> a;
@@ -327,6 +331,7 @@ void Game::start(Character* player1, Character* player2)
 	game_frame->add(sr, Alignment::BOTTOM | Alignment::LEFT);
 	game_frame->add(sr1, Alignment::BOTTOM | Alignment::LEFT);
 	_octopus->setFrameAsync(game_frame);
+	(new BeginGameEvent())->dispatch();
 	beginTurn();
 }
 void Game::beginTurn()
