@@ -27,10 +27,12 @@ public:
 	SDL_Window* getWindow() const { return _window; }
 	SDL_Renderer* getRenderer() const { return _renderer; }
 
-	int getWWidth() const { return wWidth; }
-	int getWHeight() const { return wHeight; }
+	int getWWidth() const { return LOGICAL_WIDTH; }
+	int getWHeight() const { return LOGICAL_HEIGHT; }
 
 private:
+	static const int LOGICAL_WIDTH = 1200;
+	static const int LOGICAL_HEIGHT = 900;
 	Panel* _frame = nullptr;
 
 	SDL_Window* _window;
