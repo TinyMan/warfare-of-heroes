@@ -12,7 +12,9 @@ Chrono::Chrono()
 	Clickable::setCallback(new EventCallback(l));
 	//setBgColor(Color::BGCOLOR);
 	Texture bgTexture = (*ServiceLocator::getTextureManager())["bgChrono"];//Penser à changer le nom
+	Texture bgTextureHover = (*ServiceLocator::getTextureManager())["bgChronoHover"];//Penser à changer le nom
 	setBackground(bgTexture);
+	setHoverBackground(bgTextureHover);
 }
 
 

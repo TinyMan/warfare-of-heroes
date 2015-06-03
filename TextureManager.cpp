@@ -27,10 +27,12 @@ TextureManager::TextureManager(SDL_Renderer* r)
 	loadTexture("Images/PNG/sort10.png", "icon_spell_1"); 
 	loadTexture("Images/PNG/sort11.png", "icon_spell_4");
 	loadTexture("Images/PNG/sort12.png", "icon_spell_3");
-	loadTexture("Images/PNG/TestFond.png", "bgPLeft"); //Penser à changer le nom
-	loadTexture("Images/PNG/TestFonddroite.png", "bgPRight"); //Penser à changer le nom
+	loadTexture("Images/PNG/bgPlayerLeft.png", "bgPLeft"); //Penser à changer le nom
+	loadTexture("Images/PNG/bgPlayerRight.png", "bgPRight"); //Penser à changer le nom
 	loadTexture("Images/PNG/FondChrono.png", "bgChrono"); //Penser à changer le nom
 	loadTexture("Images/PNG/FondSortEnBas.png", "bgSpells"); //Penser à changer le nom
+	loadTexture("Images/PNG/FondChronoHover.png", "bgChronoHover"); //Penser à changer le nom
+	//loadTexture("Images/PNG/nothing.png", "knight"); //Penser à changer le nom
 	
 
 }
