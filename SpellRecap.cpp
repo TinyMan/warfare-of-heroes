@@ -13,7 +13,7 @@ SpellRecap::SpellRecap(Character* c, GridOctopus* grid)
 	_selected_spell_name->setPositionY(20);
 
 	_selected_spell_description = new Label(900, 180);
-	_selected_spell_description->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
+	_selected_spell_description->setTextAlignment(Alignment::LEFT | Alignment::CENTERY);
 	add(_selected_spell_description, 150, 100 );
 
 	//setBgColor(Color::BGCOLOR);
