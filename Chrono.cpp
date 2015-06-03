@@ -11,8 +11,8 @@ Chrono::Chrono()
 	auto l = [=](Event*) { GAMEINST->endTurn(); };
 	Clickable::setCallback(new EventCallback(l));
 	//setBgColor(Color::BGCOLOR);
-	Texture textureFond = (*ServiceLocator::getTextureManager())["fondjobi"];//Penser à changer le nom
-	setBackground(textureFond);
+	Texture bgTexture = (*ServiceLocator::getTextureManager())["bgChrono"];//Penser à changer le nom
+	setBackground(bgTexture);
 }
 
 

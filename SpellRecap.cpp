@@ -17,8 +17,8 @@ SpellRecap::SpellRecap(Character* c, GridOctopus* grid)
 	add(_selected_spell_description, 150, 100 );
 
 	//setBgColor(Color::BGCOLOR);
-	Texture textureFond = (*ServiceLocator::getTextureManager())["fondjoba"];//Penser à changer le nom
-	setBackground(textureFond);
+	Texture bgTexture = (*ServiceLocator::getTextureManager())["bgSpells"];//Penser à changer le nom
+	setBackground(bgTexture);
 
 
 	EVENTSERVICE->listen(typeid(BeginTurnEvent), [=](Event* e) { 
