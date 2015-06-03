@@ -41,7 +41,7 @@ private:
 	stringstream _windowTitle;
 	Uint32 _lastFpsUpdate = 0;
 	Uint32 _fpsUpdateInterval = 1000; /* 1000 ms */
-	int wWidth = 1200;
-	int wHeight = 900;
+	int wWidth = 800;
+	int wHeight = 600;
 };
 

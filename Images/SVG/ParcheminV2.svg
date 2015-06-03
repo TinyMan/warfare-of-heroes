@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="500.02731"
+   height="500"
+   viewBox="0 0 500.02729 500"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="ParcheminV2.svg"
+   inkscape:export-filename="C:\Users\Amaury Punel\Desktop\GIT PROJET TUTORE\warfare-of-heroes\Images\PNG\ParcheminV2.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4215">
+      <stop
+         style="stop-color:#fbd266;stop-opacity:1;"
+         offset="0"
+         id="stop4217" />
+      <stop
+         style="stop-color:#030200;stop-opacity:0.98342544"
+         offset="1"
+         id="stop4219" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4215"
+       id="linearGradient4221"
+       x1="-97.996399"
+       y1="301.43741"
+       x2="441.09225"
+       y2="981.33612"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.8443756,0,0,0.75942178,296.58983,247.958)" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.0788903"
+     inkscape:cx="222.77712"
+     inkscape:cy="264.68679"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     units="px"
+     showguides="false" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-48.069057,-301.19779)">
+    <path
+       style="fill:url(#linearGradient4221);fill-opacity:1;fill-rule:evenodd;stroke:#705b28;stroke-width:2.40231895;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 58.78945,799.61866 c 11.564965,-28.72401 16.541709,-59.39622 20.228331,-79.07955 l -19.05176,11.02073 C 75.131067,667.4429 67.531838,648.1615 65.847284,611.82751 79.107289,593.08637 85.726448,587.51287 98.986455,581.5809 l -22.830662,-2.23245 14.73577,-10.60839 -20.047332,0.85397 c 5.009259,-28.26952 -1.213417,-59.52541 33.866179,-87.79494 l -33.51897,-1.99091 15.842569,-9.78374 -19.890008,-2.30319 c -0.7502,-71.26147 13.675783,-145.02463 -18.51479,-161.99482 39.56327,4.90406 125.371969,7.52151 125.478539,7.6635 l 20.73979,12.42811 -4.59798,-13.77877 c 7.75131,-7.6052 325.91069,-15.80642 355.92227,-2.33117 -18.781,22.90126 1.24289,44.09561 -6.99354,85.72976 l -19.51021,2.13238 13.97615,14.83176 c -15.97407,64.26519 -7.10146,128.53038 -6.98807,192.79556 l -17.21794,22.52453 12.90192,1.13695 c 1.39557,113.30466 11.06898,100.38725 16.86614,169.10816 -33.08303,-7.59545 -241.7845,-9.31452 -251.12754,-4.64618 l 35.90332,-8.02374 C 245.1762,787.69954 182.496,776.70891 58.78945,799.61866 Z"
+       id="path4197"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccccccccccccccccccccc" />
+  </g>
+</svg>

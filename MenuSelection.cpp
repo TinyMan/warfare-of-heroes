@@ -78,53 +78,58 @@ MenuSelection::MenuSelection() : Panel()
 	choice3->setBackground((*ServiceLocator::getTextureManager())["icon_mage"]);
 	choice3->setHoverBackground((*ServiceLocator::getTextureManager())["icon_mage"]);
 
-	Panel* spellInfos = new Panel(500, 400);
+	Panel* spellInfos = new Panel(500, 500);
 	this->add(spellInfos);
+
+	spellInfos->setBackground((*ServiceLocator::getTextureManager())["parchemin"]);
+	int daX = 30; //décalage en X pour les labels (test de background texture)
+	int daY = 30;//décalage en Y pour les labels (test de background texture)
+
 	spellInfos->setBgColor(Color::BLACK);
 	spellInfos->setPosition(600, 250);
 
 	nomClasse = new Label(150, 25, "Nom Classe", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	spellInfos->add(nomClasse);
-	nomClasse->setPosition(25, 10);
+	nomClasse->setPosition(25 + daX, 10 + daY);
 
 	descrClasse = new Label(400, 35, "Description de la classe : bla bla bla bla bla bla bla", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	spellInfos->add(descrClasse);
-	descrClasse->setPosition(15, 35);
+	descrClasse->setPosition(15 + daX, 35 + daY);
 	descrClasse->setTextSize(22);
 
 	spell1 = new Button(75, 75);
 	spellInfos->add(spell1);
-	spell1->setPosition(50, 100);
+	spell1->setPosition(50 + daX, 100 + daY);
 	spell1->Clickable::setCallback(new EventCallback([=](Event*) {selectSpell(0); }));
 
 	spell2 = new Button(75, 75);
 	spellInfos->add(spell2);
-	spell2->setPosition(50 + 100, 100);
+	spell2->setPosition(50 + 100 + daX, 100 + daY);
 	spell2->Clickable::setCallback(new EventCallback([=](Event*) {selectSpell(1); }));
 
 	spell3 = new Button(75, 75);
 	spellInfos->add(spell3);
-	spell3->setPosition(50 + 100 + 100, 100);
+	spell3->setPosition(50 + 100 + 100 + daX, 100 + daY);
 	spell3->Clickable::setCallback(new EventCallback([=](Event*) {selectSpell(2); }));
 
 	spell4 = new Button(75, 75);
 	spellInfos->add(spell4);
-	spell4->setPosition(50 + 100 + 100 + 100, 100);
+	spell4->setPosition(50 + 100 + 100 + 100 + daX, 100 + daY);
 	spell4->Clickable::setCallback(new EventCallback([=](Event*) {selectSpell(3); }));
 
 	nomSpell = new Label(400, 50, "Nom Spell", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	spellInfos->add(nomSpell);
-	nomSpell->setPosition(25, 175);
+	nomSpell->setPosition(25 + daX, 175 + daY);
 
 	descrSpell = new Label(500, 150, "Description du Spell : bla bla bla bla bla", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	spellInfos->add(descrSpell);
-	descrSpell->setPosition(25, 205);
+	descrSpell->setPosition(25 + daX, 205 + daY);
 	descrSpell->setTextSize(22);
 	descrSpell->setTextAlignment(Alignment::CENTERY | Alignment::LEFT);
 
 	infos = new Label(400, 35, "Cost : X , Range : Y , inline / aoe", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	spellInfos->add(infos);
-	infos->setPosition(25, 350);
+	infos->setPosition(25 + daX, 350 + daY);
 	infos->setTextSize(22);
 }
 
