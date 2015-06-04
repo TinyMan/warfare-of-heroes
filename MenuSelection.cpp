@@ -6,6 +6,7 @@ MenuSelection::MenuSelection() : Panel()
 	Panel* selection_top = new Panel(1200, 200);
 	this->add(selection_top, (Alignment::TOP | Alignment::LEFT));
 	selection_top->setBgColor(Color::WHITE);
+	selection_top->setBackground((*ServiceLocator::getTextureManager())["menuSelectTopBG"]);
 
 	Label* j1 = new Label(150, 50, "Joueur 1 :", (*ServiceLocator::getFontManager())["LifeCraft"]);
 	selection_top->add(j1);
@@ -48,7 +49,7 @@ MenuSelection::MenuSelection() : Panel()
 	button_selec_1->setText("Pret");
 	button_selec_1->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	button_selec_1->setPositionY(100);
-	button_selec_1->setPositionX(500);
+	button_selec_1->setPositionX(525);
 	button_selec_1->setBgColor(Color::RED);
 	button_selec_1->Clickable::setCallback(new EventCallback([=](Event*) {ready(); }));
 

@@ -36,6 +36,7 @@ TextureManager::TextureManager(SDL_Renderer* r)
 	loadTexture("Images/PNG/MenuSelectionBackGround.png", "menuSelectBG");
 	loadTexture("Images/PNG/flechedroite.png", "flecheD");
 	loadTexture("Images/PNG/flechegauche.png", "flecheG");
+	loadTexture("Images/PNG/FondHautSelection.png", "menuSelectTopBG");
 	//loadTexture("Images/PNG/nothing.png", "knight"); //Penser à changer le nom
 	
 
