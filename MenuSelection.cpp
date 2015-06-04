@@ -54,10 +54,35 @@ MenuSelection::MenuSelection() : Panel()
 
 	Panel* selection_bottom = new Panel(1200, 600);
 	this->add(selection_bottom);
+	Texture selBottom = (*ServiceLocator::getTextureManager())["menuSelectBG"];
+	selection_bottom->setBackground(selBottom);
 	selection_bottom->setBgColor(Color::BLUE);
 	selection_bottom->setPosition(0, 200);
 
-	Button* choice1 = new Button(125, 125);
+	Button* flecheLeft = new Button(50, 50);
+	selection_bottom->add(flecheLeft);
+	flecheLeft->setPosition(20, 250);
+	flecheLeft->Clickable::setCallback(new EventCallback([=](Event*) {clickArrow('l'); }));
+	flecheLeft->setHoverBackground((*ServiceLocator::getTextureManager())["flecheG"]);
+	flecheLeft->setBackground((*ServiceLocator::getTextureManager())["flecheG"]);
+
+	Button* flecheRight = flecheLeft->clone();
+	selection_bottom->add(flecheRight);
+	flecheRight->setPosition(500, 250);
+	flecheRight->Clickable::setCallback(new EventCallback([=](Event*) {clickArrow('r'); }));
+	flecheRight->setHoverBackground((*ServiceLocator::getTextureManager())["flecheD"]);
+	flecheRight->setBackground((*ServiceLocator::getTextureManager())["flecheD"]);
+
+	showSelectChar = new Button(300, 300);
+	selection_bottom->add(showSelectChar);
+	showSelectChar->setPosition(150, 200);
+	//showSelectChar->setHover(false);
+	//showSelectChar->Clickable::setCallback(new EventCallback([=](Event*) {selectClass(a); }));
+	showSelectChar->setHoverBackground((*ServiceLocator::getTextureManager())["icon_archer"]);
+	showSelectChar->setBackground((*ServiceLocator::getTextureManager())["icon_archer"]);
+
+
+/*	Button* choice1 = new Button(125, 125);
 	selection_bottom->add(choice1);
 	choice1->setPosition(200, 100);
 	choice1->Clickable::setCallback(new EventCallback([=](Event*) {selectClass(a); }));
@@ -76,7 +101,7 @@ MenuSelection::MenuSelection() : Panel()
 	choice3->setPosition(200 + 63, 100 + 125);
 	choice3->Clickable::setCallback(new EventCallback([=](Event*) {selectClass(m); }));
 	choice3->setBackground((*ServiceLocator::getTextureManager())["icon_mage"]);
-	choice3->setHoverBackground((*ServiceLocator::getTextureManager())["icon_mage"]);
+	choice3->setHoverBackground((*ServiceLocator::getTextureManager())["icon_mage"]);*/
 
 	Panel* spellInfos = new Panel(500, 500);
 	this->add(spellInfos);
@@ -229,4 +254,41 @@ void MenuSelection::ready() {
 	
 	
 	
+}
+
+void MenuSelection::updateShowSelect(string s) {
+	showSelectChar->setBackground((*ServiceLocator::getTextureManager())["icon_" + s]);
+	showSelectChar->setHoverBackground((*ServiceLocator::getTextureManager())["icon_" + s]);
+}
+
+void MenuSelection::clickArrow(char c){
+	if (c == 'l')
+	{
+		if (nbChoice == 0)
+			nbChoice = 2;
+		else
+			nbChoice--;
+	}
+	else
+	{
+		if (nbChoice == 2)
+			nbChoice = 0;
+		else
+			nbChoice++;
+	}
+
+		if (nbChoice==0)
+		{
+			updateShowSelect("archer");
+			selectClass(a); 
+		}
+		if (nbChoice == 1)
+		{
+				updateShowSelect("knight");
+				selectClass(k);
+		}
+		if (nbChoice == 2){
+				updateShowSelect("mage");
+				selectClass(m);
+		}
 }

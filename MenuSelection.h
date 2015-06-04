@@ -32,6 +32,10 @@ public:
 	void updateIcone1();
 	void updateIcone2();
 	void ready();
+
+	void clickArrow(char c);
+	void updateShowSelect(string s);
+
 private:
 	Archer* a = new Archer(0,0);
 	Knight* k = new Knight(1, 1);
@@ -62,6 +66,10 @@ private:
 	Button* button_selec_1;
 	Character* j1 = nullptr;
 	Character* j2 = nullptr;
+
+	//For the Selection with Arrows
+	int nbChoice = 0;
+	Button* showSelectChar;
 
 
 };

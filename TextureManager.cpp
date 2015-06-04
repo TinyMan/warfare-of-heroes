@@ -33,6 +33,9 @@ TextureManager::TextureManager(SDL_Renderer* r)
 	loadTexture("Images/PNG/FondSortEnBas.png", "bgSpells");
 	loadTexture("Images/PNG/FondChronoHover.png", "bgChronoHover");
 	loadTexture("Images/PNG/ParcheminV2.png", "parchemin");
+	loadTexture("Images/PNG/MenuSelectionBackGround.png", "menuSelectBG");
+	loadTexture("Images/PNG/flechedroite.png", "flecheD");
+	loadTexture("Images/PNG/flechegauche.png", "flecheG");
 	//loadTexture("Images/PNG/nothing.png", "knight"); //Penser à changer le nom
 	
 
