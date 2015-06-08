@@ -67,7 +67,10 @@ void OctopusBaby::render(SDL_Renderer* r, bool force)
 			_texture.setRenderTarget();
 
 			if (_background.valid())
+			{
+				_background_color.clearRenderer(r);
 				_background.render(r, Texture::STRETCH);
+			}
 			else
 			{
 				_background_color.clearRenderer(r);
