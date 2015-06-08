@@ -33,13 +33,13 @@ RecapOctopus::RecapOctopus(size_t characterID)
 	add(_nameLabel, Alignment::TOP | Alignment::CENTERX);
 	_nameLabel->setPositionY(50);
 	add(_hp_bar, Alignment::BOTTOM | Alignment::CENTERX);
-	_hp_bar->setPositionY(500);
+	_hp_bar->setPositionY(480);
 	add(_hp, Alignment::BOTTOM | Alignment::CENTERX);
-	_hp->setPositionY(400);
+	_hp->setPositionY(380);
 	add(_pt, Alignment::BOTTOM | Alignment::CENTERX);
-	_pt->setPositionY(300);
+	_pt->setPositionY(280);
 	add(_pm, Alignment::BOTTOM | Alignment::CENTERX);
-	_pm->setPositionY(200);
+	_pm->setPositionY(180);
 
 	ServiceLocator::getEventService()->listen(typeid(LoseCPEvent), EventCallback(&RecapOctopus::onEvent, this));
 	ServiceLocator::getEventService()->listen(typeid(LoseHpEvent), EventCallback(&RecapOctopus::onEvent, this));
