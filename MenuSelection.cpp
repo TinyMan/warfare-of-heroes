@@ -156,6 +156,8 @@ MenuSelection::MenuSelection() : Panel()
 	spellInfos->add(infos);
 	infos->setPosition(25 + daX, 350 + daY);
 	infos->setTextSize(22);
+
+	selectClass(a);
 }
 
 
@@ -194,6 +196,7 @@ void MenuSelection::updateClass() {
 	spell3->setHoverBackground((*ServiceLocator::getTextureManager())["icon_spell_" + to_string(rang + 2)]);
 	spell4->setBackground((*ServiceLocator::getTextureManager())["icon_spell_" + to_string(rang + 3)]);
 	spell4->setHoverBackground((*ServiceLocator::getTextureManager())["icon_spell_" + to_string(rang + 3)]);
+
 
 	selectSpell(0);
 }

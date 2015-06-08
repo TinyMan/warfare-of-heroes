@@ -533,11 +533,11 @@
     <ClInclude Include="ObstacleOctopus.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="MenuSelection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SoundService.h">
       <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuSelection.h">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
