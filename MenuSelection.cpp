@@ -111,7 +111,6 @@ MenuSelection::MenuSelection() : Panel()
 	int daX = 30; //décalage en X pour les labels (test de background texture)
 	int daY = 30;//décalage en Y pour les labels (test de background texture)
 
-	spellInfos->setBgColor(Color::BLACK);
 	spellInfos->setPosition(600, 250);
 
 	nomClasse = new Label(150, 25, "Nom Classe", (*ServiceLocator::getFontManager())["LifeCraft"]);
@@ -221,8 +220,6 @@ void MenuSelection::updateIcone2() {
 
 
 void MenuSelection::ready() {
-	// TOUT CHANGER
-	// IL FAUT TOUT CHANGER
 	if (j1 != nullptr && j2 != nullptr && j1 != j2)
 	{
 		GAMEINST->start(j1, j2);
@@ -239,22 +236,6 @@ void MenuSelection::ready() {
 		updateIcone2();
 		button_selec_1->setText("Jouer !");
 	}
-	/*
-	if (j1 == a || j2 == a)
-	{
-		if (j1 == k || j2 == k)
-			delete m;
-		if (j1 == m || j2 == m)
-			delete k;
-	}
-	else if (j1 == k || j2 == k)
-	{
-		if (j1 == m || j2 == m)
-			delete a;
-	}*/
-	
-	
-	
 }
 
 void MenuSelection::updateShowSelect(string s) {
