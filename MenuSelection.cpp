@@ -62,14 +62,14 @@ MenuSelection::MenuSelection() : Panel()
 
 	Button* flecheLeft = new Button(50, 50);
 	selection_bottom->add(flecheLeft);
-	flecheLeft->setPosition(20, 250);
+	flecheLeft->setPosition(20, 270);
 	flecheLeft->Clickable::setCallback(new EventCallback([=](Event*) {clickArrow('l'); }));
 	flecheLeft->setHoverBackground((*ServiceLocator::getTextureManager())["flecheG"]);
 	flecheLeft->setBackground((*ServiceLocator::getTextureManager())["flecheG"]);
 
 	Button* flecheRight = flecheLeft->clone();
 	selection_bottom->add(flecheRight);
-	flecheRight->setPosition(500, 250);
+	flecheRight->setPosition(500, 270);
 	flecheRight->Clickable::setCallback(new EventCallback([=](Event*) {clickArrow('r'); }));
 	flecheRight->setHoverBackground((*ServiceLocator::getTextureManager())["flecheD"]);
 	flecheRight->setBackground((*ServiceLocator::getTextureManager())["flecheD"]);

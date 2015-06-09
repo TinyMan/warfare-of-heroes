@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="300"
@@ -18,19 +19,57 @@
    sodipodi:docname="FondChrono.svg">
   <defs
      id="defs4162">
-    <filter
+    <linearGradient
        inkscape:collect="always"
-       style="color-interpolation-filters:sRGB"
-       id="filter6416"
-       x="-0.013654078"
-       width="1.0273082"
-       y="-0.012775151"
-       height="1.0255502">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="1.8092146"
-         id="feGaussianBlur6418" />
+       id="linearGradient4734">
+      <stop
+         style="stop-color:#000000;stop-opacity:0.37016574"
+         offset="0"
+         id="stop4736" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop4738" />
+    </linearGradient>
+    <filter
+       inkscape:label="Clouds"
+       inkscape:menu="Overlays"
+       inkscape:menu-tooltip="Airy, fluffy, sparse white clouds"
+       style="color-interpolation-filters:sRGB;"
+       id="filter4720">
+      <feTurbulence
+         numOctaves="3"
+         baseFrequency="0.0099999999999999742 0.28699999999999998"
+         type="fractalNoise"
+         id="feTurbulence4722"
+         flood-opacity="0.40000000000000002" />
+      <feColorMatrix
+         result="result0"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 5 -2.7"
+         id="feColorMatrix4724" />
+      <feFlood
+         flood-opacity="0.40229885057471265"
+         flood-color="rgb(0,0,0)"
+         id="feFlood4726" />
+      <feComposite
+         operator="in"
+         in2="result0"
+         id="feComposite4728" />
+      <feComposite
+         operator="atop"
+         in2="SourceGraphic"
+         id="feComposite4730" />
     </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4734"
+       id="linearGradient4740"
+       x1="148.43336"
+       y1="1050.9828"
+       x2="150.64053"
+       y2="944.4859"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.006135,0,0,1,-0.09140195,0)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -39,9 +78,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4.7032874"
-     inkscape:cx="277.47162"
-     inkscape:cy="43.589854"
+     inkscape:zoom="1.8122611"
+     inkscape:cx="173.76585"
+     inkscape:cy="91.81007"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -75,18 +114,18 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccc" />
     <path
-       style="fill:#4c3b29;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.84720719;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#6e3916;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.84720719;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter4720)"
        d="m 13.848421,1006.2697 0,-358.76394 25.679472,-29.897 222.555427,0 25.67947,29.897 0,358.76394 -25.67947,29.8971 -222.555427,0 z"
        id="path4686"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccc" />
-    <path
-       style="fill:#3a3228;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter6416)"
-       d="m 16.397322,696.89705 c 1.13052,-0.6595 30.42367,149.373 63.63962,207.0812 29.732948,51.657 141.161148,56.7586 188.306788,20.2924 58.71932,-45.4182 66.03872,-197.3586 66.03872,-197.3586 l -0.11095,284.41025 -29.64631,25.4605 -263.818328,-0.01 -24.43306,-25.5695 z"
-       id="path6402"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="csscccccc"
-       transform="matrix(0.85706617,0,0,0.16710164,0.79558414,861.92878)" />
+    <rect
+       style="opacity:1;fill:url(#linearGradient4740);fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4732"
+       width="271.48404"
+       height="102.08237"
+       x="14.898516"
+       y="933.17413" />
     <path
        style="fill:#a49381;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.49372959;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 0.53925519,633.43133 15.132704,647.6026 40.386203,618.90595 28.022257,602.34752 Z"
