@@ -27,6 +27,25 @@ void Octopus::update()
 }
 void Octopus::initialize()
 {
+	SDL_DisplayMode dm;
+	if (SDL_GetDesktopDisplayMode(0, &dm) == 0) {
+		if (dm.w > 1200 && dm.h > 900)
+		{
+			wWidth = 1200;
+			wHeight = 900;
+		}
+		else if (dm.w > 800 && dm.h > 600)
+		{
+			wWidth = 800;
+			wHeight = 600;
+		}
+		else
+		{
+			wWidth = 400;
+			wHeight = 300;
+		}
+			
+	}
 	_window = SDL_CreateWindow("Test SDL 2.0", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, wWidth, wHeight, SDL_WINDOW_SHOWN);
 	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
 	SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
