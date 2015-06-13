@@ -107,7 +107,7 @@ bool Character::moveSingle(Cell& c, bool moveWanted)
 	else if (distance > _movementPoints && moveWanted)
 		throw "not enough movement point";
 
-	(new MoveEvent(this, _hisCell, &c))->dispatch();
+	(new MoveEvent(this, _hisCell, &c, moveWanted))->dispatch();
 	_hisCell->free();
 	c.setObject(this);
 	_hisCell->setType(Cell::Free);
@@ -126,7 +126,7 @@ bool Character::move(Cell& c, bool moveWanted)
 	try{
 		if (path.empty())
 			throw "no path found";
-		else if (path.size() > (unsigned int)_movementPoints)
+		else if (path.size() > (unsigned int)_movementPoints && moveWanted)
 			throw "not enough movement point";
 		for (Cell* c : path)
 		{

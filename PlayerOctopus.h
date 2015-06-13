@@ -24,7 +24,7 @@ public:
 	void setDirty(bool d = true) { _dirty = d; }
 	bool isDirty() { return _dirty; }
 
-	void addMove(Cell* c);
+	void addMove(Cell* c, bool moveWanted);
 
 	void computePixelPos();
 
@@ -46,6 +46,7 @@ private:
 	const Cell* destination_cell;
 	const Cell* origin_cell;
 	const Cell* real_cell;
+	bool move_wanted = true;
 	Uint32 _land_time = 0;
 
 
@@ -54,6 +55,7 @@ private:
 	static Point PADDING;
 
 	deque<Cell*> path;
+	deque<bool> move_anims;
 	Uint32 movement_begin;
 	bool moving = false;
 	void pathNext();

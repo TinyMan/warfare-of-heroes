@@ -29,7 +29,7 @@ PlayerOctopus::PlayerOctopus(Character* c, GridOctopus* grid)
 	evs->listen(typeid(MoveEvent), [=](Event* e) {
 		MoveEvent* ev = dynamic_cast<MoveEvent*>(e);	
 		if (ev && ev->getCharacter() == _character)
-			addMove(ev->destination);
+			addMove(ev->destination, ev->move_wanted);
 		}
 		);
 }
@@ -49,6 +49,12 @@ void PlayerOctopus::update()
 		//LOGINFO << "Position: " << getPosition() << endl;
 		if (!real_cell)
 			teleport(real_cell = _character->getCell());
+		else if (!move_wanted)
+		{
+			teleport(real_cell = destination_cell);
+			moving = false;
+			pathNext();
+		}
 		else if (real_cell != destination_cell && _land_time + move_delay < TIMESERVICE->time())
 		{
 			//LOGINFO << "Moving" << endl;
@@ -108,11 +114,12 @@ void PlayerOctopus::internalRender(SDL_Renderer* r, bool force)
 	}
 }
 
-void PlayerOctopus::addMove(Cell* c)
+void PlayerOctopus::addMove(Cell* c, bool moveWanted)
 {
-	if (path.empty() || c->adjacent(path.back()))
+	if (path.empty() || (c->adjacent(path.back()) && moveWanted))
 	{
 		path.push_back(c);
+		move_anims.push_back(moveWanted);
 		_grid->mark(c->getNumber(), Color(127,127,127,50));
 	//	_character->displayBasic(LOGINFO);
 	//	LOGINFO << " Adding move !" << endl;
@@ -125,7 +132,7 @@ void PlayerOctopus::pathNext()
 	{
 		// set the next destination
 		destination_cell = path.front();
-
+		move_wanted = move_anims.front();
 
 		// orientation
 		if (destination_cell->getPosX() > real_cell->getPosX() || (destination_cell->getPosX() == real_cell->getPosX() && destination_cell->getPosY() < real_cell->getPosY()))
@@ -136,6 +143,7 @@ void PlayerOctopus::pathNext()
 			orientation = LEFT;
 
 		path.pop_front();
+		move_anims.pop_front();
 		moving = true;
 		movement_begin = TIMESERVICE->time() + move_delay;
 		_land_time = TIMESERVICE->time();

@@ -19,10 +19,11 @@ namespace Events
 		class MoveEvent : public CharacterEvent
 		{
 		public:
-			MoveEvent(Character* c, Cell* _origin, Cell* dst) : CharacterEvent(c), destination(dst), origin(_origin) {}
+			MoveEvent(Character* c, Cell* _origin, Cell* dst, bool moveWanted = true) : CharacterEvent(c), destination(dst), origin(_origin), move_wanted(moveWanted){}
 			virtual ~MoveEvent(){}
 			Cell* destination;
 			Cell* origin;
+			bool move_wanted;
 		};
 		class DieEvent : public CharacterEvent
 		{
