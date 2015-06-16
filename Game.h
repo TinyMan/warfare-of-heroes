@@ -9,6 +9,7 @@
 class Octopus;
 class GameObject;
 class Grid;
+class SoundEffectManager;
 
 #define GAMEINST Game::getInstance()
 
@@ -102,6 +103,7 @@ private:
 	LogService * _logService = nullptr;
 	EventService* _eventService = nullptr;
 	UserInterface* _userInterface = nullptr;
+	SoundEffectManager* _soundEffectManager = nullptr;
 
 
 	/* update its state, delete objects marked etc ... */

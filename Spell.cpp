@@ -45,7 +45,7 @@ bool Spell::cast(SpellTarget* target)
 		LOGINFO << _caster->getName() << " : Casting " << _name << " on ";
 		target->displayBasic(LOGINFO);
 		LOGINFO << endl;
-		(new SpellEvents::SpellCastEvent(_name))->dispatch();
+		(new SpellEvents::SpellCastEvent(this))->dispatch();
 		return true;
 	}
 	LOGWARN << _caster->getName() << " : Fail cast " << _name << endl;

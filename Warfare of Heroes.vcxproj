@@ -133,6 +133,7 @@
     <ClCompile Include="SDLEvents.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="Sortable.cpp" />
+    <ClCompile Include="SoundEffectManager.cpp" />
     <ClCompile Include="SoundService.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="SpellButton.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="SDLEvents.h" />
     <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="Sortable.h" />
+    <ClInclude Include="SoundEffectManager.h" />
     <ClInclude Include="SoundService.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="SpellButton.h" />

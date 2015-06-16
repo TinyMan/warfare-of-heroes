@@ -17,6 +17,7 @@ public:
 	virtual void stopMusic();
 	virtual void toggleMusic();
 	virtual void playEffect(string id);
+	virtual void loadEffect(string filename, string id);
 
 	const string MUSIC_FILENAME = "sound/theme.wav";
 
