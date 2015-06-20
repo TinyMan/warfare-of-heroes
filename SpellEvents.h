@@ -3,6 +3,7 @@
 #include "Event.h"
 using namespace std;
 
+class Spell;
 namespace Events
 {
 	namespace SpellEvents
@@ -10,16 +11,14 @@ namespace Events
 		class SpellEvent : public Events::Event
 		{
 		public:
-			SpellEvent(string spellName) : _name(spellName){}
+			SpellEvent(Spell * s) : spell(s){}
 			virtual ~SpellEvent(){};
-			string name() const { return _name; }
-		private:
-			string _name;
+			Spell* spell;
 		};
 		class SpellCastEvent : public SpellEvent
 		{
 		public:
-			SpellCastEvent(string spellName) : SpellEvent(spellName){}
+			SpellCastEvent(Spell * s) : SpellEvent(s){}
 			virtual ~SpellCastEvent(){}
 		};
 	}

@@ -10,6 +10,11 @@ SoundService::SoundService()
 SoundService::~SoundService()
 {
 	stopMusic();
+	Mix_FreeMusic(_music);
+	for (auto c : _chunks)
+	{
+		Mix_FreeChunk(c.second);
+	}
 }
 
 void SoundService::playMusic()
@@ -60,7 +65,23 @@ void SoundService::playEffect(string id)
 {
 	if (_chunks.count(id) == 1)
 	{
-
+		Mix_PlayChannel(-1, _chunks[id], 0);
 	}
 
+}
+
+void SoundService::loadEffect(string filename, string id)
+{
+	if (filename.length() > 0 && id.length() > 0)
+	{
+		if (_chunks.count(id) == 1)
+		{
+			Mix_FreeChunk(_chunks[id]);
+		}
+		Mix_Chunk* tmp = Mix_LoadWAV(filename.c_str());
+		if (tmp)
+		{
+			_chunks[id] = tmp;
+		}
+	}
 }

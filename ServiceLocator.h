@@ -11,6 +11,7 @@ using namespace Events;
 
 #define UI ServiceLocator::getUI()
 #define TIMESERVICE ServiceLocator::getTimeService()
+#define SOUNDSERVICE ServiceLocator::getSoundService()
 
 class ServiceLocator
 {

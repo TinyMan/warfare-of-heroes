@@ -17,6 +17,7 @@
 #include "PlayerOctopus.h"
 #include "MenuSelection.h"
 #include "ObstacleOctopus.h"
+#include "SoundEffectManager.h"
 
 Game* Game::_instance = nullptr;
 
@@ -45,6 +46,8 @@ Game::Game()
 	_grid = new Grid();
 	_octopus = new Octopus();
 
+	/* create the sound manager */
+	_soundEffectManager = new SoundEffectManager();
 }
 
 void Game::initialize()
@@ -125,6 +128,7 @@ Game::~Game()
 	}
 	delete _octopus;
 	ServiceLocator::cleanup();
+	delete _soundEffectManager;
 }
 
 void Game::loop()

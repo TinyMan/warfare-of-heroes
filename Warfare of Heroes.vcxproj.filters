@@ -85,6 +85,12 @@
     <Filter Include="Source Files\Graphics\Misc">
       <UniqueIdentifier>{a479e4e0-8fdb-4074-8277-7836d41498ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Sounds">
+      <UniqueIdentifier>{75336e3a-a13e-44bd-a072-f4ddca28cec2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sounds">
+      <UniqueIdentifier>{16756f3e-6510-4c67-8291-545cca595cae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -302,6 +308,9 @@
     </ClCompile>
     <ClCompile Include="MenuSelection.cpp">
       <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundEffectManager.cpp">
+      <Filter>Source Files\Sounds</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -538,6 +547,9 @@
     </ClInclude>
     <ClInclude Include="MenuSelection.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundEffectManager.h">
+      <Filter>Header Files\Sounds</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
