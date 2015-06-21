@@ -137,6 +137,7 @@
     <ClCompile Include="SoundService.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="SpellButton.cpp" />
+    <ClCompile Include="SpellOctopus.cpp" />
     <ClCompile Include="SpellRecap.cpp" />
     <ClCompile Include="SpellTarget.cpp" />
     <ClCompile Include="SquareAoE.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="Spell.h" />
     <ClInclude Include="SpellButton.h" />
     <ClInclude Include="SpellEvents.h" />
+    <ClInclude Include="SpellOctopus.h" />
     <ClInclude Include="SpellRecap.h" />
     <ClInclude Include="SpellTarget.h" />
     <ClInclude Include="SquareAoE.h" />

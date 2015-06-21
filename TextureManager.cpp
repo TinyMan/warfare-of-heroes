@@ -17,13 +17,13 @@ TextureManager::TextureManager(SDL_Renderer* r)
 	loadTexture("Images/PNG/Chevalier_Exemple.png", "icon_knight");
 	loadTexture("Images/PNG/Sort1.png", "icon_spell_10");
 	loadTexture("Images/PNG/sort2.png", "icon_spell_7");
-	loadTexture("Images/PNG/sort3.png", "icon_spell_"); // à changer
+	loadTexture("Images/PNG/SpellRoots.png", "icon_spell_11"); // à changer
 	loadTexture("Images/PNG/sort4.png", "icon_spell_6");
 	loadTexture("Images/PNG/sort5.png", "icon_spell_12");
 	loadTexture("Images/PNG/sort6.png", "icon_spell_2");
 	loadTexture("Images/PNG/sort7.png", "icon_spell_9");
-	loadTexture("Images/PNG/sort8.png", "icon_spell_8"); 
-	loadTexture("Images/PNG/sort9.png", "icon_spell_"); // à changer
+	loadTexture("Images/PNG/SpellSwordOfDestiny.png", "icon_spell_8"); 
+	loadTexture("Images/PNG/SpellDash.png", "icon_spell_5"); // à changer
 	loadTexture("Images/PNG/sort10.png", "icon_spell_1"); 
 	loadTexture("Images/PNG/sort11.png", "icon_spell_4");
 	loadTexture("Images/PNG/sort12.png", "icon_spell_3");
@@ -37,8 +37,9 @@ TextureManager::TextureManager(SDL_Renderer* r)
 	loadTexture("Images/PNG/flechedroite.png", "flecheD");
 	loadTexture("Images/PNG/flechegauche.png", "flecheG");
 	loadTexture("Images/PNG/FondHautSelection.png", "menuSelectTopBG");
-	//loadTexture("Images/PNG/nothing.png", "knight"); //Penser à changer le nom
-	
+	loadTexture("Images/PNG/nothing.png", "spellTest"); //Penser à changer le nom
+	loadTexture("Images/PNG/Background_Bouton_Pret.png", "BackgroundReady");
+	loadTexture("Images/PNG/Background_Bouton_PretHover.png", "BackgroundReadyHover");
 
 }
 

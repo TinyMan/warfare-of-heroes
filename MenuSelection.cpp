@@ -50,7 +50,9 @@ MenuSelection::MenuSelection() : Panel()
 	button_selec_1->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	button_selec_1->setPositionY(100);
 	button_selec_1->setPositionX(525);
-	button_selec_1->setBgColor(Color::RED);
+	button_selec_1->setBackground((*ServiceLocator::getTextureManager())["BackgroundReady"]);
+	button_selec_1->setHoverBackground((*ServiceLocator::getTextureManager())["BackgroundReadyHover"]);
+	//button_selec_1->setBgColor(Color::RED);
 	button_selec_1->Clickable::setCallback(new EventCallback([=](Event*) {ready(); }));
 
 	Panel* selection_bottom = new Panel(1200, 700);

@@ -18,6 +18,7 @@
 #include "MenuSelection.h"
 #include "ObstacleOctopus.h"
 #include "SoundEffectManager.h"
+#include "SpellOctopus.h"
 
 Game* Game::_instance = nullptr;
 
@@ -298,9 +299,11 @@ void Game::start(Character* player1, Character* player2)
 
 	PlayerOctopus* p = new PlayerOctopus(_players[0], gridO);
 	PlayerOctopus* p1 = new PlayerOctopus(_players[1], gridO);
+	SpellOctopus* s = new SpellOctopus("spala",0,gridO);
 
 	game_inside->add(p);
 	game_inside->add(p1);
+	game_inside->add(s);
 
 
 	for (auto& c : getGrid()->getObstacles())
