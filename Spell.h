@@ -44,6 +44,7 @@ public:
 	vector<unsigned int> getCellsInRange() const;
 	SpellTarget* getTargetFromCell(Cell* c) const;
 	int getCooldown() const { return _cooldown; }
+	Character* getCaster() const { return _caster; }
 
 	friend ostream& operator<<(ostream& o, const Spell& s);
 protected:	

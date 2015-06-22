@@ -4,6 +4,7 @@
 using namespace std;
 
 class Spell;
+class SpellTarget;
 namespace Events
 {
 	namespace SpellEvents
@@ -18,8 +19,9 @@ namespace Events
 		class SpellCastEvent : public SpellEvent
 		{
 		public:
-			SpellCastEvent(Spell * s) : SpellEvent(s){}
+			SpellCastEvent(Spell * s, SpellTarget* t) : SpellEvent(s), target(t){}
 			virtual ~SpellCastEvent(){}
+			SpellTarget *target;
 		};
 	}
 }

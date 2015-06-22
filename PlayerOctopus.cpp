@@ -3,7 +3,8 @@
 
 Texture PlayerOctopus::_basic_player;
 double PlayerOctopus::_ratio;
-Point PlayerOctopus::PADDING;
+Point PlayerOctopus::PADDINGFaceLeft;
+Point PlayerOctopus::PADDINGFaceRight;
 
 
 PlayerOctopus::PlayerOctopus(Character* c, GridOctopus* grid)
@@ -19,7 +20,10 @@ PlayerOctopus::PlayerOctopus(Character* c, GridOctopus* grid)
 		_ratio = min(ratioy, ratiox);
 
 		// calculate padding
-		PADDING = Point(-_basic_player.getWidth() * _ratio / 2, -_basic_player.getHeight() * _ratio + 7);
+		int xpadding = -5;
+		int ypadding = 7;
+		PADDINGFaceLeft = Point(-_basic_player.getWidth() * _ratio / 2 + xpadding, -_basic_player.getHeight() * _ratio + ypadding);
+		PADDINGFaceRight = Point(PADDINGFaceLeft.x -2*xpadding, PADDINGFaceLeft.y);
 
 	}
 	setBgColor(Color::TRANSPARENT);
@@ -73,14 +77,14 @@ void PlayerOctopus::update()
 			Point jump(0, sqrt(pow(jump_height, 2) - (pow(jump_height,2) * abs(delta.y - step.y))/pow( delta.y, 2)));
 
 			Point pos = origin_pos + step - jump;
-			Point newPos = pos + PADDING;
+			Point newPos = pos + getPadding();
 
 
 			step = abs(step);
 			if (step.x >= delta.x && step.y >= delta.y)
 			{
 				//LOGINFO << "Landing on new cell" << endl;
-				newPos = dest_pos + PADDING;
+				newPos = dest_pos + getPadding();
 				real_cell = destination_cell;
 
 				moving = false;
@@ -108,7 +112,7 @@ void PlayerOctopus::internalRender(SDL_Renderer* r, bool force)
 			dst.h = int(_ratio * _basic_player.getHeight());
 			dst.x = 0;
 			dst.y = 0;
-			SDL_RenderCopyEx(r, _basic_player, nullptr, &dst, 0.0, nullptr, (SDL_RendererFlip)orientation);
+			SDL_RenderCopyEx(r, (*ServiceLocator::getTextureManager())[_character->getType()], nullptr, &dst, 0.0, nullptr, (SDL_RendererFlip)orientation);
 
 		}
 	}
@@ -155,7 +159,7 @@ void PlayerOctopus::teleport(const Cell* c)
 	{
 		Point cellCenter = toContainerCoordinates(_grid->toAbsoluteCoordinates(_grid->getCellCenter(c)));
 
-		Point pos = cellCenter + PADDING;
+		Point pos = cellCenter + getPadding();
 		if ((Point)pos != getPosition())
 		{
 			setPosition(int(pos.x), int(pos.y));
@@ -168,4 +172,19 @@ void PlayerOctopus::setPosition(Point pos)
 	{
 		OctopusBaby::setPosition((int)pos.x, (int)pos.y);
 	}
+}
+Point PlayerOctopus::getPadding() const
+{
+	switch (orientation)
+	{
+	case PlayerOctopus::LEFT:
+		return PADDINGFaceLeft;
+		break;
+	case PlayerOctopus::RIGHT:
+		return PADDINGFaceRight;
+		break;
+	default:
+		break;
+	}
+	return PADDINGFaceRight;
 }
