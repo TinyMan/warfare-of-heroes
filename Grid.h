@@ -50,7 +50,7 @@ public:
 	static const int HEIGHT = 14;
 	static const unsigned int CELLS_NUMBER = (WIDTH * 2 - 1) * HEIGHT - WIDTH + 1;
 
-	static unsigned int toCellNumber(int x, int y) { return (CELLS_NUMBER-1)/2 + x * WIDTH + y * (HEIGHT - 1); }
+	unsigned int toCellNumber(int x, int y) const { if (_cells_coordinates.count(x) == 1 && _cells_coordinates.at(x).count(y) == 1)  return _cells_coordinates.at(x).at(y); return CELLS_NUMBER; }
 
 	virtual void beginTurn();
 

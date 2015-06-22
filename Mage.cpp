@@ -9,7 +9,7 @@ Mage::Mage(int x, int y, string name) : Character(x, y, name)
 {
 	_type = "mage";
 	// Initializing the Archer's HP, MP and CP with it's constants.
-	mpMax = MP_MAX;
+	mpMax = MP_MAX + 500;
 	cpMax = CP_MAX;
 	hpMax = _hitPoints = HP_MAX;
 

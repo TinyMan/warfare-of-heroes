@@ -3,10 +3,10 @@
 #include "OctopusBaby.h"
 #include "GridOctopus.h"
 
-const int PLAYER_WIDTH = 50;
-const int PLAYER_HEIGHT = 60;
+const int SPELL_WIDTH = 50;
+const int SPELL_HEIGHT = 60;
 
-class PlayerOctopus :
+class SpellOctopus :
 	public OctopusBaby
 {
 public:
@@ -17,30 +17,24 @@ public:
 	};
 	//typedef SDL_RendererFlip ORIENTATION;
 
-	PlayerOctopus(Character* c, GridOctopus* grid);
-	virtual ~PlayerOctopus();
+	SpellOctopus(string spell, unsigned int c,GridOctopus* grid);
+	virtual ~SpellOctopus();
 
 	virtual void update();
 	void setDirty(bool d = true) { _dirty = d; }
 	bool isDirty() { return _dirty; }
-
-	void addMove(Cell* c, bool moveWanted);
-
-	void computePixelPos();
-
-	static const Uint32 move_time = 300;
-	static const Uint32 jump_height = 5;
-	static const Uint32 move_delay = 200;
+	
 	virtual void setPosition(int x, int y) override { OctopusBaby::setPosition(x, y); }
 	virtual void setPosition(Point pos);
 
+	void changeDestination(int x, int y);
+	void moveSpell();
+
 protected:
 	virtual void internalRender(SDL_Renderer* r, bool force = false);
-	Point getPadding() const;
 
 private:
 	bool _dirty = true;
-	Character* _character;
 	GridOctopus* _grid;
 	ORIENTATION orientation;
 
@@ -53,8 +47,7 @@ private:
 
 	static Texture _basic_player;
 	static double _ratio;
-	static Point PADDINGFaceLeft;
-	static Point PADDINGFaceRight;
+	static Point PADDING;
 
 	deque<Cell*> path;
 	deque<bool> move_anims;
@@ -62,5 +55,20 @@ private:
 	bool moving = false;
 	void pathNext();
 	void teleport(const Cell* c);
+
+	//Truc Utile
+	 int depX;
+	 int depY;
+	 int destX;
+	 int destY;
+	 string nomduSpell;
+	 double vitesseSpell;
+	 double orientationSpell;
+	 double avancementX;
+	 double avancementY;
+	 double directionX;
+	 double directionY;
+	 double largeur;
+	 double hauteur;
 };
 

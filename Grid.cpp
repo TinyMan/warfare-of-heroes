@@ -169,10 +169,15 @@ list<Cell*> Grid::getAdjacentCells(Cell* c)
 	{
 		int x = c->getPosX();
 		int y = c->getPosY();
-		ret.push_back(getCellAt(x + 1, y));
-		ret.push_back(getCellAt(x - 1, y));
-		ret.push_back(getCellAt(x, y + 1));
-		ret.push_back(getCellAt(x, y - 1));
+		Cell * c;
+		if (c = getCellAt(x + 1, y))
+			ret.push_back(c);
+		if (c = getCellAt(x - 1, y))
+			ret.push_back(c);
+		if (c = getCellAt(x, y + 1))
+			ret.push_back(c);
+		if (c = getCellAt(x, y - 1))
+			ret.push_back(c);
 	}
 	return ret;
 }

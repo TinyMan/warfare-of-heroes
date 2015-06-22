@@ -312,6 +312,9 @@
     <ClCompile Include="SoundEffectManager.cpp">
       <Filter>Source Files\Sounds</Filter>
     </ClCompile>
+    <ClCompile Include="SpellOctopus.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -551,5 +554,11 @@
     <ClInclude Include="SoundEffectManager.h">
       <Filter>Header Files\Sounds</Filter>
     </ClInclude>
+    <ClInclude Include="SpellOctopus.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

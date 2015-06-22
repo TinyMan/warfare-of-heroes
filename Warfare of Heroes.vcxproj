@@ -137,6 +137,7 @@
     <ClCompile Include="SoundService.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="SpellButton.cpp" />
+    <ClCompile Include="SpellOctopus.cpp" />
     <ClCompile Include="SpellRecap.cpp" />
     <ClCompile Include="SpellTarget.cpp" />
     <ClCompile Include="SquareAoE.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="Spell.h" />
     <ClInclude Include="SpellButton.h" />
     <ClInclude Include="SpellEvents.h" />
+    <ClInclude Include="SpellOctopus.h" />
     <ClInclude Include="SpellRecap.h" />
     <ClInclude Include="SpellTarget.h" />
     <ClInclude Include="SquareAoE.h" />
@@ -228,6 +230,9 @@
     <ClInclude Include="TimeService.h" />
     <ClInclude Include="Tooltip.h" />
     <ClInclude Include="UserInterface.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
