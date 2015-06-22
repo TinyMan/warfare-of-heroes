@@ -23,7 +23,7 @@ public:
 	void setEffectContainer(Panel* ec) { _effectContainer = ec; }
 
 protected:
-	SpellOctopus* createSpellOctopus(Spell* s, Character* caster, SpellTarget* target);
+	OctopusBaby* createSpellOctopus(Spell* s, Character* caster, SpellTarget* target);
 
 private:
 	Panel* _effectContainer = nullptr;

@@ -296,9 +296,11 @@ void Game::start(Character* player1, Character* player2)
 	Panel * game_inside = new Panel(800, 600);
 	game_inside->setBgColor(Color::WHITE);
 	game_frame->add(game_inside, Alignment::TOP | Alignment::CENTERX);
+	_visualEffectManager->setEffectContainer(game_inside);
 
 	GridOctopus* gridO = new GridOctopus(_grid, 800, 400);
 	game_inside->add(gridO, Alignment::CENTERX | Alignment::CENTERY);
+	_visualEffectManager->setGridOctopus(gridO);
 
 	PlayerOctopus* p = new PlayerOctopus(_players[0], gridO);
 	PlayerOctopus* p1 = new PlayerOctopus(_players[1], gridO);

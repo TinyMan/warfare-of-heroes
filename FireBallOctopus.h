@@ -9,6 +9,7 @@ const int SPELL_HEIGHT = 200;
 
 class FireBallOctopus :
 	public OctopusBaby{
+public:
 	enum ORIENTATION
 	{
 		LEFT = SDL_FLIP_NONE,

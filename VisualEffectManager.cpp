@@ -1,5 +1,6 @@
 #include "VisualEffectManager.h"
 #include "Spell.h"
+#include "FireBallOctopus.h"
 
 
 VisualEffectManager::VisualEffectManager()
@@ -23,16 +24,17 @@ void VisualEffectManager::onCast(Event* e)
 		Character* caster = spell->getCaster();
 		SpellTarget* target = ev->target;
 
-		SpellOctopus* so = createSpellOctopus(spell, caster, target);
+		OctopusBaby* so = createSpellOctopus(spell, caster, target);
 
-		//_effectContainer->add((OctopusBaby*)so);
+		_effectContainer->add(so);
 	}
 }
 
-SpellOctopus* VisualEffectManager::createSpellOctopus(Spell* s, Character* caster, SpellTarget* target)
+OctopusBaby* VisualEffectManager::createSpellOctopus(Spell* s, Character* caster, SpellTarget* target)
 {
 	// TODO
 	// create the visual effect based on the spell name
+	return new FireBallOctopus(s, caster, target);
 	return nullptr;
 }
 
