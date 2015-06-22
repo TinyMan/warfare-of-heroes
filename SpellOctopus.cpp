@@ -39,7 +39,7 @@ SpellOctopus::SpellOctopus(string spellN, unsigned int c, GridOctopus* grid)
 	avancementX = sqrt(largeur*largeur / (largeur*largeur + hauteur*hauteur))*directionX;
 	avancementY = sqrt(hauteur*hauteur / (largeur*largeur + hauteur*hauteur))*directionY;
 
-	setAlpha(0);
+	//setAlpha(0);
 
 	setPosition(origin_cell->getPosX(), origin_cell->getPosY());
 };
@@ -47,7 +47,7 @@ SpellOctopus::SpellOctopus(string spellN, unsigned int c, GridOctopus* grid)
 SpellOctopus::~SpellOctopus()
 {};
 
-void SpellOctopus::update()
+/*void SpellOctopus::update()
 {
 	while (abs(origin_cell->getPosX() - destination_cell->getPosX())>5 && abs(origin_cell->getPosY() - destination_cell->getPosY())>5)
 	{
@@ -56,6 +56,19 @@ void SpellOctopus::update()
 		Point avance = (depX + avancementX, depY + avancementY);
 		setPosition(avance);
 	}
+}*/
+
+void SpellOctopus::update()
+{
+	int vitesse = 200;
+	if (TIMESERVICE->getFrameTime() % vitesse >= 0 && TIMESERVICE->getFrameTime() % vitesse < vitesse/3)
+		_basic_player=(*ServiceLocator::getTextureManager())["FireBall"];
+	else if (TIMESERVICE->getFrameTime() % vitesse >= vitesse / 3 && TIMESERVICE->getFrameTime() % vitesse < vitesse*2/3)
+		_basic_player = (*ServiceLocator::getTextureManager())["Thunder"];
+	else if (TIMESERVICE->getFrameTime() % vitesse >= vitesse*2/3 && TIMESERVICE->getFrameTime() % vitesse < vitesse - 1)
+		_basic_player = (*ServiceLocator::getTextureManager())["SwordDestiny"];
+	//_basic_player = (*ServiceLocator::getTextureManager())["Thunder"];
+		setPosition(getPosition().x + 1, getPosition().y + 1);
 }
 
 void SpellOctopus::setPosition(Point pos)

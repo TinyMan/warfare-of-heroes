@@ -26,7 +26,7 @@ public:
 	
 	virtual void setPosition(int x, int y) override { OctopusBaby::setPosition(x, y); }
 	virtual void setPosition(Point pos);
-
+	
 	void changeDestination(int x, int y);
 	void moveSpell();
 
