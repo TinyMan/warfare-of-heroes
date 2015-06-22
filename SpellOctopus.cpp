@@ -79,23 +79,35 @@ void SpellOctopus::update()
 	}
 	if (nomduSpell == "thunder") // Sort Tonnerre
 	{
-		vitesse = 200;
+		vitesse = 8000;
 		nbFrame = 7;
 		duree = 8000;
-		if (TIMESERVICE->getFrameTime() % vitesse >= 0 && TIMESERVICE->getFrameTime() % vitesse < vitesse / nbFrame)
+		if (TIMESERVICE->getFrameTime() % vitesse >= 0 && TIMESERVICE->getFrameTime() % vitesse < 100)
 			_basic_player = (*ServiceLocator::getTextureManager())["ThunderFrame1"];
-		else if (TIMESERVICE->getFrameTime() % vitesse >= vitesse / nbFrame && TIMESERVICE->getFrameTime() % vitesse < vitesse * 2 / nbFrame)
+		else if (TIMESERVICE->getFrameTime() % vitesse >= 100 && TIMESERVICE->getFrameTime() % vitesse < 200)
 			_basic_player = (*ServiceLocator::getTextureManager())["ThunderFrame2"];
-		else if (TIMESERVICE->getFrameTime() % vitesse >= vitesse * 2 / nbFrame && TIMESERVICE->getFrameTime() % vitesse < vitesse * 3 / nbFrame)
+		else if (TIMESERVICE->getFrameTime() % vitesse >= 200 && TIMESERVICE->getFrameTime() % vitesse < 300)
 			_basic_player = (*ServiceLocator::getTextureManager())["ThunderFrame3"];
-		else if (TIMESERVICE->getFrameTime() % vitesse >= vitesse * 3 / nbFrame && TIMESERVICE->getFrameTime() % vitesse < vitesse * 4 / nbFrame)
+		else if (TIMESERVICE->getFrameTime() % vitesse >= 300 && TIMESERVICE->getFrameTime() % vitesse < 400)
 			_basic_player = (*ServiceLocator::getTextureManager())["ThunderFrame4"];
-		else if (TIMESERVICE->getFrameTime() % vitesse >= vitesse * 4 / nbFrame && TIMESERVICE->getFrameTime() % vitesse < vitesse * 5 / nbFrame)
+		else if (TIMESERVICE->getFrameTime() % vitesse >= 400 && TIMESERVICE->getFrameTime() % vitesse < 2000)
 			_basic_player = (*ServiceLocator::getTextureManager())["ThunderFrame5"];
-		else if (TIMESERVICE->getFrameTime() % vitesse >= vitesse * 5 / nbFrame && TIMESERVICE->getFrameTime() % vitesse < vitesse * 6 / nbFrame)
+		else if (TIMESERVICE->getFrameTime() % vitesse >=2000 && TIMESERVICE->getFrameTime() % vitesse < 2500)
 			_basic_player = (*ServiceLocator::getTextureManager())["ThunderFrame6"];
-		else if (TIMESERVICE->getFrameTime() % vitesse >= vitesse *6 / nbFrame && TIMESERVICE->getFrameTime() % vitesse < vitesse - 1)
+		else if (TIMESERVICE->getFrameTime() % vitesse >= 2500 && TIMESERVICE->getFrameTime() % vitesse < 4000)
+			_basic_player = (*ServiceLocator::getTextureManager())["ThunderFrame5"];
+		else if (TIMESERVICE->getFrameTime() % vitesse >= 4000 && TIMESERVICE->getFrameTime() % vitesse < 4500)
 			_basic_player = (*ServiceLocator::getTextureManager())["ThunderFrame7"];
+		else if (TIMESERVICE->getFrameTime() % vitesse >= 4500 && TIMESERVICE->getFrameTime() % vitesse < 7600)
+			_basic_player = (*ServiceLocator::getTextureManager())["ThunderFrame5"];
+		else if (TIMESERVICE->getFrameTime() % vitesse >= 7600 && TIMESERVICE->getFrameTime() % vitesse < 7700)
+			_basic_player = (*ServiceLocator::getTextureManager())["ThunderFrame4"];
+		else if (TIMESERVICE->getFrameTime() % vitesse >= 7700 && TIMESERVICE->getFrameTime() % vitesse < 7800)
+			_basic_player = (*ServiceLocator::getTextureManager())["ThunderFrame3"];
+		else if (TIMESERVICE->getFrameTime() % vitesse >= 7800 && TIMESERVICE->getFrameTime() % vitesse < 7900)
+			_basic_player = (*ServiceLocator::getTextureManager())["ThunderFrame2"];
+		else if (TIMESERVICE->getFrameTime() % vitesse >= 7900 && TIMESERVICE->getFrameTime() % vitesse < 7999)
+			_basic_player = (*ServiceLocator::getTextureManager())["ThunderFrame1"];
 	}
 	//_basic_player = (*ServiceLocator::getTextureManager())["Thunder"];
 		setPosition(getPosition().x + 0.5, getPosition().y + 0.5); //Sinon ça s'anime pas
