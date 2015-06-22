@@ -30,7 +30,7 @@ void TimeService::update()
 	}
 }
 
-void TimeService::setTimeout(Uint32 t, Callback& cb)
+Timeout * TimeService::setTimeout(Uint32 t, Callback& cb)
 {
 	// if it is the first timeout we add
 	if (_timeout.empty())
@@ -50,14 +50,32 @@ void TimeService::setTimeout(Uint32 t, Callback& cb)
 
 		// insert it
 		_timeout.insert(it, new_timeout);
+		return new_timeout;
 	}
 	//display();
+	return _timeout.back();
 }
-void TimeService::setInterval(Uint32 t, Callback& cb)
+void TimeService::removeTimeout(Timeout* t)
+{
+	if (t && !_timeout.empty())
+	{
+		_timeout.remove(t);
+		delete t;
+	}
+}
+Interval* TimeService::setInterval(Uint32 t, Callback& cb)
 {
 	_interval.push_back(new Interval(t, cb));
-	
+	return _interval.back();
 	//display();
+}
+void TimeService::removeInterval(Interval* t)
+{
+	if (t && !_interval.empty())
+	{
+		_interval.remove(t);
+		delete t;
+	}
 }
 void TimeService::updateFps()
 {

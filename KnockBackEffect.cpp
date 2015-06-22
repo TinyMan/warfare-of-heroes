@@ -1,7 +1,7 @@
 #include "KnockBackEffect.h"
 #include "Grid.h"
 #include "Game.h"
-
+#include "Character.h"
 
 KnockBackEffect::KnockBackEffect(int nbCells, Character* caster)
 	: MoveEffect(nullptr, caster), _nbCells(nbCells)

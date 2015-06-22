@@ -3,8 +3,11 @@
 #include <list>
 #include "Character.h"
 #include "Cell.h"
+#include "Grid.h"
 #include "SpellTarget.h"
 #include "DamageOverTime.h"
+#include "SpellEvents.h"
+#include "TargetSelector.h"
 
 using namespace std;
 
@@ -16,6 +19,7 @@ public:
 	virtual ~Spell();
 
 	virtual bool cast(SpellTarget* target = nullptr);
+	virtual bool cast(unsigned int cell);
 	virtual void beginTurn();
 
 	virtual bool canCastOn(SpellTarget* target);
@@ -29,9 +33,17 @@ public:
 	void setMaxScope(int max_scope) { _max_scope = max_scope; }
 	void setInline(bool il) { _is_inline = il; }
 	void addEffect(Effect* effect);
+	void setDescription(string descr) { _description = descr; }
+	void setTargetSelector(TargetSelector* s);
 
 	/* getters */
 	int getMaxScope() const { return _max_scope; }
+	int getCPCost() const { return _cp_cost; }
+	string getName() const { return _name; }
+	string getDescription() const { return _description; }
+	vector<unsigned int> getCellsInRange() const;
+	SpellTarget* getTargetFromCell(Cell* c) const;
+	int getCooldown() const { return _cooldown; }
 
 	friend ostream& operator<<(ostream& o, const Spell& s);
 protected:	
@@ -42,9 +54,11 @@ protected:
 	int _mp_cost;
 	bool _is_inline;
 	string _name;
+	string _description = "Spell's Description";
 
 	list<Effect*> _effects;
 	Character* _caster;
+	TargetSelector* _selector = nullptr;
 private:
 	int _max_cooldown;
 	int _cooldown = 0;

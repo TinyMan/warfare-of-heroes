@@ -1,0 +1,1076 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Activable" Collapsed="true">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <InheritanceLine Type="Modifiable" FixedFromPoint="true">
+      <Path>
+        <Point X="13.5" Y="1.988" />
+        <Point X="13.5" Y="2.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAIAAAAABAAAAAAAAAAAAAwAAAEAAA=</HashCode>
+      <FileName>Activable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Clickable">
+    <Position X="15.5" Y="7.25" Width="1.5" />
+    <Members>
+      <Method Name="~Clickable" Hidden="true" />
+      <Method Name="Clickable" Hidden="true" />
+      <Method Name="internalOnClick" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="MouseEventReceiver" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="18.25" Y="7.938" />
+        <Point X="17" Y="7.938" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAABAAAAAgAAAAAAAAAAAAI=</HashCode>
+      <FileName>Clickable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hoverable">
+    <Position X="20.75" Y="5.5" Width="2.25" />
+    <Members>
+      <Field Name="_hover" Hidden="true" />
+      <Field Name="_notify_each_move" Hidden="true" />
+      <Method Name="~Hoverable" Hidden="true" />
+      <Method Name="concernMe" Hidden="true" />
+      <Method Name="getEveryMovesNotification" Hidden="true" />
+      <Method Name="Hoverable" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="MouseEventReceiver" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="19.75" Y="7.5" />
+        <Point X="19.75" Y="6.812" />
+        <Point X="20.75" Y="6.812" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="Modifiable" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.25" Y="1.659" />
+        <Point X="22.531" Y="1.659" />
+        <Point X="22.531" Y="5.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAIAACAAAAAAKAQAAAAAEAAQBAAFAAgAABAAAAAAAAA=</HashCode>
+      <FileName>Hoverable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LogService" Collapsed="true">
+    <Position X="31.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAABAAAAAAAAAAAGCAAgAAAQQAAAAQQAAAIAAEAA=</HashCode>
+      <FileName>LogService.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Modifiable">
+    <Position X="12.5" Y="0.5" Width="2.75" />
+    <Members>
+      <Method Name="~Modifiable" Hidden="true" />
+      <Method Name="Modifiable" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAACAAAAAAAAAACAAgAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Modifiable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyList&lt;T&gt;">
+    <Position X="24" Y="0.75" Width="1.5" />
+    <Members>
+      <Field Name="_dirty" Hidden="true" />
+      <Field Name="_sorted" Hidden="true" />
+      <Method Name="~MyList" Hidden="true" />
+      <Method Name="add" Hidden="true" />
+      <Method Name="contains" Hidden="true" />
+      <Method Name="getList" Hidden="true" />
+      <Method Name="isDirty" Hidden="true" />
+      <Method Name="MyList" Hidden="true" />
+      <Method Name="needSort" Hidden="true" />
+      <Method Name="setDirty" Hidden="true" />
+      <Method Name="setSorted" Hidden="true" />
+      <Method Name="sort" Hidden="true" />
+      <Method Name="update" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="Modifiable" FixedFromPoint="true">
+      <Path>
+        <Point X="15.25" Y="0.997" />
+        <Point X="24" Y="0.997" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ABACAAAEAAAAAAAACQAAAAAAEAAABAEAQAAAAgAGEAE=</HashCode>
+      <FileName>MyList.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ServiceLocator">
+    <Position X="30.25" Y="0.5" Width="1.5" />
+    <Members>
+      <Field Name="_userInterface" Hidden="true" />
+      <Method Name="cleanup" Hidden="true" />
+      <Method Name="getEventService" Hidden="true" />
+      <Method Name="getFontManager" Hidden="true" />
+      <Method Name="getLogService" Hidden="true" />
+      <Method Name="getSoundService" Hidden="true" />
+      <Method Name="getTextureManager" Hidden="true" />
+      <Method Name="getTimeService" Hidden="true" />
+      <Method Name="getUI" Hidden="true" />
+      <Method Name="provide" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>QAAAAAAgAEAAAAAAEACAAIAAJhAQIAAAABABAAAAACA=</HashCode>
+      <FileName>ServiceLocator.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_eventService" />
+      <Field Name="_fontManager" />
+      <Field Name="_logService" />
+      <Field Name="_soundService" />
+      <Field Name="_timeService" />
+      <Field Name="_textureManager" />
+      <Field Name="_userInterface" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sortable">
+    <Position X="9" Y="1" Width="2" />
+    <Members>
+      <Field Name="_needSort" Hidden="true" />
+      <Method Name="~Sortable" Hidden="true" />
+      <Method Name="needSort" Hidden="true" />
+      <Method Name="setSorted" Hidden="true" />
+      <Method Name="Sortable" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAACQACAAAAAAAAAAAAAAAAAAAAQIA=</HashCode>
+      <FileName>Sortable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoundService" Collapsed="true">
+    <Position X="29" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGEAAIAAAAAAAAAQAAAACAAAAEAAAAAEBAQBAAAAA=</HashCode>
+      <FileName>SoundService.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Callback" Collapsed="true">
+    <Position X="37" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAA=</HashCode>
+      <FileName>Callback.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EventReceiver" Collapsed="true">
+    <Position X="18.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAASAAABABAAAAAAAAAAAAAAABAAAABAAA=</HashCode>
+      <FileName>EventReceiver.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MouseEventReceiver" Collapsed="true">
+    <Position X="18.25" Y="7.5" Width="1.75" />
+    <InheritanceLine Type="EventReceiver" FixedToPoint="true">
+      <Path>
+        <Point X="19.25" Y="5.312" />
+        <Point X="19.25" Y="7.125" />
+        <Point X="18.812" Y="7.125" />
+        <Point X="18.812" Y="7.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAgAAAAAAAAAgAAAAAAEAAAAAA=</HashCode>
+      <FileName>MouseEventReceiver.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interval" Collapsed="true">
+    <Position X="33" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAABAZAAIAAAAAIBAAAAAAAACAABQAwAAAAAAAAA=</HashCode>
+      <FileName>Interval.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Timeout" Collapsed="true">
+    <Position X="34.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAIEBQIAAIAAAAABBAAQAAAAAAAAIQAAAAQQAAAAA=</HashCode>
+      <FileName>Timeout.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeService" Collapsed="true">
+    <Position X="33.25" Y="3.75" Width="1.5" />
+    <Members>
+      <Field Name="_fps" Hidden="true" />
+      <Field Name="_fpsUpdateInterval" Hidden="true" />
+      <Field Name="_frameStart" Hidden="true" />
+      <Field Name="_lastFpsUpdate" Hidden="true" />
+      <Field Name="_nbFrames" Hidden="true" />
+      <Method Name="~TimeService" Hidden="true" />
+      <Method Name="beginFrame" Hidden="true" />
+      <Method Name="display" Hidden="true" />
+      <Method Name="endFrame" Hidden="true" />
+      <Method Name="getFps" Hidden="true" />
+      <Method Name="getFrameTime" Hidden="true" />
+      <Method Name="removeInterval" Hidden="true" />
+      <Method Name="removeTimeout" Hidden="true" />
+      <Method Name="setInterval" Hidden="true" />
+      <Method Name="setTimeout" Hidden="true" />
+      <Method Name="time" Hidden="true" />
+      <Method Name="TimeService" Hidden="true" />
+      <Method Name="update" Hidden="true" />
+      <Method Name="updateFps" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAABAAEAgAEAgACAAAAAAAAQACEAIBAAASEgQAQEABA=</HashCode>
+      <FileName>TimeService.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cell" Collapsed="true">
+    <Position X="3" Y="11" Width="1.5" />
+    <InheritanceLine Type="SpellTarget" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.833" Y="6.911" />
+        <Point X="3.833" Y="10.625" />
+        <Point X="3.688" Y="10.625" />
+        <Point X="3.688" Y="11" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>gIAAAkQBAICAUACIBGBgAhIAARAgAAAAQAJkAgDAwAA=</HashCode>
+      <FileName>Cell.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <Members>
+      <Field Name="_endOfTurn_timeout" Hidden="true" />
+      <Field Name="_eventService" Hidden="true" />
+      <Field Name="_gameObjects" Hidden="true" />
+      <Field Name="_gameObjects_dirty" Hidden="true" />
+      <Field Name="_instance" Hidden="true" />
+      <Field Name="_logService" Hidden="true" />
+      <Field Name="_nb_active_gobjects" Hidden="true" />
+      <Field Name="_player_turn" Hidden="true" />
+      <Field Name="_running" Hidden="true" />
+      <Field Name="_soundEffectManager" Hidden="true" />
+      <Field Name="_timeService" Hidden="true" />
+      <Field Name="_turn" Hidden="true" />
+      <Field Name="_turn_max_duration" Hidden="true" />
+      <Field Name="_turn_start" Hidden="true" />
+      <Field Name="_userInterface" Hidden="true" />
+      <Method Name="~Game" Hidden="true" />
+      <Method Name="addGameObject" Hidden="true" />
+      <Method Name="addPlayer" Hidden="true" />
+      <Method Name="beginTurn" Hidden="true" />
+      <Method Name="displayPlayers" Hidden="true" />
+      <Method Name="displayPlayersList" Hidden="true" />
+      <Method Name="displayState" Hidden="true" />
+      <Method Name="endTurn" Hidden="true" />
+      <Field Name="fps_limit" Hidden="true" />
+      <Method Name="Game" Hidden="true" />
+      <Method Name="getCurrentPlayer" Hidden="true" />
+      <Method Name="getGrid" Hidden="true" />
+      <Method Name="getNbActiveGObjects" Hidden="true" />
+      <Method Name="getOctopus" Hidden="true" />
+      <Method Name="getPlayer" Hidden="true" />
+      <Method Name="getTimeLeft" Hidden="true" />
+      <Method Name="getTurnStartTime" Hidden="true" />
+      <Method Name="handleUserInput" Hidden="true" />
+      <Method Name="isRunning" Hidden="true" />
+      <Method Name="onActivatedGameObject" Hidden="true" />
+      <Method Name="onDeactivatedGameObject" Hidden="true" />
+      <Method Name="onDie" Hidden="true" />
+      <Method Name="update" Hidden="true" />
+    </Members>
+    <AssociationLine Name="_octopus" Type="Octopus" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.375" Y="0.5" />
+        <Point X="7.375" Y="0.26" />
+        <Point X="27.531" Y="0.26" />
+        <Point X="27.531" Y="4.5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.924" Y="0.11" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>gAAHAjQCAAACCUBgAIOQAYAACRyiKAQJCBAAgAAEwaA=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_octopus" />
+      <Field Name="_grid" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GameObject" Collapsed="true">
+    <Position X="6.75" Y="4.5" Width="1.5" />
+    <InheritanceLine Type="Sortable" FixedToPoint="true">
+      <Path>
+        <Point X="10" Y="2.103" />
+        <Point X="10" Y="4.125" />
+        <Point X="7.75" Y="4.125" />
+        <Point X="7.75" Y="4.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ghAAAgBAAAEAAAAACAFAkRAAAAAAAAAAAIAQAAIEQAA=</HashCode>
+      <FileName>GameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Grid" Collapsed="true">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <InheritanceLine Type="GameObject" FixedFromPoint="true">
+      <Path>
+        <Point X="7.062" Y="4.5" />
+        <Point X="7.062" Y="3.074" />
+        <Point X="4.75" Y="3.074" />
+        <Point X="4.75" Y="2.441" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>gCAAgkAAAIAAIAABQAAAAAIACAUiAAAAAAEgAARIISA=</HashCode>
+      <FileName>Grid.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Archer" Collapsed="true">
+    <Position X="5.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gKBABAAAEABAAAAAAAAOAAAEARAAAIBAAAAAAEAAAAA=</HashCode>
+      <FileName>Archer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Character">
+    <Position X="6" Y="6.75" Width="1.5" />
+    <Members>
+      <Field Name="_bonusDamage" Hidden="true" />
+      <Field Name="_capacityPoints" Hidden="true" />
+      <Field Name="_dead" Hidden="true" />
+      <Field Name="_hisCell" Hidden="true" />
+      <Field Name="_hitPoints" Hidden="true" />
+      <Field Name="_movementPoints" Hidden="true" />
+      <Field Name="_myTurn" Hidden="true" />
+      <Field Name="_name" Hidden="true" />
+      <Field Name="_spells" Hidden="true" />
+      <Field Name="_type" Hidden="true" />
+      <Method Name="~Character" Hidden="true" />
+      <Field Name="ACTION_ENDTURN" Hidden="true" />
+      <Field Name="ACTION_MOVE" Hidden="true" />
+      <Method Name="actionCallback" Hidden="true" />
+      <Method Name="addBonusDamage" Hidden="true" />
+      <Method Name="addEffect" Hidden="true" />
+      <Field Name="BASIC_ATTACK" Hidden="true" />
+      <Method Name="basicAttack" Hidden="true" />
+      <Method Name="beginTurn" Hidden="true" />
+      <Method Name="cast" Hidden="true" />
+      <Method Name="Character" Hidden="true" />
+      <Field Name="cpMax" Hidden="true" />
+      <Method Name="displayBasic" Hidden="true" />
+      <Method Name="endTurn" Hidden="true" />
+      <Method Name="getBonusDamage" Hidden="true" />
+      <Method Name="getCell" Hidden="true" />
+      <Method Name="getCP" Hidden="true" />
+      <Method Name="getCPMax" Hidden="true" />
+      <Method Name="getHP" Hidden="true" />
+      <Method Name="getHPMax" Hidden="true" />
+      <Method Name="getHPPercent" Hidden="true" />
+      <Method Name="getHPString" Hidden="true" />
+      <Method Name="getMP" Hidden="true" />
+      <Method Name="getMPMax" Hidden="true" />
+      <Method Name="getName" Hidden="true" />
+      <Method Name="getSpell" Hidden="true" />
+      <Method Name="getSpells" Hidden="true" />
+      <Method Name="getType" Hidden="true" />
+      <Method Name="heal" Hidden="true" />
+      <Method Name="hisTurn" Hidden="true" />
+      <Field Name="hpMax" Hidden="true" />
+      <Method Name="isDead" Hidden="true" />
+      <Method Name="lowerHitPoint" Hidden="true" />
+      <Method Name="move" Hidden="true" />
+      <Method Name="moveSingle" Hidden="true" />
+      <Field Name="mpMax" Hidden="true" />
+      <Field Name="NB_SPELLS" Hidden="true" />
+      <Method Name="newCast" Hidden="true" />
+      <Method Name="removeCapaciyPoint" Hidden="true" />
+      <Method Name="removeMovementPoint" Hidden="true" />
+      <Method Name="root" Hidden="true" />
+      <Method Name="targetSelector" Hidden="true" />
+      <Method Name="targetSelectorForCell" Hidden="true" />
+      <Method Name="targetSelectorForCharacter" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="SpellTarget" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.917" Y="6.911" />
+        <Point X="4.917" Y="7.476" />
+        <Point X="6" Y="7.476" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>wIAAIEQRQIBAkATQIAIoABBDAZBAAAIRIAJOAELC6AE=</HashCode>
+      <FileName>Character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Knight" Collapsed="true">
+    <Position X="7.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gIAAAEIAAIFAAAAAAIACAAAAARAAAIAACCIAIQAAAAA=</HashCode>
+      <FileName>Knight.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Mage" Collapsed="true">
+    <Position X="9.75" Y="8.75" Width="1.5" />
+    <InheritanceLine Type="Character" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.5" Y="7.875" />
+        <Point X="10.125" Y="7.875" />
+        <Point X="10.125" Y="8.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>gIAAAAAAAABBAEAAAAACAAAQAZAAIIAAAQAgAAIAICA=</HashCode>
+      <FileName>Mage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellTarget">
+    <Position X="3.5" Y="3.5" Width="2" />
+    <Members>
+      <Method Name="~SpellTarget" Hidden="true" />
+      <Method Name="SpellTarget" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAIEQBAICAUACIAAAgABAAAAAAAAAAAAIEAABAAAA=</HashCode>
+      <FileName>SpellTarget.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AreaOfEffect">
+    <Position X="5.5" Y="10.5" Width="1.5" />
+    <Members>
+      <Field Name="_name" Hidden="true" />
+      <Method Name="~AreaOfEffect" Hidden="true" />
+      <Method Name="addBonusDamage" Hidden="true" />
+      <Method Name="addEffect" Hidden="true" />
+      <Method Name="AreaOfEffect" Hidden="true" />
+      <Method Name="displayBasic" Hidden="true" />
+      <Method Name="heal" Hidden="true" />
+      <Method Name="hisTurn" Hidden="true" />
+      <Method Name="lowerHitPoint" Hidden="true" />
+      <Method Name="move" Hidden="true" />
+      <Method Name="removeCapaciyPoint" Hidden="true" />
+      <Method Name="removeMovementPoint" Hidden="true" />
+      <Method Name="root" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="SpellTarget" FixedFromPoint="true">
+      <Path>
+        <Point X="4.333" Y="6.911" />
+        <Point X="4.333" Y="10.125" />
+        <Point X="6.25" Y="10.125" />
+        <Point X="6.25" Y="10.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAIAQBAIAAEACJAAQgABAAAIAAAAAAAAIEIABAAAA=</HashCode>
+      <FileName>AreaOfEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiamondAoE" Collapsed="true">
+    <Position X="3" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAggAAAAAAAAAABA=</HashCode>
+      <FileName>DiamondAoE.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LineAoE">
+    <Position X="8.5" Y="10.5" Width="1.5" />
+    <Members>
+      <Method Name="~LineAoE" Hidden="true" />
+      <Method Name="getCell" Hidden="true" />
+      <Method Name="LineAoE" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAEABQAAAAAAAAAAAAAAAAAAAAAgCQAAAAAAAAAA=</HashCode>
+      <FileName>LineAoE.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SquareAoE">
+    <Position X="5.5" Y="13.25" Width="1.5" />
+    <Members>
+      <Method Name="~SquareAoE" Hidden="true" />
+      <Method Name="displayBasic" Hidden="true" />
+      <Method Name="getCell" Hidden="true" />
+      <Method Name="setCenter" Hidden="true" />
+      <Method Name="setLen" Hidden="true" />
+      <Method Name="SquareAoE" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAACAEAAAAAAAAAACAAgAAAAEAAEACCA=</HashCode>
+      <FileName>SquareAoE.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DamageBuffEffect" Collapsed="true">
+    <Position X="28.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAQAAAAAAAAAAAAAAAAAAAAQAAAAAABAEAAAAAA=</HashCode>
+      <FileName>DamageBuffEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DamageEffect" Collapsed="true">
+    <Position X="33.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEABAAAACAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DamageEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DamageOverTime" Collapsed="true">
+    <Position X="30.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAgBAAAAAAAAACAAAEAAAAAAAAAIAAAAAEAAAAAA=</HashCode>
+      <FileName>DamageOverTime.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DashEffect" Collapsed="true">
+    <Position X="20" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAABAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DashEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Effect">
+    <Position X="28.25" Y="9.5" Width="1.5" />
+    <Members>
+      <Field Name="_caster" Hidden="true" />
+      <Field Name="_name" Hidden="true" />
+      <Method Name="~Effect" Hidden="true" />
+      <Method Name="Effect" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>BAAAMAAAAAgAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Effect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HealEffect" Collapsed="true">
+    <Position X="38.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAIAAAAAAAAAAAABQAAAAAAAAA=</HashCode>
+      <FileName>HealEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KnockBackEffect" Collapsed="true">
+    <Position X="23.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAABABAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KnockBackEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoveEffect">
+    <Position X="21.75" Y="12" Width="1.5" />
+    <Members>
+      <Field Name="_cell" Hidden="true" />
+      <Method Name="~MoveEffect" Hidden="true" />
+      <Method Name="apply" Hidden="true" />
+      <Method Name="MoveEffect" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAACEAAABAAAAAABAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MoveEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OverTimeEffect">
+    <Position X="28.25" Y="12" Width="1.5" />
+    <Members>
+      <Field Name="_duration" Hidden="true" />
+      <Field Name="_max_duration" Hidden="true" />
+      <Field Name="_target" Hidden="true" />
+      <Field Name="_to_delete" Hidden="true" />
+      <Method Name="~OverTimeEffect" Hidden="true" />
+      <Method Name="apply" Hidden="true" />
+      <Method Name="clone" Hidden="true" />
+      <Method Name="isToDelete" Hidden="true" />
+      <Method Name="newTurn" Hidden="true" />
+      <Method Name="OverTimeEffect" Hidden="true" />
+      <Method Name="reset" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>gAAAEgAEAAAAAAAAiBAAEAAAQAQAAAAAAAAAEAECAAA=</HashCode>
+      <FileName>OverTimeEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RootEffect" Collapsed="true">
+    <Position X="25.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAFAAAAAA=</HashCode>
+      <FileName>RootEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chrono" Collapsed="true">
+    <Position X="15.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Chrono.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GridOctopus">
+    <Position X="15.75" Y="3.5" Width="2.25" />
+    <Members>
+      <Field Name="_cellDimensions" Hidden="true" />
+      <Field Name="_cellDrawPolygon" Hidden="true" />
+      <Field Name="_cellHitBox" Hidden="true" />
+      <Field Name="_cellsDrawPolygons" Hidden="true" />
+      <Field Name="_cellsHitboxes" Hidden="true" />
+      <Field Name="_coloredCells" Hidden="true" />
+      <Field Name="_dirty" Hidden="true" />
+      <Field Name="_height" Hidden="true" />
+      <Field Name="_higlighted_cell" Hidden="true" />
+      <Field Name="_markedCells" Hidden="true" />
+      <Field Name="_obstacles_tex" Hidden="true" />
+      <Field Name="_width" Hidden="true" />
+      <Method Name="~GridOctopus" Hidden="true" />
+      <Method Name="drawCell" Hidden="true" />
+      <Method Name="getCellDimensions" Hidden="true" />
+      <Method Name="getHeight" Hidden="true" />
+      <Method Name="getWidth" Hidden="true" />
+      <Method Name="getZIndexFromCell" Hidden="true" />
+      <Method Name="GridOctopus" Hidden="true" />
+      <Method Name="internalRender" Hidden="true" />
+      <Method Name="isDirty" Hidden="true" />
+      <Method Name="isInArea" Hidden="true" />
+      <Method Name="onClick" Hidden="true" />
+      <Method Name="onMouseMove" Hidden="true" />
+      <Method Name="onMouseOut" Hidden="true" />
+      <Method Name="setDirty" Hidden="true" />
+      <Method Name="update" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="Hoverable" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="21.406" Y="5.5" />
+        <Point X="21.406" Y="4.571" />
+        <Point X="18" Y="4.571" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="Clickable" FixedFromPoint="true">
+      <Path>
+        <Point X="15.812" Y="7.25" />
+        <Point X="15.812" Y="6.587" />
+        <Point X="16.875" Y="6.587" />
+        <Point X="16.875" Y="6.212" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>QAICEIAEAACAAAUQAMAgGAAYABAhSkUAAEAAABAEiIE=</HashCode>
+      <FileName>GridOctopus.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MenuSelection" Collapsed="true">
+    <Position X="25.5" Y="7" Width="1.5" />
+    <InheritanceLine Type="Panel" FixedToPoint="true">
+      <Path>
+        <Point X="25.125" Y="3.57" />
+        <Point X="25.125" Y="6.625" />
+        <Point X="26.125" Y="6.625" />
+        <Point X="26.125" Y="7" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AIIAACAQAwAAAAgSAAAAAAQAAEVABiAggiCAAIMAA4A=</HashCode>
+      <FileName>MenuSelection.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObstacleOctopus" Collapsed="true">
+    <Position X="8.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAgMAAAAAAABAIAADAAAAAAACAEAAAAAAAAEAAA=</HashCode>
+      <FileName>ObstacleOctopus.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Octopus">
+    <Position X="26.5" Y="4.5" Width="1.5" />
+    <Members>
+      <Field Name="_fpsUpdateInterval" Hidden="true" />
+      <Field Name="_lastFpsUpdate" Hidden="true" />
+      <Field Name="_renderer" Hidden="true" />
+      <Field Name="_window" Hidden="true" />
+      <Field Name="_windowTitle" Hidden="true" />
+      <Method Name="~Octopus" Hidden="true" />
+      <Method Name="getFrame" Hidden="true" />
+      <Method Name="getRenderer" Hidden="true" />
+      <Method Name="getWHeight" Hidden="true" />
+      <Method Name="getWindow" Hidden="true" />
+      <Method Name="getWWidth" Hidden="true" />
+      <Field Name="LOGICAL_HEIGHT" Hidden="true" />
+      <Field Name="LOGICAL_WIDTH" Hidden="true" />
+      <Method Name="Octopus" Hidden="true" />
+      <Method Name="setFrame" Hidden="true" />
+      <Method Name="setFrameAsync" Hidden="true" />
+      <Method Name="updateWindowTitle" Hidden="true" />
+      <Field Name="wHeight" Hidden="true" />
+      <Field Name="wWidth" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAYAAAAAhEAIAEAAAEAAAABEAAQARAgAQAggAAUAII=</HashCode>
+      <FileName>Octopus.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_frame" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PlayerOctopus">
+    <Position X="11" Y="6.75" Width="1.5" />
+    <Members>
+      <Field Name="_basic_player" Hidden="true" />
+      <Field Name="_character" Hidden="true" />
+      <Field Name="_dirty" Hidden="true" />
+      <Field Name="_grid" Hidden="true" />
+      <Field Name="_land_time" Hidden="true" />
+      <Field Name="_ratio" Hidden="true" />
+      <Method Name="~PlayerOctopus" Hidden="true" />
+      <Method Name="computePixelPos" Hidden="true" />
+      <Field Name="destination_cell" Hidden="true" />
+      <Method Name="internalRender" Hidden="true" />
+      <Method Name="isDirty" Hidden="true" />
+      <Field Name="jump_height" Hidden="true" />
+      <Field Name="move_anims" Hidden="true" />
+      <Field Name="move_delay" Hidden="true" />
+      <Field Name="move_time" Hidden="true" />
+      <Field Name="move_wanted" Hidden="true" />
+      <Field Name="movement_begin" Hidden="true" />
+      <Field Name="moving" Hidden="true" />
+      <Field Name="orientation" Hidden="true" />
+      <Field Name="origin_cell" Hidden="true" />
+      <Field Name="PADDING" Hidden="true" />
+      <Field Name="path" Hidden="true" />
+      <Method Name="pathNext" Hidden="true" />
+      <Method Name="PlayerOctopus" Hidden="true" />
+      <Field Name="real_cell" Hidden="true" />
+      <Method Name="setDirty" Hidden="true" />
+      <Method Name="setPosition" Hidden="true" />
+      <Method Name="teleport" Hidden="true" />
+      <Method Name="update" Hidden="true" />
+    </Members>
+    <NestedTypes>
+      <Enum Name="PlayerOctopus::ORIENTATION" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>PlayerOctopus.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAA7EAAEAAAAAFQAAYCCEAADAAIQSAEEIAAAYBAEAAQ=</HashCode>
+      <FileName>PlayerOctopus.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RecapOctopus" Collapsed="true">
+    <Position X="27.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CABABAAAAAAASEAABAAAAAAIBUAQCAAAAIAECgAEAAA=</HashCode>
+      <FileName>RecapOctopus.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellButton" Collapsed="true">
+    <Position X="17.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQoAAAAAAwAgAAAAAAAAAAAAAAQAAAgBAAAAAAJAAAA=</HashCode>
+      <FileName>SpellButton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellRecap" Collapsed="true">
+    <Position X="23.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAEAAAAAEQgIgkAAAKkAAAAAAAAAiAAAgAWgAAAEYAE=</HashCode>
+      <FileName>SpellRecap.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Font" Collapsed="true">
+    <Position X="14" Y="5.5" Width="1.5" />
+    <Members>
+      <Field Name="_alignment" Hidden="true" />
+      <Field Name="_alpha_chnl" Hidden="true" />
+      <Field Name="_base" Hidden="true" />
+      <Field Name="_blue_chnl" Hidden="true" />
+      <Field Name="_chars_count" Hidden="true" />
+      <Field Name="_fntFilename" Hidden="true" />
+      <Field Name="_glyphs" Hidden="true" />
+      <Field Name="_green_chnl" Hidden="true" />
+      <Field Name="_lineHeight" Hidden="true" />
+      <Field Name="_name" Hidden="true" />
+      <Field Name="_original_size" Hidden="true" />
+      <Field Name="_packed" Hidden="true" />
+      <Field Name="_pages" Hidden="true" />
+      <Field Name="_pages_count" Hidden="true" />
+      <Field Name="_pages_filename" Hidden="true" />
+      <Field Name="_path_to_files" Hidden="true" />
+      <Field Name="_red_chnl" Hidden="true" />
+      <Field Name="_scale_height" Hidden="true" />
+      <Field Name="_scale_width" Hidden="true" />
+      <Method Name="~Font" Hidden="true" />
+      <Method Name="Font" Hidden="true" />
+      <Method Name="getAlignment" Hidden="true" />
+      <Method Name="getName" Hidden="true" />
+      <Method Name="getPixelHeight" Hidden="true" />
+      <Method Name="getPixelLength" Hidden="true" />
+      <Method Name="parse" Hidden="true" />
+      <Method Name="parseChar" Hidden="true" />
+      <Method Name="parseCommon" Hidden="true" />
+      <Method Name="parseInfo" Hidden="true" />
+      <Method Name="parsePages" Hidden="true" />
+      <Method Name="renderText" Hidden="true" />
+      <Method Name="setAlignment" Hidden="true" />
+      <Method Name="setColor" Hidden="true" />
+      <Method Name="updateAtlases" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAgAMADhAAAAAAAkAAAAgARABAAAMQQAKQQNAAAKbAE=</HashCode>
+      <FileName>Font.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FontManager">
+    <Position X="30.75" Y="4.75" Width="1.5" />
+    <Members>
+      <Method Name="~FontManager" Hidden="true" />
+      <Method Name="FontManager" Hidden="true" />
+      <Method Name="loadFont" Hidden="true" />
+      <Method Name="operator[]" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAGAAAAAAQAAiAAAAAA=</HashCode>
+      <FileName>FontManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Label">
+    <Position X="13.25" Y="6.75" Width="1.5" />
+    <Members>
+      <Field Name="_dirty" Hidden="true" />
+      <Field Name="_padding_bottom" Hidden="true" />
+      <Field Name="_padding_left" Hidden="true" />
+      <Field Name="_padding_right" Hidden="true" />
+      <Field Name="_padding_top" Hidden="true" />
+      <Field Name="_text_rect" Hidden="true" />
+      <Method Name="~Label" Hidden="true" />
+      <Method Name="clone" Hidden="true" />
+      <Method Name="getFont" Hidden="true" />
+      <Method Name="getText" Hidden="true" />
+      <Method Name="getTextAlignment" Hidden="true" />
+      <Method Name="getTextColor" Hidden="true" />
+      <Method Name="getTextSize" Hidden="true" />
+      <Method Name="internalRender" Hidden="true" />
+      <Method Name="isDirty" Hidden="true" />
+      <Method Name="Label" Hidden="true" />
+      <Method Name="setDirty" Hidden="true" />
+      <Method Name="setFont" Hidden="true" />
+      <Method Name="setPadding" Hidden="true" />
+      <Method Name="setText" Hidden="true" />
+      <Method Name="setTextAlignment" Hidden="true" />
+      <Method Name="setTextColor" Hidden="true" />
+      <Method Name="setTextSize" Hidden="true" />
+      <Method Name="update" Hidden="true" />
+      <Method Name="updateAbsoluteRect" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>gAgiAAIEEJAAAAAAAAABCACiAQCAiQEOABAAGBAEAAA=</HashCode>
+      <FileName>Label.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_font" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Tooltip" Collapsed="true">
+    <Position X="12.75" Y="10.5" Width="1.5" />
+    <InheritanceLine Type="Label" FixedFromPoint="true">
+      <Path>
+        <Point X="13.5" Y="8.56" />
+        <Point X="13.5" Y="10.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AQCCACAEAIAERAgAAAAAAAAABAACCAFAEAgAIAAEAAA=</HashCode>
+      <FileName>Tooltip.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Button">
+    <Position X="16.5" Y="9.25" Width="1.5" />
+    <Members>
+      <Field Name="_color" Hidden="true" />
+      <Field Name="_dirty" Hidden="true" />
+      <Field Name="_enabled" Hidden="true" />
+      <Field Name="_hover_bg" Hidden="true" />
+      <Field Name="_regular_bg" Hidden="true" />
+      <Method Name="~Button" Hidden="true" />
+      <Method Name="Button" Hidden="true" />
+      <Method Name="clone" Hidden="true" />
+      <Method Name="getColor" Hidden="true" />
+      <Method Name="internalRender" Hidden="true" />
+      <Method Name="isDirty" Hidden="true" />
+      <Method Name="isInArea" Hidden="true" />
+      <Method Name="setBackground" Hidden="true" />
+      <Method Name="setColor" Hidden="true" />
+      <Method Name="setDirty" Hidden="true" />
+      <Method Name="setHoverBackground" Hidden="true" />
+      <Method Name="update" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="Clickable" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="16.312" Y="8.483" />
+        <Point X="16.312" Y="8.875" />
+        <Point X="17" Y="8.875" />
+        <Point X="17" Y="9.25" />
+      </Path>
+      <InheritanceModifierLabel ManuallyPlaced="true">
+        <Position X="-0.164" Y="0.432" />
+      </InheritanceModifierLabel>
+    </InheritanceLine>
+    <InheritanceLine Type="Hoverable" FixedToPoint="true">
+      <Path>
+        <Point X="21.875" Y="7.824" />
+        <Point X="21.875" Y="8.875" />
+        <Point X="17.75" Y="8.875" />
+        <Point X="17.75" Y="9.25" />
+      </Path>
+      <InheritanceModifierLabel ManuallyPlaced="true">
+        <Position X="-0.007" Y="0.021" />
+      </InheritanceModifierLabel>
+    </InheritanceLine>
+    <InheritanceLine Type="Label" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="14.312" Y="8.56" />
+        <Point X="14.312" Y="9.75" />
+        <Point X="16.5" Y="9.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AEICAAAEAAAIAQAAICAgAAAAAgAACAkQAEAAkAEMAAA=</HashCode>
+      <FileName>Button.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OctopusBaby">
+    <Position X="11" Y="3.5" Width="2" />
+    <Members>
+      <Field Name="_absolute_rect" Hidden="true" />
+      <Field Name="_background" Hidden="true" />
+      <Field Name="_background_color" Hidden="true" />
+      <Field Name="_container_rect" Hidden="true" />
+      <Field Name="_relative_rect" Hidden="true" />
+      <Field Name="_z_index" Hidden="true" />
+      <Method Name="~OctopusBaby" Hidden="true" />
+      <Method Name="compare" Hidden="true" />
+      <Method Name="getAbsolutePosition" Hidden="true" />
+      <Method Name="getAbsolutRect" Hidden="true" />
+      <Method Name="getAlpha" Hidden="true" />
+      <Method Name="getBackground" Hidden="true" />
+      <Method Name="getBgColor" Hidden="true" />
+      <Method Name="getPosition" Hidden="true" />
+      <Method Name="getRelativeRect" Hidden="true" />
+      <Method Name="getZIndex" Hidden="true" />
+      <Method Name="initialize" Hidden="true" />
+      <Method Name="isAbove" Hidden="true" />
+      <Method Name="isInArea" Hidden="true" />
+      <Method Name="OctopusBaby" Hidden="true" />
+      <Method Name="setAlpha" Hidden="true" />
+      <Method Name="setBackground" Hidden="true" />
+      <Method Name="setBgColor" Hidden="true" />
+      <Method Name="setContainerRect" Hidden="true" />
+      <Method Name="setPositionX" Hidden="true" />
+      <Method Name="setPositionY" Hidden="true" />
+      <Method Name="toAbsoluteCoordinates" Hidden="true" />
+      <Method Name="toContainerCoordinates" Hidden="true" />
+      <Method Name="toLocalCoordinates" Hidden="true" />
+      <Method Name="updateAbsoluteRect" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="Activable" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="12.75" Y="2.875" />
+        <Point X="12.5" Y="2.875" />
+        <Point X="12.5" Y="3.5" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="Sortable" FixedToPoint="true">
+      <Path>
+        <Point X="10" Y="2.103" />
+        <Point X="10" Y="3.125" />
+        <Point X="11.5" Y="3.125" />
+        <Point X="11.5" Y="3.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AABAIAAQAQALAQAQASEgAAICAAAACAAAABkiCRocQEA=</HashCode>
+      <FileName>OctopusBaby.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_texture" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Panel" Collapsed="true">
+    <Position X="24.25" Y="2.75" Width="1.75" />
+    <Members>
+      <Method Name="~Panel" Hidden="true" />
+      <Method Name="add" Hidden="true" />
+      <Method Name="internalRender" Hidden="true" />
+      <Method Name="isDirty" Hidden="true" />
+      <Method Name="Panel" Hidden="true" />
+      <Method Name="setActive" Hidden="true" />
+      <Method Name="setDirty" Hidden="true" />
+      <Method Name="update" Hidden="true" />
+      <Method Name="updateAbsoluteRect" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="OctopusBaby" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="13" Y="3.938" />
+        <Point X="14.522" Y="3.938" />
+        <Point X="14.522" Y="3.16" />
+        <Point X="22.448" Y="3.16" Type="JumpStart" />
+        <Point X="22.614" Y="3.16" Type="JumpEnd" />
+        <Point X="24.25" Y="3.16" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>oAAAAAAEAAAAAAAAAAAAAAAAAAAACAEBAAAACAAGAAA=</HashCode>
+      <FileName>Panel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProgressBar">
+    <Position X="8.75" Y="4.5" Width="1.5" />
+    <Members>
+      <Field Name="_border_color" Hidden="true" />
+      <Field Name="_dirty" Hidden="true" />
+      <Field Name="_foreground_color" Hidden="true" />
+      <Field Name="_value" Hidden="true" />
+      <Method Name="~ProgressBar" Hidden="true" />
+      <Method Name="internalRender" Hidden="true" />
+      <Method Name="isDirty" Hidden="true" />
+      <Method Name="ProgressBar" Hidden="true" />
+      <Method Name="setDirty" Hidden="true" />
+      <Method Name="setValue" Hidden="true" />
+      <Method Name="update" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ABACAAAEAAAAEAAAAAIAAAAAiAAACAMBAAAAAAAMAAA=</HashCode>
+      <FileName>ProgressBar.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Texture" Collapsed="true">
+    <Position X="14" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAIQAEAQAQggAAABACAAAAEAAAQAAgIBowSwAQQkw=</HashCode>
+      <FileName>Texture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextureManager" Collapsed="true">
+    <Position X="29.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABQAAAAAABgAAAAAAFAEAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>TextureManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Events::EventCallback" Collapsed="true">
+    <Position X="37" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>EventCallback.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Events::EventService" Collapsed="true">
+    <Position X="35.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAEAEAAAAAAAAAAAAAAAAAAAAAAAAAAIAQA=</HashCode>
+      <FileName>EventService.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

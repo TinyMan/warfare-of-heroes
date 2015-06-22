@@ -8,10 +8,12 @@
 
 # Build results
 [Dd]ebug/*
-![Dd]ebug/SDL2.dll
+![Dd]ebug/*.dll
+![Dd]ebug/*.txt
 [Dd]ebugPublic/
 [Rr]elease/*
-![Rr]elease/SDL2.dll
+![Rr]elease/*.dll
+![Rr]elease/*.txt
 x64/
 build/
 bld/

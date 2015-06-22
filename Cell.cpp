@@ -1,10 +1,9 @@
 #include "Cell.h"
 #include "Character.h"
 
-Cell::Cell(int x, int y)
+Cell::Cell(unsigned int n, int x, int y)
+	: _number(n), _posX(x), _posY(y)
 {
-	_posX = x;
-	_posY = y;
 	_cellType = Free;
 }
 
@@ -85,6 +84,10 @@ void Cell::beginTurn()
 	{
 		e->beginTurn();
 	}
+}
+bool Cell::adjacent(Cell* c) const
+{
+	return getDistance(*c) == 1;
 }
 void Cell::displayBasic(ostream& o) const
 {

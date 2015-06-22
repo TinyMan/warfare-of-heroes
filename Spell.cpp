@@ -3,7 +3,7 @@
 /* definition */
 
 Spell::Spell(string name, Character* caster, int cd,int cp_cost, int mp_cost, int hp_cost, int min_scope, int max_scope, bool is_inline)
-	: _name(name), _caster(caster), _max_cooldown(cd), _cp_cost(cp_cost), _mp_cost(mp_cost), _hp_cost(hp_cost), _min_scope(min_scope), _max_scope(max_scope), _is_inline(is_inline)
+	: _name(name), _caster(caster), _max_cooldown(cd), _cp_cost(cp_cost), _mp_cost(mp_cost), _hp_cost(hp_cost), _min_scope(min_scope), _max_scope(max_scope), _is_inline(is_inline), _selector(new TargetSelector())
 {
 }
 
@@ -11,7 +11,22 @@ Spell::Spell(string name, Character* caster, int cd,int cp_cost, int mp_cost, in
 Spell::~Spell()
 {	
 }
-
+SpellTarget* Spell::getTargetFromCell(Cell* c) const
+{
+	if (_selector)
+	{
+		return _selector->getTargetFromCell(c);
+	}
+	return nullptr;
+}
+bool Spell::cast(unsigned int cell)
+{
+	SpellTarget* target = getTargetFromCell(GAMEINST->getGrid()->getCell(cell));
+	if (target)
+		return cast(target);	
+	
+	return false;
+}
 bool Spell::cast(SpellTarget* target)
 {
 
@@ -30,7 +45,7 @@ bool Spell::cast(SpellTarget* target)
 		LOGINFO << _caster->getName() << " : Casting " << _name << " on ";
 		target->displayBasic(LOGINFO);
 		LOGINFO << endl;
-
+		(new SpellEvents::SpellCastEvent(this))->dispatch();
 		return true;
 	}
 	LOGWARN << _caster->getName() << " : Fail cast " << _name << endl;
@@ -83,6 +98,39 @@ void Spell::beginTurn()
 {
 	if (_cooldown > 0)
 		_cooldown--;
+}
+vector<unsigned int> Spell::getCellsInRange() const
+{// TODO: add inline check
+	Grid* grid = GAMEINST->getGrid();
+	const Cell* casterCell = _caster->getCell();
+	int x = casterCell->getPosX(), y = casterCell->getPosY();
+	vector<unsigned int> ret;
+	for (int i = -_max_scope; i <= _max_scope; i++)
+	{
+		for (int j = -_max_scope; j <= _max_scope; j++)
+		{
+			SpellTarget* target = grid->getCellAt(x + i, y + j);
+			if (target)
+			{
+				int distance = _caster->getDistance(*target);
+				if (distance <= _max_scope && distance >= _min_scope && (!_is_inline || casterCell->isInLine(*target->getCell())))
+				{
+					ret.push_back(target->getCell()->getNumber());
+				}
+			}
+		}
+	}
+	return ret;
+}
+
+void Spell::setTargetSelector(TargetSelector* s)
+{
+	if (s != _selector)
+	{
+		if (_selector)
+			delete _selector;
+		_selector = s;
+	}
 }
 ostream& operator<<(ostream& o, const Spell& s)
 {
