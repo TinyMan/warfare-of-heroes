@@ -1,9 +1,9 @@
 #include "FireBallOctopus.h"
 #include "ServiceLocator.h"
 
-Texture SpellOctopus::_basic_player;
-double SpellOctopus::_ratio;
-Point SpellOctopus::PADDING;
+Texture FireBallOctopus::_basic_player;
+double FireBallOctopus::_ratio;
+Point FireBallOctopus::PADDING;
 
 
 FireBallOctopus::FireBallOctopus(Spell* s, Character* caster, SpellTarget* ennemi)
@@ -50,7 +50,7 @@ FireBallOctopus::~FireBallOctopus()
 {};
 
 
-void SpellOctopus::update()
+void FireBallOctopus::update()
 {
 	int vitesse;
 	int nbFrame;
@@ -58,8 +58,6 @@ void SpellOctopus::update()
 	vitesse = 200;
 	nbFrame = 4;
 	//duree = TIMESERVICE->getFrameTime() + 1000;
-	if (isActive())
-	{
 		//Animation des frames
 		if (TIMESERVICE->getFrameTime() % vitesse >= 0 && TIMESERVICE->getFrameTime() % vitesse < vitesse / nbFrame)
 			_basic_player = (*ServiceLocator::getTextureManager())["FireBall"];
@@ -72,11 +70,11 @@ void SpellOctopus::update()
 
 		//Deplacement du sort
 		setPosition(getPosition().x + avancementX, getPosition().y + avancementY);
-	}
+	
 	//setPosition(getPosition().x + 0.5, getPosition().y + 0.5); //Sinon ça s'anime pas
 }
 
-void SpellOctopus::setPosition(Point pos)
+void FireBallOctopus::setPosition(Point pos)
 {
 	if (pos != getPosition())
 	{
@@ -84,7 +82,7 @@ void SpellOctopus::setPosition(Point pos)
 	}
 }
 
-void SpellOctopus::internalRender(SDL_Renderer* r, bool force)
+void FireBallOctopus::internalRender(SDL_Renderer* r, bool force)
 {
 	if (isActive())
 	{

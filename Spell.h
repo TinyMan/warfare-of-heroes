@@ -8,7 +8,6 @@
 #include "DamageOverTime.h"
 #include "SpellEvents.h"
 #include "TargetSelector.h"
-#include "SpellOctopus.h"
 
 using namespace std;
 
