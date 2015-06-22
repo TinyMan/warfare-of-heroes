@@ -63,9 +63,9 @@ SpellOctopus::~SpellOctopus()
 
 void SpellOctopus::update()
 {
-	int vitesse;
-	int nbFrame;
-	int duree;
+	Uint32 vitesse;
+	Uint32 nbFrame;
+	Uint32 duree;
 	nomduSpell = "thunder"; //a changer pour voir les autres sorts
 	if (nomduSpell == "fireball") // Sort boule de feu
 	{
@@ -113,7 +113,7 @@ void SpellOctopus::update()
 			_basic_player = (*ServiceLocator::getTextureManager())["ThunderFrame1"];
 	}
 	//_basic_player = (*ServiceLocator::getTextureManager())["Thunder"];
-		setPosition(getPosition().x + 0.5, getPosition().y + 0.5); //Sinon ça s'anime pas
+		setPosition(getPosition().x + 0, getPosition().y + 0); //Sinon ça s'anime pas
 }
 
 void SpellOctopus::setPosition(Point pos)

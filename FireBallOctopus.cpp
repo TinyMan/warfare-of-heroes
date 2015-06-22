@@ -1,13 +1,14 @@
 #include "FireBallOctopus.h"
 #include "ServiceLocator.h"
+#include "Character.h"
 
 Texture FireBallOctopus::_basic_player;
 double FireBallOctopus::_ratio;
 Point FireBallOctopus::PADDING;
 
 
-FireBallOctopus::FireBallOctopus(Spell* s, Character* caster, SpellTarget* ennemi)
-	: OctopusBaby(SPELL_WIDTH, SPELL_HEIGHT), _spell(s), _caster(caster), _ennemi(ennemi)
+FireBallOctopus::FireBallOctopus(Spell* s, Character* caster, SpellTarget* ennemi)//, Grid* grid)
+	: OctopusBaby(SPELL_WIDTH, SPELL_HEIGHT), _spell(s), _caster(caster), _ennemi(ennemi)//, _grid(grid)
 {
 	if (!_basic_player.valid()){
 		_basic_player = (*ServiceLocator::getTextureManager())["spellTest"];
@@ -21,13 +22,29 @@ FireBallOctopus::FireBallOctopus(Spell* s, Character* caster, SpellTarget* ennem
 		PADDING = Point(-_basic_player.getWidth() * _ratio / 2, -_basic_player.getHeight() * _ratio + 7);
 	}
 	setBgColor(Color::TRANSPARENT);
+	_basic_player = (*ServiceLocator::getTextureManager())["spellTest"];
 
 	//depX = GAMEINST->getCurrentPlayer()->getCell()->getPosX();
 	//depY = GAMEINST->getCurrentPlayer()->getCell()->getPosY();
 	
-	positionDepart = (caster->getCell()->getPosX(), caster->getCell()->getPosY()); //Position du caster
-	positionArrivee = (ennemi->getCell()->getPosX(), ennemi->getCell()->getPosY()); //Position de l'ennemi
+	_caster = caster;
+	_ennemi = ennemi;
 
+
+	//positionDepart = (caster->getCell()->getPosX(), caster->getCell()->getPosY()); //Position du caster
+	//positionArrivee = (ennemi->getCell()->getPosX(), ennemi->getCell()->getPosY()); //Position de l'ennemi
+
+	PlayerOctopus* playerCaster = GAMEINST->getPlayerOcto(_caster->getId());
+	int idEnnemi;
+	if (_caster->getId() == 0)
+		idEnnemi = 1;
+	else if (_caster->getId() == 1)
+		idEnnemi = 0;
+	PlayerOctopus* playerTarget = GAMEINST->getPlayerOcto(idEnnemi);
+	//playerCaster->getAbsolutePosition();
+	positionDepart = playerCaster->getAbsolutePosition();
+	positionArrivee = playerTarget->getAbsolutePosition();
+	
 	//Je "crée" un triangle rectangle pour calculer l'hypothénuse, afin d'avoir ainsi l'angle d'orientation et 
 	//la valeur des coordonnées en X et en Y lorsque l'on veut faire avancer le sort vers l'ennemi
 	largeur = positionDepart.x - positionArrivee.x;
@@ -36,14 +53,20 @@ FireBallOctopus::FireBallOctopus(Spell* s, Character* caster, SpellTarget* ennem
 	//Pour savoir où se situe l'ennemi par rapport au joueur
 	directionX = largeur / (abs(largeur));
 	directionY = hauteur / (abs(hauteur));
+	
+	
 
 	//Defini le pas de déplace de 1 de la source vers la cible
 	avancementX = sqrt(largeur*largeur / (largeur*largeur + hauteur*hauteur))*directionX;
 	avancementY = sqrt(hauteur*hauteur / (largeur*largeur + hauteur*hauteur))*directionY;
-
 	
-
-	setPosition(positionDepart);
+	setActive(true);
+	
+	setPositionX(50);
+	setPositionY(50);
+	//setPositionX(caster->getCell()->getPosX());
+	//setPositionY(caster->getCell()->getPosY());
+	//setPosition(caster->getCell()->getPosX(), caster->getCell()->getPosY());
 };
 
 FireBallOctopus::~FireBallOctopus()
@@ -52,9 +75,9 @@ FireBallOctopus::~FireBallOctopus()
 
 void FireBallOctopus::update()
 {
-	int vitesse;
-	int nbFrame;
-	int duree;
+	Uint32 vitesse;
+	Uint32 nbFrame;
+	Uint32 duree;
 	vitesse = 200;
 	nbFrame = 4;
 	//duree = TIMESERVICE->getFrameTime() + 1000;
@@ -69,9 +92,9 @@ void FireBallOctopus::update()
 			_basic_player = (*ServiceLocator::getTextureManager())["FireBallFrame4"];
 
 		//Deplacement du sort
-		setPosition(getPosition().x + avancementX, getPosition().y + avancementY);
+		//setPosition(getPosition().x + avancementX, getPosition().y + avancementY);
 	
-	//setPosition(getPosition().x + 0.5, getPosition().y + 0.5); //Sinon ça s'anime pas
+	setPosition(getPosition().x + 0.5, getPosition().y + 0.5); //Sinon ça s'anime pas
 }
 
 void FireBallOctopus::setPosition(Point pos)

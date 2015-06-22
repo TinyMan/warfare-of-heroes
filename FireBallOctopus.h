@@ -3,6 +3,7 @@
 #include "OctopusBaby.h"
 #include "GridOctopus.h"
 #include "Spell.h"
+#include "PlayerOctopus.h"
 
 const int SPELL_WIDTH = 500;
 const int SPELL_HEIGHT = 200;

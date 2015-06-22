@@ -305,6 +305,9 @@ void Game::start(Character* player1, Character* player2)
 	PlayerOctopus* p = new PlayerOctopus(_players[0], gridO);
 	PlayerOctopus* p1 = new PlayerOctopus(_players[1], gridO);
 
+	_playerocto.push_back(p);
+	_playerocto.push_back(p1);
+
 	game_inside->add(p);
 	game_inside->add(p1);
 

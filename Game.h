@@ -6,6 +6,7 @@
 #include <sstream>
 #include "CharacterEvents.h"
 #include "ServiceLocator.h"
+class PlayerOctopus;
 class Octopus;
 class GameObject;
 class Grid;
@@ -37,6 +38,7 @@ public:
 
 	/* getters */
 	Grid* getGrid() const { return _grid; }
+	PlayerOctopus* getPlayerOcto(int id) const { return _playerocto.at(id); }
 	Character* getPlayer(int id) const { return _players.at(id); }
 	Character* getCurrentPlayer() const { return _players.at(_player_turn); }
 	Octopus* getOctopus() const { return _octopus; }
@@ -86,6 +88,9 @@ private:
 	/* true if we need to sort _gameObjects list */
 	bool _gameObjects_dirty = false;
 
+	PlayerOctopus* playerOcto1;
+	PlayerOctopus* playerOcto2;
+	deque<PlayerOctopus*> _playerocto;
 	deque<Character*> _players;
 	Grid* _grid;
 
