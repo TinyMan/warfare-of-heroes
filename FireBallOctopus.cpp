@@ -31,6 +31,7 @@ FireBallOctopus::FireBallOctopus(Spell* s, Character* caster, SpellTarget* ennem
 	int idCaster;
 	int idEnnemi;
 
+	//Temps que dure l'animation (détermine la vitesse et quand s'arrête l'animation)
 	tempsAnimation = 2000;
 	finAnimation = TIMESERVICE->time() + tempsAnimation;
 
@@ -55,13 +56,17 @@ FireBallOctopus::FireBallOctopus(Spell* s, Character* caster, SpellTarget* ennem
 	positionArrivee = playerTarget->getAbsolutePosition();
 	
 	//Distance entre le casteur et la target
-	largeur = positionDepart.x - positionArrivee.x;
+	largeur = (positionDepart.x - positionArrivee.x)*(-1);
 	hauteur = (positionDepart.y - positionArrivee.y)*(-1);
 
 	//A diviser par le nombre de milliseconde que doit durer l'animation (ici 2000)
 	avancementX = largeur / tempsAnimation;
 	avancementY = hauteur / tempsAnimation;
 
+	avancementX = static_cast<int>(avancementX * 1000) % 5;
+	avancementY = static_cast<int>(avancementY * 1000) % 5;
+
+	LOGINFO << "AvancementX : " << avancementX << " AvancementY : " << avancementY << endl;
 
 	setActive(true); //OBLIGATOIRE, sinon bah ça s'affiche pas
 	
@@ -93,8 +98,19 @@ void FireBallOctopus::update()
 		else if (TIMESERVICE->getFrameTime() % vitesse >= vitesse * 3 / nbFrame && TIMESERVICE->getFrameTime() % vitesse < vitesse - 1)
 			_basic_player = (*ServiceLocator::getTextureManager())["FireBallFrame4"];
 
+		/*
+		Point origin_pos = positionDepart;
+		Point dest_pos = positionArrivee;
+		Point delta = abs(origin_pos - dest_pos);
+		Point middle = (origin_pos - dest_pos) / 2;
+		Uint32 movement_begin = TIMESERVICE->time() + tempsAnimation;
+		Uint32 dt = (TIMESERVICE->time() - movement_begin);
+		Point step = ((dest_pos - origin_pos) * dt) / tempsAnimation;
+		Point newPos = origin_pos + step;*/
+
 		//Deplacement du sort
-	setPosition(getPosition().x + avancementX, getPosition().y + avancementY);
+		//setPosition(newPos);
+		setPosition(getPosition().x + avancementX, getPosition().y + avancementY);
 }
 
 void FireBallOctopus::setPosition(Point pos)
