@@ -62,16 +62,10 @@ private:
 	SpellTarget* _ennemi;
 	Character* _caster;
 	Spell* _spell;
-
+	Uint32 finAnimation;
+	Uint32 tempsAnimation;
 
 	//Truc Utile
-	int depX;
-	int depY;
-	int destX;
-	int destY;
-	string nomduSpell;
-	double vitesseSpell;
-	double orientationSpell;
 	double avancementX;
 	double avancementY;
 	double directionX;
