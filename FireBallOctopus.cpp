@@ -30,16 +30,25 @@ FireBallOctopus::FireBallOctopus(Spell* s, Character* caster, SpellTarget* ennem
 	_caster = caster;
 	_ennemi = ennemi;
 
+	int idCaster;
+	int idEnnemi;
 
+	Character* tempChara = GAMEINST->getPlayer(0);
+	if (tempChara == caster)
+	{
+		idCaster = 0;
+		idEnnemi = 1;
+	}
+	else
+	{
+		idCaster = 1;
+		idEnnemi = 0;
+	}
+	
 	//positionDepart = (caster->getCell()->getPosX(), caster->getCell()->getPosY()); //Position du caster
 	//positionArrivee = (ennemi->getCell()->getPosX(), ennemi->getCell()->getPosY()); //Position de l'ennemi
 
-	PlayerOctopus* playerCaster = GAMEINST->getPlayerOcto(_caster->getId());
-	int idEnnemi;
-	if (_caster->getId() == 0)
-		idEnnemi = 1;
-	else if (_caster->getId() == 1)
-		idEnnemi = 0;
+	PlayerOctopus* playerCaster = GAMEINST->getPlayerOcto(idCaster);
 	PlayerOctopus* playerTarget = GAMEINST->getPlayerOcto(idEnnemi);
 	//playerCaster->getAbsolutePosition();
 	positionDepart = playerCaster->getAbsolutePosition();
@@ -60,10 +69,10 @@ FireBallOctopus::FireBallOctopus(Spell* s, Character* caster, SpellTarget* ennem
 	avancementX = sqrt(largeur*largeur / (largeur*largeur + hauteur*hauteur))*directionX;
 	avancementY = sqrt(hauteur*hauteur / (largeur*largeur + hauteur*hauteur))*directionY;
 	
-	setActive(true);
+	setActive(true); //OBLIGATOIRE, sinon bah ça s'affiche pas
 	
-	setPositionX(50);
-	setPositionY(50);
+	setPositionX(positionDepart.x-200); //Obligé de mettre un moins, sinon ça coucouille
+	setPositionY(positionDepart.y);
 	//setPositionX(caster->getCell()->getPosX());
 	//setPositionY(caster->getCell()->getPosY());
 	//setPosition(caster->getCell()->getPosX(), caster->getCell()->getPosY());
@@ -92,9 +101,9 @@ void FireBallOctopus::update()
 			_basic_player = (*ServiceLocator::getTextureManager())["FireBallFrame4"];
 
 		//Deplacement du sort
-		//setPosition(getPosition().x + avancementX, getPosition().y + avancementY);
+		setPosition(getPosition().x + avancementX, getPosition().y + avancementY);
 	
-	setPosition(getPosition().x + 0.5, getPosition().y + 0.5); //Sinon ça s'anime pas
+	//setPosition(getPosition().x + 0.5, getPosition().y + 0.5); //Sinon ça s'anime pas
 }
 
 void FireBallOctopus::setPosition(Point pos)

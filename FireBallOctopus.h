@@ -5,8 +5,8 @@
 #include "Spell.h"
 #include "PlayerOctopus.h"
 
-const int SPELL_WIDTH = 500;
-const int SPELL_HEIGHT = 200;
+const int SPELL_WIDTH = 100;
+const int SPELL_HEIGHT = 40;
 
 class FireBallOctopus :
 	public OctopusBaby{
