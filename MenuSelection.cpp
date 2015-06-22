@@ -245,6 +245,18 @@ void MenuSelection::ready() {
 	if (j1 != nullptr && j2 != nullptr && j1 != j2)
 	{
 		GAMEINST->start(j1, j2);
+		if (a != j1 && a != j2)
+		{
+			delete a;
+		}
+		else if (k != j1 && k != j2)
+		{
+			delete k;
+		}
+		else if (m != j1 && m != j2)
+		{
+			delete m;
+		}
 	}
 
 	if (j1 == nullptr)
