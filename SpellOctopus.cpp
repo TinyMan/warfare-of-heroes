@@ -25,13 +25,16 @@ SpellOctopus::SpellOctopus(string spellN, unsigned int c, GridOctopus* grid)
 	//depX = GAMEINST->getCurrentPlayer()->getCell()->getPosX();
 	//depY = GAMEINST->getCurrentPlayer()->getCell()->getPosY();
 
-	origin_cell = GAMEINST->getCurrentPlayer()->getCell();
-	destination_cell = GAMEINST->getGrid()->getCell(c);
+	origin_cell = GAMEINST->getCurrentPlayer()->getCell(); //Position du caster
+	destination_cell = GAMEINST->getGrid()->getCell(c); //Position de l'ennemi
 	nomduSpell = spellN;
 
-	largeur = (origin_cell->getPosX()) - (destination_cell->getPosX());
+	//Je "crée" un triangle rectangle pour calculer l'hypothénuse, afin d'avoir ainsi l'angle d'orientation et 
+	//la valeur des coordonnées en X et en Y lorsque l'on veut faire avancer le sort vers l'ennemi
+	largeur = (origin_cell->getPosX()) - (destination_cell->getPosX()); 
 	hauteur = (origin_cell->getPosY()) - (destination_cell->getPosY());
 
+	//Pour savoir où se situe l'ennemi par rapport au joueur
 	directionX = largeur / (abs(largeur));
 	directionY = hauteur / (abs(hauteur));
 
