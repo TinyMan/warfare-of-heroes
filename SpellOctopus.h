@@ -3,8 +3,8 @@
 #include "OctopusBaby.h"
 #include "GridOctopus.h"
 
-const int SPELL_WIDTH = 50;
-const int SPELL_HEIGHT = 60;
+const int SPELL_WIDTH = 500;
+const int SPELL_HEIGHT = 200;
 
 class SpellOctopus :
 	public OctopusBaby

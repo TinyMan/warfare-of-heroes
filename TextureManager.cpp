@@ -45,7 +45,17 @@ TextureManager::TextureManager(SDL_Renderer* r)
 	loadTexture("Images/PNG/FlecheArcherFeu.png", "FlecheArcher");
 	loadTexture("Images/PNG/Eruption.png", "Eruption");
 	loadTexture("Images/PNG/FireBall.png", "FireBall");
+	loadTexture("Images/PNG/FireBallFrame2.png", "FireBallFrame2");
+	loadTexture("Images/PNG/FireBallFrame3.png", "FireBallFrame3");
+	loadTexture("Images/PNG/FireBallFrame4.png", "FireBallFrame4");
 	loadTexture("Images/PNG/Thunder.png", "Thunder");
+	loadTexture("Images/PNG/ThunderFrame1.png", "ThunderFrame1");
+	loadTexture("Images/PNG/ThunderFrame2.png", "ThunderFrame2");
+	loadTexture("Images/PNG/ThunderFrame3.png", "ThunderFrame3");
+	loadTexture("Images/PNG/ThunderFrame4.png", "ThunderFrame4");
+	loadTexture("Images/PNG/ThunderFrame5.png", "ThunderFrame5");
+	loadTexture("Images/PNG/ThunderFrame6.png", "ThunderFrame6");
+	loadTexture("Images/PNG/ThunderFrame7.png", "ThunderFrame7");
 	loadTexture("Images/PNG/Roots.png", "Root");
 	loadTexture("Images/PNG/SwordOfDestiny.png", "SwordDestiny");
 	loadTexture("Images/PNG/VoleeFleches.png", "VoleeFleches");
