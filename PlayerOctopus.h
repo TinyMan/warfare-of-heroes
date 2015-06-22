@@ -36,6 +36,7 @@ public:
 
 protected:
 	virtual void internalRender(SDL_Renderer* r, bool force = false);
+	Point getPadding() const;
 
 private:
 	bool _dirty = true;
@@ -52,7 +53,8 @@ private:
 
 	static Texture _basic_player;
 	static double _ratio;
-	static Point PADDING;
+	static Point PADDINGFaceLeft;
+	static Point PADDINGFaceRight;
 
 	deque<Cell*> path;
 	deque<bool> move_anims;
