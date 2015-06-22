@@ -37,9 +37,9 @@ public:
 	void updateShowSelect(string s);
 
 private:
-	Archer* a = new Archer(0,0);
-	Knight* k = new Knight(1, 1);
-	Mage* m = new Mage(3, 3);
+	Archer* a = nullptr;
+	Knight* k = nullptr;
+	Mage* m = nullptr;
 
 	Character* _selected_class;
 	int _selected_spell_id=0;

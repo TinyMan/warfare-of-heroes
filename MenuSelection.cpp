@@ -159,6 +159,23 @@ MenuSelection::MenuSelection() : Panel()
 	infos->setPosition(25 + daX, 350 + daY);
 	infos->setTextSize(22);
 
+	unsigned int n = rand() % Grid::CELLS_NUMBER;
+	while (GAMEINST->getGrid()->getCell(n)->getType() != Cell::Free)
+	{
+		n = rand() % Grid::CELLS_NUMBER;
+	}
+	a = new Archer(GAMEINST->getGrid()->getCell(n)->getPosX(), GAMEINST->getGrid()->getCell(n)->getPosY());
+
+	while (GAMEINST->getGrid()->getCell(n)->getType() != Cell::Free)
+	{
+		n = rand() % Grid::CELLS_NUMBER;
+	}
+	k = new Knight(GAMEINST->getGrid()->getCell(n)->getPosX(), GAMEINST->getGrid()->getCell(n)->getPosY());
+	while (GAMEINST->getGrid()->getCell(n)->getType() != Cell::Free)
+	{
+		n = rand() % Grid::CELLS_NUMBER;
+	}
+	m = new Mage(GAMEINST->getGrid()->getCell(n)->getPosX(), GAMEINST->getGrid()->getCell(n)->getPosY());
 	selectClass(a);
 }
 
