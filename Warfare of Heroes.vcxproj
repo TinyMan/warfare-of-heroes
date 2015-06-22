@@ -96,6 +96,7 @@
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventReceiver.cpp" />
     <ClCompile Include="EventService.cpp" />
+    <ClCompile Include="FireBallOctopus.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="EventCallback.h" />
     <ClInclude Include="EventReceiver.h" />
     <ClInclude Include="EventService.h" />
+    <ClInclude Include="FireBallOctopus.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="Game.h" />
