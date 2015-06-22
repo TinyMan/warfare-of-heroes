@@ -42,6 +42,14 @@ TextureManager::TextureManager(SDL_Renderer* r)
 	loadTexture("Images/PNG/nothing.png", "spellTest"); //Penser à changer le nom
 	loadTexture("Images/PNG/Background_Bouton_Pret.png", "BackgroundReady");
 	loadTexture("Images/PNG/Background_Bouton_PretHover.png", "BackgroundReadyHover");
+	loadTexture("Images/PNG/FlecheArcherFeu.png", "FlecheArcher");
+	loadTexture("Images/PNG/Eruption.png", "Eruption");
+	loadTexture("Images/PNG/FireBall.png", "FireBall");
+	loadTexture("Images/PNG/Thunder.png", "Thunder");
+	loadTexture("Images/PNG/Root.png", "Root");
+	loadTexture("Images/PNG/SwordOfDestiny.png", "SwordDestiny");
+	loadTexture("Images/PNG/VoleeFleches.png", "VoleeFleches");
+
 
 }
 
