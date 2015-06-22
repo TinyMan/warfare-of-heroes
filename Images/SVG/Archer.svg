@@ -16,7 +16,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="Archer.svg">
+   sodipodi:docname="Archer.svg"
+   inkscape:export-filename="C:\Users\Amaury Punel\Desktop\GIT PROJET TUTORE\warfare-of-heroes\Images\PNG\Archer.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4">
     <linearGradient
@@ -999,9 +1002,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.58791093"
-     inkscape:cx="335.73355"
-     inkscape:cy="392.06467"
+     inkscape:zoom="1.1758219"
+     inkscape:cx="474.69898"
+     inkscape:cy="480.11149"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1508,7 +1511,7 @@
        inkscape:export-ydpi="260.78418" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#f11212;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m -76.939358,1053.6416 411.533968,-6.4881 158.46603,6.4881 -1.98744,-73.87393 1.98744,-526.12604 60.27726,660.24707 z"
+       d="m -34.415909,1076.6043 411.533969,-6.4881 158.46603,6.4881 -1.98744,-73.874 1.98744,-526.12601 60.27726,660.24711 z"
        id="path8485"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccc" />
