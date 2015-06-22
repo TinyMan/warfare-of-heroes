@@ -19,6 +19,7 @@
 #include "ObstacleOctopus.h"
 #include "SoundEffectManager.h"
 #include "SpellOctopus.h"
+#include "VisualEffectManager.h"
 
 Game* Game::_instance = nullptr;
 
@@ -49,6 +50,8 @@ Game::Game()
 
 	/* create the sound manager */
 	_soundEffectManager = new SoundEffectManager();
+	_visualEffectManager = new VisualEffectManager();
+	
 }
 
 void Game::initialize()

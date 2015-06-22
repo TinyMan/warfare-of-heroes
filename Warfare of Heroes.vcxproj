@@ -148,6 +148,7 @@
     <ClCompile Include="TimeService.cpp" />
     <ClCompile Include="Tooltip.cpp" />
     <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="VisualEffectManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
@@ -230,6 +231,7 @@
     <ClInclude Include="TimeService.h" />
     <ClInclude Include="Tooltip.h" />
     <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="VisualEffectManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
