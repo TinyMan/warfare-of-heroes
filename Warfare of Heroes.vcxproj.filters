@@ -327,8 +327,11 @@
     <ClCompile Include="SODOctopus.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="ThunderOctopus.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
     <ClCompile Include="RootOctopus.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -575,17 +578,20 @@
     <ClInclude Include="FireBallOctopus.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="VisualEffectManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EruptionOctopus.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="SODOctopus.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="ThunderOctopus.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
     <ClInclude Include="RootOctopus.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="VisualEffectManager.h">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

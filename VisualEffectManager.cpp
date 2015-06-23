@@ -4,6 +4,8 @@
 #include "EruptionOctopus.h"
 #include "SODOctopus.h"
 #include "RootOctopus.h"
+#include "ThunderOctopus.h"
+
 
 VisualEffectManager::VisualEffectManager()
 {
@@ -45,6 +47,8 @@ OctopusBaby* VisualEffectManager::createSpellOctopus(Spell* s, Character* caster
 		return new SODOctopus(_effectContainer, _gridOctopus, s, target);
 	else if (s->getName() == "Root")
 		return new RootOctopus(_effectContainer, _gridOctopus, s, target);
+	else if (s->getName() == "Thunder Storm")
+		return new ThunderOctopus(_effectContainer, _gridOctopus, s, target);
 	return nullptr;
 }
 

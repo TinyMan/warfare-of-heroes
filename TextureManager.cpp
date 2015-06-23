@@ -98,6 +98,9 @@ Texture TextureManager::operator[](string id)
 {
 	// TODO : try to load the texture
 	if (_textures.count(id) != 1)
+	{
+		LOGERR << "Could not find texture " << id << endl;
 		return nullptr;
+	}
 	return _textures[id];
 }
