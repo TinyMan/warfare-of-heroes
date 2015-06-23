@@ -8,7 +8,7 @@
 #include "Panel.h"
 #include "PlayerOctopus.h"
 
-class FlammedArrow :
+class FlammedArrowOctopus :
 	public OctopusBaby{
 public:
 	enum ORIENTATION
@@ -16,8 +16,8 @@ public:
 		LEFT = SDL_FLIP_NONE,
 		RIGHT = SDL_FLIP_HORIZONTAL
 	};
-	FlammedArrow(Panel* container, GridOctopus* gridO, Spell* s, Character* caster, SpellTarget* target);
-	virtual ~FlammedArrow();
+	FlammedArrowOctopus(Panel* container, GridOctopus* gridO, Spell* s, Character* caster, SpellTarget* target);
+	virtual ~FlammedArrowOctopus();
 
 	virtual void update();
 	void setDirty(bool d = true) { _dirty = d; }
@@ -64,7 +64,7 @@ private:
 	Uint32 tempsAnimation;
 	Uint32 beginTime;
 	Uint32 finishTime;
-	Uint32 totalTime = 1000;
+	Uint32 totalTime = 500;
 	Texture _tex;
 
 };

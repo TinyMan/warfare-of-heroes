@@ -1,7 +1,7 @@
-#include "FlammedArrow.h"
+#include "FlammedArrowOctopus.h"
 
 
-FlammedArrow::FlammedArrow(Panel* container, GridOctopus* gridO, Spell* s, Character* caster, SpellTarget* target)
+FlammedArrowOctopus::FlammedArrowOctopus(Panel* container, GridOctopus* gridO, Spell* s, Character* caster, SpellTarget* target)
 	: OctopusBaby(int(gridO->getCellDimensions().x * 3), int(gridO->getCellDimensions().y * 3)), _grid(gridO), _spell(s), _caster(caster), _target(target)
 {
 	Texture t = (*ServiceLocator::getTextureManager())["FlammedArrowFrame1"];
@@ -39,12 +39,12 @@ FlammedArrow::FlammedArrow(Panel* container, GridOctopus* gridO, Spell* s, Chara
 }
 
 
-FlammedArrow::~FlammedArrow()
+FlammedArrowOctopus::~FlammedArrowOctopus()
 {
 }
 
 
-void FlammedArrow::update()
+void FlammedArrowOctopus::update()
 {
 	if (isActive())
 	{
@@ -80,7 +80,7 @@ void FlammedArrow::update()
 }
 
 
-void FlammedArrow::internalRender(SDL_Renderer* r, bool force)
+void FlammedArrowOctopus::internalRender(SDL_Renderer* r, bool force)
 {
 	if (isActive())
 	{

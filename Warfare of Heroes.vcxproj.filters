@@ -321,10 +321,10 @@
     <ClCompile Include="VisualEffectManager.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="FlammedArrow.cpp">
+    <ClCompile Include="StepBackOctopus.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="StepBackOctopus.cpp">
+    <ClCompile Include="FlammedArrowOctopus.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
@@ -575,10 +575,10 @@
     <ClInclude Include="VisualEffectManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FlammedArrow.h">
+    <ClInclude Include="StepBackOctopus.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="StepBackOctopus.h">
+    <ClInclude Include="FlammedArrowOctopus.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
