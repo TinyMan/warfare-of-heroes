@@ -232,7 +232,7 @@ void Game::onDie(Event* data)
 	btnQuitter->setPositionY(btnQuitter->getPosition().y - 50);
 
 	Label * lblWinner = new Label(500, 50);
-	lblWinner->setText("Congratulations ! " + winner +" has won the match !");
+	lblWinner->setText("Congratulations !\n " + winner +" has won the match !");
 	lblWinner->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	popup->add(lblWinner, Alignment::TOP | Alignment::CENTERX);
 	lblWinner->setPositionY(lblWinner->getPosition().y + 50);
