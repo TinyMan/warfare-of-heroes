@@ -46,37 +46,19 @@ void ThunderOctopus::update()
 			setActive(false);
 		else 
 		{
-			Uint32 vitesse = totalTime;
-			int nbFrame = 7;
-			Uint32 duree = totalTime;
-			if (TIMESERVICE->getFrameTime() % vitesse >= 0 && TIMESERVICE->getFrameTime() % vitesse < 100)
-				setIfDifferent(_tex, (*ServiceLocator::getTextureManager())["ThunderFrame1"]);
-			else if (TIMESERVICE->getFrameTime() % vitesse >= 100 && TIMESERVICE->getFrameTime() % vitesse < 200)
-				setIfDifferent(_tex, (*ServiceLocator::getTextureManager())["ThunderFrame2"]);
-			else if (TIMESERVICE->getFrameTime() % vitesse >= 200 && TIMESERVICE->getFrameTime() % vitesse < 300)
-				setIfDifferent(_tex, (*ServiceLocator::getTextureManager())["ThunderFrame3"]);
-			else if (TIMESERVICE->getFrameTime() % vitesse >= 300 && TIMESERVICE->getFrameTime() % vitesse < 400)
-				setIfDifferent(_tex, (*ServiceLocator::getTextureManager())["ThunderFrame4"]);
-			else if (TIMESERVICE->getFrameTime() % vitesse >= 400 && TIMESERVICE->getFrameTime() % vitesse < 2000)
-				setIfDifferent(_tex, (*ServiceLocator::getTextureManager())["ThunderFrame5"]);
-			else if (TIMESERVICE->getFrameTime() % vitesse >= 2000 && TIMESERVICE->getFrameTime() % vitesse < 2500)
-				setIfDifferent(_tex, (*ServiceLocator::getTextureManager())["ThunderFrame6"]);
-			else if (TIMESERVICE->getFrameTime() % vitesse >= 2500 && TIMESERVICE->getFrameTime() % vitesse < 4000)
-				setIfDifferent(_tex, (*ServiceLocator::getTextureManager())["ThunderFrame5"]);
-			else if (TIMESERVICE->getFrameTime() % vitesse >= 4000 && TIMESERVICE->getFrameTime() % vitesse < 4500)
-				setIfDifferent(_tex, (*ServiceLocator::getTextureManager())["ThunderFrame7"]);
-			else if (TIMESERVICE->getFrameTime() % vitesse >= 4500 && TIMESERVICE->getFrameTime() % vitesse < 7600)
-				setIfDifferent(_tex, (*ServiceLocator::getTextureManager())["ThunderFrame5"]);
-			else if (TIMESERVICE->getFrameTime() % vitesse >= 7600 && TIMESERVICE->getFrameTime() % vitesse < 7700)
-				setIfDifferent(_tex, (*ServiceLocator::getTextureManager())["ThunderFrame4"]);
-			else if (TIMESERVICE->getFrameTime() % vitesse >= 7700 && TIMESERVICE->getFrameTime() % vitesse < 7800)
-				setIfDifferent(_tex, (*ServiceLocator::getTextureManager())["ThunderFrame3"]);
-			else if (TIMESERVICE->getFrameTime() % vitesse >= 7800 && TIMESERVICE->getFrameTime() % vitesse < 7900)
-				setIfDifferent(_tex, (*ServiceLocator::getTextureManager())["ThunderFrame2"]);
-			else if (TIMESERVICE->getFrameTime() % vitesse >= 7900 && TIMESERVICE->getFrameTime() % vitesse < 7999)
-				setIfDifferent(_tex, (*ServiceLocator::getTextureManager())["ThunderFrame1"]);
+			string name = "ThunderFrame";
+			int nbFrame = 14;
+			Uint32 timePerFrame = totalTime / nbFrame;
 
-			//setDirty();
+			Uint32 now = TIMESERVICE->getFrameTime();
+			Uint32 elapsed = now - beginTime;
+
+			int n = (elapsed / timePerFrame) % 14 +1;
+
+			if (n > 7)
+				n = 14 - n +1;
+
+			setIfDifferent(_tex, (*ServiceLocator::getTextureManager())[name+to_string(n)]);
 		}
 	}
 }
