@@ -120,7 +120,7 @@ MenuSelection::MenuSelection() : Panel()
 	nomClasse->setPosition(25 + daX, 10 + daY);
 
 	descrClasse = new Label(400, 35, "Description de la classe : bla bla bla bla bla bla bla", (*ServiceLocator::getFontManager())["LifeCraft"]);
-	spellInfos->add(descrClasse);
+	//spellInfos->add(descrClasse);
 	descrClasse->setPosition(15 + daX, 35 + daY);
 	descrClasse->setTextSize(22);
 
