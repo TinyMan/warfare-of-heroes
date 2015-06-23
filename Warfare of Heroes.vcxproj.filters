@@ -324,6 +324,9 @@
     <ClCompile Include="FlammedArrow.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="StepBackOctopus.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -573,6 +576,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FlammedArrow.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="StepBackOctopus.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 #include "Spell.h"
 #include "FireBallOctopus.h"
 #include "FlammedArrow.h"
+#include "StepBackOctopus.h"
 
 
 VisualEffectManager::VisualEffectManager()
@@ -49,6 +50,8 @@ OctopusBaby* VisualEffectManager::createSpellOctopus(Spell* s, Character* caster
 		return new FireBallOctopus(_effectContainer, _gridOctopus, s, caster, target);
 	else if (s->getName() == "Flamed Arrow")
 		return new FlammedArrow(_effectContainer, _gridOctopus, s, caster, target);
+	else if (s->getName() == "Step-Back Arrow")
+		return new StepBackOctopus(_effectContainer, _gridOctopus, s, caster, target);
 	/*else if (s->getName() == "Eruption")
 		return new EruptionOctopus(_effectContainer, _gridOctopus, s, target);
 	else if (s->getName() == "Sword of Destiny")
