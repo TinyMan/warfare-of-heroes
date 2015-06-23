@@ -14,25 +14,12 @@ const int SPELL_HEIGHT = 40;
 class FireBallOctopus :
 	public OctopusBaby{
 public:
-	enum ORIENTATION
-	{
-		LEFT = SDL_FLIP_NONE,
-		RIGHT = SDL_FLIP_HORIZONTAL
-	};
-	//typedef SDL_RendererFlip ORIENTATION;
-
-	//FireBallOctopus(Spell* s, Character* caster, SpellTarget* ennemi);
-	FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s, SpellTarget* target);
+	FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s, Character* caster, SpellTarget* target);
 	virtual ~FireBallOctopus();
 
 	virtual void update();
 	void setDirty(bool d = true) { _dirty = d; }
 	bool isDirty() { return _dirty; }
-
-	virtual void setPosition(int x, int y) override { OctopusBaby::setPosition(x, y); }
-	virtual void setPosition(Point pos);
-
-	void changeDestination(int x, int y); //dis quel ennemi il faut viser
 
 protected:
 	virtual void internalRender(SDL_Renderer* r, bool force = false);
@@ -40,7 +27,7 @@ protected:
 private:
 	bool _dirty = true;
 	GridOctopus* _grid;
-	ORIENTATION orientation;
+	//ORIENTATION orientation;
 
 	int height;
 	int width;
@@ -75,7 +62,7 @@ private:
 	Uint32 tempsAnimation;
 	Uint32 beginTime;
 	Uint32 finishTime;
-	Uint32 totalTime = 2000;
+	Uint32 totalTime = 1000;
 	Uint32 bootstrapTime = 20;
 
 	//Truc Utile

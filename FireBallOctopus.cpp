@@ -1,10 +1,10 @@
 #include "FireBallOctopus.h"
 
 
-FireBallOctopus::FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s, SpellTarget* target)
-	: OctopusBaby(int(gridO->getCellDimensions().x*1.5), int(gridO->getCellDimensions().y * 5)), _grid(gridO), _spell(s), _target(target)
+FireBallOctopus::FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s, Character* caster, SpellTarget* target)
+	: OctopusBaby(int(gridO->getCellDimensions().x*1.5), int(gridO->getCellDimensions().y * 5)), _grid(gridO), _spell(s), _caster(caster), _target(target)
 {
-	Texture t = (*ServiceLocator::getTextureManager())["SwordDestiny"];
+	Texture t = (*ServiceLocator::getTextureManager())["FireBall"];
 	Point d = gridO->getCellDimensions() * 3;
 	// compute ratio
 	double ratiox = (double)d.x / t.getWidth();
@@ -13,12 +13,16 @@ FireBallOctopus::FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s,
 
 	unsigned int n = target->getCell()->getNumber();
 	Point cellCenter = gridO->getCellCenter(n);
+	//pour le caster en dessous
+	n = caster->getCell()->getNumber();
+	Point departCenter = gridO->getCellCenter(n);
 
 	width = int(t.getWidth() * ratio);
 	height = int(t.getHeight() * ratio);
 
 	container->add(this);
-	Point pos = toContainerCoordinates(gridO->toAbsoluteCoordinates(Point(cellCenter.x - width / 2, cellCenter.y - height - d.y / 3)));
+	Point pos = toContainerCoordinates(gridO->toAbsoluteCoordinates(Point(departCenter.x - width / 2, departCenter.y - height)));
+	//Point pos = toContainerCoordinates(gridO->toAbsoluteCoordinates(Point(departCenter.x - width / 2, departCenter.y - height - d.y / 3)));
 
 	ori_pos = pos;
 	dst_pos = toContainerCoordinates(gridO->toAbsoluteCoordinates(Point(cellCenter.x - width / 2, cellCenter.y - height)));
@@ -68,7 +72,7 @@ void FireBallOctopus::internalRender(SDL_Renderer* r, bool force)
 		bool d = (force || isDirty());
 		if (d)
 		{
-			Texture t = (*ServiceLocator::getTextureManager())["SwordDestiny"];
+			Texture t = (*ServiceLocator::getTextureManager())["FireBall"];
 			SDL_Rect dst = { 0, 0, width, height };
 			SDL_RenderCopy(r, t, nullptr, &dst);
 		}
