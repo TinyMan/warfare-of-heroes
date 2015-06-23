@@ -45,7 +45,7 @@ OctopusBaby* VisualEffectManager::createSpellOctopus(Spell* s, Character* caster
 	// TODO
 	// create the visual effect based on the spell name
 	if (s->getName() == "Fireball of the Doom")
-		return new FireBallOctopus(s, caster, target);
+		return new FireBallOctopus(_effectContainer, _gridOctopus, s, target);
 	/*else if (s->getName() == "Eruption")
 		return new EruptionOctopus(_effectContainer, _gridOctopus, s, target);
 	else if (s->getName() == "Sword of Destiny")

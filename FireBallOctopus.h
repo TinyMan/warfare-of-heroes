@@ -21,8 +21,8 @@ public:
 	};
 	//typedef SDL_RendererFlip ORIENTATION;
 
-	FireBallOctopus(Spell* s, Character* caster, SpellTarget* ennemi);
-	//FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s, SpellTarget* target);
+	//FireBallOctopus(Spell* s, Character* caster, SpellTarget* ennemi);
+	FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s, SpellTarget* target);
 	virtual ~FireBallOctopus();
 
 	virtual void update();
@@ -65,8 +65,8 @@ private:
 	void teleport(const Cell* c);
 
 	//Truc vraiment utile
-	Point positionDepart;
-	Point positionArrivee;
+	Point ori_pos;
+	Point dst_pos;
 	SpellTarget* _target;
 	SpellTarget* _ennemi;
 	Character* _caster;
@@ -76,6 +76,7 @@ private:
 	Uint32 beginTime;
 	Uint32 finishTime;
 	Uint32 totalTime = 2000;
+	Uint32 bootstrapTime = 20;
 
 	//Truc Utile
 	double avancementX;
