@@ -3,6 +3,7 @@
 #include "FireBallOctopus.h"
 #include "EruptionOctopus.h"
 #include "SODOctopus.h"
+#include "RootOctopus.h"
 
 VisualEffectManager::VisualEffectManager()
 {
@@ -42,6 +43,8 @@ OctopusBaby* VisualEffectManager::createSpellOctopus(Spell* s, Character* caster
 		return new EruptionOctopus(_effectContainer, _gridOctopus, s, target);
 	else if (s->getName() == "Sword of Destiny")
 		return new SODOctopus(_effectContainer, _gridOctopus, s, target);
+	else if (s->getName() == "Root")
+		return new RootOctopus(_effectContainer, _gridOctopus, s, target);
 	return nullptr;
 }
 

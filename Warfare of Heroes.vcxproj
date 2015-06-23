@@ -132,6 +132,7 @@
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="RecapOctopus.cpp" />
     <ClCompile Include="RootEffect.cpp" />
+    <ClCompile Include="RootOctopus.cpp" />
     <ClCompile Include="SDLEvents.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="SODOctopus.cpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="RecapOctopus.h" />
     <ClInclude Include="RootEffect.h" />
+    <ClInclude Include="RootOctopus.h" />
     <ClInclude Include="SDLEvents.h" />
     <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="SODOctopus.h" />
