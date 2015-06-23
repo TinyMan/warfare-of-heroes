@@ -12,6 +12,7 @@ public:
 	virtual ~Effect();
 
 	virtual bool apply(SpellTarget* target) = 0;
+	string getName() const { return _name; }
 
 	friend ostream& operator<<(ostream& o, const Effect& e);
 protected:

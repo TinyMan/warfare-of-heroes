@@ -321,6 +321,9 @@
     <ClCompile Include="VisualEffectManager.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="EruptionOctopus.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -568,6 +571,9 @@
     </ClInclude>
     <ClInclude Include="VisualEffectManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EruptionOctopus.h">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

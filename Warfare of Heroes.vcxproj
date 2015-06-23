@@ -93,6 +93,7 @@
     <ClCompile Include="DiamondAoE.cpp" />
     <ClCompile Include="DiamondSelector.cpp" />
     <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="EruptionOctopus.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventReceiver.cpp" />
     <ClCompile Include="EventService.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="DiamondAoE.h" />
     <ClInclude Include="DiamondSelector.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="EruptionOctopus.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventCallback.h" />
     <ClInclude Include="EventReceiver.h" />

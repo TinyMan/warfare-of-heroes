@@ -58,6 +58,6 @@ private:
 	unsigned int _number;
 
 	SpellTarget* _object = nullptr;
-	list<OverTimeEffect*> _effects;
+	//list<OverTimeEffect*> _effects;
 };
 

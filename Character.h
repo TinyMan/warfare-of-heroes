@@ -27,7 +27,7 @@ protected:
 	int _movementPoints;
 	int _capacityPoints;
 	int _bonusDamage;
-	list<OverTimeEffect*> _effects;
+	//list<OverTimeEffect*> _effects;
 	int mpMax;
 	int cpMax;
 	int hpMax;
