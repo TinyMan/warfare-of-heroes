@@ -35,7 +35,7 @@ FireBallOctopus::FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s,
 	beginTime = TIMESERVICE->time();
 	finishTime = beginTime + totalTime;
 
-	setZIndex(gridO->getZIndexFromCell(n) + 1);
+	setZIndex(gridO->getZIndexFromCell(Grid::CELLS_NUMBER-1) + 1);
 
 	//orientation
 	if (ori_pos.x>dst_pos.x)
@@ -111,9 +111,9 @@ void FireBallOctopus::internalRender(SDL_Renderer* r, bool force)
 		double angle = getAngleFromPoint(from, to) - 90;
 
 		//SDL_Rect dst = { int(from.x), int(from.y), width, width };
-		SDL_Rect dst = { 0, (height+10) / 2, width, height };
+		SDL_Rect dst = { 0, (height) / 2, width, height };
 
-		SDL_Point center = { 15, 0 };
+		SDL_Point center = { height/2, 0 };
 		SDL_RenderCopyEx(r, _tex, nullptr, &dst, angle, nullptr, SDL_FLIP_VERTICAL);
 	}
 }
