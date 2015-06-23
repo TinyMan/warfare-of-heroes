@@ -339,6 +339,12 @@
     <ClCompile Include="VolleyOctopus.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="FlammedArrowOctopus.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="StepBackOctopus.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -603,6 +609,12 @@
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="VolleyOctopus.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="FlammedArrowOctopus.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="StepBackOctopus.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>

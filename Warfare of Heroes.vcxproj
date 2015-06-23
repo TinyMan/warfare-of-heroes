@@ -98,6 +98,7 @@
     <ClCompile Include="EventReceiver.cpp" />
     <ClCompile Include="EventService.cpp" />
     <ClCompile Include="FireBallOctopus.cpp" />
+    <ClCompile Include="FlammedArrowOctopus.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="SpellRecap.cpp" />
     <ClCompile Include="SpellTarget.cpp" />
     <ClCompile Include="SquareAoE.cpp" />
+    <ClCompile Include="StepBackOctopus.cpp" />
     <ClCompile Include="TargetSelector.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -184,6 +186,7 @@
     <ClInclude Include="EventReceiver.h" />
     <ClInclude Include="EventService.h" />
     <ClInclude Include="FireBallOctopus.h" />
+    <ClInclude Include="FlammedArrowOctopus.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="Game.h" />
@@ -236,6 +239,7 @@
     <ClInclude Include="SpellRecap.h" />
     <ClInclude Include="SpellTarget.h" />
     <ClInclude Include="SquareAoE.h" />
+    <ClInclude Include="StepBackOctopus.h" />
     <ClInclude Include="TargetSelector.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />

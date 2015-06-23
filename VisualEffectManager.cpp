@@ -7,6 +7,8 @@
 #include "ThunderOctopus.h"
 #include "SFOctopus.h"
 #include "VolleyOctopus.h"
+#include "FlammedArrowOctopus.h"
+#include "StepBackOctopus.h"
 
 
 VisualEffectManager::VisualEffectManager()
@@ -43,6 +45,10 @@ OctopusBaby* VisualEffectManager::createSpellOctopus(Spell* s, Character* caster
 	// create the visual effect based on the spell name
 	if (s->getName() == "Fireball of the Doom")
 		return new FireBallOctopus(_effectContainer, _gridOctopus, s, caster, target);
+	else if (s->getName() == "Flamed Arrow")
+		return new FlammedArrowOctopus(_effectContainer, _gridOctopus, s, caster, target);
+	else if (s->getName() == "Step-Back Arrow")
+		return new StepBackOctopus(_effectContainer, _gridOctopus, s, caster, target);
 	else if (s->getName() == "Eruption")
 		return new EruptionOctopus(_effectContainer, _gridOctopus, s, target);
 	else if (s->getName() == "Sword of Destiny")
@@ -57,4 +63,3 @@ OctopusBaby* VisualEffectManager::createSpellOctopus(Spell* s, Character* caster
 		return new VolleyOctopus(_effectContainer, _gridOctopus, s, caster, target);
 	return nullptr;
 }
-
