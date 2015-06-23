@@ -19,12 +19,12 @@ Archer::Archer(int x, int y, string name) : Character(x, y, name)
 	_spells[VOLLEY]->addEffect(new DamageEffect(120, this));
 	_spells[VOLLEY]->setTargetSelector(new DiamondSelector(2));
 
-	_spells[SB_ARROW] = new Spell("Step-Back Arrow", this, 4, 6, 0, 0, 0, 3, true);
+	_spells[SB_ARROW] = new Spell("Step-Back Arrow", this, 2, 6, 0, 0, 0, 3, true);
 	_spells[SB_ARROW]->setDescription("Shoots an arrow in a line, \nupon hitting an enemy, \nit makes him move backwards for 2 cells.");
 	_spells[SB_ARROW]->addEffect(new KnockBackEffect(2, this));
 	_spells[SB_ARROW]->addEffect(new DamageEffect(70, this));
 
-	_spells[FLAMED_ARROW] = new Spell("Flamed Arrow", this, 4, 5, 0, 0, 0, 6, false);
+	_spells[FLAMED_ARROW] = new Spell("Flamed Arrow", this, 1, 5, 0, 0, 0, 6, false);
 	_spells[FLAMED_ARROW]->setDescription("Launches an arrow set on fire to damage and \ncause a 3 turn burn to the enemy. ");
 	_spells[FLAMED_ARROW]->addEffect(new DamageEffect(80, this));
 	_spells[FLAMED_ARROW]->addEffect(new DamageOverTime(20, 3, this, "Flamed Arrow DoT"));
