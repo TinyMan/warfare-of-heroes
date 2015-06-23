@@ -2,10 +2,10 @@
 
 
 FireBallOctopus::FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s, Character* caster, SpellTarget* target)
-	: OctopusBaby(int(gridO->getCellDimensions().x*2), int(gridO->getCellDimensions().y * 3)), _grid(gridO), _spell(s), _caster(caster), _target(target)
+	: OctopusBaby(int(gridO->getCellDimensions().x*3), int(gridO->getCellDimensions().y * 3)), _grid(gridO), _spell(s), _caster(caster), _target(target)
 {
 	Texture t = (*ServiceLocator::getTextureManager())["FireBallFrame1"];
-	Point d = gridO->getCellDimensions() * 2;
+	Point d = gridO->getCellDimensions() * 1.5;
 	// compute ratio
 	double ratiox = (double)d.x / t.getWidth();
 	double ratioy = (double)d.y / t.getHeight();
@@ -111,7 +111,7 @@ void FireBallOctopus::internalRender(SDL_Renderer* r, bool force)
 		double angle = getAngleFromPoint(from, to) - 90;
 
 		//SDL_Rect dst = { int(from.x), int(from.y), width, width };
-		SDL_Rect dst = { 0, 0, width, height };
+		SDL_Rect dst = { 0, (height+10) / 2, width, height };
 
 		SDL_Point center = { 15, 0 };
 		SDL_RenderCopyEx(r, _tex, nullptr, &dst, angle, nullptr, SDL_FLIP_VERTICAL);
