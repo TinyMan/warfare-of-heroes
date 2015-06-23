@@ -210,21 +210,36 @@ void Game::onDie(Event* data)
 {
 	if (data == nullptr)
 		return;
-	char a;
+
 	Character* c = (Character*)((DieEvent*)data)->getCharacter();
 	(new FinishGameEvent())->dispatch();
 	LOGINFO << c->getName() << " died !" << endl;	
-	LOGINFO << "Do you want to replay (y/n) ?" << endl;
-	cin >> a;
-	switch (a)
-	{
-	case 'y':
-		// TODO: reset game 
-		break;
-	default:
-		stop();
-		break;
-	}
+	string winner = getPlayer(0)->getName();
+	if (winner == c->getName())
+		winner = getPlayer(1)->getName();
+	
+	Panel* popup = new Panel(500, 200);
+	popup->setBgColor(Color::RED);
+
+	Button * btnQuitter = new Button(150,50);
+	btnQuitter->setBackground((*ServiceLocator::getTextureManager())["BackgroundReady"]);
+	btnQuitter->setHoverBackground((*ServiceLocator::getTextureManager())["BackgroundReadyHover"]);
+	btnQuitter->Clickable::setCallback(new EventCallback([=](Event*){stop(); }));
+	btnQuitter->setText("Quit");
+	btnQuitter->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
+	popup->add(btnQuitter, Alignment::BOTTOM | Alignment::CENTERX);
+	btnQuitter->setPositionY(btnQuitter->getPosition().y - 25);
+
+	Label * lblWinner = new Label(500, 50);
+	lblWinner->setText("Congratulations ! " + winner +" has won the match !");
+	lblWinner->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
+	popup->add(lblWinner, Alignment::TOP | Alignment::CENTERX);
+	lblWinner->setPositionY(lblWinner->getPosition().y + 25);
+
+	popup->setActive(true);
+
+	_octopus->getFrame()->add(popup, Alignment::CENTERX | Alignment::CENTERY);
+
 }
 void Game::displayState(ostream& o) const
 {
