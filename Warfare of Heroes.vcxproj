@@ -134,6 +134,7 @@
     <ClCompile Include="RootEffect.cpp" />
     <ClCompile Include="SDLEvents.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
+    <ClCompile Include="SODOctopus.cpp" />
     <ClCompile Include="Sortable.cpp" />
     <ClCompile Include="SoundEffectManager.cpp" />
     <ClCompile Include="SoundService.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="RootEffect.h" />
     <ClInclude Include="SDLEvents.h" />
     <ClInclude Include="ServiceLocator.h" />
+    <ClInclude Include="SODOctopus.h" />
     <ClInclude Include="Sortable.h" />
     <ClInclude Include="SoundEffectManager.h" />
     <ClInclude Include="SoundService.h" />
