@@ -70,12 +70,6 @@ private:
 	Uint32 totalTime = 1000;
 	Uint32 bootstrapTime = 20;
 	Texture _tex;
+	double angleInclinaison = 20;
 
-	//Truc Utile
-	double avancementX;
-	double avancementY;
-	double directionX;
-	double directionY;
-	double largeur;
-	double hauteur;
 };

@@ -37,6 +37,12 @@ FireBallOctopus::FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s,
 
 	setZIndex(gridO->getZIndexFromCell(n) + 1);
 
+	angleInclinaison = atan(abs(ori_pos.x - dst_pos.x)/abs(ori_pos.y - dst_pos.y));
+
+	LOGINFO << abs(ori_pos.x - dst_pos.x) << endl;
+	LOGINFO << abs(ori_pos.y - dst_pos.y) << endl;
+	LOGINFO << angleInclinaison << endl;
+
 	//orientation
 	if (ori_pos.x>dst_pos.x)
 	{
@@ -90,16 +96,6 @@ void FireBallOctopus::update()
 
 
 void FireBallOctopus::internalRender(SDL_Renderer* r, bool force)
-/*{
-	if (isActive())
-	{
-		bool d = (force || isDirty());
-		if (d)
-		{
-			SDL_RenderCopy(r, _tex, nullptr, nullptr);
-		}
-	}
-}*/
 {
 	if (isActive())
 	{
@@ -107,8 +103,7 @@ void FireBallOctopus::internalRender(SDL_Renderer* r, bool force)
 		if (d)
 		{
 			SDL_Rect dst = { 0, 0, width, height };
-			//SDL_RenderCopy(r, _tex, nullptr, &dst);
-			SDL_RenderCopyEx(r, _tex, nullptr, &dst, 0.0, nullptr, (SDL_RendererFlip)orientation);
+			SDL_RenderCopyEx(r, _tex, nullptr, &dst, angleInclinaison, nullptr, (SDL_RendererFlip)orientation);
 		}
 	}
 }
