@@ -37,7 +37,9 @@ FireBallOctopus::FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s,
 
 	setZIndex(gridO->getZIndexFromCell(n) + 1);
 
-	angleInclinaison = atan(abs(ori_pos.x - dst_pos.x)/abs(ori_pos.y - dst_pos.y));
+	angleInclinaison = (atan(abs(ori_pos.x - dst_pos.x)/abs(ori_pos.y - dst_pos.y))*180/M_PI)-10;
+	if (ori_pos.y - dst_pos.y < 0)
+		angleInclinaison *= -1;
 
 	LOGINFO << abs(ori_pos.x - dst_pos.x) << endl;
 	LOGINFO << abs(ori_pos.y - dst_pos.y) << endl;
@@ -100,11 +102,27 @@ void FireBallOctopus::internalRender(SDL_Renderer* r, bool force)
 	if (isActive())
 	{
 		bool d = (force || isDirty());
-		if (d)
+		/*if (d)
 		{
 			SDL_Rect dst = { 0, 0, width, height };
 			SDL_RenderCopyEx(r, _tex, nullptr, &dst, angleInclinaison, nullptr, (SDL_RendererFlip)orientation);
-		}
+		}*/
+
+		Point from = _grid->getCellCenter(_caster->getCell()->getNumber());
+		Point to = _grid->getCellCenter(_target->getCell()->getNumber());
+
+		from.x -= 15;
+		to.x -= 15;
+
+		Point delta = to - from;
+
+		double angle = getAngleFromPoint(from, to);
+
+		SDL_Rect dst = { int(from.x), int(from.y), int(_grid->getCellDimensions().y), int(770 * ratio) };
+
+
+		SDL_Point center = { 15, 0 };
+		SDL_RenderCopyEx(r, _tex, nullptr, &dst, angle + 180, &center, SDL_FLIP_VERTICAL);
 	}
 }
 
