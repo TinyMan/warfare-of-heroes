@@ -218,7 +218,7 @@ void Game::onDie(Event* data)
 	if (winner == c->getName())
 		winner = getPlayer(1)->getName();
 	
-	Panel* popup = new Panel(600, 240);
+	Panel* popup = new Panel(500, 200);
 	//popup->setBgColor(Color::RED);
 	popup->setBackground((*ServiceLocator::getTextureManager())["FondPopup"]);
 
@@ -229,13 +229,13 @@ void Game::onDie(Event* data)
 	btnQuitter->setText("Quit");
 	btnQuitter->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	popup->add(btnQuitter, Alignment::BOTTOM | Alignment::CENTERX);
-	btnQuitter->setPositionY(btnQuitter->getPosition().y - 50);
+	btnQuitter->setPositionY(btnQuitter->getPosition().y - 25);
 
 	Label * lblWinner = new Label(500, 50);
 	lblWinner->setText("Congratulations !\n " + winner +" has won the match !");
 	lblWinner->setTextAlignment(Alignment::CENTERX | Alignment::CENTERY);
 	popup->add(lblWinner, Alignment::TOP | Alignment::CENTERX);
-	lblWinner->setPositionY(lblWinner->getPosition().y + 50);
+	lblWinner->setPositionY(lblWinner->getPosition().y + 25);
 
 	popup->setActive(true);
 
