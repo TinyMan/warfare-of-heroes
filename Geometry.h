@@ -38,3 +38,4 @@ Point* intersection(Point p1, Point p2, Point p3, Point p4);
 
 bool operator==(const SDL_Rect&, const SDL_Rect&);
 Point abs(const Point& p);
+double getAngleFromPoint(Point firstPoint, Point secondPoint);

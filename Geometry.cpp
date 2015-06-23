@@ -1,5 +1,23 @@
 #include "Geometry.h"
 
+// thanks to http://stackoverflow.com/questions/26076656/calculating-angle-between-two-points-java
+double getAngleFromPoint(Point firstPoint, Point secondPoint) {
+
+	if ((secondPoint.x > firstPoint.x)) {//above 0 to 180 degrees
+
+		return (atan2((secondPoint.x - firstPoint.x), (firstPoint.y - secondPoint.y)) * 180 / M_PI);
+
+	}
+	else if ((secondPoint.x < firstPoint.x)) {//above 180 degrees to 360/0
+
+		return 360 - (atan2((firstPoint.x - secondPoint.x), (firstPoint.y - secondPoint.y)) * 180 / M_PI);
+
+	}//End if((secondPoint.x > firstPoint.x) && (secondPoint.y <= firstPoint.y))
+
+	return atan2(0, 0);
+
+}//End public float getAngleFromPoint(Point firstPoint, Point secondPoint)
+
 SDL_Point operator+(const SDL_Point p1, const SDL_Point p2)
 {
 	return{ p1.x + p2.x, p1.y + p2.y };

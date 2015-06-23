@@ -12,7 +12,7 @@ class SFOctopus :
 	public OctopusBaby
 {
 public:
-	SFOctopus(Panel* container, GridOctopus * gridO, Spell* s, SpellTarget* target);
+	SFOctopus(Panel* container, GridOctopus * gridO, Spell* s, Character* caster, SpellTarget* target);
 	virtual ~SFOctopus();
 
 	virtual void update();
@@ -25,6 +25,7 @@ protected:
 private:
 	bool _dirty = true;
 	GridOctopus * _grid;
+	Character* _caster;
 	SpellTarget* _target;
 	double ratio = 0;
 
@@ -32,5 +33,5 @@ private:
 	Uint32 beginTime;
 	Uint32 finishTime;
 
-
+	Texture _tex;
 };

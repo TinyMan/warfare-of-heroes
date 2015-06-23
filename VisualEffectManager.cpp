@@ -51,7 +51,7 @@ OctopusBaby* VisualEffectManager::createSpellOctopus(Spell* s, Character* caster
 	else if (s->getName() == "Thunder Storm")
 	return new ThunderOctopus(_effectContainer, _gridOctopus, s, target);
 	else if (s->getName() == "Sword Forward")
-		return new SFOctopus(_effectContainer, _gridOctopus, s, target);
+		return new SFOctopus(_effectContainer, _gridOctopus, s, caster, target);
 	return nullptr;
 }
 
