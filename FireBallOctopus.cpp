@@ -6,7 +6,7 @@ Texture FireBallOctopus::_basic_player;
 double FireBallOctopus::_ratio;
 Point FireBallOctopus::PADDING;
 
-
+/*
 FireBallOctopus::FireBallOctopus(Spell* s, Character* caster, SpellTarget* ennemi)//, Grid* grid)
 	: OctopusBaby(SPELL_WIDTH, SPELL_HEIGHT), _spell(s), _caster(caster), _ennemi(ennemi)//, _grid(grid)
 {
@@ -110,8 +110,71 @@ void FireBallOctopus::update()
 
 		//Deplacement du sort
 		//setPosition(newPos);
+/*
 		setPosition(getPosition().x + avancementX, getPosition().y + avancementY);
+}*/
+
+
+FireBallOctopus::FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s, SpellTarget* target)
+: OctopusBaby(int(gridO->getCellDimensions().x*1.5), int(gridO->getCellDimensions().y * 5)), _grid(gridO), _spell(s), _target(target)
+{
+	Texture t = (*ServiceLocator::getTextureManager())["FireBall"];
+	Point d = gridO->getCellDimensions() * 3;
+	// compute ratio
+	double ratiox = (double)d.x / t.getWidth();
+	double ratioy = (double)d.y / t.getHeight();
+	ratio = min(ratioy, ratiox);
+
+	unsigned int n = target->getCell()->getNumber();
+	Point cellCenter = gridO->getCellCenter(n);
+
+	width = int(t.getWidth() * ratio);
+	height = int(t.getHeight() * ratio);
+
+	container->add(this);
+	Point pos = toContainerCoordinates(gridO->toAbsoluteCoordinates(Point(cellCenter.x - width / 2, cellCenter.y - height - d.y / 3)));
+
+	positionDepart = pos;
+	positionArrivee = toContainerCoordinates(gridO->toAbsoluteCoordinates(Point(cellCenter.x - width / 2, cellCenter.y - height)));
+
+	setPositionX((int)pos.x);
+	setPositionY((int)pos.y);
+
+	setBgColor(Color::TRANSPARENT);
+	setActive(true);
+	beginTime = TIMESERVICE->time();
+	finishTime = beginTime + totalTime;
+
+	setZIndex(gridO->getZIndexFromCell(n) + 1);
 }
+
+
+FireBallOctopus::~FireBallOctopus()
+{
+}
+
+
+void FireBallOctopus::update()
+{
+	if (isActive())
+	{
+		Uint32 now = TIMESERVICE->time();
+		if (now > finishTime)
+			setActive(false);
+		else if (now > beginTime + 2000)
+		{
+			Uint32 dt = now - (beginTime + 2000);
+			Point delta = positionArrivee - positionDepart;
+
+			Point step = (delta * dt) / (totalTime - 2000);
+			Point newPos = positionDepart + step;
+			setPositionX((int)newPos.x);
+			setPositionY((int)newPos.y);
+		}
+	}
+}
+
+
 
 void FireBallOctopus::setPosition(Point pos)
 {
