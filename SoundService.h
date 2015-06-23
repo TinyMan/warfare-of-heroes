@@ -16,6 +16,7 @@ public:
 	virtual void pauseMusic();
 	virtual void stopMusic();
 	virtual void toggleMusic();
+	virtual bool isMusicPlaying() const { return Mix_PlayingMusic() != 0 && Mix_PausedMusic() == 0; }
 	virtual void playEffect(string id);
 	virtual void loadEffect(string filename, string id);
 

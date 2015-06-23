@@ -328,6 +328,24 @@ void Game::start(Character* player1, Character* player2)
 	SpellRecap* sr1 = new SpellRecap(_players[1], gridO);
 	game_frame->add(sr, Alignment::BOTTOM | Alignment::LEFT);
 	game_frame->add(sr1, Alignment::BOTTOM | Alignment::LEFT);
+
+
+	// music mute button:
+	Button* music_button = new Button(51, 84);
+	music_button->setBackground((*ServiceLocator::getTextureManager())["MuteMusicOff"]);
+	music_button->setHoverBackground((*ServiceLocator::getTextureManager())["MuteMusicOn"]);
+	game_frame->add(music_button, Alignment::BOTTOM | Alignment::RIGHT);
+	music_button->setPositionX(music_button->getPosition().x - 30);
+	music_button->setPositionY(music_button->getPosition().y - 30);
+	music_button->Clickable::setCallback(new EventCallback([=](Event* e)
+	{
+		SOUNDSERVICE->toggleMusic();
+		static const Texture t1 = (*ServiceLocator::getTextureManager())["MuteMusicOff"];
+		static const Texture t2 = (*ServiceLocator::getTextureManager())["MuteMusicOn"];
+		music_button->setBackground(SOUNDSERVICE->isMusicPlaying() ? t1 : t2);
+		music_button->setHoverBackground(SOUNDSERVICE->isMusicPlaying() ? t2 : t1);
+	}));
+
 	_octopus->setFrameAsync(game_frame);
 	(new BeginGameEvent())->dispatch();
 	beginTurn();

@@ -59,6 +59,8 @@ TextureManager::TextureManager(SDL_Renderer* r)
 	loadTexture("Images/PNG/Roots.png", "Root");
 	loadTexture("Images/PNG/SwordOfDestiny.png", "SwordDestiny");
 	loadTexture("Images/PNG/VoleeFleches.png", "VoleeFleches");
+	loadTexture("Images/PNG/MuteMusicOff.png", "MuteMusicOff");
+	loadTexture("Images/PNG/MuteMusicOn.png", "MuteMusicOn");
 
 
 }
