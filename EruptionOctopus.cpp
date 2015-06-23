@@ -16,6 +16,8 @@ EruptionOctopus::EruptionOctopus(Panel* container, GridOctopus * gridO, Spell* s
 	container->add(this, gridO->getPosition().x, gridO->getPosition().y);
 	setBgColor(Color::TRANSPARENT);
 	setActive(true);
+	beginTime = TIMESERVICE->time();
+	finishTime = beginTime + bootstrapTime;
 }
 
 
@@ -32,6 +34,17 @@ void EruptionOctopus::update()
 		{
 			setActive(false);
 		}
+		else if (TIMESERVICE->time() < beginTime + bootstrapTime)
+		{
+			Uint32 now = TIMESERVICE->time();
+			Uint32 dt = now - beginTime;
+			
+			setAlpha(Uint8((255 / (double)bootstrapTime) * dt));
+		}
+		else
+		{
+			setAlpha(255);
+		}
 	}
 }
 
@@ -43,10 +56,12 @@ void EruptionOctopus::internalRender(SDL_Renderer* r, bool force)
 		if (d)
 		{
 			Texture t = (*ServiceLocator::getTextureManager())["Eruption"];
+			int width = int(t.getWidth() * ratio), height = int(t.getHeight() * ratio);
+
 			for (Cell* c : _target->getCells())
 			{
 				Point center = _grid->getCellCenter(c->getNumber());
-				SDL_Rect dst = { center.x, center.y, int(t.getWidth() * ratio), int(t.getHeight() * ratio) };
+				SDL_Rect dst = { int(center.x - width/2), int(center.y - height/2), width, height };
 
 				SDL_RenderCopy(r, t, nullptr, &dst);
 			}

@@ -28,6 +28,10 @@ private:
 	SpellTarget* _target;
 	double ratio = 0;
 
+	const Uint32 bootstrapTime = 2000;
+	Uint32 beginTime;
+	Uint32 finishTime;
+
 
 };
 
