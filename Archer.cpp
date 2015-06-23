@@ -14,7 +14,7 @@ Archer::Archer(int x, int y, string name) : Character(x, y, name)
 	cpMax = CP_MAX;
 	hpMax = _hitPoints = HP_MAX;
 
-	_spells[VOLLEY] = new Spell("Arrow Volley", this, 4, 10, 0, 0, 0, 8, false);
+	_spells[VOLLEY] = new Spell("Arrow Volley", this, 3, 8, 0, 0, 0, 8, false);
 	_spells[VOLLEY]->setDescription("Shoots a bunch of arrows in the air, \nwhich then fall into a zone, \ndealing damages to the enemies present in the area.");
 	_spells[VOLLEY]->addEffect(new DamageEffect(120, this));
 	_spells[VOLLEY]->setTargetSelector(new DiamondSelector(2));
@@ -29,7 +29,7 @@ Archer::Archer(int x, int y, string name) : Character(x, y, name)
 	_spells[FLAMED_ARROW]->addEffect(new DamageEffect(80, this));
 	_spells[FLAMED_ARROW]->addEffect(new DamageOverTime(20, 3, this, "Flamed Arrow DoT"));
 
-	_spells[DMG_BUFF] = new Spell("Damage Buff", this, 4, 4, 0, 0, 0, 0, false);
+	_spells[DMG_BUFF] = new Spell("Damage Buff", this, 3, 2, 0, 0, 0, 0, false);
 	_spells[DMG_BUFF]->setDescription("Increases the Archer’s damages for a turn.");
 	_spells[DMG_BUFF]->addEffect(new DamageBuffEffect(20, 3, this));
 }

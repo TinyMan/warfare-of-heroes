@@ -6,7 +6,7 @@
 class Mage : public Character
 {
 protected:
-	const static int MP_MAX = 25;
+	const static int MP_MAX = 3;
 	const static int CP_MAX = 12;
 	const static int HP_MAX = 750;
 	int _bonusDamage = 0;
