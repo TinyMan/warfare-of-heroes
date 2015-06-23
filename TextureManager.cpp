@@ -71,6 +71,16 @@ TextureManager::TextureManager(SDL_Renderer* r)
 	loadTexture("Images/PNG/SwordForwardFrame8.png", "SwordForwardFrame8");
 	loadTexture("Images/PNG/SwordForwardFrame9.png", "SwordForwardFrame9");
 	loadTexture("Images/PNG/SwordForwardFrame10.png", "SwordForwardFrame10");
+	loadTexture("Images/PNG/VoleeFlechesFrame1.png", "VoleeFlechesFrame1");
+	loadTexture("Images/PNG/VoleeFlechesFrame2.png", "VoleeFlechesFrame2");
+	loadTexture("Images/PNG/VoleeFlechesFrame3.png", "VoleeFlechesFrame3");
+	loadTexture("Images/PNG/VoleeFlechesFrame4.png", "VoleeFlechesFrame4");
+	loadTexture("Images/PNG/VoleeFlechesFrame5.png", "VoleeFlechesFrame5");
+	loadTexture("Images/PNG/VoleeFlechesFrame6.png", "VoleeFlechesFrame6");
+	loadTexture("Images/PNG/VoleeFlechesFrame7.png", "VoleeFlechesFrame7");
+	loadTexture("Images/PNG/VoleeFlechesFrame8.png", "VoleeFlechesFrame8");
+	loadTexture("Images/PNG/VoleeFlechesFrame9.png", "VoleeFlechesFrame9");
+	loadTexture("Images/PNG/VoleeFlechesFrame10.png", "VoleeFlechesFrame10");
 
 
 }
