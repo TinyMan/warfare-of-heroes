@@ -64,7 +64,7 @@ private:
 	Uint32 tempsAnimation;
 	Uint32 beginTime;
 	Uint32 finishTime;
-	Uint32 totalTime = 1000;
+	Uint32 totalTime = 500;
 	Texture _tex;
 
 };
