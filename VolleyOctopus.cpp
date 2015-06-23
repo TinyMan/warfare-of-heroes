@@ -67,7 +67,7 @@ void VolleyOctopus::internalRender(SDL_Renderer* r, bool force)
 			//for (Cell* c : _target->getCells())
 			//{
 				Point center = _grid->getCellCenter(_target->getCell()->getNumber());
-				SDL_Rect dst = { int(center.x - width / 2), int(center.y - height / 2), width, height };
+				SDL_Rect dst = { int(center.x - width / 2), int(center.y - height /1.5), width, height };
 
 				SDL_RenderCopy(r, _tex, nullptr, &dst);
 			//}
