@@ -135,6 +135,7 @@
     <ClCompile Include="RootOctopus.cpp" />
     <ClCompile Include="SDLEvents.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
+    <ClCompile Include="SFOctopus.cpp" />
     <ClCompile Include="SODOctopus.cpp" />
     <ClCompile Include="Sortable.cpp" />
     <ClCompile Include="SoundEffectManager.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="RootOctopus.h" />
     <ClInclude Include="SDLEvents.h" />
     <ClInclude Include="ServiceLocator.h" />
+    <ClInclude Include="SFOctopus.h" />
     <ClInclude Include="SODOctopus.h" />
     <ClInclude Include="Sortable.h" />
     <ClInclude Include="SoundEffectManager.h" />

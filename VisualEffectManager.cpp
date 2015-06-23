@@ -5,6 +5,7 @@
 #include "SODOctopus.h"
 #include "RootOctopus.h"
 #include "ThunderOctopus.h"
+#include "SFOctopus.h"
 
 
 VisualEffectManager::VisualEffectManager()
@@ -46,9 +47,11 @@ OctopusBaby* VisualEffectManager::createSpellOctopus(Spell* s, Character* caster
 	else if (s->getName() == "Sword of Destiny")
 		return new SODOctopus(_effectContainer, _gridOctopus, s, target);
 	else if (s->getName() == "Root")
-		return new RootOctopus(_effectContainer, _gridOctopus, s, target);
+		return new RootOctopus(_effectContainer, _gridOctopus, s, target); 
 	else if (s->getName() == "Thunder Storm")
-		return new ThunderOctopus(_effectContainer, _gridOctopus, s, target);
+	return new ThunderOctopus(_effectContainer, _gridOctopus, s, target);
+	else if (s->getName() == "Sword Forward")
+		return new SFOctopus(_effectContainer, _gridOctopus, s, target);
 	return nullptr;
 }
 
