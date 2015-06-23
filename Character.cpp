@@ -82,7 +82,8 @@ void Character::addEffect(OverTimeEffect* e)
 }
 void Character::root()
 {
-	_movementPoints = 0;
+	//_movementPoints = 0;
+	_rooted = true;
 }
 int Character::getHP() const
 {
@@ -124,7 +125,9 @@ bool Character::move(Cell& c, bool moveWanted)
 	list<Cell*> path = GAMEINST->getGrid()->pathFinder.getPathAStar(_hisCell, &c);
 
 	try{
-		if (path.empty())
+		if (_rooted)
+			throw " I cannot move when I am tied to the ground !";
+		else if (path.empty())
 			throw "no path found";
 		else if (path.size() > (unsigned int)_movementPoints && moveWanted)
 			throw "not enough movement point";
@@ -170,6 +173,7 @@ void Character::beginTurn()
 
 	
 	/* reset the stats to normal */
+	_rooted = false;
 	_capacityPoints = cpMax;
 	_movementPoints = mpMax;
 	_bonusDamage = 0;

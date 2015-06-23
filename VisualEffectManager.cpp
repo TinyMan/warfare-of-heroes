@@ -27,7 +27,8 @@ void VisualEffectManager::onCast(Event* e)
 
 		OctopusBaby* so = createSpellOctopus(spell, caster, target);
 
-		_effectContainer->add(so);
+		if(so)
+			_effectContainer->add(so);
 	}
 }
 

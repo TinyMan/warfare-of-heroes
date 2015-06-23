@@ -34,6 +34,7 @@ protected:
 	Cell* _hisCell = nullptr;
 	bool _myTurn = false;
 	bool _dead = false;
+	bool _rooted = false;
 
 	map<int, Spell*> _spells;
 public:

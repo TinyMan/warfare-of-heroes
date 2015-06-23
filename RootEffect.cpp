@@ -13,7 +13,7 @@ RootEffect::~RootEffect()
 
 bool RootEffect::beginTurn()
 {
-	if (_target)
+	if (OverTimeEffect::newTurn() && _target)
 	{
 		_target->root();
 	}
