@@ -14,6 +14,11 @@ const int SPELL_HEIGHT = 40;
 class FireBallOctopus :
 	public OctopusBaby{
 public:
+	enum ORIENTATION
+	{
+		LEFT = SDL_FLIP_NONE,
+		RIGHT = SDL_FLIP_HORIZONTAL
+	};
 	FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s, Character* caster, SpellTarget* target);
 	virtual ~FireBallOctopus();
 
@@ -27,7 +32,7 @@ protected:
 private:
 	bool _dirty = true;
 	GridOctopus* _grid;
-	//ORIENTATION orientation;
+	ORIENTATION orientation;
 
 	int height;
 	int width;
@@ -64,6 +69,7 @@ private:
 	Uint32 finishTime;
 	Uint32 totalTime = 1000;
 	Uint32 bootstrapTime = 20;
+	Texture _tex;
 
 	//Truc Utile
 	double avancementX;

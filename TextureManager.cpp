@@ -44,7 +44,7 @@ TextureManager::TextureManager(SDL_Renderer* r)
 	loadTexture("Images/PNG/Background_Bouton_PretHover.png", "BackgroundReadyHover");
 	loadTexture("Images/PNG/FlecheArcherFeu.png", "FlecheArcher");
 	loadTexture("Images/PNG/Eruption.png", "Eruption");
-	loadTexture("Images/PNG/FireBall.png", "FireBall");
+	loadTexture("Images/PNG/FireBall.png", "FireBallFrame1");
 	loadTexture("Images/PNG/FireBallFrame2.png", "FireBallFrame2");
 	loadTexture("Images/PNG/FireBallFrame3.png", "FireBallFrame3");
 	loadTexture("Images/PNG/FireBallFrame4.png", "FireBallFrame4");

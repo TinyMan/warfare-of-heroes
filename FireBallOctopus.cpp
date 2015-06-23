@@ -2,10 +2,10 @@
 
 
 FireBallOctopus::FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s, Character* caster, SpellTarget* target)
-	: OctopusBaby(int(gridO->getCellDimensions().x*1.5), int(gridO->getCellDimensions().y * 5)), _grid(gridO), _spell(s), _caster(caster), _target(target)
+	: OctopusBaby(int(gridO->getCellDimensions().x*2), int(gridO->getCellDimensions().y * 3)), _grid(gridO), _spell(s), _caster(caster), _target(target)
 {
-	Texture t = (*ServiceLocator::getTextureManager())["FireBall"];
-	Point d = gridO->getCellDimensions() * 3;
+	Texture t = (*ServiceLocator::getTextureManager())["FireBallFrame1"];
+	Point d = gridO->getCellDimensions() * 2;
 	// compute ratio
 	double ratiox = (double)d.x / t.getWidth();
 	double ratioy = (double)d.y / t.getHeight();
@@ -36,6 +36,15 @@ FireBallOctopus::FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s,
 	finishTime = beginTime + totalTime;
 
 	setZIndex(gridO->getZIndexFromCell(n) + 1);
+
+	//orientation
+	if (ori_pos.x>dst_pos.x)
+	{
+		orientation = RIGHT;
+	}
+	else
+		orientation = LEFT;
+
 }
 
 
@@ -53,6 +62,21 @@ void FireBallOctopus::update()
 			setActive(false);
 		else if (now > beginTime)
 		{
+
+			string name = "FireBallFrame";
+			int nbFrame = 4;
+			Uint32 timePerFrame = 50;
+
+			Uint32 now = TIMESERVICE->getFrameTime();
+			Uint32 elapsed = now - beginTime;
+
+			int n = (elapsed / timePerFrame) % 4 + 1;
+			
+
+			setIfDifferent(_tex, (*ServiceLocator::getTextureManager())[name + to_string(n)]);
+
+
+
 			Uint32 dt = now - (beginTime);
 			Point delta = dst_pos - ori_pos;
 
@@ -66,15 +90,25 @@ void FireBallOctopus::update()
 
 
 void FireBallOctopus::internalRender(SDL_Renderer* r, bool force)
+/*{
+	if (isActive())
+	{
+		bool d = (force || isDirty());
+		if (d)
+		{
+			SDL_RenderCopy(r, _tex, nullptr, nullptr);
+		}
+	}
+}*/
 {
 	if (isActive())
 	{
 		bool d = (force || isDirty());
 		if (d)
 		{
-			Texture t = (*ServiceLocator::getTextureManager())["FireBall"];
 			SDL_Rect dst = { 0, 0, width, height };
-			SDL_RenderCopy(r, t, nullptr, &dst);
+			//SDL_RenderCopy(r, _tex, nullptr, &dst);
+			SDL_RenderCopyEx(r, _tex, nullptr, &dst, 0.0, nullptr, (SDL_RendererFlip)orientation);
 		}
 	}
 }
