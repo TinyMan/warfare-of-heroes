@@ -26,10 +26,11 @@ void VisualEffectManager::onCast(Event* e)
 
 		OctopusBaby* so = createSpellOctopus(spell, caster, target);
 
-		_effectContainer->add(so);
+		if (so)
+			_effectContainer->add(so);
 	}
 }
-
+/*
 OctopusBaby* VisualEffectManager::createSpellOctopus(Spell* s, Character* caster, SpellTarget* target)
 {
 	// TODO
@@ -37,4 +38,19 @@ OctopusBaby* VisualEffectManager::createSpellOctopus(Spell* s, Character* caster
 	return new FireBallOctopus(s, caster, target);
 	return nullptr;
 }
+*/
 
+OctopusBaby* VisualEffectManager::createSpellOctopus(Spell* s, Character* caster, SpellTarget* target)
+{
+	// TODO
+	// create the visual effect based on the spell name
+	if (s->getName() == "Fireball of the Doom")
+		return new FireBallOctopus(s, caster, target);
+	/*else if (s->getName() == "Eruption")
+		return new EruptionOctopus(_effectContainer, _gridOctopus, s, target);
+	else if (s->getName() == "Sword of Destiny")
+		return new SODOctopus(_effectContainer, _gridOctopus, s, target);
+	else if (s->getName() == "Root")
+		return new RootOctopus(_effectContainer, _gridOctopus, s, target);*/
+	return nullptr;
+}

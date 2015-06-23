@@ -3,6 +3,9 @@
 #include "OctopusBaby.h"
 #include "GridOctopus.h"
 #include "Spell.h"
+
+#include "SpellTarget.h"
+#include "Panel.h"
 #include "PlayerOctopus.h"
 
 const int SPELL_WIDTH = 100;
@@ -19,6 +22,7 @@ public:
 	//typedef SDL_RendererFlip ORIENTATION;
 
 	FireBallOctopus(Spell* s, Character* caster, SpellTarget* ennemi);
+	//FireBallOctopus(Panel* container, GridOctopus* gridO, Spell* s, SpellTarget* target);
 	virtual ~FireBallOctopus();
 
 	virtual void update();
@@ -37,6 +41,10 @@ private:
 	bool _dirty = true;
 	GridOctopus* _grid;
 	ORIENTATION orientation;
+
+	int height;
+	int width;
+	double ratio;
 
 	const Cell* destination_cell;
 	const Cell* origin_cell;
@@ -59,11 +67,15 @@ private:
 	//Truc vraiment utile
 	Point positionDepart;
 	Point positionArrivee;
+	SpellTarget* _target;
 	SpellTarget* _ennemi;
 	Character* _caster;
 	Spell* _spell;
 	Uint32 finAnimation;
 	Uint32 tempsAnimation;
+	Uint32 beginTime;
+	Uint32 finishTime;
+	Uint32 totalTime = 2000;
 
 	//Truc Utile
 	double avancementX;
