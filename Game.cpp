@@ -219,7 +219,8 @@ void Game::onDie(Event* data)
 		winner = getPlayer(1)->getName();
 	
 	Panel* popup = new Panel(500, 200);
-	popup->setBgColor(Color::RED);
+	//popup->setBgColor(Color::RED);
+	popup->setBackground((*ServiceLocator::getTextureManager())["FondPopup"]);
 
 	Button * btnQuitter = new Button(150,50);
 	btnQuitter->setBackground((*ServiceLocator::getTextureManager())["BackgroundReady"]);

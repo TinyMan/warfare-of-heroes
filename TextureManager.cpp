@@ -85,6 +85,7 @@ TextureManager::TextureManager(SDL_Renderer* r)
 	loadTexture("Images/PNG/VoleeFlechesFrame8.png", "VoleeFlechesFrame8");
 	loadTexture("Images/PNG/VoleeFlechesFrame9.png", "VoleeFlechesFrame9");
 	loadTexture("Images/PNG/VoleeFlechesFrame10.png", "VoleeFlechesFrame10");
+	loadTexture("Images/PNG/FondPopup.png", "FondPopup");
 
 
 }
