@@ -125,7 +125,29 @@ Cell* Grid::getCellFromCellAndDir(const Cell& c, DIRECTION d, int pathLen)
 	default:
 		break;
 	}
-	return getCellAt(i, j);
+	Cell* cell = getCellAt(i, j);
+	while (cell == nullptr)
+	{
+		switch (d)
+		{
+		case Grid::TOP:
+			j += 1;
+			break;
+		case Grid::BOTTOM:
+			j -= 1;
+			break;
+		case Grid::RIGHT:
+			i -= 1;
+			break;
+		case Grid::LEFT:
+			i += 1;
+			break;
+		default:
+			break;
+		}
+		cell = getCellAt(i, j);
+	}
+	return cell;
 }
 Grid::DIRECTION Grid::getDir(const Cell& c1, const Cell& c2)
 {
