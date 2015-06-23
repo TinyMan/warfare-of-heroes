@@ -27,7 +27,13 @@ Game::Game()
 {
 	/* instanciate services */
 	_eventService = new EventService();
-	_logService = new LogService("log.txt", true);
+	_logService = new LogService("log.txt",
+#ifdef __DEBUG 
+		true
+#else
+		false
+#endif
+		);
 	_timeService = new TimeService();
 	_userInterface = new UserInterface();
 	/* and provide them */

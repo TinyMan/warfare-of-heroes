@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 	delete g;
 
 
-	system("pause");
+	//system("pause");
 	Mix_Quit(); 
 	SDL_Quit();
 
